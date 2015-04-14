@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Vendor: Electric Cloud, Inc.
+Implementation-Title: EC-S3
+Implementation-Version: 1.0.0.0
+Implementation-Vendor-Id: com.electriccloud
+

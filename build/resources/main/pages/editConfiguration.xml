@@ -1,0 +1,11 @@
+<page>
+    <componentContainer>
+        <title>Edit S3 Configuration</title>
+        <helpLink>/pages/EC-S3-1.0.0.0/help</helpLink>
+        <component plugin="EC-S3"
+                   version="1.0.0.0" 
+                   ref="ConfigurationManagement">
+            <panel>edit</panel>
+        </component>
+    </componentContainer>
+</page>

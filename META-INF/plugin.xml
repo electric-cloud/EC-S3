@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <key>EC-S3</key>
+  <version>1.0.0.0</version>
+  <label>EC-S3</label>
+  <description>A plugin to interact with Amazon S3</description>
+  <author>Anand</author>
+  <authorUrl>mailto:anand@msystechnologies.com</authorUrl>
+
+  <commander-version min="4.1"/>
+
+    <!-- Specify a category for this plugin; this is used in filtered lists in the Plugin Manager.
+         Typically, it is set to System or Step.
+     -->
+  <category>Other</category>
+ 	  <depends>EC-Core</depends>
+</plugin>

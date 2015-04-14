@@ -1,0 +1,223 @@
+// -*- Groovy -*-
+// build.gradle
+//
+// Gradle build script for EC-S3 plugin.
+//
+// Copyright (c) 2015 Electric Cloud, Inc.
+// All rights reserved
+
+import javax.xml.parsers.DocumentBuilderFactory
+import javax.xml.xpath.XPathFactory
+import javax.xml.xpath.XPathConstants
+import javax.xml.transform.dom.DOMSource
+import javax.xml.transform.stream.StreamResult
+import javax.xml.transform.TransformerFactory
+
+
+group = "com.electriccloud"
+description = "Plugins : EC-S3"
+
+// Set the build number if it exists
+def buildNumber = System.env.BUILD_NUMBER ? System.env.BUILD_NUMBER : "0"
+
+version = "1.0.0.$buildNumber"
+
+project.ext {
+	pluginName = "$name-$version"
+	commanderHome = System.env.COMMANDER_HOME
+
+	commanderServer = System.env.COMMANDER_SERVER ? System.env.COMMANDER_SERVER : "localhost"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'gwt-compiler'
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+defaultTasks 'assemblePluginJar'
+
+buildscript {
+	repositories {
+        maven { url "https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/" }
+		mavenCentral()
+	}
+
+	dependencies { classpath "de.richsource.gradle.plugins:gwt-gradle-plugin:0.4" }
+}
+
+repositories {
+	mavenCentral()
+	flatDir {
+       dirs 'libs'
+    }
+	
+}
+
+dependencies {
+	compile group: group, name: "commander-sdk", version: "5.0.0-SNAPSHOT"
+	compile group: group, name: "commander-client", version: "5.0.0-SNAPSHOT"
+	compile group: group, name: "ec_internal", version: "5.0.0-SNAPSHOT"
+	compile group: group, name: "ec-test", version: "5.0.0-SNAPSHOT"
+	compile group: "com.google.gwt", name: "gwt-dev", version: "2.5.0"
+	compile group: "com.google.gwt", name: "gwt-servlet", version: "2.5.0"
+	compile group: "com.google.gwt", name: "gwt-user", version: "2.5.0"
+	compile group: "org.codehaus.groovy", name: "groovy-all", version: "2.3.9"
+	compile group: "com.amazonaws", name: "aws-java-sdk", version: "1.9.6"
+	compile "com.intellij:annotations:132.839-PATCH1"
+	compile "com.google.guava:guava-gwt:16.+"
+	compile "com.google.gwt.inject:gin:1.5.0"
+	compile "com.gwtplatform:gwtp-all:0.8-PATCH5"
+    testCompile 'junit:junit:[4,)'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+
+
+}
+
+test {
+    Properties props = new Properties()
+
+    def propFileName = "ecplugin.properties"
+
+    def propertyFile = new File( propFileName )
+
+    if( propertyFile.exists() ) {
+        props.load(new FileInputStream(propFileName))
+    }
+
+    systemProperties['COMMANDER_SERVER'] = "$commanderServer"
+    systemProperties['COMMANDER_USER'] = props.getProperty("COMMANDER_USER")
+    systemProperties['COMMANDER_PASSWORD'] = props.getProperty("COMMANDER_PASSWORD")
+    //TODO: load properties for EC-EC2
+
+
+ testLogging {
+     // Show that tests are run in the command-line output
+     events 'started', 'passed'
+     exceptionFormat = 'full'
+ }
+}
+
+processResources {
+	// Clear readonly flag, set by perforce
+	setFileMode(0644)
+	
+	from(projectDir, {
+		include 'agent/**'
+		include 'htdocs/**'
+		include 'cgi-bin/**'
+		include 'pages/**'
+	})
+	
+	/* Apply macros substitution only on subset of files.
+	 * This is to ensure, that no binary resources is corrupted by filter
+	 */
+	["**/*.xml", "**/*.css", "**/*.pm", "**/*.pl", "**/*.cgi"].each {
+		filesMatching(it, {
+			filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+			PLUGIN_NAME: project.pluginName.toString(),
+			PLUGIN_KEY: project.name.toString(),
+			PLUGIN_VERSION: project.version.toString()])
+		})
+	}
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
+
+task printEnvironment {
+	println project.description
+	
+	if(commanderHome) {
+		println "Using commander home:   $commanderHome"
+	}
+	
+	println "Using commander server: $commanderServer"
+}
+
+task processProjectXml(dependsOn: processResources) << {
+	def resourcesPath = "$buildDir/resources/main"
+	def projectPath = "$resourcesPath/project"
+	
+	def xml = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+	def xmlp = XPathFactory.newInstance().newXPath()
+	
+	def project = xml.parse("$projectPath/project.xml")
+	def replacements = xml.parse("$projectPath/manifest.xml")
+	
+	/* For each file entry in manifest, replace content of node
+	 * located by xpath expression with file content
+	 */
+	xmlp.evaluate("//file", replacements.documentElement, XPathConstants.NODESET).each {
+		def file = "$projectPath/${xmlp.evaluate('path', it)}"
+		def xpath = xmlp.evaluate('xpath', it)
+		def nodes = xmlp.evaluate(xpath, project.documentElement, XPathConstants.NODESET)
+		
+		nodes.each { it.setTextContent(new File(file).text) }
+	}
+	
+	def source = new DOMSource(project)
+	def result = new StreamResult(new File("$resourcesPath/META-INF/project.xml"))
+	def transformer = TransformerFactory.newInstance().newTransformer()
+	
+	transformer.transform(source, result)
+}
+
+task assemblePluginJar(type: Jar, dependsOn: [processProjectXml, compileGwt]) {
+	doFirst {
+		println "Building plugin jar: $archiveName"
+
+	}
+	
+	manifest {
+		attributes (
+			'Implementation-Vendor': 'Electric Cloud, Inc.',
+			'Implementation-Title': project.name,
+			'Implementation-Version': project.version,
+			'Implementation-Vendor-Id': project.group
+		)
+	}
+
+	outputs.upToDateWhen { false }
+	destinationDir = buildDir
+	includeEmptyDirs = false
+	excludes = [
+		"WEB-INF/**",
+		"ecplugins/**",
+		"project/**",
+		"**/*.pl",
+		"**/*.pm",
+	]
+
+	from sourceSets.main.output
+	from (tasks.compileGwt.outputs, {
+		into('htdocs/war')
+	})
+}
+
+task deployPluginJar(dependsOn: assemblePluginJar) << {
+	def ectool = project.commanderHome ? "$commanderHome/ectool" : "ectool"
+	def serverOpt = "--server $commanderServer"
+
+	exec {
+		commandLine ectool, serverOpt, "login", "admin", "changeme"
+	}
+
+	exec {
+		commandLine ectool, serverOpt, "installPlugin", assemblePluginJar.archivePath
+	}
+
+	exec {
+		commandLine ectool, serverOpt, "promotePlugin", project.pluginName
+	}
+}
+
+gwt {
+	minHeapSize "512M"
+	maxHeapSize "1024M"
+	gwtVersion '2.7.0'
+
+	modules 'ecplugins.s3.ConfigurationManagement'
+}

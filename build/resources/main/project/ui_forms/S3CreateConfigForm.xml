@@ -1,0 +1,69 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Configuration Name:</label>
+        <property>config</property>
+        <value></value>
+        <required>1</required>
+        <documentation>Provide a unique name for the connection, keeping in mind that you may need to create additional connections over time.</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Description:</label>
+        <property>desc</property>
+        <value>S3 integration</value>
+        <documentation>A description for this configuration.</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Service URL:</label>
+        <property>service_url</property>
+        <value>https://s3.amazonaws.com</value>
+        <documentation>The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com. For Eucalyptus EC2, this is the internal address, such as http://ip/services/Eucalyptus</documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Resource Pool:</label>
+        <property>resource_pool</property>
+        <value>cloud_servers</value>
+        <documentation>The name of the pool of resources on which the integration steps can run. </documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Workspace:</label>
+        <property>workspace</property>
+        <value>default</value>
+        <documentation>The workspace to use for resourced dynamically created by this configuration.</documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>credential</type>
+        <label>Access ID's:</label>
+        <property>credential</property>
+        <required>1</required>
+        <documentation>The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential.</documentation>
+    </formElement>
+    <formElement>
+        <type>checkbox</type>
+        <label>Attempt Connection?:</label>
+        <property>attempt</property>
+        <checkedValue>1</checkedValue>
+        <uncheckedValue>0</uncheckedValue>
+        <initiallyChecked>1</initiallyChecked>        
+        <documentation>Attempt a connection to check credentials.</documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Debug Level:</label>
+        <property>debug</property>
+        <value>1</value>
+        <documentation>Provide the debug level for the output: 0=errors only, 1=normal headers and responses, 2+=debugging information included.</documentation>
+        <required>1</required>
+    </formElement>
+</editor>
+
+
+

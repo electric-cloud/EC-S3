@@ -1,0 +1,16 @@
+<?xml version='1.0' standalone='yes'?>
+<fileset>
+    <file>
+        <xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/CreateBucket/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;run&quot;]/command</xpath>
+        <path>procedures/CreateBucket/steps/CreateBucket.sh</path>
+    </file>
+
+    <file>
+        <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>
+        <path>ec_setup.pl</path>
+    </file>
+</fileset>
