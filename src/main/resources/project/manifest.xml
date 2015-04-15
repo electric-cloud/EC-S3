@@ -6,6 +6,7 @@
     </file>
     
     <file><xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;createBucket&quot;]/command</xpath>
+        <path>procedures/CreateBucket/steps/createBucket.groovy</path>
     </file>
 
     <file>

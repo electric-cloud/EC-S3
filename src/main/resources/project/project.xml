@@ -5,7 +5,7 @@
     <projectName>@PLUGIN_KEY@</projectName>
     <description/>
     <resourceName/>
-    <tracked>1</tracked>
+
     <workspaceName/>
 
 
@@ -16,75 +16,16 @@
       <resourceName/>
       <timeLimit/>
       <timeLimitUnits>minutes</timeLimitUnits>
-      <tracked>1</tracked>
+
       <workspaceName/>
-      <propertySheet>
 
-        <property>
-          <propertyName>ec_customEditorData</propertyName>
-
-          <propertySheet>
-
-            <property>
-              <propertyName>parameters</propertyName>
-
-              <propertySheet>
-
-                  <propertyName>config</propertyName>
-
-                  <propertySheet>
-
-                    <property>
-                      <propertyName>formType</propertyName>
-
-                      <expandable>1</expandable>
-
-                      <value>standard</value>
-                    </property>
-                  </propertySheet>
-				</propertySheet>
-                </property>
-                <property>
-                  <propertyName>BucketName</propertyName>
-
-                  <propertySheet>
-
-                    <property>
-                      <propertyName>formType</propertyName>
-
-                      <expandable>1</expandable>
-
-                      <value>standard</value>
-                    </property>
-                  </propertySheet>
-                </property>
-              </propertySheet>
-            </property>
-
-        <property>
-          <propertyName>ec_parameterForm</propertyName>
-
-          <description/>
-          <expandable>1</expandable>
-
-          <value>PLACEHOLDER</value>
-        </property>
-        <property>
-          <propertyName>exposeToPlugin</propertyName>
-
-          <description/>
-          <expandable>1</expandable>
-
-          <value>1</value>
-        </property>
-      </propertySheet>
       <formalParameter>
         <formalParameterName>config</formalParameterName>
         <defaultValue>sharefileCredential</defaultValue>
         <description/>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
-        <tracked>1</tracked>
+
         <type>entry</type>
       </formalParameter>
       <formalParameter>
@@ -93,14 +34,14 @@
         <description/>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>
-        <tracked>1</tracked>
+
         <type>entry</type>
       </formalParameter>
       <step>
-        <stepName>createFolderAndUploadFile</stepName>
+        <stepName>createBucket</stepName>
         <alwaysRun>0</alwaysRun>
         <broadcast>0</broadcast>
-        <command>PLACEHOLDER</command>
+        <command/>
         <condition/>
         <description/>
         <errorHandling>failProcedure</errorHandling>
@@ -114,7 +55,7 @@
         <shell>ec-groovy</shell>
         <timeLimit/>
         <timeLimitUnits>minutes</timeLimitUnits>
-        <tracked>1</tracked>
+
         <workingDirectory/>
         <workspaceName/>
       </step>
