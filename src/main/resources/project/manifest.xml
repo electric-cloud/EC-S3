@@ -5,8 +5,7 @@
         <path>procedures/CreateBucket/form.xml</path>
     </file>
     
-    <file><xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;run&quot;]/command</xpath>
-        <path>procedures/CreateBucket/steps/CreateBucket.sh</path>
+    <file><xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;createBucket&quot;]/command</xpath>
     </file>
 
     <file>
