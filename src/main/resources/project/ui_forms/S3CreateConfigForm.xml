@@ -26,7 +26,7 @@
         <type>entry</type>
         <label>Resource Pool:</label>
         <property>resource_pool</property>
-        <value>cloud_servers</value>
+        <value>default</value>
         <documentation>The name of the pool of resources on which the integration steps can run. </documentation>
         <required>1</required>
     </formElement>
@@ -42,6 +42,9 @@
         <type>credential</type>
         <label>Access ID's:</label>
         <property>credential</property>
+        <userNameLabel>Access ID:</userNameLabel>
+        <passwordLabel>Secret Access ID:</passwordLabel>
+        <retypePasswordLabel>Retype Secret Access ID:</retypePasswordLabel>
         <required>1</required>
         <documentation>The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential.</documentation>
     </formElement>

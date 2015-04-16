@@ -8,97 +8,7 @@
 
     <workspaceName/>
         <propertySheet>
-            <property>
-                <propertyName>ec_cloudprovisioning_plugin</propertyName>
-                <description></description>
-                <propertySheet>
-                    <property>
-                        <propertyName>operations</propertyName>
-                        <description></description>
-                        <propertySheet>
-                            <property>
-                                <propertyName>createConfiguration</propertyName>
-                                <description></description>
-
-                                <propertySheet>
-                                    <property>
-                                        <propertyName>procedureName</propertyName>
-                                        <description></description>
-                                        <expandable>1</expandable>
-                                        <value>CreateConfiguration</value>
-                                    </property>
-                                    <property>
-                                        <propertyName>ui_formRefs</propertyName>
-                                        <description></description>
-                                        <propertySheet>
-                                            <property>
-                                                <propertyName>parameterForm</propertyName>
-                                                <description></description>
-                                                <expandable>1</expandable>
-                                                <value>ui_forms/S3CreateConfigForm</value>
-                                            </property>
-                                        </propertySheet>
-                                    </property>
-                                    <property>
-                                        <propertyName>parameterRefs</propertyName>
-                                        <description></description>
-                                        <propertySheet>
-                                            <!--Place-holder-->
-                                        </propertySheet>
-                                    </property>
-                                </propertySheet>
-                            </property>
-                            <property>
-                                <propertyName>deleteConfiguration</propertyName>
-                                <description></description>
-                                <propertySheet>
-                                    <property>
-                                        <propertyName>procedureName</propertyName>
-                                        <description></description>
-                                        <expandable>1</expandable>
-                                        <value>DeleteConfiguration</value>
-                                    </property>
-                                    <property>
-                                        <propertyName>ui_formRefs</propertyName>
-                                        <description></description>
-                                        <propertySheet>
-                                            <!--Place-holder-->
-                                        </propertySheet>
-                                    </property>
-                                    <property>
-                                        <propertyName>parameterRefs</propertyName>
-                                        <description></description>
-                                        <propertySheet>
-                                            <!--Place-holder-->
-                                        </propertySheet>
-                                    </property>
-                                </propertySheet>
-                            </property>
-                        </propertySheet>
-                    </property>
-                    <property>
-                        <propertyName>hasConfiguration</propertyName>
-                        <description></description>
-                        <expandable>1</expandable>
-                        <value>1</value>
-                    </property>
-                    <property>
-                        <propertyName>configurationLocation</propertyName>
-                        <description></description>
-                        <expandable>1</expandable>
-                        <value>s3_cfgs</value>
-                    </property>
-                    <property>
-                        <propertyName>displayName</propertyName>
-                        <description></description>
-                        <expandable>1</expandable>
-                        <value>Amazon</value>
-                    </property>
-                </propertySheet>
-            </property>
-
-
-            <property>
+          <property>
                 <propertyName>ec_setup</propertyName>
                 <value/>
                 <expandable>0</expandable>
@@ -602,7 +512,7 @@
 
       <formalParameter>
         <formalParameterName>config</formalParameterName>
-        <defaultValue>sharefileCredential</defaultValue>
+        <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
         <required>1</required>

@@ -50,6 +50,12 @@ $xpath = $ec->attachCredential($projName, $credName,
 $errors .= $ec->checkAllErrors($xpath);
 
 
+# Attach credential to steps that will need it
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "CreateBucket",
+     stepName => "createBucket"});
+$errors .= $ec->checkAllErrors($xpath);
+
 if ("$errors" ne "") {
     # Cleanup the partially created configuration we just created
     $ec->deleteProperty($configPath);
