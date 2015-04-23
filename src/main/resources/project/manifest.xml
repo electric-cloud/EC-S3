@@ -40,4 +40,8 @@
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>
         <path>ec_setup.pl</path>
     </file>
+    <file>
+        <path>preamble.groovy</path>
+        <xpath>//property[propertyName=&quot;preamble&quot;]/value</xpath>
+    </file>	
 </fileset>

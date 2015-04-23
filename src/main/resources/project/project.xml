@@ -41,6 +41,18 @@
                 <expandable>1</expandable>
                 <value/>
             </property>
+            <property>
+                <propertyName>procedure_helpers</propertyName>
+                <description/>
+                <propertySheet>
+                    <property>
+                        <propertyName>preamble</propertyName>
+                        <description/>
+                        <expandable>1</expandable>
+                        <value/>
+                    </property>
+                </propertySheet>
+            </property>			
         </propertySheet>
 
         <procedure>

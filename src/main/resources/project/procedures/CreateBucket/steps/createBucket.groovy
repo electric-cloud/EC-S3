@@ -1,45 +1,18 @@
-package project.procedures.CreateBucket.steps
+$[/myProject/procedure_helpers/preamble]
 
-import com.amazonaws.AmazonClientException
-import com.amazonaws.AmazonServiceException
-import com.amazonaws.auth.BasicAWSCredentials
+//get credentials from commander
+S3Credentials s3Cred = new S3Credentials();
 
-import com.amazonaws.services.s3.AmazonS3
-import com.amazonaws.services.s3.transfer.TransferManager
-import groovyx.net.http.RESTClient;
-
-@Grab('com.amazonaws:aws-java-sdk-s3:1.9.30')
-@Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7.1')
-
-
-
-def commanderServer = 'https://' + System.getenv('COMMANDER_SERVER')
-def commanderPort = System.getenv("COMMANDER_HTTPS_PORT")
-
-def sessionId = System.getenv('COMMANDER_SESSIONID')
-
-def client = new RESTClient(commanderServer + ":" + commanderPort)
-
-client.ignoreSSLIssues()
-
-def jobStepId = '$[/myJobStep/jobStepId]'
-
-def resp = client.get(path: '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', headers: ['Cookie': "sessionId=" + sessionId, 'Accept': 'application/json'])
-
-assert resp.status == 200
-
-def userName = resp.getData().credential.userName
-def password = resp.getData().credential.password
-
-println 'userName is: ' + userName
+println 'userName is: ' + s3Cred.userName
 
 def bucketName = '$[bucketName]'
 
 println 'bucket is: ' + bucketName
 
+
 // Create bucket logic here
 
-def credentials = new BasicAWSCredentials(userName,password)
+def credentials = new BasicAWSCredentials(s3Cred.userName, s3Cred.password)
 
 // Create TransferManager
 def tx = new TransferManager(credentials);
