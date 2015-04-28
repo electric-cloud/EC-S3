@@ -1,0 +1,16 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Credential:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the credential that contains the user name and password to ShareFile</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Bucket Name:</label>
+        <property>pathToFile</property>
+        <required>1</required>
+        <documentation>Name of the Bucket to create</documentation>
+    </formElement>
+</editor>

@@ -1,0 +1,63 @@
+// -*- Groovy -*-
+// build.gradle
+//
+// Gradle build script for EC-S3 plugin.
+//
+// Copyright (c) 2015 Electric Cloud, Inc.
+// All rights reserved
+
+
+buildscript {
+	repositories {
+		maven {
+			url 'http://dl.bintray.com/ecpluginsdev/maven'
+		}
+
+		jcenter()
+	}
+	dependencies {
+		classpath group: 'com.electriccloud.plugins', name: 'flow-gradle-plugin', version: '+'
+	}
+}
+
+group = "com.electriccloud"
+description = "Plugins : EC-S3"
+version = "1.0.0"
+
+apply plugin: 'flow-gradle-plugin'
+
+
+
+dependencies {
+    testCompile 'junit:junit:[4,)'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+}
+
+test {
+    Properties props = new Properties()
+
+    def propFileName = "ecplugin.properties"
+
+    def propertyFile = new File( propFileName )
+
+    if( propertyFile.exists() ) {
+        props.load(new FileInputStream(propFileName))
+    }
+
+    systemProperties['COMMANDER_SERVER'] = "$commanderServer"
+    systemProperties['COMMANDER_USER'] = props.getProperty("COMMANDER_USER")
+    systemProperties['COMMANDER_PASSWORD'] = props.getProperty("COMMANDER_PASSWORD")
+    //TODO: load properties for EC-EC2
+
+
+ testLogging {
+     // Show that tests are run in the command-line output
+     events 'started', 'passed'
+     exceptionFormat = 'full'
+ }
+}
+
+gwt {
+
+	modules 'ecplugins.s3.ConfigurationManagement'
+}

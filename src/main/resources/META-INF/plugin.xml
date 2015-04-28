@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <key>@PLUGIN_KEY@</key>
+  <version>@PLUGIN_VERSION@</version>
+  <label>@PLUGIN_KEY@</label>
+  <description>Integration for Amazon S3</description>
+  <configure>configurations.xml</configure>
+  <help>@PLUGIN_KEY@_help.xml</help>
+  <author>Electric Cloud</author>
+  <authorUrl>http://www.electric-cloud.com/support</authorUrl>
+  <category>Resource Management</category>
+  <commander-version min="3.6"/>
+  <components>
+    <component name="ConfigurationManagement">
+      <javascript>war/ecplugins.s3.ConfigurationManagement/ecplugins.s3.ConfigurationManagement.nocache.js</javascript>
+    </component>
+  </components>
+</plugin>
