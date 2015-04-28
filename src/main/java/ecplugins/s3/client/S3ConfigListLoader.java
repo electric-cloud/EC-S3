@@ -52,7 +52,7 @@ public class S3ConfigListLoader
     {
         super(component, callback);
         m_configList      = configList;
-        m_cgiRequestProxy = new CgiRequestProxy(getPluginName(), "ec2.cgi");
+        m_cgiRequestProxy = new CgiRequestProxy(getPluginName(), "s3.cgi");
     }
 
     //~ Methods ----------------------------------------------------------------

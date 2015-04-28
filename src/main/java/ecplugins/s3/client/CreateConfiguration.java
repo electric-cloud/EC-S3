@@ -148,7 +148,7 @@ public class CreateConfiguration
     private void waitForJob(final String jobId)
     {
         CgiRequestProxy     cgiRequestProxy = new CgiRequestProxy(
-                getPluginName(), "ec2Monitor.cgi");
+                getPluginName(), "s3Monitor.cgi");
         Map<String, String> cgiParams       = new HashMap<String, String>();
 
         cgiParams.put("jobId", jobId);

@@ -192,7 +192,7 @@ public class ConfigurationList
     private void waitForJob(final String jobId)
     {
         CgiRequestProxy     cgiRequestProxy = new CgiRequestProxy(
-                ComponentBaseFactory.getPluginName(), "ec2Monitor.cgi");
+                ComponentBaseFactory.getPluginName(), "s3Monitor.cgi");
         Map<String, String> cgiParams       = new HashMap<String, String>();
 
         cgiParams.put("jobId", jobId);

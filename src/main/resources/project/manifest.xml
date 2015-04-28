@@ -2,38 +2,35 @@
 <fileset>
     <file>
         <xpath>//property[propertyName=&quot;ui_forms&quot;]/propertySheet/property[propertyName=&quot;S3CreateConfigForm&quot;]/value</xpath>
-        <path>ui_forms/S3CreateConfigForm.xml</path>
+        <path>procedures/CreateConfiguration/S3CreateConfigForm.xml</path>
     </file>
     <file>
         <xpath>//property[propertyName=&quot;ui_forms&quot;]/propertySheet/property[propertyName=&quot;S3EditConfigForm&quot;]/value</xpath>
-        <path>ui_forms/S3EditConfigForm.xml</path>
+        <path>procedures/CreateConfiguration/S3EditConfigForm.xml</path>
     </file>
     <file>
         <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
-        <path>ui_forms/S3CreateConfigForm.xml</path>
-    </file>
-    <file>
-        <xpath>//procedure[procedureName=&quot;DeleteConfiguration&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
-        <path>ui_forms/DeleteConfiguration.xml</path>
+        <path>procedures/CreateConfiguration/S3CreateConfigForm.xml</path>
     </file>
 
+
     <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateConfiguration&quot;]/command</xpath>
-        <path>conf/createcfg.pl</path>
+        <path>procedures/CreateConfiguration/createcfg.pl</path>
     </file>
     <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateAndAttachCredential&quot;]/command</xpath>
-        <path>conf/createAndAttachCredential.pl</path>
+        <path>procedures/CreateConfiguration/createAndAttachCredential.pl</path>
     </file>
     <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>
-        <path>conf/attemptConnection.pl</path>
+        <path>procedures/CreateConfiguration/attemptConnection.pl</path>
     </file>
-	
+
     <file>
         <xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/CreateBucket/form.xml</path>
     </file>
     
     <file><xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;createBucket&quot;]/command</xpath>
-        <path>procedures/CreateBucket/steps/createBucket.groovy</path>
+        <path>procedures/CreateBucket/createBucket.groovy</path>
     </file>
 
     <file>
@@ -41,7 +38,7 @@
         <path>ec_setup.pl</path>
     </file>
     <file>
-        <path>preamble.groovy</path>
         <xpath>//property[propertyName=&quot;preamble&quot;]/value</xpath>
+		<path>procedures/preamble.groovy</path>
     </file>	
 </fileset>
