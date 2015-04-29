@@ -1,9 +1,5 @@
-import com.amazonaws.AmazonClientException
-import com.amazonaws.AmazonServiceException
-import com.amazonaws.auth.BasicAWSCredentials
 
-import com.amazonaws.services.s3.AmazonS3
-import com.amazonaws.services.s3.transfer.TransferManager
+
 import groovyx.net.http.RESTClient;
 import static groovyx.net.http.ContentType.JSON
 import groovyx.net.http.HTTPBuilder
