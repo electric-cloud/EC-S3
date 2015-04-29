@@ -529,7 +529,14 @@
       <timeLimitUnits>minutes</timeLimitUnits>
 
       <workspaceName/>
-
+	  <propertySheet>
+		<property>
+			<propertyName>ec_parameterForm</propertyName>
+			<description/>
+			<expandable>0</expandable>
+			<value/>
+		</property>
+	   </propertySheet>
       <formalParameter>
         <formalParameterName>config</formalParameterName>
         <defaultValue/>
@@ -540,7 +547,7 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>BucketName</formalParameterName>
+        <formalParameterName>bucketName</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
@@ -581,7 +588,14 @@
       <timeLimitUnits>minutes</timeLimitUnits>
 
       <workspaceName/>
-
+	  <propertySheet>
+		<property>
+			<propertyName>ec_parameterForm</propertyName>
+			<description/>
+			<expandable>0</expandable>
+			<value/>
+		</property>
+	   </propertySheet>
       <formalParameter>
         <formalParameterName>config</formalParameterName>
         <defaultValue/>
@@ -592,7 +606,7 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>BucketName</formalParameterName>
+        <formalParameterName>bucketName</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
@@ -601,7 +615,7 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>Key</formalParameterName>
+        <formalParameterName>key</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
@@ -610,7 +624,7 @@
         <type>entry</type>
       </formalParameter>	  
 	  <formalParameter>
-        <formalParameterName>FileToUpload</formalParameterName>
+        <formalParameterName>fileToUpload</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
@@ -651,7 +665,14 @@
       <timeLimitUnits>minutes</timeLimitUnits>
 
       <workspaceName/>
-
+	  <propertySheet>
+		<property>
+			<propertyName>ec_parameterForm</propertyName>
+			<description/>
+			<expandable>0</expandable>
+			<value/>
+		</property>
+	   </propertySheet>
       <formalParameter>
         <formalParameterName>config</formalParameterName>
         <defaultValue/>
@@ -662,7 +683,7 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>BucketName</formalParameterName>
+        <formalParameterName>bucketName</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
@@ -671,7 +692,7 @@
         <type>entry</type>
       </formalParameter>
       <formalParameter>
-        <formalParameterName>Key</formalParameterName>
+        <formalParameterName>key</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>
@@ -680,7 +701,7 @@
         <type>entry</type>
       </formalParameter>	  
 	  <formalParameter>
-        <formalParameterName>DownloadLocation</formalParameterName>
+        <formalParameterName>downloadLocation</formalParameterName>
         <defaultValue/>
         <description/>
         <expansionDeferred>0</expansionDeferred>

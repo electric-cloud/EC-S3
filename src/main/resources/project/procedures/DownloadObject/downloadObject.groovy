@@ -5,7 +5,7 @@ ElectricCommander commander = new ElectricCommander();
 
 def bucketName = '$[bucketName]'
 def downloadLocation = '$[downloadLocation]'
-def key ='$[Key]'
+def key ='$[key]'
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
