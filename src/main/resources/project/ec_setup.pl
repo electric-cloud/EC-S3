@@ -6,7 +6,14 @@ my %CreateBucket = (
   category    => "Resource Management" 
 );
 
-@::createStepPickerSteps = (\%CreateBucket);
+my %UploadObject = ( 
+  label       => "EC-S3 - UploadObject", 
+  procedure   => "UploadObject", 
+  description => "", 
+  category    => "Resource Management" 
+);
+
+@::createStepPickerSteps = (\%CreateBucket, \%UploadObject);
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -72,7 +79,10 @@ if ($upgradeAction eq "upgrade") {
                 procedureName => 'CreateBucket',
                 stepName => 'createBucket'
             });
-
+            $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'UploadObject',
+                stepName => 'uploadObject'
+            });
         }
     }
 }

@@ -33,6 +33,15 @@
         <path>procedures/CreateBucket/createBucket.groovy</path>
     </file>
 
+	<file>
+        <xpath>//procedure[procedureName=&quot;UploadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/UploadObject/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;UploadObject&quot;]/step[stepName=&quot;uploadObject&quot;]/command</xpath>
+        <path>procedures/UploadObject/uploadObject.groovy</path>
+    </file>
+	
     <file>
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>
         <path>ec_setup.pl</path>
