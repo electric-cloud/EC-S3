@@ -52,6 +52,12 @@
                         <value/>
                     </property>
                 </propertySheet>
+            </property>		
+            <property>
+                <propertyName>postp_matchers</propertyName>
+                <description/>
+                <expandable>1</expandable>
+                <value/>
             </property>			
         </propertySheet>
 
@@ -560,7 +566,7 @@
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
         <parallel>0</parallel>
-        <postProcessor>postp</postProcessor>
+        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
         <precondition/>
         <releaseMode>none</releaseMode>
         <resourceName/>

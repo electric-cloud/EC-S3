@@ -21,6 +21,13 @@ def tx = new TransferManager(credentials);
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
 
+if (s3.doesBucketExist(bucketName)) {
+	println("Error : Bucket " + bucketName + " already present");
+	s3 = null
+	commander = null
+	return
+}
+
 println("Creating bucket " + bucketName);
 
 try {
@@ -28,7 +35,7 @@ try {
 
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {
-        println("bucket already present")
+		println("Error : Bucket " + bucketName + " already present");
     }
     handleServiceException(ase)
 
@@ -39,4 +46,9 @@ try {
 
 commander.setProperty("BucketName", bucketName)
 
-println "Done"
+if (s3.doesBucketExist(bucketName)) {
+	println("Bucket " + bucketName + " created successfully");
+}
+
+s3 = null
+commander = null

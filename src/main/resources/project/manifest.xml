@@ -23,7 +23,10 @@
     <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>
         <path>procedures/CreateConfiguration/attemptConnection.pl</path>
     </file>
-
+    <file>
+        <path>postp_matchers.pl</path>
+        <xpath>//property[propertyName=&quot;postp_matchers&quot;]/value</xpath>
+    </file>
     <file>
         <xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/CreateBucket/form.xml</path>
