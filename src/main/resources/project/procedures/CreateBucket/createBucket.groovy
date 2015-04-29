@@ -31,5 +31,6 @@ try {
 
 }
 
+commander.setProperty("BucketName", bucketName)
 
 println "Done"
