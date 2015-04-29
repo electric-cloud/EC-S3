@@ -9,7 +9,7 @@
     <formElement>
         <type>entry</type>
         <label>Bucket Name:</label>
-        <property>BucketName</property>
+        <property>bucketName</property>
         <required>1</required>
         <documentation>Name of the Bucket to create</documentation>
     </formElement>

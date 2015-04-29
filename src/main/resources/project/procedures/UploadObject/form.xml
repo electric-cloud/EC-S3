@@ -1,10 +1,10 @@
 <editor>
     <formElement>
         <type>entry</type>
-        <label>Credential:</label>
+        <label>Configuration:</label>
         <property>config</property>
         <required>1</required>
-        <documentation>The name of the credential that contains the user name and password to ShareFile</documentation>
+        <documentation>The name of the config which holds all the connection information. This must reference a valid existing configuration.</documentation>
     </formElement>
     <formElement>
         <type>entry</type>
@@ -18,7 +18,7 @@
         <label>Key:</label>
         <property>key</property>
         <required>1</required>
-        <documentation>Key of the object to upload</documentation>
+        <documentation>Key of the object to upload. This value will be used as the key for the object that is uploaded</documentation>
     </formElement>
     <formElement>
         <type>entry</type>

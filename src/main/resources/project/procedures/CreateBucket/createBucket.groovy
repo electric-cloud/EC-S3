@@ -23,8 +23,6 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 
 if (s3.doesBucketExist(bucketName)) {
 	println("Error : Bucket " + bucketName + " already present");
-	s3 = null
-	commander = null
 	return
 }
 
@@ -50,5 +48,3 @@ if (s3.doesBucketExist(bucketName)) {
 	println("Bucket " + bucketName + " created successfully");
 }
 
-s3 = null
-commander = null
