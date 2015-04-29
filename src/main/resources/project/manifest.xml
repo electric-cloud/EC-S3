@@ -41,6 +41,15 @@
     <file><xpath>//procedure[procedureName=&quot;UploadObject&quot;]/step[stepName=&quot;uploadObject&quot;]/command</xpath>
         <path>procedures/UploadObject/uploadObject.groovy</path>
     </file>
+
+	<file>
+        <xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/DownloadObject/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/step[stepName=&quot;downloadObject&quot;]/command</xpath>
+        <path>procedures/DownloadObject/downloadObject.groovy</path>
+    </file>
 	
     <file>
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>
