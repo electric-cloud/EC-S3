@@ -44,8 +44,4 @@ try {
 commander.setProperty("downloadLocation", downloadLocation)
 commander.setProperty("Key", key)
 
-tf = null
-s3 = null
-commander = null
-
 println "Done"

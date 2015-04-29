@@ -46,8 +46,4 @@ try {
 commander.setProperty("BucketName", bucketName)
 commander.setProperty("Key", key)
 
-tf = null
-s3 = null
-commander = null
-
 println "Done"
