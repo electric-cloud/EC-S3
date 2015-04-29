@@ -523,7 +523,14 @@
       <timeLimitUnits>minutes</timeLimitUnits>
 
       <workspaceName/>
-
+      <propertySheet>
+        <property>
+            <propertyName>ec_parameterForm</propertyName>
+            <description/>
+            <expandable>0</expandable>
+            <value/>
+        </property>
+      </propertySheet>
       <formalParameter>
         <formalParameterName>config</formalParameterName>
         <defaultValue/>
