@@ -1,5 +1,9 @@
-
-
+import com.amazonaws.AmazonClientException
+import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.services.s3.model.*
+import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.transfer.*
 import groovyx.net.http.RESTClient;
 import static groovyx.net.http.ContentType.JSON
 import groovyx.net.http.HTTPBuilder
@@ -78,8 +82,36 @@ public class ElectricCommander {
         return response
     }
 
+}
 
+/*
+ * Exception handling routines
+ *
+ */
+static void printDeleteResults(MultiObjectDeleteException mode) {
+    System.out.format("%s \n", mode.getMessage());
+    System.out.format("No. of objects successfully deleted = %s\n", mode.getDeletedObjects().size());
+    System.out.format("No. of objects failed to delete = %s\n", mode.getErrors().size());
+    System.out.format("Printing error data...\n");
+    for (MultiObjectDeleteException.DeleteError deleteError : mode.getErrors()){
+        System.out.format("Object Key: %s\t%s\t%s\n",
+                deleteError.getKey(), deleteError.getCode(), deleteError.getMessage());
+    }
+}
 
+static handleServiceException(AmazonServiceException ase) {
+    println("Caught an AmazonServiceException, which means your request made it "
+            + "to Amazon S3, but was rejected with an error response for some reason.");
+    println("Error Message:    " + ase.getMessage());
+    println("HTTP Status Code: " + ase.getStatusCode());
+    println("AWS Error Code:   " + ase.getErrorCode());
+    println("Error Type:       " + ase.getErrorType());
+    println("Request ID:       " + ase.getRequestId());
+}
 
-
+static handleClientException(AmazonClientException ace) {
+    println("Caught an AmazonClientException, which means the client encountered "
+            + "a serious internal problem while trying to communicate with S3, "
+            + "such as not being able to access the network.");
+    println("Error Message: " + ace.getMessage());
 }

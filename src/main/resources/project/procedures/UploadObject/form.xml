@@ -1,0 +1,30 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Credential:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the credential that contains the user name and password to ShareFile</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Bucket Name:</label>
+        <property>bucketName</property>
+        <required>1</required>
+        <documentation>Name of the Bucket to create</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Key:</label>
+        <property>key</property>
+        <required>1</required>
+        <documentation>Key of the object to upload</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>File to Upload:</label>
+        <property>fileToUpload</property>
+        <required>1</required>
+        <documentation>Path for file to upload</documentation>
+    </formElement>
+</editor>
