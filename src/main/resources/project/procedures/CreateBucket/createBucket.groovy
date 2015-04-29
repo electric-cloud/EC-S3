@@ -3,12 +3,7 @@ $[/myProject/procedure_helpers/preamble]
 //get credentials from commander
 ElectricCommander commander = new ElectricCommander();
 
-println 'userName is: ' + commander.userName
-
 def bucketName = '$[bucketName]'
-
-println 'bucket is: ' + bucketName
-
 
 // Create bucket logic here
 
@@ -20,7 +15,8 @@ def tx = new TransferManager(credentials);
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
 
-println("Creating " + bucketName);
+println("Creating bucket " + bucketName);
+
 try {
     s3.createBucket(bucketName);
 
@@ -35,6 +31,5 @@ try {
 
 }
 
-commander.SetProperty("BucketName", bucketName)
 
 println "Done"

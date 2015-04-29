@@ -49,8 +49,7 @@ public class ElectricCommander {
 
     }
 
-    public SetProperty(String propName, String propValue) {
-        def req
+    public setProperty(String propName, String propValue) {
 
         sysJobId = System.getenv('COMMANDER_JOBID')
         def jsonData = [propertyName : propName, value : propValue, jobId : sysJobId]
