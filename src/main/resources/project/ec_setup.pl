@@ -20,7 +20,14 @@ my %DownloadObject = (
   category    => "Resource Management" 
 );
 
-@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject);
+my %ListBucket = ( 
+  label       => "EC-S3 - ListBucket", 
+  procedure   => "ListBucket", 
+  description => "Lists the buckets under current account", 
+  category    => "Resource Management" 
+);
+
+@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject, \%ListBucket);
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -93,6 +100,10 @@ if ($upgradeAction eq "upgrade") {
             $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
                 procedureName => 'DownloadObject',
                 stepName => 'downloadObject'
+            });
+            $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'ListBucket',
+                stepName => 'listBucket'
             });
 		}
     }
