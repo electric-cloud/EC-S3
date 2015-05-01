@@ -732,5 +732,57 @@
         <workspaceName/>
       </step>
     </procedure>	
+	
+	    <procedure>
+      <procedureName>ListBucket</procedureName>
+      <description/>
+      <jobNameTemplate/>
+      <resourceName/>
+      <timeLimit/>
+      <timeLimitUnits>minutes</timeLimitUnits>
+
+      <workspaceName/>
+	  <propertySheet>
+		<property>
+			<propertyName>ec_parameterForm</propertyName>
+			<description/>
+			<expandable>0</expandable>
+			<value/>
+		</property>
+	   </propertySheet>
+      <formalParameter>
+        <formalParameterName>config</formalParameterName>
+        <defaultValue/>
+        <description/>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+
+        <type>entry</type>
+      </formalParameter>
+
+      <step>
+        <stepName>listBucket</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command/>
+        <condition/>
+        <description/>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell>ec-groovy</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+
+        <workingDirectory/>
+        <workspaceName/>
+      </step>
+    </procedure>
+	
   </project>
 </exportedData>

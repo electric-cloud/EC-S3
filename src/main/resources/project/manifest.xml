@@ -36,6 +36,15 @@
         <path>procedures/CreateBucket/createBucket.groovy</path>
     </file>
 
+	    <file>
+        <xpath>//procedure[procedureName=&quot;ListBucket&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/ListBucket/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;ListBucket&quot;]/step[stepName=&quot;listBucket&quot;]/command</xpath>
+        <path>procedures/ListBucket/listBucket.groovy</path>
+    </file>
+	
 	<file>
         <xpath>//procedure[procedureName=&quot;UploadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/UploadObject/form.xml</path>
