@@ -55,6 +55,15 @@
     </file>
 	
 	<file>
+        <xpath>//procedure[procedureName=&quot;ListFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/ListFolder/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;ListFolder&quot;]/step[stepName=&quot;listFolder&quot;]/command</xpath>
+        <path>procedures/ListFolder/listFolder.groovy</path>
+    </file>
+	
+	<file>
         <xpath>//procedure[procedureName=&quot;UploadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/UploadObject/form.xml</path>
     </file>

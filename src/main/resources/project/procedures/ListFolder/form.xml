@@ -1,0 +1,33 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Configuration:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the config which holds all the connection information. This must reference a valid existing configuration.</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Bucket Name:</label>
+        <property>bucketName</property>
+        <required>1</required>
+        <documentation>Name of the Bucket to create</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Folder Name:</label>
+        <property>folderName</property>
+        <required>1</required>
+        <documentation>Name of the Folder/Prefix to lists</documentation>
+    </formElement>    
+	<formElement>
+		<type>checkbox</type>
+		<label>List Objects in this folder or Include all sub folders:</label>
+		<property>include_sub_folder</property>
+		<required>0</required>
+		<checkedValue>1</checkedValue>
+		<uncheckedValue>0</uncheckedValue>
+		<initiallyChecked>1</initiallyChecked>
+		<documentation>If checked, All objects in this folder and all sub folders will be listed.</documentation>
+	</formElement>
+</editor>
