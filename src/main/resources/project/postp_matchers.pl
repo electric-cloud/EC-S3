@@ -25,6 +25,18 @@ push (@::gMatchers,
                               setProperty("summary", $desc . "\n");
                              },
   },
+    {
+        id =>          "createFolder",
+        pattern =>     q{^Folder\s(.+)\screated\ssuccessfully},
+        action =>           q{
+         
+                              my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                              $desc .= "Folder $1 created successfully";
+                              
+                              setProperty("summary", $desc . "\n");
+                             },
+  },
       {
                  id =>          "error",
                  pattern =>     q{ERROR\s:|[Ee]rror\s:},
