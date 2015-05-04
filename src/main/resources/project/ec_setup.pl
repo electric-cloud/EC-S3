@@ -41,7 +41,15 @@ my %ListFolder = (
   category    => "Resource Management" 
 );
 
-@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder);
+my %DownloadFolder = ( 
+  label       => "EC-S3 - DownloadFolder", 
+  procedure   => "DownloadFolder", 
+  description => "Download all the contents from given Folder / Prefix to local storage", 
+  category    => "Resource Management" 
+);
+
+
+@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder);
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -127,6 +135,13 @@ if ($upgradeAction eq "upgrade") {
                 procedureName => 'ListFolder',
                 stepName => 'listFolder'
             });
+            $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'DownloadFolder',
+                stepName => 'downloadFolder'
+            });
+            
+
+
 		}
     }
 }
