@@ -1,0 +1,23 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Configuration:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the config which holds all the connection information. This must reference a valid existing configuration.</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Bucket Name:</label>
+        <property>bucketName</property>
+        <required>1</required>
+        <documentation>Name of the Bucket to create</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Folder Name:</label>
+        <property>folderName</property>
+        <required>1</required>
+        <documentation>Name of the Folder to create</documentation>
+    </formElement>
+</editor>

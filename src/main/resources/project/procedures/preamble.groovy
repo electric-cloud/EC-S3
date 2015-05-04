@@ -4,6 +4,11 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.transfer.*
+
+import java.io.ByteArrayInputStream
+import java.io.File
+import java.io.InputStream
+
 import groovyx.net.http.RESTClient;
 import static groovyx.net.http.ContentType.JSON
 import groovyx.net.http.HTTPBuilder
@@ -115,3 +120,4 @@ static handleClientException(AmazonClientException ace) {
             + "such as not being able to access the network.");
     println("Error Message: " + ace.getMessage());
 }
+
