@@ -25,6 +25,18 @@ push (@::gMatchers,
                               setProperty("summary", $desc . "\n");
                              },
   },
+  {
+        id =>          "listFolder",
+        pattern =>     q{^Listed\s(.+)\sobjects},
+        action =>           q{
+         
+                              my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                              $desc .= "Listed $1 objects";
+                              
+                              setProperty("summary", $desc . "\n");
+                             },
+  },
     {
         id =>          "createFolder",
         pattern =>     q{^Folder\s(.+)\screated\ssuccessfully},
