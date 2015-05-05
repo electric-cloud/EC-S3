@@ -45,6 +45,30 @@ push (@::gMatchers,
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Folder $1 created successfully";
+                                
+                              setProperty("summary", $desc . "\n");
+                             },
+  },
+      {
+        id =>          "deleteObject",
+        pattern =>     q{^"Object\s(.+)\sdeleted\ssuccessfully"},
+        action =>           q{
+         
+                              my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                              $desc .= "Object $1 deleted successfully";
+                              
+                              setProperty("summary", $desc . "\n");
+                             },
+  },
+        {
+        id =>          "deleteBucketContents",
+        pattern =>     q{^"Successfully\sdeleted\s(.+)\sitems"},
+        action =>           q{
+         
+                              my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                              $desc .= "Successfully deleted $1 items.";
                               
                               setProperty("summary", $desc . "\n");
                              },

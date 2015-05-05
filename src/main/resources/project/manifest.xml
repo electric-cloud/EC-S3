@@ -89,6 +89,24 @@
     <file><xpath>//procedure[procedureName=&quot;DownloadFolder&quot;]/step[stepName=&quot;downloadFolder&quot;]/command</xpath>
         <path>procedures/DownloadFolder/downloadFolder.groovy</path>
     </file>
+
+	<file>
+        <xpath>//procedure[procedureName=&quot;DeleteObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/DeleteObject/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;DeleteObject&quot;]/step[stepName=&quot;deleteObject&quot;]/command</xpath>
+        <path>procedures/DeleteObject/deleteObject.groovy</path>
+    </file>
+
+	<file>
+        <xpath>//procedure[procedureName=&quot;DeleteBucketContents&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/DeleteBucketContents/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;DeleteBucketContents&quot;]/step[stepName=&quot;deleteBucketContents&quot;]/command</xpath>
+        <path>procedures/DeleteBucketContents/deleteBucketContents.groovy</path>
+    </file>
 	
     <file>
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>

@@ -48,8 +48,21 @@ my %DownloadFolder = (
   category    => "Resource Management" 
 );
 
+my %DeleteObject = ( 
+  label       => "EC-S3 - DeleteObject", 
+  procedure   => "DeleteObject", 
+  description => "Delete a given object from the given bucket", 
+  category    => "Resource Management" 
+);
 
-@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder);
+my %DeleteBucketContents = ( 
+  label       => "EC-S3 - DeleteBucketContents", 
+  procedure   => "DeleteBucketContents", 
+  description => "Delete all the objects under a given bucket", 
+  category    => "Resource Management" 
+);
+
+@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder, \%DeleteObject, \%DeleteBucketContents);
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -139,8 +152,14 @@ if ($upgradeAction eq "upgrade") {
                 procedureName => 'DownloadFolder',
                 stepName => 'downloadFolder'
             });
-            
-
+            $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'DeleteObject',
+                stepName => 'deleteObject'
+            });
+            $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'DeleteBucketContents',
+                stepName => 'deleteBucketContents'
+            });
 
 		}
     }
