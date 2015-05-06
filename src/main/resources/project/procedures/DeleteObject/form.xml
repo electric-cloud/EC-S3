@@ -1,0 +1,23 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Configuration:</label>
+        <property>config</property>
+        <required>1</required>
+        <documentation>The name of the config which holds all the connection information. This must reference a valid existing configuration.</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Bucket Name:</label>
+        <property>bucketName</property>
+        <required>1</required>
+        <documentation>Name of the Bucket where the object is</documentation>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Key:</label>
+        <property>key</property>
+        <required>1</required>
+        <documentation>Key of the object to delete</documentation>
+    </formElement>
+</editor>
