@@ -80,6 +80,15 @@
     <file><xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/step[stepName=&quot;downloadObject&quot;]/command</xpath>
         <path>procedures/DownloadObject/downloadObject.groovy</path>
     </file>
+
+	<file>
+        <xpath>//procedure[procedureName=&quot;DownloadFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/DownloadFolder/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;DownloadFolder&quot;]/step[stepName=&quot;downloadFolder&quot;]/command</xpath>
+        <path>procedures/DownloadFolder/downloadFolder.groovy</path>
+    </file>
 	
     <file>
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>
