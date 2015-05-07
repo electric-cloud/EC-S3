@@ -27,4 +27,14 @@
         <required>1</required>
         <documentation>Path for file to upload</documentation>
     </formElement>
+    <formElement>
+        <type>checkbox</type>
+        <label>Make the object public:</label>
+        <property>access_public</property>
+        <required>0</required>
+        <checkedValue>1</checkedValue>
+        <uncheckedValue>0</uncheckedValue>
+        <initiallyChecked>0</initiallyChecked>
+        <documentation>If checked, the uploaded object will be visible too all.</documentation>
+    </formElement>    
 </editor>

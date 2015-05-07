@@ -1,13 +1,13 @@
 $[/myProject/procedure_helpers/preamble]
 
-//get credentials from commander
 ElectricCommander commander = new ElectricCommander();
 
 def bucketName = '$[bucketName]'
 def fileToUpload = '$[fileToUpload]'
 def key ='$[key]'
-// Create bucket logic here
+def access_public = '$[access_public]'
 
+//get credentials from commander
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
 // Create TransferManager
@@ -17,13 +17,24 @@ def tx = new TransferManager(credentials);
 AmazonS3 s3 = tx.getAmazonS3Client();
 TransferManager tf = new TransferManager(s3);
 
-def file = new File(fileToUpload)
-println "Uploading " + key + " to " + bucketName
-
 try {
-    PutObjectRequest por = new PutObjectRequest(bucketName, key, file).withCannedAcl(CannedAccessControlList.PublicRead)
+    def file = new File(fileToUpload)
+    if(!file.exists()){
+       println "Error : File " + fileToUpload +" does not exists"
+       return
+    }
+    
+    println "Uploading " + key + " to " + bucketName
+
+    PutObjectRequest por
+    if(access_public == '1') {
+        por = new PutObjectRequest(bucketName, key, file).withCannedAcl(CannedAccessControlList.PublicRead)
+    } else {
+        por = new PutObjectRequest(bucketName, key, file).withCannedAcl(CannedAccessControlList.Private)
+    }
 
     Upload objectUpload = tf.upload(por)
+
     while (!objectUpload.isDone()) {
     	Thread.sleep(1000);
         println(objectUpload.getProgress().getPercentTransferred() + "%");
@@ -41,9 +52,8 @@ try {
 
     handleClientException(ace)
 
+} catch(IOException ioex) {
+    println("Error : " + ioex.getMessage())
 }
 
-commander.setProperty("BucketName", bucketName)
-commander.setProperty("Key", key)
-
-println "Done"
+println "Uploaded " + key + " successfully"
