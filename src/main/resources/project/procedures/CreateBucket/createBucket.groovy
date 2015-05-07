@@ -42,8 +42,6 @@ try {
 
 }
 
-commander.setProperty("BucketName", bucketName)
-
 if (s3.doesBucketExist(bucketName)) {
 	println("Bucket " + bucketName + " created successfully");
 }
