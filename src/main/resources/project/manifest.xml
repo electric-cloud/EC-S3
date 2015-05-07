@@ -23,6 +23,12 @@
     <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>
         <path>procedures/CreateConfiguration/attemptConnection.pl</path>
     </file>
+	
+	<file>
+        <xpath>//procedure[procedureName=&quot;DeleteConfiguration&quot;]/step[stepName=&quot;DeleteConfiguration&quot;]/command</xpath>
+        <path>procedures/DeleteConfiguration/deletecfg.pl</path>
+    </file>
+	
     <file>
         <path>postp_matchers.pl</path>
         <xpath>//property[propertyName=&quot;postp_matchers&quot;]/value</xpath>
