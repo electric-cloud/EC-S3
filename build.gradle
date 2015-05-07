@@ -31,6 +31,7 @@ apply plugin: 'flow-gradle-plugin'
 dependencies {
     testCompile 'junit:junit:[4,)'
     testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'com.amazonaws:aws-java-sdk-s3:1.9.30'
 }
 
 test {
@@ -47,6 +48,7 @@ test {
     systemProperties['COMMANDER_SERVER'] = "$commanderServer"
     systemProperties['COMMANDER_USER'] = props.getProperty("COMMANDER_USER")
     systemProperties['COMMANDER_PASSWORD'] = props.getProperty("COMMANDER_PASSWORD")
+    systemProperties['PLUGIN_VERSION'] = version
     //TODO: load properties for EC-EC2
 
 
