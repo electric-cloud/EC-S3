@@ -53,4 +53,33 @@ public class CreateBucketTest {
         assertTrue(util.CheckIsBucketAvailable(bucketName));
     }
 
+    @Test
+    public void createInvalidBucket() throws Exception {
+        long jobTimeoutMillis = 5 * 60 * 1000;
+        String bucketName = "ec_s3_plugin_test_bucket";
+        JSONObject jo = new JSONObject();
+
+        jo.put("projectName", "EC-S3-" + StringConstants.PLUGIN_VERSION);
+        jo.put("procedureName", "CreateBucket");
+
+        JSONArray actualParameterArray = new JSONArray();
+        actualParameterArray.put(new JSONObject()
+                .put("value", bucketName)
+                .put("actualParameterName", "bucketName"));
+
+        actualParameterArray.put(new JSONObject()
+                .put("actualParameterName", "config")
+                .put("value", "S3Cfg"));
+
+        jo.put("actualParameter", actualParameterArray);
+
+        String jobId = TestUtils.callRunProcedure(jo);
+
+        String response = TestUtils.waitForJob(jobId, jobTimeoutMillis);
+
+        // Check job status
+        assertEquals("Job completed with success", "error", response);
+
+    }
+
 }
