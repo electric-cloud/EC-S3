@@ -9,7 +9,7 @@
         <type>entry</type>
         <label>Service URL:</label>
         <property>service_url</property>
-        <documentation>The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com. For Eucalyptus EC2, this is the internal address, such as http://ip/services/Eucalyptus</documentation>
+        <documentation>The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com.</documentation>
         <required>1</required>
     </formElement>
     <formElement>

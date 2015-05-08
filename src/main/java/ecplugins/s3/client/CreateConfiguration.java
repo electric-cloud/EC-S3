@@ -39,7 +39,7 @@ import static com.electriccloud.commander.gwt.client.util.CommanderUrlBuilder.cr
 import static ecinternal.client.InternalComponentBaseFactory.getPluginName;
 
 /**
- * Create EC2 Configuration.
+ * Create S3 Configuration.
  */
 public class CreateConfiguration
     extends InternalFormBase
@@ -51,7 +51,7 @@ public class CreateConfiguration
     {
 
         // noinspection HardCodedStringLiteral
-        super("New EC2 Configuration", "EC2 Configurations");
+        super("New S3 Configuration", "S3 Configurations");
 
         CommanderUrlBuilder urlBuilder = createPageUrl(getPluginName(),
                 "configurations");

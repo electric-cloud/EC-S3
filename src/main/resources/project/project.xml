@@ -135,7 +135,7 @@
                 <broadcast>0</broadcast>
                 <command/>
                 <condition/>
-                <description>Run an EC2 api call using the Amazon Perl API</description>
+                <description>Run an S3 api call using the Amazon Perl API</description>
                 <errorHandling>failProcedure</errorHandling>
                 <exclusive>0</exclusive>
                 <logFileName/>
