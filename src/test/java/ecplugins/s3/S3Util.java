@@ -7,7 +7,7 @@ import com.amazonaws.services.s3.model.*;
 import com.amazonaws.services.s3.transfer.*;
 
 import java.util.Properties;
-
+import java.util.*;
 ;
 
 /**
@@ -32,6 +32,22 @@ public class S3Util {
         }
     }
 
+    public static void CreateBucket(String bucketName) throws Exception {
+
+        Properties props = TestUtils.getProperties();
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
+
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
+
+        // Get S3 Client
+        AmazonS3 s3 = tx.getAmazonS3Client();
+
+        s3.createBucket(bucketName);
+
+    }
+
     public static boolean CheckIsBucketAvailable(String bucketName) throws Exception {
 
         Properties props = TestUtils.getProperties();
@@ -45,6 +61,22 @@ public class S3Util {
         AmazonS3 s3 = tx.getAmazonS3Client();
 
         return s3.doesBucketExist(bucketName);
+    }
+
+    public static int ListBuckets() throws Exception {
+        Properties props = TestUtils.getProperties();
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
+
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
+
+        // Get S3 Client
+        AmazonS3 s3 = tx.getAmazonS3Client();
+
+        List<Bucket> buckets = s3.listBuckets();
+
+        return buckets.size();
     }
 }
 
