@@ -26,6 +26,10 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 println("Creating folder " + folderName);
 
 try {
+        if (!s3.doesBucketExist(bucketName)) {
+            println("Error : Bucket " + bucketName + " not present");
+            return
+        }
 		// create meta-data for your folder and set content-length to 0
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(0)
