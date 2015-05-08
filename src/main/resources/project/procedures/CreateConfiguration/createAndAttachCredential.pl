@@ -56,6 +56,46 @@ $xpath = $ec->attachCredential($projName, $credName,
      stepName => "createBucket"});
 $errors .= $ec->checkAllErrors($xpath);
 
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "ListBucket",
+     stepName => "listBucket"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "UploadObject",
+     stepName => "uploadObject"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "DownloadObject",
+     stepName => "downloadObject"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "CreateFolder",
+     stepName => "createFolder"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "ListFolder",
+     stepName => "listFolder"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "DownloadFolder",
+     stepName => "downloadFolder"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "DeleteObject",
+     stepName => "deleteObject"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "DeleteBucketContents",
+     stepName => "deleteBucketContents"});
+$errors .= $ec->checkAllErrors($xpath);
+
 if ("$errors" ne "") {
     # Cleanup the partially created configuration we just created
     $ec->deleteProperty($configPath);
