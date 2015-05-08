@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 
@@ -97,6 +99,52 @@ public class TestUtils {
 
         return jsonObject.getString("outcome");
 
+    }
+
+    /**
+     * waitForJob: Waits for job to be completed and reports outcome
+     *
+     * @param jobId
+     * @return outcome of job
+     */
+    static String getJobStatus(String jobId) throws IOException, JSONException {
+
+        HttpClient httpClient = new DefaultHttpClient();
+        String output = "";
+        HttpGet httpGetRequest = new HttpGet("http://" + props.getProperty(StringConstants.COMMANDER_USER)
+                + ":" + props.getProperty(StringConstants.COMMANDER_PASSWORD) + "@" + StringConstants.COMMANDER_SERVER
+                + ":8000/rest/v1.0/jobs/" + jobId + "?request=getJobDetails");
+        try {
+
+
+            HttpResponse httpResponse = httpClient.execute(httpGetRequest);
+            if (httpResponse.getStatusLine().getStatusCode() >= 400) {
+                throw new RuntimeException("HTTP GET failed with " +
+                        httpResponse.getStatusLine().getStatusCode() + "-" +
+                        httpResponse.getStatusLine().getReasonPhrase());
+            }
+
+            output = new JSONObject(EntityUtils.toString(httpResponse.getEntity())).getJSONObject("job").getJSONArray("jobStep").getJSONObject(0).getJSONObject("propertySheet").getJSONArray("property").getJSONObject(1).getString("value");
+
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+
+        return output;
+    }
+
+    static String getSubstring(String string,String regex){
+
+        String substring = null;
+
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.find())
+        {
+            substring = matcher.group(1);
+        }
+        return substring;
     }
 
     /**
