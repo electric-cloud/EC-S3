@@ -11,7 +11,7 @@
         <label>Bucket Name:</label>
         <property>bucketName</property>
         <required>1</required>
-        <documentation>Name of the Bucket to create</documentation>
+        <documentation>Name of the Bucket where the object is</documentation>
     </formElement>
     <formElement>
         <type>entry</type>
@@ -23,7 +23,7 @@
     <formElement>
         <type>entry</type>
         <label>Download Location:</label>
-        <property>downloadLocation/property>
+        <property>downloadLocation</property>
         <required>1</required>
         <documentation>Download location path</documentation>
     </formElement>

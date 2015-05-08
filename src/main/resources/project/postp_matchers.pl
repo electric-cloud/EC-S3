@@ -77,14 +77,26 @@ push (@::gMatchers,
         id =>          "uploadObject",
         pattern =>     q{^Uploaded\s(.+)\ssuccessfully},
         action =>           q{
-         
+
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Uploaded $1 successfully.";
-                              
+
                               setProperty("summary", $desc . "\n");
                              },
   },
+            {
+          id =>          "downloadObject",
+          pattern =>     q{^Downloaded\s(.+)\ssuccessfully},
+          action =>           q{
+
+                                my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                                $desc .= "Downloaded $1 successfully.";
+
+                                setProperty("summary", $desc . "\n");
+                               },
+    },
       {
                  id =>          "error",
                  pattern =>     q{ERROR\s:|[Ee]rror\s:},
