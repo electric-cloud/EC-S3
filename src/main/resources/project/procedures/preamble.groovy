@@ -78,10 +78,10 @@ public class ElectricCommander {
                     break
             }
         } catch (groovyx.net.http.HttpResponseException ex) {
-            ex.printStackTrace()
+            ex.getMessage()
             return null
         } catch (java.net.ConnectException ex) {
-            ex.printStackTrace()
+            ex.getMessage()
             return null
         }
         return response
