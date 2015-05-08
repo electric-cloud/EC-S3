@@ -35,6 +35,6 @@
         <checkedValue>1</checkedValue>
         <uncheckedValue>0</uncheckedValue>
         <initiallyChecked>0</initiallyChecked>
-        <documentation>If checked, the uploaded object will be visible too all.</documentation>
+        <documentation>If checked, the uploaded object will be publicly accessible</documentation>
     </formElement>    
 </editor>
