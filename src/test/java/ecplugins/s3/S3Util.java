@@ -5,7 +5,10 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.services.s3.transfer.*;
-;import java.util.Properties;
+
+import java.util.Properties;
+
+;
 
 /**
  * Created by anand on 07-05-2015.
@@ -18,10 +21,10 @@ public class S3Util {
 
         BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
 
-// Create TransferManager
-        TransferManager  tx = new TransferManager(credentials);
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
 
-// Get S3 Client
+        // Get S3 Client
         AmazonS3 s3 = tx.getAmazonS3Client();
 
         if (s3.doesBucketExist(bucketName)) {
@@ -35,10 +38,10 @@ public class S3Util {
 
         BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
 
-// Create TransferManager
-        TransferManager  tx = new TransferManager(credentials);
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
 
-// Get S3 Client
+        // Get S3 Client
         AmazonS3 s3 = tx.getAmazonS3Client();
 
         return s3.doesBucketExist(bucketName);

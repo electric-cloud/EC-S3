@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import java.util.Properties;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -25,7 +27,7 @@ public class CreateBucketTest {
     @Test
     public void createValidBucket() throws Exception {
         long jobTimeoutMillis = 5 * 60 * 1000;
-        String bucketName = "ec-s3-plugin-test-bucket";
+        String bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
         S3Util util = new S3Util();
         util.DeleteBucket(bucketName);
         JSONObject jo = new JSONObject();
@@ -46,17 +48,20 @@ public class CreateBucketTest {
 
         String jobId = TestUtils.callRunProcedure(jo);
 
-        String response = TestUtils.waitForJob(jobId,jobTimeoutMillis);
+        String response = TestUtils.waitForJob(jobId, jobTimeoutMillis);
 
         // Check job status
         assertEquals("Job completed with errors", "success", response);
         assertTrue(util.CheckIsBucketAvailable(bucketName));
+
+        //Delete the bucket since we do not want to leave any residue
+        util.DeleteBucket(bucketName);
     }
 
     @Test
     public void createInvalidBucket() throws Exception {
         long jobTimeoutMillis = 5 * 60 * 1000;
-        String bucketName = "ec_s3_plugin_test_bucket";
+        String bucketName = "ec_s3_plugin_test_bucket" + TestUtils.randInt();
         JSONObject jo = new JSONObject();
 
         jo.put("projectName", "EC-S3-" + StringConstants.PLUGIN_VERSION);
