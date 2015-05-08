@@ -41,7 +41,4 @@ try {
 
 }
 
-commander.setProperty("downloadLocation", downloadLocation)
-commander.setProperty("Key", key)
-
-println "Done"
+println "Downloaded " + key + " successfully"
