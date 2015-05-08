@@ -1,10 +1,9 @@
 package ecplugins.s3;
 
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -12,22 +11,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
+import java.util.Random;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 public class TestUtils {
 
-    private static Properties props;
     private static final long jobStatusPollIntervalMillis = 15000;
+    private static Properties props;
     private static boolean isConfigDeletedSuccessfully = false;
     private static boolean isConfigCreatedSuccessfully = false;
 
     public static Properties getProperties() throws Exception {
 
-        if(props == null){
+        if (props == null) {
             props = new Properties();
             InputStream is = null;
             is = new FileInputStream("ecplugin.properties");
@@ -67,13 +69,14 @@ public class TestUtils {
         }
 
     }
+
     /**
      * waitForJob: Waits for job to be completed and reports outcome
      *
      * @param jobId
      * @return outcome of job
      */
-     static String waitForJob(String jobId, long jobTimeOutMillis) throws Exception {
+    static String waitForJob(String jobId, long jobTimeOutMillis) throws Exception {
 
         long timeTaken = 0;
 
@@ -87,7 +90,7 @@ public class TestUtils {
             Thread.sleep(jobStatusPollIntervalMillis);
             jsonObject = performHTTPGet(url);
             timeTaken += jobStatusPollIntervalMillis;
-            if(timeTaken > jobTimeOutMillis){
+            if (timeTaken > jobTimeOutMillis) {
                 throw new Exception("Job did not completed within time.");
             }
         }
@@ -102,7 +105,7 @@ public class TestUtils {
      * @param url
      * @return JSONObject
      */
-     static JSONObject performHTTPGet(String url) throws IOException, JSONException {
+    static JSONObject performHTTPGet(String url) throws IOException, JSONException {
 
         HttpClient httpClient = new DefaultHttpClient();
         try {
@@ -125,116 +128,131 @@ public class TestUtils {
     /**
      * Create the S3 configuration used for this test suite
      */
-     static void createConfiguration() throws Exception {
+    static void createConfiguration() throws Exception {
 
-         long jobTimeoutMillis = 3 * 60 * 1000;
-         if(isConfigCreatedSuccessfully == false) {
+        long jobTimeoutMillis = 3 * 60 * 1000;
+        if (isConfigCreatedSuccessfully == false) {
 
-             String response = "";
-             JSONObject parentJSONObject = new JSONObject();
-             JSONArray actualParameterArray = new JSONArray();
+            String response = "";
+            JSONObject parentJSONObject = new JSONObject();
+            JSONArray actualParameterArray = new JSONArray();
 
-             parentJSONObject.put("projectName", "EC-S3-" + StringConstants.PLUGIN_VERSION);
-             parentJSONObject.put("procedureName", "CreateConfiguration");
+            parentJSONObject.put("projectName", "EC-S3-" + StringConstants.PLUGIN_VERSION);
+            parentJSONObject.put("procedureName", "CreateConfiguration");
 
-             actualParameterArray.put(new JSONObject()
-                     .put("value", "S3Cfg")
-                     .put("actualParameterName", "config"));
+            actualParameterArray.put(new JSONObject()
+                    .put("value", "S3Cfg")
+                    .put("actualParameterName", "config"));
 
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "service_url")
-                     .put("value", props.getProperty(StringConstants.SERVICE_URL)));
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "service_url")
+                    .put("value", props.getProperty(StringConstants.SERVICE_URL)));
 
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "credential")
-                     .put("value", "web_credentials"));
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "credential")
+                    .put("value", "web_credentials"));
 
-             parentJSONObject.put("actualParameter", actualParameterArray);
+            parentJSONObject.put("actualParameter", actualParameterArray);
 
-             JSONArray credentialArray = new JSONArray();
+            JSONArray credentialArray = new JSONArray();
 
-             credentialArray.put(new JSONObject()
-                     .put("credentialName", "web_credentials")
-                     .put("userName", props.getProperty(StringConstants.ACCESS_ID))
-                     .put("password", props.getProperty(StringConstants.SECRET_ACCESS_ID)));
+            credentialArray.put(new JSONObject()
+                    .put("credentialName", "web_credentials")
+                    .put("userName", props.getProperty(StringConstants.ACCESS_ID))
+                    .put("password", props.getProperty(StringConstants.SECRET_ACCESS_ID)));
 
-             parentJSONObject.put("credential", credentialArray);
-
-
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "attempt")
-                     .put("value", "1"));
+            parentJSONObject.put("credential", credentialArray);
 
 
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "debug")
-                     .put("value", "1"));
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "attempt")
+                    .put("value", "1"));
 
 
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "desc")
-                     .put("value", "Test Configuration"));
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "debug")
+                    .put("value", "1"));
 
 
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "resource_pool")
-                     .put("value", "default"));
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "desc")
+                    .put("value", "Test Configuration"));
 
 
-             actualParameterArray.put(new JSONObject()
-                     .put("actualParameterName", "workspace")
-                     .put("value", "default"));
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "resource_pool")
+                    .put("value", "default"));
 
-             String jobId = callRunProcedure(parentJSONObject);
 
-             response = waitForJob(jobId,jobTimeoutMillis);
+            actualParameterArray.put(new JSONObject()
+                    .put("actualParameterName", "workspace")
+                    .put("value", "default"));
 
-             // Check job status
-             assertEquals("Job completed without errors", "success", response);
+            String jobId = callRunProcedure(parentJSONObject);
 
-             isConfigCreatedSuccessfully = true;
-         }
+            response = waitForJob(jobId, jobTimeoutMillis);
+
+            // Check job status
+            assertEquals("Job completed without errors", "success", response);
+
+            isConfigCreatedSuccessfully = true;
+        }
     }
 
     /**
      * Delete the S3 configuration used for this test suite (clear previous runs)
      */
-     static void deleteConfiguration() throws Exception {
+    static void deleteConfiguration() throws Exception {
 
-         long jobTimeoutMillis = 3 * 60 * 1000;
-         if (isConfigDeletedSuccessfully == false) {
+        long jobTimeoutMillis = 3 * 60 * 1000;
+        if (isConfigDeletedSuccessfully == false) {
 
-             String jobId = "";
-             JSONObject param1 = new JSONObject();
-             JSONObject jo = new JSONObject();
-             jo.put("projectName", "EC-S3-" + StringConstants.PLUGIN_VERSION);
-             jo.put("procedureName", "DeleteConfiguration");
+            String jobId = "";
+            JSONObject param1 = new JSONObject();
+            JSONObject jo = new JSONObject();
+            jo.put("projectName", "EC-S3-" + StringConstants.PLUGIN_VERSION);
+            jo.put("procedureName", "DeleteConfiguration");
 
-             JSONArray actualParameterArray = new JSONArray();
-             actualParameterArray.put(new JSONObject()
-                     .put("value", "S3Cfg")
-                     .put("actualParameterName", "config"));
+            JSONArray actualParameterArray = new JSONArray();
+            actualParameterArray.put(new JSONObject()
+                    .put("value", "S3Cfg")
+                    .put("actualParameterName", "config"));
 
-             jo.put("actualParameter", actualParameterArray);
+            jo.put("actualParameter", actualParameterArray);
 
-             JSONArray credentialArray = new JSONArray();
+            JSONArray credentialArray = new JSONArray();
 
-             credentialArray.put(new JSONObject()
-                     .put("credentialName", "web_credentials")
-                     .put("userName", props.getProperty(StringConstants.ACCESS_ID))
-                     .put("password", props.getProperty(StringConstants.SECRET_ACCESS_ID)));
+            credentialArray.put(new JSONObject()
+                    .put("credentialName", "web_credentials")
+                    .put("userName", props.getProperty(StringConstants.ACCESS_ID))
+                    .put("password", props.getProperty(StringConstants.SECRET_ACCESS_ID)));
 
-             jo.put("credential", credentialArray);
+            jo.put("credential", credentialArray);
 
-             jobId = callRunProcedure(jo);
+            jobId = callRunProcedure(jo);
 
-             // Block on job completion
-             waitForJob(jobId,jobTimeoutMillis);
-             // Do not check job status. Delete will error if it does not exist
-             // which is OK since that is the expected state.
+            // Block on job completion
+            waitForJob(jobId, jobTimeoutMillis);
+            // Do not check job status. Delete will error if it does not exist
+            // which is OK since that is the expected state.
 
             isConfigDeletedSuccessfully = true;
-         }
+        }
 
-     }
+    }
+
+    public static int randInt() {
+        int min = 100;
+        int max = 10000;
+
+        // NOTE: Usually this should be a field rather than a method
+        // variable so that it is not re-seeded every call.
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
 }
