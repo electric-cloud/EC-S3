@@ -721,7 +721,7 @@
 	  <formalParameter>
 		  <formalParameterName>access_public</formalParameterName>
 		  <defaultValue>1</defaultValue>
-		  <description>If checked, the uploaded object will be visible too all</description>
+		  <description>If checked, the uploaded object will be publicly accessible</description>
 		  <required>0</required>
 		  <type>checkbox</type>
 		</formalParameter>	  
