@@ -9,7 +9,7 @@
   <author>Electric Cloud</author>
   <authorUrl>http://www.electric-cloud.com/support</authorUrl>
   <category>Resource Management</category>
-  <commander-version min="3.6"/>
+  <commander-version min="5.4"/>
   <components>
     <component name="ConfigurationManagement">
       <javascript>war/ecplugins.s3.ConfigurationManagement/ecplugins.s3.ConfigurationManagement.nocache.js</javascript>
