@@ -27,8 +27,9 @@ public class UploadObjectTest {
     @Test
     public void UploadOneObject() throws Exception {
         long jobTimeoutMillis = 5 * 60 * 1000;
-        String bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
         S3Util util = new S3Util();
+
+        String bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
         if(!util.CheckIsBucketAvailable(bucketName))
             util.CreateBucket(bucketName);
 
@@ -64,6 +65,7 @@ public class UploadObjectTest {
         // Check job status
         assertEquals("Job completed with errors", "success", response);
 
+        assertTrue("The key is not found",  util.isValidFile(bucketName, "template.xml"));
     }
 
 
