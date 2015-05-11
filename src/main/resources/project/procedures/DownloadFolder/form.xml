@@ -17,7 +17,7 @@
         <type>entry</type>
         <label>Key Prefix - Folder:</label>
         <property>key</property>
-        <required>1</required>
+        <required>0</required>
         <documentation>Key prefix of the folder to download</documentation>
     </formElement>
     <formElement>
