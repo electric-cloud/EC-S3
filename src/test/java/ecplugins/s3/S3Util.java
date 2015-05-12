@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.transfer.*;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 
+import java.io.File;
 import java.util.Properties;
 import java.util.*;
 ;
@@ -79,6 +80,37 @@ public class S3Util {
         List<Bucket> buckets = s3.listBuckets();
 
         return buckets.size();
+    }
+
+    public static void UploadObject(String bucketName, String key, String fileToUpload) throws AmazonClientException, AmazonServiceException, Exception {
+        Properties props = TestUtils.getProperties();
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
+
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
+
+        // Get S3 Client
+        AmazonS3 s3 = tx.getAmazonS3Client();
+
+        try {
+            System.out.println("Uploading a new object to S3 from a file\n");
+            File file = new File(fileToUpload);
+            s3.putObject(new PutObjectRequest(
+                    bucketName, key, file));
+
+        } catch (AmazonServiceException ase) {
+            System.out.println("Caught an AmazonServiceException");
+            System.out.println("Error Message:    " + ase.getMessage());
+            System.out.println("HTTP Status Code: " + ase.getStatusCode());
+            System.out.println("AWS Error Code:   " + ase.getErrorCode());
+            System.out.println("Error Type:       " + ase.getErrorType());
+            System.out.println("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+            System.out.println("Caught an AmazonClientException, which  means the client encountered  an internal error while trying to such as not being able to access the network.");
+            System.out.println("Error Message: " + ace.getMessage());
+        }
+
     }
 
     public static boolean isValidFile(String bucketName,
