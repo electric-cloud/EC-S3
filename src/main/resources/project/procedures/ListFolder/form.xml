@@ -17,7 +17,7 @@
         <type>entry</type>
         <label>Folder Name:</label>
         <property>folderName</property>
-        <required>1</required>
+        <required>0</required>
         <documentation>Name of the Folder/Prefix to lists</documentation>
     </formElement>    
 	<formElement>
