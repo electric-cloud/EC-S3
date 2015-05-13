@@ -3,9 +3,9 @@ $[/myProject/procedure_helpers/preamble]
 //get credentials from commander
 ElectricCommander commander = new ElectricCommander();
 
-def bucketName = '$[bucketName]'
-def downloadLocation = '$[downloadLocation]'
-def key ='$[key]'
+def bucketName = '$[bucketName]'.trim()
+def downloadLocation = '$[downloadLocation]'.trim()
+def key ='$[key]'.trim()
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
@@ -19,7 +19,27 @@ TransferManager tf = new TransferManager(s3);
 
 println "Downloading " + key + " to " + downloadLocation
 
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty");
+    return
+}
+
+if (downloadLocation.length() == 0) {
+    println("Error : Download location is empty");
+    return
+}
+
+if (key.length() == 0) {
+    println("Error : Key is empty");
+    return
+}
+
 try {
+    if (!s3.doesBucketExist(bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
     Download download = tf.download(new GetObjectRequest(bucketName, key), new File(downloadLocation + "/" + key));
 
     while (!download.isDone()) {

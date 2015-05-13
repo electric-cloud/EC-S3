@@ -3,8 +3,8 @@ $[/myProject/procedure_helpers/preamble]
 //get credentials from commander
 ElectricCommander commander = new ElectricCommander();
 
-def bucketName = '$[bucketName]'
-def key ='$[key]'
+def bucketName = '$[bucketName]'.trim()
+def key ='$[key]'.trim()
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
@@ -17,7 +17,22 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 
 println "Deleting object : " + key
 
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty");
+    return
+}
+
+if (key.length() == 0) {
+    println("Error : Key is empty");
+    return
+}
+
 try {
+    if (!s3.doesBucketExist(bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
     s3.deleteObject(bucketName, key);
 
 } catch (InterruptedException e) {
