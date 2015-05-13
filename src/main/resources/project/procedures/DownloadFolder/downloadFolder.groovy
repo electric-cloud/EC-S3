@@ -19,6 +19,12 @@ TransferManager tf = new TransferManager(s3);
 println "Downloading " + key + " to " + downloadLocation
 
 try {
+    if (!s3.doesBucketExist(bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
+    //Now download the contents
     file = new File(downloadLocation)
     MultipleFileDownload download = tf.downloadDirectory(bucketName, key, file)
 
@@ -41,4 +47,4 @@ try {
 
 }
 
-println "Downloaded " + key + " to " + downloadLocation
+println "Downloaded " + key + " successfully"
