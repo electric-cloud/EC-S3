@@ -25,7 +25,7 @@
         <label>File to Upload:</label>
         <property>fileToUpload</property>
         <required>1</required>
-        <documentation>Path for file to upload</documentation>
+        <documentation>Path for file to upload. For example, '/path/to/fileToUpload.txt' or 'c:/mydir/fileToUpload.txt'.</documentation>
     </formElement>
     <formElement>
         <type>checkbox</type>

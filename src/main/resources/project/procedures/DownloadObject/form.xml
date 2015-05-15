@@ -25,6 +25,6 @@
         <label>Download Location:</label>
         <property>downloadLocation</property>
         <required>1</required>
-        <documentation>Download location path</documentation>
+        <documentation>Download location path.For example, '/path/to/downloadLocation' or 'C:/path/to/downloadLocation'</documentation>
     </formElement>
 </editor>
