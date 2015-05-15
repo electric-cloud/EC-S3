@@ -2,6 +2,7 @@ package ecplugins.s3;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,8 +39,8 @@ public class DeleteBucketContentsTest {
             System.out.println("Bucket : " + bucketName + " already present");
         }
 
-        util.UploadObject(bucketName, "license_test.xml", "C:\\test\\project.xml");
-        util.UploadObject(bucketName, "license_test1.xml", "C:\\test\\project.xml");
+        util.UploadObject(bucketName, "license_test.xml");
+        util.UploadObject(bucketName, "license_test1.xml");
 
 
         //Create the formal parameters
@@ -69,6 +70,12 @@ public class DeleteBucketContentsTest {
         assertFalse("The key is still available", util.isValidFile(bucketName, "license_test.xml"));
         assertFalse("The key is still available", util.isValidFile(bucketName, "license_test1.xml"));
 
+    }
+
+    @AfterClass
+    public static void cleanup(){
+
+        S3Util.deleteTestData();
     }
 
 

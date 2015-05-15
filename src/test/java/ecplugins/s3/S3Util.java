@@ -9,6 +9,7 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.*;
 ;
@@ -17,6 +18,8 @@ import java.util.*;
  * Created by anand on 07-05-2015.
  */
 public class S3Util {
+
+    private static String testFileLocation;
 
     public static void DeleteBucket(String bucketName) throws Exception {
 
@@ -82,9 +85,9 @@ public class S3Util {
         return buckets.size();
     }
 
-    public static void UploadObject(String bucketName, String key, String fileToUpload) throws AmazonClientException, AmazonServiceException, Exception {
+    public static void UploadObject(String bucketName, String key) throws AmazonClientException, AmazonServiceException, Exception {
         Properties props = TestUtils.getProperties();
-
+        File file  =  new File(createFile());
         BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
 
         // Create TransferManager
@@ -95,7 +98,7 @@ public class S3Util {
 
         try {
             System.out.println("Uploading a new object to S3 from a file\n");
-            File file = new File(fileToUpload);
+
             s3.putObject(new PutObjectRequest(
                     bucketName, key, file));
 
@@ -111,6 +114,31 @@ public class S3Util {
             System.out.println("Error Message: " + ace.getMessage());
         }
 
+    }
+
+
+    public static String createFile() throws IOException {
+        File file = null;
+        String OS = System.getProperty("os.name").toLowerCase();
+
+        if((OS.indexOf("win") >= 0)) //if its windows system
+        {
+            new File("C:\\EC-S3AutomatedTestTemp").mkdir();
+            file = new File("C:\\EC-S3AutomatedTestTemp\\test.txt");
+        } else {
+            // /var/tmp dir already exists.
+            file = new File("/var/tmp/test.txt");
+        }
+
+        boolean result = file.createNewFile();
+        if(result == false){
+            System.out.println("Deleting already existing test.txt");
+            file.delete();
+            file.createNewFile();
+        }
+
+        testFileLocation = file.getAbsolutePath().replace('\\','/');
+        return testFileLocation;
     }
 
     public static boolean isValidFile(String bucketName,
@@ -139,6 +167,12 @@ public class S3Util {
         }
 
         return isValidFile;
+    }
+
+    public static void deleteTestData() {
+
+        File fileToDelete =  new File(testFileLocation);
+        fileToDelete.delete();
     }
 }
 
