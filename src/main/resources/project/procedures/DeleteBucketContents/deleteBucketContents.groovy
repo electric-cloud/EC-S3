@@ -75,7 +75,4 @@ try {
 
 }
 
-if (!s3.doesBucketExist(bucketName)) {
-    println("Bucket " + bucketName + " deleted successfully");
-}
 

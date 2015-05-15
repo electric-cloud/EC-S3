@@ -35,6 +35,10 @@ println("Creating bucket " + bucketName);
 try {
     s3.createBucket(bucketName);
 
+    if (s3.doesBucketExist(bucketName)) {
+        println("Bucket " + bucketName + " created successfully");
+    }
+
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {
 		println("Error : Bucket " + bucketName + " already present");
@@ -46,7 +50,4 @@ try {
 
 }
 
-if (s3.doesBucketExist(bucketName)) {
-	println("Bucket " + bucketName + " created successfully");
-}
 

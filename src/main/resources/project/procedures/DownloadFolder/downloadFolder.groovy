@@ -50,6 +50,8 @@ try {
 
     tf.shutdownNow()
 
+    println "Downloaded " + key + " successfully"
+
 } catch (InterruptedException e) {
     e.printStackTrace();
 } catch (AmazonServiceException ase) {
@@ -61,5 +63,3 @@ try {
     handleClientException(ace)
 
 }
-
-println "Downloaded " + key + " successfully"

@@ -57,6 +57,8 @@ try {
 
     tf.shutdownNow()
 
+    println "Uploaded " + key + " successfully"
+
 } catch (InterruptedException e) {
     e.printStackTrace();
 } catch (AmazonServiceException ase) {
@@ -70,5 +72,3 @@ try {
 } catch(IOException ioex) {
     println("Error : " + ioex.getMessage())
 }
-
-println "Uploaded " + key + " successfully"

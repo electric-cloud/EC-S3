@@ -51,6 +51,8 @@ try {
     // send request to S3 to create folder
     s3.putObject(putObjectRequest)
 
+    println("Folder " + folderName + " created successfully")
+
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {
 		println("Error : Folder " + folderName + " already present");
@@ -61,5 +63,4 @@ try {
     handleClientException(ace)
 }
 
-println("Folder " + folderName + " created successfully");
 

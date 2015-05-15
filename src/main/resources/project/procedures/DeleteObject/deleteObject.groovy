@@ -35,6 +35,8 @@ try {
 
     s3.deleteObject(bucketName, key);
 
+    println "Object " + key + " deleted successfully"
+
 } catch (InterruptedException e) {
     e.printStackTrace();
 } catch (AmazonServiceException ase) {
@@ -46,6 +48,4 @@ try {
     handleClientException(ace)
 
 }
-
-println "Object " + key + " deleted successfully"
 
