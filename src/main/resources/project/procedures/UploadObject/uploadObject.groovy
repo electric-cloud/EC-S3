@@ -52,7 +52,9 @@ try {
 
     while (!objectUpload.isDone()) {
     	Thread.sleep(1000);
-        println(objectUpload.getProgress().getPercentTransferred() + "%");
+        if(!Double.isNaN(objectUpload.getProgress().getPercentTransferred())) {
+            println(objectUpload.getProgress().getPercentTransferred() + "%");
+        }
     }
 
     tf.shutdownNow()
