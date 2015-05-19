@@ -27,11 +27,11 @@ try {
         i++
     }
 
+    println("Listed " + i + " buckets")
+
 } catch (AmazonServiceException ase) {
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
     handleClientException(ace)
 }
-
-println("Listed " + i + " buckets")

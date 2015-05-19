@@ -9,8 +9,8 @@ $[/myProject/procedure_helpers/preamble]
 //get credentials from commander
 ElectricCommander commander = new ElectricCommander();
 
-def bucketName = '$[bucketName]'
-def folderName = '$[folderName]'
+def bucketName = '$[bucketName]'.trim()
+def folderName = '$[folderName]'.trim()
 
 // Create bucket logic here
 
@@ -26,20 +26,32 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 println("Creating folder " + folderName);
 
 try {
-        if (!s3.doesBucketExist(bucketName)) {
-            println("Error : Bucket " + bucketName + " not present");
-            return
-        }
-		// create meta-data for your folder and set content-length to 0
-		ObjectMetadata metadata = new ObjectMetadata();
-		metadata.setContentLength(0)
-		// create empty content
-		InputStream emptyContent = new ByteArrayInputStream(new byte[0])
-		// create a PutObjectRequest passing the folder name suffixed by /
-		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,
-				folderName + SUFFIX, emptyContent, metadata)
-		// send request to S3 to create folder
-		s3.putObject(putObjectRequest)
+    if (bucketName.length() == 0) {
+        println("Error : Bucket name is empty");
+        return
+    }
+
+    if (folderName.length() == 0) {
+        println("Error : Folder name is empty");
+        return
+    }
+
+    if (!s3.doesBucketExist(bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+    // create meta-data for your folder and set content-length to 0
+    ObjectMetadata metadata = new ObjectMetadata();
+    metadata.setContentLength(0)
+    // create empty content
+    InputStream emptyContent = new ByteArrayInputStream(new byte[0])
+    // create a PutObjectRequest passing the folder name suffixed by /
+    PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,
+            folderName + SUFFIX, emptyContent, metadata)
+    // send request to S3 to create folder
+    s3.putObject(putObjectRequest)
+
+    println("Folder " + folderName + " created successfully")
 
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {
@@ -49,8 +61,6 @@ try {
 
 } catch (AmazonClientException ace) {
     handleClientException(ace)
-
 }
 
-println("Folder " + folderName + " created successfully");
 
