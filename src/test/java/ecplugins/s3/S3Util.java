@@ -119,16 +119,8 @@ public class S3Util {
 
     public static String createFile() throws IOException {
         File file = null;
-        String OS = System.getProperty("os.name").toLowerCase();
-
-        if((OS.indexOf("win") >= 0)) //if its windows system
-        {
-            new File("C:\\EC-S3AutomatedTestTemp").mkdir();
-            file = new File("C:\\EC-S3AutomatedTestTemp\\test.txt");
-        } else {
-            // /var/tmp dir already exists.
-            file = new File("/var/tmp/test.txt");
-        }
+        // Create a sample file at project root directory
+        file = new File("test.txt");
 
         boolean result = file.createNewFile();
         if(result == false){
