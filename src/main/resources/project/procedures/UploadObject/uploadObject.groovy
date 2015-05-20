@@ -2,10 +2,10 @@ $[/myProject/procedure_helpers/preamble]
 
 ElectricCommander commander = new ElectricCommander();
 
-def bucketName = '$[bucketName]'
-def fileToUpload = '$[fileToUpload]'
+def bucketName = '$[bucketName]'.trim()
+def fileToUpload = '$[fileToUpload]'.trim()
+def key ='$[key]'.trim()
 
-def key ='$[key]'
 def access_public = '$[access_public]'
 
 //get credentials from commander
@@ -17,6 +17,21 @@ def tx = new TransferManager(credentials);
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
 TransferManager tf = new TransferManager(s3);
+
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty");
+    return
+}
+
+if (fileToUpload.length() == 0) {
+    println("Error : File to upload is empty");
+    return
+}
+
+if (key.length() == 0) {
+    println("Error : Key is empty");
+    return
+}
 
 try {
     def file = new File(fileToUpload)
@@ -48,6 +63,8 @@ try {
 
     tf.shutdownNow()
 
+    println "Uploaded " + key + " successfully"
+
 } catch (InterruptedException e) {
     e.printStackTrace();
 } catch (AmazonServiceException ase) {
@@ -61,5 +78,3 @@ try {
 } catch(IOException ioex) {
     println("Error : " + ioex.getMessage())
 }
-
-println "Uploaded " + key + " successfully"

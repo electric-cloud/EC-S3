@@ -10,7 +10,7 @@ $[/myProject/procedure_helpers/preamble]
 //get credentials from commander
 ElectricCommander commander = new ElectricCommander();
 
-def bucketName = '$[bucketName]'
+def bucketName = '$[bucketName]'.trim()
 
 // Create bucket logic here
 
@@ -23,10 +23,17 @@ def tx = new TransferManager(credentials);
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
 
+
 if (!doesBucketExist(s3, bucketName)) {
     println("Error : Bucket " + bucketName + " not present");
     return
 }
+
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty");
+    return
+}
+
 
 // Multi-object delete by specifying only keys (no version ID).
 DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
@@ -70,8 +77,4 @@ try {
 } catch (AmazonClientException ace) {
     handleClientException(ace)
 
-}
-
-if (!s3.doesBucketExist(bucketName)) {
-    println("Bucket " + bucketName + " deleted successfully");
 }

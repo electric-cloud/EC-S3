@@ -66,11 +66,12 @@ try {
         System.out.println(summary.getKey())
         i++
     }
+
+    println("Listed " + i + " objects")
+
 } catch (AmazonServiceException ase) {
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
     handleClientException(ace)
 }
-
-println("Listed " + i + " objects")
