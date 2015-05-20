@@ -26,7 +26,7 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 println("Creating folder " + folderName);
 
 try {
-        if (!s3.doesBucketExist(bucketName)) {
+        if (!doesBucketExist(s3,bucketName)) {
             println("Error : Bucket " + bucketName + " not present");
             return
         }

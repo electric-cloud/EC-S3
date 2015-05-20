@@ -19,7 +19,7 @@ TransferManager tf = new TransferManager(s3);
 println "Downloading " + key + " to " + downloadLocation
 
 try {
-    if (!s3.doesBucketExist(bucketName)) {
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }

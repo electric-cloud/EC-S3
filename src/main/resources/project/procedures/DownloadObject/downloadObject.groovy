@@ -20,6 +20,10 @@ TransferManager tf = new TransferManager(s3);
 println "Downloading " + key + " to " + downloadLocation
 
 try {
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
     Download download = tf.download(new GetObjectRequest(bucketName, key), new File(downloadLocation + "/" + key));
 
     while (!download.isDone()) {

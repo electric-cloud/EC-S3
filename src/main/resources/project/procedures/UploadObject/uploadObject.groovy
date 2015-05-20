@@ -4,6 +4,7 @@ ElectricCommander commander = new ElectricCommander();
 
 def bucketName = '$[bucketName]'
 def fileToUpload = '$[fileToUpload]'
+
 def key ='$[key]'
 def access_public = '$[access_public]'
 
@@ -23,7 +24,12 @@ try {
        println "Error : File " + fileToUpload +" does not exists"
        return
     }
-    
+
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
     println "Uploading " + key + " to " + bucketName
 
     PutObjectRequest por
