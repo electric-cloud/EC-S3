@@ -19,6 +19,11 @@ TransferManager tf = new TransferManager(s3);
 
 println "Downloading " + key + " to " + downloadLocation
 
+if(!isFilenameValid(downloadLocation)){
+    println("Error : Download location is invalid.");
+    return
+}
+
 try {
     Download download = tf.download(new GetObjectRequest(bucketName, key), new File(downloadLocation + "/" + key));
 

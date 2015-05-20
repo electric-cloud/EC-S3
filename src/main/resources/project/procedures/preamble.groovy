@@ -114,6 +114,31 @@ static handleServiceException(AmazonServiceException ase) {
     println("Request ID:       " + ase.getRequestId());
 }
 
+def isFilenameValid
+isFilenameValid = { String file ->
+
+    File f = new File(file + "testFile.txt")
+    try {
+        if(f.createNewFile()){
+
+            f.delete()
+            return true
+        } else {
+            f.delete()
+            if(f.createNewFile()){
+
+                f.delete()
+                return true
+            }
+        }
+        //Path canonicalPath = f.getCanonicalPath()
+        return true
+    }
+    catch (Exception e) {
+        return false
+    }
+}
+
 static handleClientException(AmazonClientException ace) {
     println("Caught an AmazonClientException, which means the client encountered "
             + "a serious internal problem while trying to communicate with S3, "

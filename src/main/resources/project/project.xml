@@ -1082,6 +1082,7 @@
         <condition/>
         <description/>
         <errorHandling>failProcedure</errorHandling>
+          <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
         <parallel>0</parallel>

@@ -109,18 +109,6 @@ push (@::gMatchers,
                                 setProperty("summary", $desc . "\n");
                                },
     },
-          {
-                 id =>          "error",
-                 pattern =>     q{ERROR\s:|[Ee]rror\s:},
-                 action =>      q{
-                                    incValue("errors"); diagnostic("", "error", -1);
-                                    my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
-
-                                    $desc .= "$1";
-                                    
-                                    setProperty("summary", $desc . "\n");
-                                 },
-    },
     {
               id      => "error2",
               pattern => q{ERROR\s:|[Ee]rror\s:|[Ee]xception},
