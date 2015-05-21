@@ -86,6 +86,18 @@ push (@::gMatchers,
                              },
   },
             {
+        id =>          "uploadFolder",
+        pattern =>     q{^Uploaded\s(.+)\ssuccessfully},
+        action =>           q{
+
+                              my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                              $desc .= "Uploaded $1 successfully.";
+
+                              setProperty("summary", $desc . "\n");
+                             },
+  },
+            {
           id =>          "downloadObject",
           pattern =>     q{^Downloaded\s(.+)\ssuccessfully},
           action =>           q{

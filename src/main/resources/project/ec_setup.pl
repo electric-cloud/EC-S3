@@ -13,6 +13,13 @@ my %UploadObject = (
   category    => "Resource Management" 
 );
 
+my %UploadFolder = ( 
+  label       => "EC-S3 - UploadFolder", 
+  procedure   => "UploadObject", 
+  description => "Uploads an Folder to given bucket on S3 Object Storage", 
+  category    => "Resource Management" 
+);
+
 my %DownloadObject = ( 
   label       => "EC-S3 - DownloadObject", 
   procedure   => "DownloadObject", 
@@ -62,7 +69,7 @@ my %DeleteBucketContents = (
   category    => "Resource Management" 
 );
 
-@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder, \%DeleteObject, \%DeleteBucketContents);
+@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%UploadFolder, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder, \%DeleteObject, \%DeleteBucketContents);
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -131,6 +138,10 @@ if ($upgradeAction eq "upgrade") {
             $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
                 procedureName => 'UploadObject',
                 stepName => 'uploadObject'
+            });
+			$batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'UploadFolder',
+                stepName => 'uploadFolder'
             });
             $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
                 procedureName => 'DownloadObject',
