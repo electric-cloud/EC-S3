@@ -44,7 +44,9 @@ try {
 
     while (!download.isDone()) {
     	Thread.sleep(1000);
-        println(download.getProgress().getPercentTransferred() + "%");
+        if(!Double.isNaN(download.getProgress().getPercentTransferred())) {
+            println(download.getProgress().getPercentTransferred() + "%");
+        }
     }
 
     tf.shutdownNow()
