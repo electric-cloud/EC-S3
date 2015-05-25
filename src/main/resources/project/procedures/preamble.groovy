@@ -46,7 +46,9 @@ public class ElectricCommander {
 
         def resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
 
-        assert resp != null : "Could not retrieve Credentials from the commander. Request failed"
+        if( resp == null ) {
+            throw new Exception("Error : Invalid configuration $[config].");
+        }
         assert resp.status == 200 : "Commander did not respond with 200 for credentials"
 
         userName = resp.getData().credential.userName
