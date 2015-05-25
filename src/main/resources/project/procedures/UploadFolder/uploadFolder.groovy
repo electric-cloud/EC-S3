@@ -1,6 +1,13 @@
 $[/myProject/procedure_helpers/preamble]
 
-ElectricCommander commander = new ElectricCommander();
+ElectricCommander commander;
+//get credentials from commander
+try {
+	commander = new ElectricCommander();
+}catch(Exception e){
+	println(e.getMessage());
+	return
+}
 
 def bucketName = '$[bucketName]'.trim()
 def fileToUpload = '$[folderToUpload]'.trim()
