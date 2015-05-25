@@ -123,7 +123,7 @@ static handleClientException(AmazonClientException ace) {
 
 def doesBucketExist
 doesBucketExist = { AmazonS3 s3, String bucket ->
-    println("Inside the doesBucketExist.")
+
     try {
         /*
         * If a bucket exists, but isn't owned by you, trying to list its
@@ -135,13 +135,13 @@ doesBucketExist = { AmazonS3 s3, String bucket ->
         * that we want 0 keys returned since we don't actually care about the data.
         */
         s3.listObjects(new ListObjectsRequest(bucket, null, null, null, 1))
-        println("returning true")
+
         return true
     } catch (AmazonServiceException ase) {
         //Access denied, bucket exists but in some others account, not in our's.
 
         if(ase.getStatusCode() == 403 || ase.getStatusCode() == 404){
-            println("returning false")
+            
             return false
         }
     }
