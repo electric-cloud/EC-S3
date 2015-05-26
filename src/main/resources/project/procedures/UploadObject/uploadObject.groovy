@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.FileSystems
+
 $[/myProject/procedure_helpers/preamble]
 
 ElectricCommander commander = new ElectricCommander();
@@ -38,7 +41,15 @@ try {
        println "Error : File " + fileToUpload +" does not exists"
        return
     }
-    
+    if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) ){
+        println "Error : Can not open " + fileToUpload
+        return
+    }
+
+    if( !file.isFile() ) {
+        println "Error : " +  fileToUpload + " is not a normal file."
+        return
+    }
     println "Uploading " + key + " to " + bucketName
 
     PutObjectRequest por
