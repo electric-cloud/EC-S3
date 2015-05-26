@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.FileSystems
+
 $[/myProject/procedure_helpers/preamble]
 
 ElectricCommander commander;
@@ -25,34 +28,52 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 TransferManager tf = new TransferManager(s3);
 
 if (bucketName.length() == 0) {
-    println("Error : Bucket name is empty");
-    return
+	println("Error : Bucket name is empty");
+	return
+}
+
+if (!doesBucketExist(s3,bucketName)) {
+	println("Error : Bucket " + bucketName + " not present");
+	return
 }
 
 if (fileToUpload.length() == 0) {
-    println("Error : File to upload is empty");
-    return
+	println("Error : File to upload is empty");
+	return
 }
 
+
 try {
-    def file = new File(fileToUpload)
-    if(!file.exists()){
-       println "Error : Folder " + fileToUpload +" does not exists"
-       return
-    }
-    
-    println "Uploading " + fileToUpload + " to " + bucketName
+	def file = new File(fileToUpload)
+	if(!file.exists()){
+		println "Error : Folder " + fileToUpload +" does not exists"
+		return
+	}
+
+	if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) ){
+		println "Error : Can not open " + fileToUpload
+		return
+	}
+
+	if( !file.isDirectory() ) {
+		println "Error : " +  fileToUpload + " is not a directory."
+		return
+	}
+
+	println "Uploading " + fileToUpload + " to " + bucketName
 
 	MultipleFileUpload objectUpload = tf.uploadDirectory(bucketName,
-            key, file, true);
-			
-    while (!objectUpload.isDone()) {
-    	Thread.sleep(1000);
-        println(objectUpload.getProgress().getPercentTransferred() + "%");
-    }
+			key, file, true);
+
+	while (!objectUpload.isDone()) {
+		Thread.sleep(1000);
+		if(!Double.isNaN(objectUpload.getProgress().getPercentTransferred())) {
+			println(objectUpload.getProgress().getPercentTransferred() + "%");
+		}
+	}
 
 	if(access_public == '1') {
-	
+
 		String prefix = ""
 		String delimiter = "/"
 
@@ -62,9 +83,9 @@ try {
 
 		ListObjectsRequest listObjectsRequest
 
-		
-			listObjectsRequest = new ListObjectsRequest()
-					.withBucketName(bucketName).withPrefix(prefix)
+
+		listObjectsRequest = new ListObjectsRequest()
+				.withBucketName(bucketName).withPrefix(prefix)
 
 		ObjectListing listing = s3.listObjects(listObjectsRequest)
 
@@ -80,21 +101,21 @@ try {
 			s3.setObjectAcl(bucketName, summary.getKey(), CannedAccessControlList.PublicRead);
 		}
 	}
-	
-    tf.shutdownNow()
 
-    println "Uploaded " + fileToUpload + " successfully"
+	tf.shutdownNow()
+
+	println "Uploaded " + fileToUpload + " successfully"
 
 } catch (InterruptedException e) {
-    e.printStackTrace();
+	e.printStackTrace();
 } catch (AmazonServiceException ase) {
 
-    handleServiceException(ase)
+	handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
 
-    handleClientException(ace)
+	handleClientException(ace)
 
 } catch(IOException ioex) {
-    println("Error : " + ioex.getMessage())
+	println("Error : " + ioex.getMessage())
 }

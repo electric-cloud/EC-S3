@@ -15,7 +15,7 @@ my %UploadObject = (
 
 my %UploadFolder = ( 
   label       => "EC-S3 - UploadFolder", 
-  procedure   => "UploadObject", 
+  procedure   => "UploadFolder",
   description => "Uploads an Folder to given bucket on S3 Object Storage", 
   category    => "Resource Management" 
 );
