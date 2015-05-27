@@ -35,6 +35,7 @@ public class ElectricCommander {
     def client = new RESTClient(commanderServer + ":" + commanderPort);
     def sysJobId = System.getenv('COMMANDER_JOBID')
     def sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
+
     def userName
     def password
 
@@ -63,6 +64,7 @@ public class ElectricCommander {
 
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
         assert resp != null : "Could not set property on the Commander. Request failed"
+
     }
 
     public getCommanderProperty(String propName) {
@@ -77,6 +79,7 @@ public class ElectricCommander {
 
         return resp.getData().property.value
     }
+
 
     private PerformHTTPRequest(RequestMethod request, String url, Object jsonData) {
 

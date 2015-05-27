@@ -8,9 +8,12 @@ try {
     println(e.getMessage());
     return
 }
+
 def bucketName = '$[bucketName]'.trim()
-def downloadLocation = '$[downloadLocation]'.trim()
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
+downloadLocation = downloadLocation.replace('\\','/').trim()
 def key ='$[key]'.trim()
+
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
