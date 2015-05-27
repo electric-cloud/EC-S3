@@ -62,6 +62,11 @@ $xpath = $ec->attachCredential($projName, $credName,
 $errors .= $ec->checkAllErrors($xpath);
 
 $xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "UploadFolder",
+     stepName => "uploadFolder"});
+$errors .= $ec->checkAllErrors($xpath);
+
+$xpath = $ec->attachCredential($projName, $credName,
     {procedureName => "UploadObject",
      stepName => "uploadObject"});
 $errors .= $ec->checkAllErrors($xpath);

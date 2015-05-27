@@ -47,7 +47,9 @@ public class ElectricCommander {
 
         def resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
 
-        assert resp != null : "Could not retrieve Credentials from the commander. Request failed"
+        if( resp == null ) {
+            throw new Exception("Error : Invalid configuration $[config].");
+        }
         assert resp.status == 200 : "Commander did not respond with 200 for credentials"
 
         userName = resp.getData().credential.userName
@@ -63,6 +65,19 @@ public class ElectricCommander {
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
         assert resp != null : "Could not set property on the Commander. Request failed"
 
+    }
+
+    public getCommanderProperty(String propName) {
+
+        sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
+        def url = '/rest/v1.0/properties/' + propName
+        def query =  ['jobStepId': "" + sysJobStepId]
+        def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
+
+        assert resp != null : "Could not get property " + propName + " on the Commander. Request failed"
+        assert resp.status == 200 : "Commander did not respond with 200 for retrieving property "
+
+        return resp.getData().property.value
     }
 
     public getCommanderProperty(String propName) {
@@ -141,3 +156,28 @@ static handleClientException(AmazonClientException ace) {
     println("Error Message: " + ace.getMessage());
 }
 
+def doesBucketExist
+doesBucketExist = { AmazonS3 s3, String bucket ->
+
+    try {
+        /*
+        * If a bucket exists, but isn't owned by you, trying to list its
+        * objects returns a 403 AccessDenied error response from Amazon S3.
+        * If a bucket DOESN'T exist at all, trying to list its objects
+        * returns a 404 NoSuchBucket error response from Amazon S3.
+        *
+        * Notice that we supply the bucket name in the request and specify
+        * that we want 0 keys returned since we don't actually care about the data.
+        */
+        s3.listObjects(new ListObjectsRequest(bucket, null, null, null, 1))
+
+        return true
+    } catch (AmazonServiceException ase) {
+        //Access denied, bucket exists but in some others account, not in our's.
+
+        if(ase.getStatusCode() == 403 || ase.getStatusCode() == 404){
+
+            return false
+        }
+    }
+}
