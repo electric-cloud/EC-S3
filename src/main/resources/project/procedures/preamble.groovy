@@ -137,6 +137,35 @@ static handleServiceException(AmazonServiceException ase) {
     println("Request ID:       " + ase.getRequestId());
 }
 
+def isFilenameValid
+isFilenameValid = { String file ->
+
+    File f = new File(file + "testFile.txt")
+    try {
+        // Try to create an empty file at the provided location to check write permissions/valid path
+
+        if(f.createNewFile()){
+            // Can successfully create an empty file.
+            f.delete()
+            return true
+        } else {
+            // if testFile.txt already exists
+            f.delete()
+            if(f.createNewFile()){
+                // provided location is writable
+                f.delete()
+                return true
+            }
+        }
+
+        return true
+    }
+    catch (java.io.IOException e) {
+        // Can not write to a file at specified location.Return location as invalid
+        return false
+    }
+}
+
 static handleClientException(AmazonClientException ace) {
     println("Caught an AmazonClientException, which means the client encountered "
             + "a serious internal problem while trying to communicate with S3, "

@@ -19,6 +19,7 @@ def credentials = new BasicAWSCredentials(commander.userName, commander.password
 // Create TransferManager
 def tx = new TransferManager(credentials);
 
+
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
 TransferManager tf = new TransferManager(s3);
@@ -46,6 +47,10 @@ try {
         return
     }
 
+    if(!isFilenameValid(downloadLocation)){
+        println("Error : Download location is invalid.");
+        return
+    }
     //Now download the contents
     file = new File(downloadLocation)
     MultipleFileDownload download = tf.downloadDirectory(bucketName, key, file)

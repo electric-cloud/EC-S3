@@ -27,6 +27,12 @@ TransferManager tf = new TransferManager(s3);
 
 println "Downloading " + key + " to " + downloadLocation
 
+
+if(!isFilenameValid(downloadLocation)){
+    println("Error : Download location is invalid.");
+    return
+}
+
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty");
     return
