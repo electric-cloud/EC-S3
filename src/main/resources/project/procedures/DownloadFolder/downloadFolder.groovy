@@ -9,10 +9,10 @@ try {
 }
 
 
-def bucketName = '$[bucketName]'
+def bucketName = '$[bucketName]'.trim()
 def downloadLocation = commander.getCommanderProperty('downloadLocation')
-downloadLocation = downloadLocation.replace('\\','/')
-def key ='$[key]'
+downloadLocation = downloadLocation.replace('\\','/').trim()
+def key ='$[key]'.trim()
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 

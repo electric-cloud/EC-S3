@@ -80,18 +80,6 @@ public class ElectricCommander {
         return resp.getData().property.value
     }
 
-    public getCommanderProperty(String propName) {
-
-        sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
-        def url = '/rest/v1.0/properties/' + propName
-        def query =  ['jobStepId': "" + sysJobStepId]
-        def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
-
-        assert resp != null : "Could not get property " + propName + " on the Commander. Request failed"
-        assert resp.status == 200 : "Commander did not respond with 200 for retrieving property "
-
-        return resp.getData().property.value
-    }
 
     private PerformHTTPRequest(RequestMethod request, String url, Object jsonData) {
 
