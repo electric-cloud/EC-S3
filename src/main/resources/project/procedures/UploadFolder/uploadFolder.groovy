@@ -13,7 +13,8 @@ try {
 }
 
 def bucketName = '$[bucketName]'.trim()
-def fileToUpload = '$[folderToUpload]'.trim()
+def folderToUpload = commander.getCommanderProperty('folderToUpload')
+folderToUpload = folderToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
 def access_public = '$[access_public]'
 
@@ -37,30 +38,30 @@ if (!doesBucketExist(s3,bucketName)) {
 	return
 }
 
-if (fileToUpload.length() == 0) {
+if (folderToUpload.length() == 0) {
 	println("Error : File to upload is empty");
 	return
 }
 
 
 try {
-	def file = new File(fileToUpload)
+	def file = new File(folderToUpload)
 	if(!file.exists()){
-		println "Error : Folder " + fileToUpload +" does not exists"
+		println "Error : Folder " + folderToUpload +" does not exists"
 		return
 	}
 
 	if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) ){
-		println "Error : Can not open " + fileToUpload
+		println "Error : Can not open " + folderToUpload
 		return
 	}
 
 	if( !file.isDirectory() ) {
-		println "Error : " +  fileToUpload + " is not a directory."
+		println "Error : " +  folderToUpload + " is not a directory."
 		return
 	}
 
-	println "Uploading " + fileToUpload + " to " + bucketName
+	println "Uploading " + folderToUpload + " to " + bucketName
 
 	MultipleFileUpload objectUpload = tf.uploadDirectory(bucketName,
 			key, file, true);
@@ -104,7 +105,7 @@ try {
 
 	tf.shutdownNow()
 
-	println "Uploaded " + fileToUpload + " successfully"
+	println "Uploaded " + folderToUpload + " successfully"
 
 } catch (InterruptedException e) {
 	e.printStackTrace();

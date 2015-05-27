@@ -25,7 +25,7 @@
         <label>Folder to Upload:</label>
         <property>folderToUpload</property>
         <required>1</required>
-        <documentation>Folder to upload</documentation>
+        <documentation>Folder to upload.For example, '/opt/folderToUpload' or 'C:\path\to\folderToUpload'</documentation>
     </formElement>
     <formElement>
         <type>checkbox</type>
