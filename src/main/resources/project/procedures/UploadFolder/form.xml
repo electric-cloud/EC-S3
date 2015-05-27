@@ -18,7 +18,7 @@
         <label>Key:</label>
         <property>key</property>
         <required>0</required>
-        <documentation>The key prefix of the virtual directory to upload to.Keep this field empty to upload fields to the root of the bucket.</documentation>
+        <documentation>The key prefix of the virtual directory to upload to.Keep this field empty to upload files to the root of the bucket.</documentation>
     </formElement>
     <formElement>
         <type>entry</type>
