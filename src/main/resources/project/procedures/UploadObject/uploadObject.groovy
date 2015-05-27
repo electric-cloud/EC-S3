@@ -3,7 +3,8 @@ $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander = new ElectricCommander();
 
 def bucketName = '$[bucketName]'
-def fileToUpload = '$[fileToUpload]'
+def fileToUpload = commander.getCommanderProperty('fileToUpload')
+fileToUpload = fileToUpload.replace('\\','/')
 def key ='$[key]'
 def access_public = '$[access_public]'
 

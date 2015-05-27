@@ -65,36 +65,31 @@ public class ElectricCommander {
 
     }
 
-    public getProperty(String propName) {
+    public getCommanderProperty(String propName) {
 
-        println('Inside the getProperty method')
         sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
-        //def url = '/rest/v1.0/properties/' + propName + '?jobStepId=' + sysJobStepId
-        //def url = '/rest/v1.0/properties/myJobStep/' + propName
-        def url = '/rest/v1.0/properties/myStep/' + propName
-        println("URL = " + url)
-        def resp = PerformHTTPRequest(RequestMethod.GET, url, [])
+        def url = '/rest/v1.0/properties/' + propName
+        def query =  ['jobStepId': "" + sysJobStepId]
+        def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
 
         assert resp != null : "Could not get property " + propName + " on the Commander. Request failed"
         assert resp.status == 200 : "Commander did not respond with 200 for retrieving property "
 
-        println("GetPropertyResponse = " + resp.getData())
         return resp.getData().property.value
     }
 
     private PerformHTTPRequest(RequestMethod request, String url, Object jsonData) {
+
+        PerformHTTPRequest(request,url,["":""],jsonData)
+    }
+    private PerformHTTPRequest(RequestMethod request, String url, def query, Object jsonData) {
         def response
         def requestHeaders = ['Cookie': "sessionId=" + sessionId, 'Accept': 'application/json']
-        println("Session ID : " + sessionId)
-        sessionId = System.getenv('COMMANDER_SESSIONID')
-        println("Session ID : " + sessionId)
-
 
         try {
             switch (request) {
                 case RequestMethod.GET:
-                    response = client.get(path: url, headers: requestHeaders, requestContentType: JSON)
-                    println("Response : " + response.getData())
+                    response = client.get(path: url, query: query, headers: requestHeaders, requestContentType: JSON)
                     break
                 case RequestMethod.POST:
                     response = client.post(path: url, headers: requestHeaders, body: jsonData, requestContentType: JSON)
@@ -103,24 +98,12 @@ public class ElectricCommander {
                     break
             }
         } catch (groovyx.net.http.HttpResponseException ex) {
-            println("Got HttpResponseException.")
-            println(ex.getMessage())
-            println(ex.getCause())
-            println(ex.getStackTrace())
-            println(ex.toString())
-            println("Response data : " + ex.getResponse().getData())
-
+            println(ex.getResponse().getData())
             return null
         } catch (java.net.ConnectException ex) {
-            println("Got ConnectException.")
-            println(ex.getMessage())
-            println(ex.getCause())
-            println(ex.getStackTrace())
-            println(ex.toString())
-
+            println(ex.getResponse().getData())
             return null
         }
-        println("Response before returning : " + response.getData())
         return response
     }
 

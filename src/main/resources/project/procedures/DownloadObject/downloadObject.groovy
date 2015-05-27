@@ -4,7 +4,8 @@ $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander = new ElectricCommander();
 
 def bucketName = '$[bucketName]'
-def downloadLocation = '$[downloadLocation]'
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
+downloadLocation = downloadLocation.replace('\\','/')
 def key ='$[key]'
 // Create bucket logic here
 

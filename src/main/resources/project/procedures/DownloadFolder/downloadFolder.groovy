@@ -4,10 +4,8 @@ $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander = new ElectricCommander();
 
 def bucketName = '$[bucketName]'
-def downloadLocation = commander.getProperty('downloadLocation')
-println("download location = " + downloadLocation)
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
 downloadLocation = downloadLocation.replace('\\','/')
-println("download location = " + downloadLocation)
 def key ='$[key]'
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
