@@ -79,6 +79,15 @@
     </file>
 
 	<file>
+        <xpath>//procedure[procedureName=&quot;UploadFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/UploadFolder/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;UploadFolder&quot;]/step[stepName=&quot;uploadFolder&quot;]/command</xpath>
+        <path>procedures/UploadFolder/uploadFolder.groovy</path>
+    </file>
+	
+	<file>
         <xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/DownloadObject/form.xml</path>
     </file>
