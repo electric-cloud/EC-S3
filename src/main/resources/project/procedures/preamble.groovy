@@ -160,7 +160,7 @@ isFilenameValid = { String file ->
 
         return true
     }
-    catch (Exception e) {
+    catch (java.io.IOException e) {
         // Can not write to a file at specified location.Return location as invalid
         return false
     }
