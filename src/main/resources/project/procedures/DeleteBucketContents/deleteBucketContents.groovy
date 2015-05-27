@@ -7,8 +7,14 @@ import com.amazonaws.services.s3.model.ListObjectsRequest
 
 $[/myProject/procedure_helpers/preamble]
 
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
 def bucketName = '$[bucketName]'.trim()
 

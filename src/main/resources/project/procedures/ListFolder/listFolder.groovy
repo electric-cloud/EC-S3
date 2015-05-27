@@ -10,8 +10,14 @@ def bucketName = '$[bucketName]'.trim()
 def prefix = '$[folderName]'.trim()
 def include_sub_folder = '$[include_sub_folder]'
 
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 

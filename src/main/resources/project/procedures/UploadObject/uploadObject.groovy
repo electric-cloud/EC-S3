@@ -1,9 +1,18 @@
 $[/myProject/procedure_helpers/preamble]
 
-ElectricCommander commander = new ElectricCommander();
+ElectricCommander commander;
+//get credentials from commander
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
+
 
 def bucketName = '$[bucketName]'.trim()
-def fileToUpload = '$[fileToUpload]'.trim()
+def fileToUpload = commander.getCommanderProperty('fileToUpload').trim()
+fileToUpload = fileToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
 
 def access_public = '$[access_public]'
@@ -58,7 +67,9 @@ try {
 
     while (!objectUpload.isDone()) {
     	Thread.sleep(1000);
-        println(objectUpload.getProgress().getPercentTransferred() + "%");
+        if(!Double.isNaN(objectUpload.getProgress().getPercentTransferred())) {
+            println(objectUpload.getProgress().getPercentTransferred() + "%");
+        }
     }
 
     tf.shutdownNow()

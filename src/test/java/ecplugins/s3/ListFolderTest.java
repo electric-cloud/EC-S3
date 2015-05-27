@@ -2,6 +2,7 @@ package ecplugins.s3;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class ListFolderTest {
             System.out.println("Bucket : " + bucketName + " already present");
         }
 
-        util.UploadObject(bucketName, "license_test.xml", "C:\\test\\project.xml");
+        util.UploadObject(bucketName, "license_test.xml");
 
         //Create the formal parameters
         JSONObject jo = new JSONObject();
@@ -81,5 +82,9 @@ public class ListFolderTest {
 
     }
 
+    @AfterClass
+    public static void cleanup(){
 
+        S3Util.deleteTestData();
+    }
 }
