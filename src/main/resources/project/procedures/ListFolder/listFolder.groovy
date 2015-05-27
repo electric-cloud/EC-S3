@@ -37,7 +37,7 @@ try {
         return
     }
 
-    if (!s3.doesBucketExist(bucketName)) {
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }

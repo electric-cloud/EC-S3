@@ -14,6 +14,7 @@ def bucketName = '$[bucketName]'.trim()
 def fileToUpload = commander.getCommanderProperty('fileToUpload').trim()
 fileToUpload = fileToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
+
 def access_public = '$[access_public]'
 
 //get credentials from commander
@@ -47,7 +48,12 @@ try {
        println "Error : File " + fileToUpload +" does not exists"
        return
     }
-    
+
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
     println "Uploading " + key + " to " + bucketName
 
     PutObjectRequest por

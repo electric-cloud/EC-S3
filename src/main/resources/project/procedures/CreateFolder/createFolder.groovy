@@ -32,6 +32,7 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 println("Creating folder " + folderName);
 
 try {
+
     if (bucketName.length() == 0) {
         println("Error : Bucket name is empty");
         return
@@ -42,7 +43,7 @@ try {
         return
     }
 
-    if (!s3.doesBucketExist(bucketName)) {
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }
