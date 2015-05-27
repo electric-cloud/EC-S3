@@ -1,10 +1,20 @@
 $[/myProject/procedure_helpers/preamble]
 
-ElectricCommander commander = new ElectricCommander();
+ElectricCommander commander;
+//get credentials from commander
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
-def bucketName = '$[bucketName]'
-def fileToUpload = '$[fileToUpload]'
-def key ='$[key]'
+
+def bucketName = '$[bucketName]'.trim()
+def fileToUpload = commander.getCommanderProperty('fileToUpload').trim()
+fileToUpload = fileToUpload.replace('\\','/').trim()
+def key ='$[key]'.trim()
+
 def access_public = '$[access_public]'
 
 //get credentials from commander
@@ -17,13 +27,33 @@ def tx = new TransferManager(credentials);
 AmazonS3 s3 = tx.getAmazonS3Client();
 TransferManager tf = new TransferManager(s3);
 
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty");
+    return
+}
+
+if (fileToUpload.length() == 0) {
+    println("Error : File to upload is empty");
+    return
+}
+
+if (key.length() == 0) {
+    println("Error : Key is empty");
+    return
+}
+
 try {
     def file = new File(fileToUpload)
     if(!file.exists()){
        println "Error : File " + fileToUpload +" does not exists"
        return
     }
-    
+
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
     println "Uploading " + key + " to " + bucketName
 
     PutObjectRequest por
@@ -37,10 +67,14 @@ try {
 
     while (!objectUpload.isDone()) {
     	Thread.sleep(1000);
-        println(objectUpload.getProgress().getPercentTransferred() + "%");
+        if(!Double.isNaN(objectUpload.getProgress().getPercentTransferred())) {
+            println(objectUpload.getProgress().getPercentTransferred() + "%");
+        }
     }
 
     tf.shutdownNow()
+
+    println "Uploaded " + key + " successfully"
 
 } catch (InterruptedException e) {
     e.printStackTrace();
@@ -55,5 +89,3 @@ try {
 } catch(IOException ioex) {
     println("Error : " + ioex.getMessage())
 }
-
-println "Uploaded " + key + " successfully"

@@ -34,6 +34,7 @@ public class ElectricCommander {
 
     def client = new RESTClient(commanderServer + ":" + commanderPort);
     def sysJobId = System.getenv('COMMANDER_JOBID')
+    def sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
 
     def userName
     def password
@@ -46,7 +47,9 @@ public class ElectricCommander {
 
         def resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
 
-        assert resp != null : "Could not retrieve Credentials from the commander. Request failed"
+        if( resp == null ) {
+            throw new Exception("Error : Invalid configuration $[config].");
+        }
         assert resp.status == 200 : "Commander did not respond with 200 for credentials"
 
         userName = resp.getData().credential.userName
@@ -61,15 +64,35 @@ public class ElectricCommander {
 
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
         assert resp != null : "Could not set property on the Commander. Request failed"
+
     }
 
+    public getCommanderProperty(String propName) {
+
+        sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
+        def url = '/rest/v1.0/properties/' + propName
+        def query =  ['jobStepId': "" + sysJobStepId]
+        def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
+
+        assert resp != null : "Could not get property " + propName + " on the Commander. Request failed"
+        assert resp.status == 200 : "Commander did not respond with 200 for retrieving property "
+
+        return resp.getData().property.value
+    }
+
+
     private PerformHTTPRequest(RequestMethod request, String url, Object jsonData) {
+
+        PerformHTTPRequest(request,url,["":""],jsonData)
+    }
+    private PerformHTTPRequest(RequestMethod request, String url, def query, Object jsonData) {
         def response
         def requestHeaders = ['Cookie': "sessionId=" + sessionId, 'Accept': 'application/json']
+
         try {
             switch (request) {
                 case RequestMethod.GET:
-                    response = client.get(path: url, headers: requestHeaders, requestContentType: JSON)
+                    response = client.get(path: url, query: query, headers: requestHeaders, requestContentType: JSON)
                     break
                 case RequestMethod.POST:
                     response = client.post(path: url, headers: requestHeaders, body: jsonData, requestContentType: JSON)
@@ -78,10 +101,10 @@ public class ElectricCommander {
                     break
             }
         } catch (groovyx.net.http.HttpResponseException ex) {
-            ex.getMessage()
+            println(ex.getResponse().getData())
             return null
         } catch (java.net.ConnectException ex) {
-            ex.getMessage()
+            println(ex.getResponse().getData())
             return null
         }
         return response
@@ -119,22 +142,26 @@ isFilenameValid = { String file ->
 
     File f = new File(file + "testFile.txt")
     try {
-        if(f.createNewFile()){
+        // Try to create an empty file at the provided location to check write permissions/valid path
 
+        if(f.createNewFile()){
+            // Can successfully create an empty file.
             f.delete()
             return true
         } else {
+            // if testFile.txt already exists
             f.delete()
             if(f.createNewFile()){
-
+                // provided location is writable
                 f.delete()
                 return true
             }
         }
-        //Path canonicalPath = f.getCanonicalPath()
+
         return true
     }
     catch (Exception e) {
+        // Can not write to a file at specified location.Return location as invalid
         return false
     }
 }
@@ -146,3 +173,28 @@ static handleClientException(AmazonClientException ace) {
     println("Error Message: " + ace.getMessage());
 }
 
+def doesBucketExist
+doesBucketExist = { AmazonS3 s3, String bucket ->
+
+    try {
+        /*
+        * If a bucket exists, but isn't owned by you, trying to list its
+        * objects returns a 403 AccessDenied error response from Amazon S3.
+        * If a bucket DOESN'T exist at all, trying to list its objects
+        * returns a 404 NoSuchBucket error response from Amazon S3.
+        *
+        * Notice that we supply the bucket name in the request and specify
+        * that we want 0 keys returned since we don't actually care about the data.
+        */
+        s3.listObjects(new ListObjectsRequest(bucket, null, null, null, 1))
+
+        return true
+    } catch (AmazonServiceException ase) {
+        //Access denied, bucket exists but in some others account, not in our's.
+
+        if(ase.getStatusCode() == 403 || ase.getStatusCode() == 404){
+
+            return false
+        }
+    }
+}

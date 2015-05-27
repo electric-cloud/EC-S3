@@ -10,8 +10,14 @@ def bucketName = '$[bucketName]'.trim()
 def prefix = '$[folderName]'.trim()
 def include_sub_folder = '$[include_sub_folder]'
 
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
@@ -31,7 +37,7 @@ try {
         return
     }
 
-    if (!s3.doesBucketExist(bucketName)) {
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }
@@ -66,11 +72,12 @@ try {
         System.out.println(summary.getKey())
         i++
     }
+
+    println("Listed " + i + " objects")
+
 } catch (AmazonServiceException ase) {
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
     handleClientException(ace)
 }
-
-println("Listed " + i + " objects")

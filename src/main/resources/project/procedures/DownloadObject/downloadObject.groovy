@@ -1,11 +1,19 @@
 $[/myProject/procedure_helpers/preamble]
 
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
-def bucketName = '$[bucketName]'
-def downloadLocation = '$[downloadLocation]'
-def key ='$[key]'
+def bucketName = '$[bucketName]'.trim()
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
+downloadLocation = downloadLocation.replace('\\','/').trim()
+def key ='$[key]'.trim()
+
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
@@ -19,20 +27,46 @@ TransferManager tf = new TransferManager(s3);
 
 println "Downloading " + key + " to " + downloadLocation
 
+
 if(!isFilenameValid(downloadLocation)){
     println("Error : Download location is invalid.");
     return
 }
 
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty");
+    return
+}
+
+if (downloadLocation.length() == 0) {
+    println("Error : Download location is empty");
+    return
+}
+
+if (key.length() == 0) {
+    println("Error : Key is empty");
+    return
+}
+
 try {
+
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+
     Download download = tf.download(new GetObjectRequest(bucketName, key), new File(downloadLocation + "/" + key));
 
     while (!download.isDone()) {
     	Thread.sleep(1000);
-        println(download.getProgress().getPercentTransferred() + "%");
+        if(!Double.isNaN(download.getProgress().getPercentTransferred())) {
+            println(download.getProgress().getPercentTransferred() + "%");
+        }
     }
 
     tf.shutdownNow()
+
+    println "Downloaded " + key + " successfully"
 
 } catch (InterruptedException e) {
     e.printStackTrace();
@@ -45,5 +79,3 @@ try {
     handleClientException(ace)
 
 }
-
-println "Downloaded " + key + " successfully"

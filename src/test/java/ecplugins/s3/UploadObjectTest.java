@@ -2,6 +2,7 @@ package ecplugins.s3;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class UploadObjectTest {
     public void UploadOneObject() throws Exception {
         long jobTimeoutMillis = 5 * 60 * 1000;
         S3Util util = new S3Util();
-
+        String fileToUpload = S3Util.createFile();
         String bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
         if(!util.CheckIsBucketAvailable(bucketName))
             util.CreateBucket(bucketName);
@@ -49,7 +50,7 @@ public class UploadObjectTest {
 
         actualParameterArray.put(new JSONObject()
                 .put("actualParameterName", "fileToUpload")
-                .put("value", "/tmp/license.xml"));
+                .put("value", fileToUpload));
 
         actualParameterArray.put(new JSONObject()
                 .put("actualParameterName", "key")
@@ -68,5 +69,9 @@ public class UploadObjectTest {
         assertTrue("The key is not found",  util.isValidFile(bucketName, "template.xml"));
     }
 
+    @AfterClass
+    public static void  cleanup(){
 
+        S3Util.deleteTestData();
+    }
 }
