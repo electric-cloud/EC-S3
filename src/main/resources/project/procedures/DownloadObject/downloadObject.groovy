@@ -2,24 +2,18 @@ $[/myProject/procedure_helpers/preamble]
 
 ElectricCommander commander;
 //get credentials from commander
-<<<<<<< HEAD
-ElectricCommander commander = new ElectricCommander();
-
-def bucketName = '$[bucketName]'
-def downloadLocation = commander.getCommanderProperty('downloadLocation')
-downloadLocation = downloadLocation.replace('\\','/')
-def key ='$[key]'
-=======
 try {
     commander = new ElectricCommander();
 }catch(Exception e){
     println(e.getMessage());
     return
 }
+
 def bucketName = '$[bucketName]'.trim()
-def downloadLocation = '$[downloadLocation]'.trim()
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
+downloadLocation = downloadLocation.replace('\\','/').trim()
 def key ='$[key]'.trim()
->>>>>>> 4c54350a3c3df0dfd7c7907d248fd6b84b4cd7ba
+
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)

@@ -9,16 +9,11 @@ try {
     return
 }
 
-<<<<<<< HEAD
-def bucketName = '$[bucketName]'
-def fileToUpload = commander.getCommanderProperty('fileToUpload')
-fileToUpload = fileToUpload.replace('\\','/')
-def key ='$[key]'
-=======
+
 def bucketName = '$[bucketName]'.trim()
-def fileToUpload = '$[fileToUpload]'.trim()
+def fileToUpload = commander.getCommanderProperty('fileToUpload').trim()
+fileToUpload = fileToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
->>>>>>> 4c54350a3c3df0dfd7c7907d248fd6b84b4cd7ba
 def access_public = '$[access_public]'
 
 //get credentials from commander
