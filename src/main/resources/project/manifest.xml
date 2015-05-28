@@ -122,6 +122,15 @@
     <file><xpath>//procedure[procedureName=&quot;DeleteBucketContents&quot;]/step[stepName=&quot;deleteBucketContents&quot;]/command</xpath>
         <path>procedures/DeleteBucketContents/deleteBucketContents.groovy</path>
     </file>
+
+	<file>
+        <xpath>//procedure[procedureName=&quot;WebsiteHosting&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+        <path>procedures/WebsiteHosting/form.xml</path>
+    </file>
+    
+    <file><xpath>//procedure[procedureName=&quot;WebsiteHosting&quot;]/step[stepName=&quot;websiteHosting&quot;]/command</xpath>
+        <path>procedures/WebsiteHosting/websiteHosting.groovy</path>
+    </file>
 	
     <file>
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>

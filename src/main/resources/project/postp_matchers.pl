@@ -62,17 +62,17 @@ push (@::gMatchers,
                              },
   },
         {
-        id =>          "deleteBucketContents",
-        pattern =>     q{^Successfully\sdeleted\s(.+)\sitems},
-        action =>           q{
-         
-                              my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+            id =>          "deleteBucketContents",
+            pattern =>     q{^Successfully\sdeleted\s(.+)\sitems},
+            action =>           q{
 
-                              $desc .= "Successfully deleted $1 items.";
-                              
-                              setProperty("summary", $desc . "\n");
-                             },
-  },
+                                  my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                                  $desc .= "Successfully deleted $1 items.";
+
+                                  setProperty("summary", $desc . "\n");
+                                 },
+      },
           {
         id =>          "uploadObject",
         pattern =>     q{^Uploaded\s(.+)\ssuccessfully},
@@ -117,6 +117,18 @@ push (@::gMatchers,
                                 my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                                 $desc .= "Downloaded $1 successfully.";
+
+                                setProperty("summary", $desc . "\n");
+                               },
+    },
+    {
+          id =>          "websiteHosting",
+          pattern =>     q{^Website\son\s(.+)\schanged\ssuccessfully},
+          action =>           q{
+
+                                my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
+
+                                $desc .= "Website on $1 changed successfully.";
 
                                 setProperty("summary", $desc . "\n");
                                },
