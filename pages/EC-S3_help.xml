@@ -10,9 +10,9 @@
 					
 <!-- Enter the new plugin name in the following line. -->				
 
-    <title>ElectricFlow Plugin for [Plugin Name]</title>
+    <title>ElectricFlow Plugin for Amazon Simple Storage Service (S3) implementation</title>
     <link rel="stylesheet"
-          href="../../plugins/[Plugin Name]/pluginhelp.css"
+          href="../../plugins/@PLUGIN_KEY@/pluginhelp.css"
           type="text/css"
           media="screen" />
 </head>
@@ -20,9 +20,8 @@
 <body>
     <div class="help">
 		
-		<!-- Enter the new [Plugin name] in the following line. -->		
 
-        <h1>[Plugin name]</h1>
+        <h1>Amazon Simple Storage Service (S3) </h1>
 				
 				<!-- Do not change the following line. -->		
 
@@ -43,7 +42,7 @@
 				If you are writing the first version of a new plugin, change "Revised on" to "Created on" and 
 				enter the date when the current sprint will end, and the document will be published.-->		
 				
-        <p>Revised on [end date for the current sprint]</p>
+        <p>Revised on May 28, 2015</p>
 				
 				<h1>Contents</h1>
 				
@@ -55,18 +54,27 @@
 				
 				<!-- Add a line for each plugin procedure. The following are examples. -->		
 				
-				<li><a href="#Procuedure1">Procuedure1</a></li>
-				<li><a href="#Procuedure2">Procuedure2</a></li>
+				<li><a href="#CreateBucket">CreateBucket</a></li>
+				<li><a href="#CreateFolder">CreateFolder</a></li>
+				<li><a href="#DeleteBucketContents">DeleteBucketContents</a></li>
+				<li><a href="#DeleteObject">DeleteObject</a></li>
+				<li><a href="#DownloadFolder">DownloadFolder</a></li>
+				<li><a href="#DownloadObject">DownloadObject</a></li>
+				<li><a href="#ListBucket">ListBucket</a></li>
+				<li><a href="#ListFolder">ListFolder</a></li>
+				<li><a href="#UploadFolder">UploadFolder</a></li>
+				<li><a href="#UploadObject">UploadObject</a></li>
+
 				</ul>
 				
-				<!-- Include this section only if there are examples and use cases. -->	
-				
+				<!-- Include this section only if there are examples and use cases. -->
+
 				<li><p><a href="#example">Examples and Use Cases</a></p></li>
 				<ul>
-				
+
 				<!-- Add a line for each example or use case. The following is an example. -->
 				
-				<li><a href="#UseCase1">UseCase1</a></li>
+				<li><a href="#UseCase1">Host a static website on Amazon S3</a></li>
 				</ul>
 				<li><p><a href="#rns">Release Notes</a></p></li>
 				</ul>
@@ -82,22 +90,20 @@
 				
 				<!-- The following is an example description. Replace it with the new plugin description. -->
 				
-				<p>This is example text (one or more paragraphs):</p>
+				<p>Amazon Simple Storage Service is storage for the Internet. It is designed to make web-scale computing easier for developers.</p>
 						
-        <p>Gerrit is a web-based code review system, facilitating online code reviews for projects using the Git version control system. 
-				It provides a systematic process for evaluating and approving source code changes before they are committed. Gerrit provides 
-				facilities to park changes until they are approved by appropriate engineers. Engineers are notified of a change (or they sign 
-				into the Gerrit server to find new changes) and must decide if the change should be accepted into the code base. This process is 
-				typically implemented by manual code review and/or by pulling changes into a local workspace, building the changes, and running 
-				some tests.</p>
+        <p>Amazon S3 has a simple web services interface that allows to store and retrieve any amount of data, at any time, from anywhere on the web.
+			It gives any developer access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run
+			its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers.</p>
 
         <!-- This section is required. Replace the plugin name, the URL to the website with the new plugin information, and the name of the link. -->	
 				<!-- Example of [Plugin name] is OpenStack or Chef. -->	
 				<!-- Example of [Name of plugin or website page] is OpenStack or OpenStack Home Page. -->		
 							
-				<p>For more information about [Plugin Name], go to the <a href="http://code.google.com/p/gerrit/">[Name of the plugin or website page]</a>.</p>
+				<p>For more information about Amazon S3, go to the <a href="http://aws.amazon.com/ec2/">Amazon Web Services website.</a>.</p>
 
-        <h2>ElectricCommander Integration to [Plugin Name]</h2>
+		<p>You can view the documentation at <a href="http://aws.amazon.com/documentation/s3/">AWS S3 Documentation Page.</a></p>
+        <h2>ElectricCommander Integration to AWS S3</h2>
 				
 				<!-- The integration description should answer the questions:
         How deep does our integration go? Why should I care?
@@ -106,19 +112,20 @@
 				
 				<!-- The following is an example description. Replace it with the new plugin content. -->
 
-        <p>This is example text (one or more paragraphs):</p>
+        <p>This plugin uses the Amazon S3 application programming interface (API) that lets developers choose where
+			their object should get stored on Amazon cloud. Using this secure API, your application is automatically scaled up and down as needed. This integration allows ElectricCommander to manage S3 Buckets and Objects.</p>
 				
-				<p>The ElectricCommander Gerrit plugin simplifies the build/test approval process. The goal is to run tests automatically 
-				before the reviewer looks at the change, although a setting is available to run builds on demand only. The Android team 
-				published a <a href="http://source.android.com/submit-patches/workflow">diagram</a> that describes the workflow for 
-				submitting changes. </p> 
-				
-						
-			  <h2>Integrated Version</h2>
-				
-				<!-- Replace the [Plugin name] and [Plugin version] in the following line with the new plugin values. -->
+				<p>The plugin interacts with S3 data by using AWS Java SDK to perform the following tasks:</p>
+				<ul>
+					<li>Create configurations with connection information.</li>
+					<li>Create buckets and folders.</li>
+					<li>Store objects in existing buckets/folders.</li>
+					<li>Download objects or entire folder.</li>
+					<li>List all the buckets and folders.</li>
 
-        <p>This plugin was tested against Gerrit 2.8.5. (This is example text.)</p>
+				</ul>
+
+		<p>This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).</p>
 				
 			<!-- The following is boilerplate text. Do not modify or remove it from the document. -->	
 				
@@ -142,13 +149,13 @@
 			
 			<!-- Replace the [Plugin name is ElectricFlow] in the following line with the name that appears in the UI. -->		
 				
-		  <li>Find the [Plugin name is ElectricFlow] row.</li>
+		  <li>Find the EC-S3 row.</li>
 			
 		  <!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
 			
 			<li>Click <b>Configure</b> to open the [Plugin name] Configurations page.</li> 	
 		  <li>Click <b>Create Configuration</b>.</li>
-		  <li>To create a [Plugin name] configuration, enter the following information and click <b>OK</b>. 
+		  <li>To create a S3 configuration, enter the following information and click <b>OK</b>.
 			<br /> Remember that you may need to create additional configurations later.</li>
 
                 <!-- Replace the information in this table with the parameters for the new plugin. -->
@@ -163,35 +170,44 @@
 								<!-- The following is example text. Replace it with the configuration parameters for the new plugin. -->
 								    <tr>
                         <td class='required'>Configuration Name</td>
-                        <td>Name of the Gerrit configuration.</td>
+                        <td>Name of the S3 configuration.The default is S3 integration.</td>
                     </tr>
                     <tr>
                         <td>Description</td>
                         <td>A description for this configuration.</td>
                     </tr>
                     <tr>
-                        <td>Repository Server</td>
-                        <td>The server where the repository is located. If you do not specify a server, the default Gerrit server is used. 
-												For example, in the <i>git://github.com/ecGerrit/ecGerritTest.git</i> URL, the repository server is <i>github.com</i>. 
-												You can specify the server with the protocol that it uses, such as Secure Shell (SSH) in <i>ssh://my_gerrit_server.my_domain.com</i>. 
-												If no protocol is specified, the default protocol is <i>Git</i>.</td>		
+                        <td class='required'>Service URL</td>
+                        <td>The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com. (Required)</td>
                     </tr>
                     <tr>
-                        <td class='required'>Repository Path</td>
-                        <td>The path associated to the <b>Repository Server</b>. For example, the repository path is <i>ecGerrit/ecGerritTest.git</i> in the 
-												<i>git://github.com/ecGerrit/ecGerritTest.git</i> URL.</td>
+                        <td class='required'>Resource Pool</td>
+                        <td>The name of the pool of resources on which the integration steps can run. (Required)</td>
                     </tr>
                     <tr>
-                        <td class='required'>Gerrit Server</td>
-                        <td>The hostname or IP address of the Gerrit server, such as <i>localhost</i> or <i>github.com</i>.</td>
+                        <td class='required'>Workspace</td>
+                        <td>The workspace to use for resourced dynamically created by this configuration. (Required)</td>
                     </tr>
+					<tr>
+						<td class='required'>Access IDs (Credential Parameters)</td>
+						<td>The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential,
+							putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential. (Required)</td>
+					</tr>
+					<tr>
+						<td class='required'>Attempt Connection?</td>
+						<td>If the check box is selected, the system tries a connection to check credentials. (Required)</td>
+					</tr>
+					<tr>
+						<td class='required'>Debug Level</td>
+						<td>Provide the debug level for the output: 0=errors only, 1=normal headers and responses, 2+=debugging information included. (Required)</td>
+					</tr>
                  </tbody>
             </table>
 		
 		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI. 
 		Change the filename (.png) to the new image filename. -->
 		
-		<img src="../../plugins/[Plugin Name]/images/Config/[Plugin Name]_config1.png" />
+		<img src="../../plugins/@PLUGIN_KEY@/images/parameters/configuration_panel.png" />
 		
 		</ol>
 						
@@ -199,36 +215,47 @@
 		
 		<!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
 		
-		<p>The [Plugin name] Configurations page now shows the new configuration.</p>
+		<p>The EC-S3 Configurations page now shows the new configuration.</p>
 		
 		<!-- The following line is optional. Replace the [Plugin name] in the following lines with the new plugin name. -->
 		
-		<p>You can also manage your [Plugin name] configurations in this page. Click <b>Edit</b> to modify an existing configuration or 
+		<p>You can also manage your S3 configurations in this page. Click <b>Edit</b> to modify an existing configuration or
 		<b>Delete</b> to remove an existing configuration.</p>
 						
-		</div>
-		
+
+
 		<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->		
 		
 		 <h1 id="procedures">Plugin Procedures</h1>
 
-     <div class="procedure" id="Procedure1">
+     <div class="CreateBucket" id="CreateBucket">
 
-     <a name='Procedure1' id="Procedure1"></a> 
+     <a name='CreateBucket' id="CreateBucket"></a>
 
-     <h2>[Procedure1]</h2>
+     <h2>CreateBucket</h2>
 
       <!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 			
-			<p>This is example text (one or more paragraphs):</p>
+			<p>A bucket is a container for objects stored in Amazon S3. </p>
 			
-			<p>The CustomBuildPrepare procedure uses the new helper methods to prepare an environment to test all the open changes in 
-						the Gerrit server and those that were scanned previously, which can include changes from one or more projects.</p>
-	    
+			<p>To ensure a single, consistent naming approach for Amazon S3 buckets across regions and to ensure bucket names conform to DNS naming conventions,
+				bucket names must comply with the following requirements:</p>
+
+				<ul>
+					<li>Can contain lowercase letters, numbers, periods (.), and hyphens (-).</li>
+					<li>Must start with a number or letter.</li>
+					<li>Must be between 3 and 63 characters long.</li>
+					<li>Must not be formatted as an IP address (e.g., 192.168.5.4).</li>
+					<li>Must not contain underscores (_).</li>
+					<li>Must not end with a hyphen.</li>
+					<li>Cannot contain two, adjacent periods.</li>
+					<li>Cannot contain dashes next to periods (e.g., my-.bucket.com and my.-bucket are invalid).</li>
+				</ul>
+
 			<h3>Input</h3>
 			
       <ol>
-			<li>Go to the [Procedure1] procedure.</li>
+			<li>Go to the <b>CreateBucket</b> procedure.</li>
 			<li>Enter the following parameters:<br />
      <table class="grid">
                 <thead>
@@ -240,9 +267,13 @@
                 <tbody>
 								<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
                    <tr>
-                         <td class='required'>Gerrit Config</td>
-                        <td>The name of the configuration that has the connection information for Gerrit.</td>
+                         <td class='required'>Configuration</td>
+                        <td>The name of the config which holds all the connection information. This must reference a valid existing configuration.</td>
                     </tr>
+					<tr>
+						<td class='required'>Bucket Name</td>
+						<td>Name of the Bucket to create.</td>
+					</tr>
                 </tbody>
             </table>
 
@@ -253,7 +284,7 @@
 		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI. 
 		Change the filename (.png) to the new image filename. -->
 		
-		<img src="../../plugins/[Plugin Name]/images/CustomBuildPrepare/[Plugin Name]_CustomBuildPrepare2.png" />
+		<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_CreateBucket1.PNG" />
 		<br />
 
 		</ol>   
@@ -261,96 +292,569 @@
 		<h3>Output</h3>
 						
 		<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
-		
-		<!-- The following image shows the Job Details page with the results. Change the filename (.png) to the new image filename. -->
-		
-		<img src="../../plugins/[Plugin Name]/images/CustomBuildPrepare/[Plugin Name]_CustomBuildPrepare3.png" />
-		
-		<p>In the <b>[Procedure1]</b> step, click the Log button to see the diagnostic information. 
-		The output is similar to the following diagnostic report:</p>	
-		
-		<!-- The following image shows the diagnostic report in the ElectricCommander UI. Change the filename (.png) to the new image filename. -->
-		
-		<img src="../../plugins/[Plugin Name]/images/CustomBuildPrepare/[Plugin Name]_CustomBuildPrepare4.png" /> </li>
-		
-		</div>
-		 
-		 <!-- The next section is required for additional procedures. Replace [Procedure2} with the plugin procedure name in the following lines. -->	
-		 
-		 <div class="procedure" id="Procedure2">
 
-           <a name='Procedure2' id="Procedure2"></a> 
+		<p>In the <b>CreateBucket</b> step, click the Log button to see the diagnostic information.</p>
 
-            <h2>[Procedure2]</h2>
+</div>
 
-             <!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
-						
-						<p>This procedure cleans up after one developer build. The working tree is cleaned up (runtime artifacts are removed, and 
-						changes are backed out). This also marks the job as complete in the Gerrit comments.</p>
+
+		<div class="CreateFolder" id="CreateFolder">
+
+			<a name='CreateFolder' id="CreateFolder"></a>
+
+			<h2>CreateFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure creates nested folders within specified bucket. Folders help to organize the S3 Objects. </p>
+
 
 			<h3>Input</h3>
-						
+
 			<ol>
-			<li>Go to the [Procedure2] procedure.</li>
-			<li>Enter the following parameters:<br />
-       <table class="grid">
-                <thead>
-                    <tr>
-                        <th>Parameter</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-								
-								<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
-								
-                    <tr>
-                        <td class='required'>Change ID</td>
-                        <td>The short change ID to build, such as <i>5</i>.</td>
-                    </tr>
-                    <tr>
-                        <td class='required'>Gerrit Config</td>
-                        <td>The name of the configuration that has the connection information for Gerrit.</td>
-                    </tr>
-                    <tr>
-                        <td class='required'>Patch ID</td>
-                        <td>The short patch set ID to build, such as <i>1</i>.</td>
-                    </tr>
-                    <tr>
-                        <td class='required'>Project</td>
-                        <td>The project that contains the change to build.</td>
-                    </tr>
-                </tbody>
-            </table>
+				<li>Go to the <b>CreateFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket in which to create folder. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Folder Name</td>
+								<td>Name of the Folder to create. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
 
 				</li>
-						
-		<br />
-		
-		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI. 
-		Change the filename (.png) to the new image filename. -->
-		
-		<img src="../../plugins/[Plugin Name]/images/DevBuildCleanup/[Plugin Name]_DevBuildCleanup2.png" />
-		
-		<br />
 
-		</ol>   
-						
-		<h3>Output</h3>
-						
-		<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. The procedure was completed successfully.</p>
-		
-		<!-- The following image shows the Job Details page with the results. Change the filename (.png) to the new image filename. -->
-		
-		<img src="../../plugins/[Plugin Name]/images/DevBuildCleanup/[Plugin Name]_DevBuildCleanup3.png" />
-		
-		<p>In the <b>[Procedure2]</b> step, click the Log button to see the diagnostic information. 
-		The output is similar to the following diagnostic report:</p>	
-		
-		<!-- The following image shows the diagnostic report in the ElectricCommander UI. Change the filename (.png) to the new image filename. -->
-		<img src="../../plugins/[Plugin Name]/images/DevBuildCleanup/[Plugin Name]_DevBuildCleanup4.png" />			
-						
-    </div>
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_CreateFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>CreateFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="deleteBucketContents" id="deleteBucketContents">
+
+			<a name='deleteBucketContents' id="deleteBucketContents"></a>
+
+			<h2>deleteBucketContents</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure deletes the contents of the specified bucket.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>deleteBucketContents</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket of which to clear the contents. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DeleteBucketContents1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>DeleteBucketContents</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="DeleteObject" id="DeleteObject">
+
+			<a name='DeleteObject' id="DeleteObject"></a>
+
+			<h2>DeleteObject</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure deletes the S3 object in specified bucket/folder.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DeleteObject</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket where the object is. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Key</td>
+								<td>Key of the object to delete. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DeleteObject1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>DeleteObject</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="DownloadFolder" id="DownloadFolder">
+
+			<a name='DownloadFolder' id="DownloadFolder"></a>
+
+			<h2>DownloadFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure downloads the contents of the specified folder to local filesystem.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DownloadFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket where the folder is. (Required)</td>
+							</tr>
+							<tr>
+								<td>Key Prefix - Folder</td>
+								<td>Key prefix of the folder to download.</td>
+							</tr>
+							<tr>
+								<td class='required'>Download Location</td>
+								<td>Download location path.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>DownloadFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="DownloadObject" id="DownloadObject">
+
+			<a name='DownloadObject' id="DownloadObject"></a>
+
+			<h2>DownloadObject</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure downloads S3 object specified by key to local filesystem.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DownloadObject</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket where the folder is. (Required)</td>
+							</tr>
+							<tr>
+								<td>Key</td>
+								<td>Key of the object to download</td>
+							</tr>
+							<tr>
+								<td class='required'>Download Location</td>
+								<td>Download location path.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadObject1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>DownloadObject</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="ListBucket" id="ListBucket">
+
+			<a name='ListBucket' id="ListBucket"></a>
+
+			<h2>ListBucket</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure lists all the buckets.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>ListBucket</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListBucket1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>ListBucket</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="ListFolder" id="ListFolder">
+
+			<a name='ListFolder' id="ListFolder"></a>
+
+			<h2>ListFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure lists folders (either recursively or non-recursively) .</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>ListFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket of which to list the folders. (Required)</td>
+							</tr>
+							<tr>
+								<td>Folder Name</td>
+								<td>Name of the Folder/Prefix to lists</td>
+							</tr>
+							<tr>
+								<td>List Objects in this folder or Include all sub folders?</td>
+								<td>If checked, All objects in this folder and all sub folders will be listed.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>ListFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="UploadFolder" id="UploadFolder">
+
+			<a name='UploadFolder' id="UploadFolder"></a>
+
+			<h2>UploadFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure uploads the specified local filesystem folder to Amazon S3 service .</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>UploadFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket of which to list the folders. (Required)</td>
+							</tr>
+							<tr>
+								<td>Key</td>
+								<td>The key prefix of the virtual directory to upload to.Keep this field empty to upload files to the root of the bucket.</td>
+							</tr>
+							<tr>
+								<td class='required'>Folder to Upload</td>
+								<td>Folder to upload.For example, '/opt/folderToUpload' or 'C:\path\to\folderToUpload'. (Required)</td>
+							</tr>
+							<tr>
+								<td>Make the object public</td>
+								<td>If checked, the uploaded object will be publicly accessible.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>UploadFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="UploadObject" id="UploadObject">
+
+			<a name='UploadObject' id="UploadObject"></a>
+
+			<h2>UploadObject</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure uploads the specified local filesystem folder to Amazon S3 service .</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>UploadObject</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the Bucket to which upload the object. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Key</td>
+								<td>Key of the object to upload. This value will be used as the key for the object that is uploaded. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>File to Upload</td>
+								<td>Path for file to upload. For example, '/path/to/fileToUpload.txt' or 'C:\mydir\fileToUpload.txt'. (Required)</td>
+							</tr>
+							<tr>
+								<td>Make the object public</td>
+								<td>If checked, the uploaded object will be publicly accessible.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadObject1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>UploadObject</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<!-- The next section is required for additional procedures. Replace [Procedure2} with the plugin procedure name in the following lines. -->
 
 		<!-- Include this section only if there are examples and use cases. -->	
 			
@@ -359,69 +863,57 @@
 		<!-- The following can be an example of how to run a specific procedure or a use case showing how to perform a specific task 
 		using one or more procedures.  -->
 		
-		<!-- The following summary about use case is optional.  -->
-
-        <p>This plugin has preconfigured example procedures that include the basic process to do the following:</p>
-				<ul>
-				<li>Clone the repository.</li>
-				<li>Get specific changes.</li>
-				<li>Run user-defined builds and tests.</li>
-				<li>Review and approve changes.</li>
-				<li>Reject changes.</li>
-				</ul>
 
         <!-- The following is a use case with several procedures showing how to perform a specific task.  
 				Replace it with an example or use case for the new plugin. 
 				Replace [UseCase1} with the name of the example or use case in the following lines.-->
 				
-				<h2>[UseCase1]</h2>
+				<h2>Use Case 1 : Static website hosting</h2>
 
         <div class="procedure" id="UseCase1">
 
             <a name='UseCase1' id="UseCase1"></a> 
 
-            <p>This procedure runs a sample custom build using the helper methods. This procedure runs the CustomBuildPrepare, DoWork, and TeamBuildCleanup 
-						procedures as steps. The DoWork step is where the builds and tests steps are run until TeamBuildCleanup step approves or rejects the changes.</p>
+            <p>One of the use case of this plugin is to host an publicly accessible javadoc (or any other auto generated documentation).To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:</p>
 
-						<h3>Input</h3>
-						
-			      <ol>
-			      <li>Go to the [UseCase1] procedure.</li>
-			      <li>Enter the following parameters:<br />
-                <table class="grid">
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class='required'>Gerrit Config</td>
-                            <td>The name of the configuration that has the connection information for Gerrit.</td>
-                        </tr>
-                    </tbody>
-                </table>
-				     </li>
-						
-		    <br />
-		    <img src="../../plugins/[Plugin Name]/images/CustomBuildExample/[Plugin Name]_CustomBuildExample2.png" />
-		    <br />
+				<ol>
+					<li>Create a plugin configuration</li>
+					<li>Create bucket on S3</li>
+					<li>Upload contents to that folder.</li>
 
-		    </ol>   
-						
-		    <h3>Output</h3>
-						
-		        <p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
-		        <img src="../../plugins/[Plugin Name]/images/CustomBuildExample/[Plugin Name]_CustomBuildExample3.png" />
-		
-		        <p>In the <b>CustomBuildExample</b> step, click the Log button to see the diagnostic information. 
-						The output is similar to the following diagnostic report:</p>	
-						<img src="../../plugins/[Plugin Name]/images/CustomBuildExample/[Plugin Name]_CustomBuildExample4.png" /></li>
-						
-				</div>
+				</ol>
 
-       <!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
+			<h4>Create a Plugin Configuration</h4>
+
+			<p>In ElectricCommander, go to <b>Administration</b> > <b>Plugins</b> to open the Plugin Manager. Then click <b>Configure</b> and enter the values
+				for the parameters in the S3 Configuration page.</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/create_config.PNG" />
+			<p>After the configuration is created, you can see it in "S3 Configurations".</p>
+
+			<h4>Create bucket on S3</h4>
+
+			<p>Go to the CreateBucket procedure, enter the values in the parameter fields:</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/createBucket_parameters.PNG" />
+			<p>This procedure calls the CreateBucket procedures to create a new bucket 'WebsiteHosting'.</p>
+
+			<h4>Upload contents to S3 bucket</h4>
+
+			<p>Go to the UploadFolder procedure, enter the values in the parameter fields:</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/uploadFolder_parameters.PNG" />
+			<p>This procedure calls the UploadFolder procedures to upload the contents of the 'C:\Electric Cloud\electricCloud\Website' directory to 'WebsiteHosting' bucket.</p>
+
+			<h4>View the Results and Output</h4>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/results.PNG" />
+			<p>The following output appears during the procedures:</p>
+			<h5>CreateBucket</h5>
+
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/create_bucket_log.PNG" />
+			<h5>UploadFolder</h5>
+
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/upload_folder_log.PNG" />
+
+
+			<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
 			 
 			  <h1>Release Notes</h1>
 				
@@ -432,70 +924,19 @@
 				- Descriptions of new features or functionality supported by the plugin.
 				-->
 
-        <h2>[Plugin name in the ElectricFlow UI]-[Plugin version x.x.x]</h2>
+        <h2>EC-S3-plugin-1.0.0.0</h2>
 
         <ul>
-
-            <li>Added support for Gerrit 2.1.0</li>
-						
-						<!-- This is an example of how to write a feature update. -->
-						
-            <li>Updated the plugin logic to support the Gerrit review labels called <i>Code-Review</i> and <i>Verified</i>. Starting with 
-						Gerrit 2.6, the Verified label is no longer installed by default. Follow the steps <a href="#gerrit-verified-label">here</a> to install 
-						the label that can be used with ElectricCommander.</li>
-						
-            <!-- This is an example of how to write a new functionality of the plugin. -->
-						
-						<li>The project/branches manifest file can now be used to filter the changes.</li>
+            <li>Added support to create new bucket and folders within buckets.</li>
+			<li>Added support to clean the bucket contents.</li>
+			<li>Added support to delete particular object within the bucket/folder.</li>
+			<li>Added support to upload and download individual objects or entire contents of the bucket/folder.</li>
+			<li>Added support to list buckets and folders.</li>
         </ul>
 
-        <h2>[Plugin Name]-2.0.2</h2>
-       
-			  <ul>
-				
-				    <!-- These are examples of how to write descriptions of specific bug fixes. -->
-						
-            <li>Fixed the manifest file.</li>
-						
-						<li>Fixed a bug with the pseudo code snippet execution.</li>
-        </ul>
-
-        <h2 class="help">[Plugin Name]-2.0.1</h2>
-   
-	      <ul>
-				
-				    <!-- This is an example of how to write an enhancement. -->
-				 
-            <li>Updated the logic for applying eligible pending changes to honor project paths defined in the repository manifest.</li>
-        
-				</ul>
-
-        <h2 class="help">[Plugin Name]-2.0.0</h2>
-
-        <ul>
-				     <!-- These are examples of how not to write a release note issue. 
-						 Be more specific when describing fixed bugs. 
-						 The following phrase is too vague and does not provide useful information to the user. -->
-            
-						<li>Fixed minor bugs.</li>
-						
-						<li>Made minor API improvements.</li>
-						
-        </ul>
-
-	      <h2 class="help">[Plugin Name]-1.0.0</h2>
-
-        <ul>
-				   <!-- This is an example of how not to write a release note issue.
-					 Be more specific when describing improvements or enhancements. 
-					 The following phrase is too vague and does not provide useful information to the user. -->
-           
-					 
-        </ul>
-				
-				...
-
-    </body>
+		</div>
+	</div>
+</body>
 		
 </html>
 
