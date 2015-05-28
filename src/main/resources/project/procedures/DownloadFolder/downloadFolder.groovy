@@ -1,16 +1,24 @@
 $[/myProject/procedure_helpers/preamble]
-
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
+
 
 def bucketName = '$[bucketName]'.trim()
-def downloadLocation = '$[downloadLocation]'.trim()
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
+downloadLocation = downloadLocation.replace('\\','/').trim()
 def key ='$[key]'.trim()
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
 // Create TransferManager
 def tx = new TransferManager(credentials);
+
 
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
@@ -34,11 +42,15 @@ if (key.length() == 0) {
 }
 
 try {
-    if (!s3.doesBucketExist(bucketName)) {
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }
 
+    if(!isFilenameValid(downloadLocation)){
+        println("Error : Download location is invalid.");
+        return
+    }
     //Now download the contents
     file = new File(downloadLocation)
     MultipleFileDownload download = tf.downloadDirectory(bucketName, key, file)

@@ -749,6 +749,90 @@
       </step>
     </procedure>
 	
+		<procedure>
+      <procedureName>UploadFolder</procedureName>
+      <description/>
+      <jobNameTemplate/>
+      <resourceName/>
+      <timeLimit/>
+      <timeLimitUnits>minutes</timeLimitUnits>
+
+      <workspaceName/>
+	  <propertySheet>
+		<property>
+			<propertyName>ec_parameterForm</propertyName>
+			<description/>
+			<expandable>0</expandable>
+			<value/>
+		</property>
+	   </propertySheet>
+      <formalParameter>
+        <formalParameterName>config</formalParameterName>
+        <defaultValue/>
+        <description/>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>bucketName</formalParameterName>
+        <defaultValue/>
+        <description/>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+
+        <type>entry</type>
+      </formalParameter>
+      <formalParameter>
+        <formalParameterName>key</formalParameterName>
+        <defaultValue/>
+        <description/>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+
+        <type>entry</type>
+      </formalParameter>	  
+	  <formalParameter>
+        <formalParameterName>folderToUpload</formalParameterName>
+        <defaultValue/>
+        <description/>
+        <expansionDeferred>0</expansionDeferred>
+        <required>1</required>
+
+        <type>entry</type>
+      </formalParameter>
+	  <formalParameter>
+		  <formalParameterName>access_public</formalParameterName>
+		  <defaultValue>1</defaultValue>
+		  <description>If checked, the uploaded object will be publicly accessible</description>
+		  <required>0</required>
+		  <type>checkbox</type>
+		</formalParameter>	  
+      <step>
+        <stepName>uploadFolder</stepName>
+        <alwaysRun>0</alwaysRun>
+        <broadcast>0</broadcast>
+        <command/>
+        <condition/>
+        <description/>
+        <errorHandling>failProcedure</errorHandling>
+        <exclusiveMode>none</exclusiveMode>
+        <logFileName/>
+        <parallel>0</parallel>
+        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+        <precondition/>
+        <releaseMode>none</releaseMode>
+        <resourceName/>
+        <shell>ec-groovy</shell>
+        <timeLimit/>
+        <timeLimitUnits>minutes</timeLimitUnits>
+
+        <workingDirectory/>
+        <workspaceName/>
+      </step>
+    </procedure>
+	
 	<procedure>
       <procedureName>DownloadObject</procedureName>
       <description/>
@@ -1082,6 +1166,7 @@
         <condition/>
         <description/>
         <errorHandling>failProcedure</errorHandling>
+          <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
         <parallel>0</parallel>

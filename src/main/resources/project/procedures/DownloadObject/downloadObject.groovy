@@ -1,11 +1,19 @@
 $[/myProject/procedure_helpers/preamble]
 
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
 def bucketName = '$[bucketName]'.trim()
-def downloadLocation = '$[downloadLocation]'.trim()
+def downloadLocation = commander.getCommanderProperty('downloadLocation')
+downloadLocation = downloadLocation.replace('\\','/').trim()
 def key ='$[key]'.trim()
+
 // Create bucket logic here
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
@@ -18,6 +26,12 @@ AmazonS3 s3 = tx.getAmazonS3Client();
 TransferManager tf = new TransferManager(s3);
 
 println "Downloading " + key + " to " + downloadLocation
+
+
+if(!isFilenameValid(downloadLocation)){
+    println("Error : Download location is invalid.");
+    return
+}
 
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty");
@@ -35,7 +49,8 @@ if (key.length() == 0) {
 }
 
 try {
-    if (!s3.doesBucketExist(bucketName)) {
+
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }

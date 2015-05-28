@@ -3,11 +3,21 @@ import java.nio.file.FileSystems
 
 $[/myProject/procedure_helpers/preamble]
 
-ElectricCommander commander = new ElectricCommander();
+ElectricCommander commander;
+//get credentials from commander
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
+
 
 def bucketName = '$[bucketName]'.trim()
-def fileToUpload = '$[fileToUpload]'.trim()
+def fileToUpload = commander.getCommanderProperty('fileToUpload').trim()
+fileToUpload = fileToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
+
 def access_public = '$[access_public]'
 
 //get credentials from commander
@@ -41,6 +51,7 @@ try {
        println "Error : File " + fileToUpload +" does not exists"
        return
     }
+
     if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) ){
         println "Error : Can not open " + fileToUpload
         return
@@ -50,6 +61,12 @@ try {
         println "Error : " +  fileToUpload + " is not a normal file."
         return
     }
+
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present");
+        return
+    }
+    
     println "Uploading " + key + " to " + bucketName
 
     PutObjectRequest por

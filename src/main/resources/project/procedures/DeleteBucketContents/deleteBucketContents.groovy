@@ -3,11 +3,18 @@ import com.amazonaws.AmazonServiceException
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.transfer.TransferManager
+import com.amazonaws.services.s3.model.ListObjectsRequest
 
 $[/myProject/procedure_helpers/preamble]
 
+ElectricCommander commander;
 //get credentials from commander
-ElectricCommander commander = new ElectricCommander();
+try {
+    commander = new ElectricCommander();
+}catch(Exception e){
+    println(e.getMessage());
+    return
+}
 
 def bucketName = '$[bucketName]'.trim()
 
@@ -15,21 +22,24 @@ def bucketName = '$[bucketName]'.trim()
 
 def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
+
 // Create TransferManager
 def tx = new TransferManager(credentials);
 
 // Get S3 Client
 AmazonS3 s3 = tx.getAmazonS3Client();
 
+
+if (!doesBucketExist(s3, bucketName)) {
+    println("Error : Bucket " + bucketName + " not present");
+    return
+}
+
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty");
     return
 }
 
-if (!s3.doesBucketExist(bucketName)) {
-    println("Error : Bucket " + bucketName + " not present");
-    return
-}
 
 // Multi-object delete by specifying only keys (no version ID).
 DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
@@ -74,5 +84,3 @@ try {
     handleClientException(ace)
 
 }
-
-
