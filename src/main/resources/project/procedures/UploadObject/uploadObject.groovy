@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.FileSystems
+
 $[/myProject/procedure_helpers/preamble]
 
 ElectricCommander commander;
@@ -49,11 +52,21 @@ try {
        return
     }
 
+    if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) ){
+        println "Error : Can not open " + fileToUpload
+        return
+    }
+
+    if( !file.isFile() ) {
+        println "Error : " +  fileToUpload + " is not a normal file."
+        return
+    }
+
     if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }
-
+    
     println "Uploading " + key + " to " + bucketName
 
     PutObjectRequest por
