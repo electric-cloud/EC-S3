@@ -69,7 +69,14 @@ my %DeleteBucketContents = (
   category    => "Resource Management" 
 );
 
-@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%UploadFolder, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder, \%DeleteObject, \%DeleteBucketContents);
+my %WebsiteHosting = (
+  label       => "EC-S3 - WebsiteHosting",
+  procedure   => "WebsiteHosting",
+  description => "Host your static website in S3",
+  category    => "Resource Management"
+);
+
+@::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%UploadFolder, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder, \%DeleteObject, \%DeleteBucketContents, \%WebsiteHosting);
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -171,7 +178,10 @@ if ($upgradeAction eq "upgrade") {
                 procedureName => 'DeleteBucketContents',
                 stepName => 'deleteBucketContents'
             });
-
+            $batch->attachCredential("\$[/plugins/$pluginName/project]", $cred, {
+                procedureName => 'WebsiteHosting',
+                stepName => 'websiteHosting'
+            });
 		}
     }
 }
