@@ -36,10 +36,6 @@ if (downloadLocation.length() == 0) {
     return
 }
 
-if (key.length() == 0) {
-    println("Error : Key is empty");
-    return
-}
 
 try {
     if (!doesBucketExist(s3,bucketName)) {
