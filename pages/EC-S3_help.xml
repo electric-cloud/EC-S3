@@ -74,7 +74,7 @@
 
 				<!-- Add a line for each example or use case. The following is an example. -->
 				
-				<li><a href="#UseCase1">Host a static website on Amazon S3</a></li>
+				<li><a href="#UseCase1">Host a Static Website on Amazon S3</a></li>
 				</ul>
 				<li><p><a href="#rns">Release Notes</a></p></li>
 				</ul>
@@ -90,11 +90,11 @@
 				
 				<!-- The following is an example description. Replace it with the new plugin description. -->
 				
-				<p>Amazon Simple Storage Service is storage for the Internet. It is designed to make web-scale computing easier for developers.</p>
+				<p>Amazon Simple Storage Service (S3) is storage for the Internet. It is designed to make web-scale computing easier for developers.</p>
 						
-        <p>Amazon S3 has a simple web services interface that allows to store and retrieve any amount of data, at any time, from anywhere on the web.
-			It gives any developer access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run
-			its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers.</p>
+        <p>Amazon S3 has a simple web-services interface where you can store and retrieve any amount of data, at any time, from anywhere on the web.
+			It gives developers access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run
+			its own global network of websites. The goal is to maximize benefits of scale and pass those benefits on to developers.</p>
 
         <!-- This section is required. Replace the plugin name, the URL to the website with the new plugin information, and the name of the link. -->	
 				<!-- Example of [Plugin name] is OpenStack or Chef. -->	
@@ -113,14 +113,14 @@
 				<!-- The following is an example description. Replace it with the new plugin content. -->
 
         <p>This plugin uses the Amazon S3 application programming interface (API) that lets developers choose where
-			their object should get stored on Amazon cloud. Using this secure API, your application is automatically scaled up and down as needed. This integration allows ElectricCommander to manage S3 Buckets and Objects.</p>
+			their objects are stored on the Amazon cloud. Using this secure API, your application is automatically scaled up and down as needed. This integration allows ElectricFlow to manage S3 buckets and objects.</p>
 				
 				<p>The plugin interacts with S3 data by using AWS Java SDK to perform the following tasks:</p>
 				<ul>
 					<li>Create configurations with connection information.</li>
 					<li>Create buckets and folders.</li>
-					<li>Store objects in existing buckets/folders.</li>
-					<li>Download objects or entire folder.</li>
+					<li>Store objects in existing buckets and folders.</li>
+					<li>Download objects or entire folders.</li>
 					<li>List all the buckets and folders.</li>
 
 				</ul>
@@ -153,7 +153,7 @@
 			
 		  <!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
 			
-			<li>Click <b>Configure</b> to open the [Plugin name] Configurations page.</li> 	
+			<li>Click <b>Configure</b> to open the EC-S3 Configurations page.</li>
 		  <li>Click <b>Create Configuration</b>.</li>
 		  <li>To create a S3 configuration, enter the following information and click <b>OK</b>.
 			<br /> Remember that you may need to create additional configurations later.</li>
@@ -186,7 +186,7 @@
                     </tr>
                     <tr>
                         <td class='required'>Workspace</td>
-                        <td>The workspace to use for resourced dynamically created by this configuration. (Required)</td>
+                        <td>The workspace to use for resources dynamically created by this configuration. (Required)</td>
                     </tr>
 					<tr>
 						<td class='required'>Access IDs (Credential Parameters)</td>
@@ -268,11 +268,11 @@
 								<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
                    <tr>
                          <td class='required'>Configuration</td>
-                        <td>The name of the config which holds all the connection information. This must reference a valid existing configuration.</td>
+                        <td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration.</td>
                     </tr>
 					<tr>
 						<td class='required'>Bucket Name</td>
-						<td>Name of the Bucket to create.</td>
+						<td>Name of the bucket to create.</td>
 					</tr>
                 </tbody>
             </table>
@@ -306,7 +306,7 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>This procedure creates nested folders within specified bucket. Folders help to organize the S3 Objects. </p>
+			<p>This procedure create nested folders within the specified bucket. Folders help to organize the S3 Objects. </p>
 
 
 			<h3>Input</h3>
@@ -325,11 +325,11 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket in which to create folder. (Required)</td>
+								<td>Name of the bucket in which to create folder. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Folder Name</td>
@@ -352,17 +352,17 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>CreateFolder</b> step, click the Log button to see the diagnostic information.</p>
 
 		</div>
 
-		<div class="deleteBucketContents" id="deleteBucketContents">
+		<div class="DeleteBucketContents" id="DeleteBucketContents">
 
-			<a name='deleteBucketContents' id="deleteBucketContents"></a>
+			<a name='DeleteBucketContents' id="DeleteBucketContents"></a>
 
-			<h2>deleteBucketContents</h2>
+			<h2>DeleteBucketContents</h2>
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
@@ -372,7 +372,7 @@
 			<h3>Input</h3>
 
 			<ol>
-				<li>Go to the <b>deleteBucketContents</b> procedure.</li>
+				<li>Go to the <b>DeleteBucketContents</b> procedure.</li>
 				<li>Enter the following parameters:<br />
 					<table class="grid">
 						<thead>
@@ -385,11 +385,11 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket of which to clear the contents. (Required)</td>
+								<td>Name of the bucketof which to clear the contents. (Required)</td>
 							</tr>
 						</tbody>
 					</table>
@@ -408,7 +408,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>DeleteBucketContents</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -422,7 +422,7 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>This procedure deletes the S3 object in specified bucket/folder.</p>
+			<p>This procedure deletes the S3 object in specified bucket or folder.</p>
 
 
 			<h3>Input</h3>
@@ -441,11 +441,11 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket where the object is. (Required)</td>
+								<td>Name of the bucketwhere the object is. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Key</td>
@@ -468,7 +468,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>DeleteObject</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -501,11 +501,11 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket where the folder is. (Required)</td>
+								<td>Name of the bucketwhere the folder is. (Required)</td>
 							</tr>
 							<tr>
 								<td>Key Prefix - Folder</td>
@@ -513,7 +513,7 @@
 							</tr>
 							<tr>
 								<td class='required'>Download Location</td>
-								<td>Download location path.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
+								<td>Path of the download location.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
 							</tr>
 						</tbody>
 					</table>
@@ -532,7 +532,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>DownloadFolder</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -546,7 +546,7 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>This procedure downloads S3 object specified by key to local filesystem.</p>
+			<p>This procedure downloads the S3 object specified by the key to the local file system.</p>
 
 
 			<h3>Input</h3>
@@ -565,11 +565,11 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket where the folder is. (Required)</td>
+								<td>Name of the bucketwhere the folder is. (Required)</td>
 							</tr>
 							<tr>
 								<td>Key</td>
@@ -577,7 +577,7 @@
 							</tr>
 							<tr>
 								<td class='required'>Download Location</td>
-								<td>Download location path.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
+								<td>Path of the download location.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
 							</tr>
 						</tbody>
 					</table>
@@ -596,7 +596,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>DownloadObject</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -629,7 +629,7 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 						</tbody>
 					</table>
@@ -648,7 +648,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>ListBucket</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -662,7 +662,7 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>This procedure lists folders (either recursively or non-recursively) .</p>
+			<p>This procedure lists the folders, either recursively or nonrecursively.</p>
 
 
 			<h3>Input</h3>
@@ -681,19 +681,19 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket of which to list the folders. (Required)</td>
+								<td>Name of the bucketof which to list the folders. (Required)</td>
 							</tr>
 							<tr>
 								<td>Folder Name</td>
-								<td>Name of the Folder/Prefix to lists</td>
+								<td>Name of the folder or prefix to include in the list.</td>
 							</tr>
 							<tr>
 								<td>List Objects in this folder or Include all sub folders?</td>
-								<td>If checked, All objects in this folder and all sub folders will be listed.</td>
+								<td>If selected, all objects in this folder and all subfolders will be in the list.</td>
 							</tr>
 						</tbody>
 					</table>
@@ -712,7 +712,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>ListFolder</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -726,7 +726,7 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>This procedure uploads the specified local filesystem folder to Amazon S3 service .</p>
+			<p>This procedure uploads the specified local filesystem folder to the Amazon S3 service.</p>
 
 
 			<h3>Input</h3>
@@ -745,23 +745,23 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket of which to list the folders. (Required)</td>
+								<td>Name of the bucketof which to list the folders. (Required)</td>
 							</tr>
 							<tr>
 								<td>Key</td>
-								<td>The key prefix of the virtual directory to upload to.Keep this field empty to upload files to the root of the bucket.</td>
+								<td>The key prefix of the virtual directory to which the folder is uploaded. Keep this field empty to upload files to the root of the bucket.</td>
 							</tr>
 							<tr>
 								<td class='required'>Folder to Upload</td>
-								<td>Folder to upload.For example, '/opt/folderToUpload' or 'C:\path\to\folderToUpload'. (Required)</td>
+								<td>Name of the folder to upload.For example, '/opt/folderToUpload' or 'C:\path\to\folderToUpload'. (Required)</td>
 							</tr>
 							<tr>
 								<td>Make the object public</td>
-								<td>If checked, the uploaded object will be publicly accessible.</td>
+								<td>If selected, the uploaded object will be publicly accessible.</td>
 							</tr>
 						</tbody>
 					</table>
@@ -780,7 +780,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>UploadFolder</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -794,7 +794,7 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>This procedure uploads the specified local filesystem folder to Amazon S3 service .</p>
+			<p>This procedure uploads the specified local filesystem folder to Amazon S3 service.</p>
 
 
 			<h3>Input</h3>
@@ -813,11 +813,11 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the config which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
-								<td>Name of the Bucket to which upload the object. (Required)</td>
+								<td>Name of the bucketto which upload the object. (Required)</td>
 							</tr>
 							<tr>
 								<td class='required'>Key</td>
@@ -848,7 +848,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>UploadObject</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -868,7 +868,7 @@
 				Replace it with an example or use case for the new plugin. 
 				Replace [UseCase1} with the name of the example or use case in the following lines.-->
 				
-				<h2>Use Case 1 : Static website hosting</h2>
+				<h2>Use Case 1: Static Website Hosting</h2>
 
         <div class="procedure" id="UseCase1">
 
@@ -877,9 +877,9 @@
             <p>One of the use case of this plugin is to host an publicly accessible javadoc (or any other auto generated documentation).To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:</p>
 
 				<ol>
-					<li>Create a plugin configuration</li>
-					<li>Create bucket on S3</li>
-					<li>Upload contents to that folder.</li>
+					<li>Create a plugin configuration.</li>
+					<li>Create a bucket on S3.</li>
+					<li>Upload the content to the folder.</li>
 
 				</ol>
 
@@ -890,13 +890,13 @@
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/create_config.PNG" />
 			<p>After the configuration is created, you can see it in "S3 Configurations".</p>
 
-			<h4>Create bucket on S3</h4>
+			<h4>Create a Bucket on S3</h4>
 
 			<p>Go to the CreateBucket procedure, enter the values in the parameter fields:</p>
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/createBucket_parameters.PNG" />
 			<p>This procedure calls the CreateBucket procedures to create a new bucket 'WebsiteHosting'.</p>
 
-			<h4>Upload contents to S3 bucket</h4>
+			<h4>Upload the Contents to the S3 Bucket</h4>
 
 			<p>Go to the UploadFolder procedure, enter the values in the parameter fields:</p>
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/uploadFolder_parameters.PNG" />
@@ -927,10 +927,10 @@
         <h2>EC-S3-plugin-1.0.0.0</h2>
 
         <ul>
-            <li>Added support to create new bucket and folders within buckets.</li>
+            <li>Added support to create new buckets and folders in buckets.</li>
 			<li>Added support to clean the bucket contents.</li>
-			<li>Added support to delete particular object within the bucket/folder.</li>
-			<li>Added support to upload and download individual objects or entire contents of the bucket/folder.</li>
+			<li>Added support to delete specific objects in a bucket or folder.</li>
+			<li>Added support to upload or download objects or the entire content of the bucket or folder.</li>
 			<li>Added support to list buckets and folders.</li>
         </ul>
 
