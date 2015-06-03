@@ -64,6 +64,7 @@
 				<li><a href="#ListFolder">ListFolder</a></li>
 				<li><a href="#UploadFolder">UploadFolder</a></li>
 				<li><a href="#UploadObject">UploadObject</a></li>
+				<li><a href="#WebsiteHosting">WebsiteHosting</a></li>
 
 				</ul>
 				
@@ -854,6 +855,74 @@
 
 		</div>
 
+		<div class="WebsiteHosting" id="WebsiteHosting">
+
+			<a name='WebsiteHosting' id="WebsiteHosting"></a>
+
+			<h2>WebsiteHosting</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>One can use Amazon Simple Storage Service (S3) to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This type of site is called a static website, and is used to display content that does not change frequently.</p>
+
+			<p>To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting.The website is then available at the region-specific website endpoint of the bucket:<i>&lt;bucket-name&gt;.s3-website-&lt;AWS-region&gt;.amazonaws.com</i></p>
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>WebsiteHosting</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration.</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucket to create.</td>
+							</tr>
+							<tr>
+								<td>Enable website hosting</td>
+								<td>Once you enable your bucket for static website hosting, all your content is accessible to web browsers via the Amazon S3 website endpoint for your bucket</td>
+							</tr>
+							<tr>
+								<td class='required'>Index Document</td>
+								<td>Name of the index document.</td>
+							</tr>
+							<tr>
+								<td class='required'>Error Document</td>
+								<td>Name of the error document.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_WebsiteHosting1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+
+			<p>In the <b>WebsiteHosting</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
 		<!-- The next section is required for additional procedures. Replace [Procedure2} with the plugin procedure name in the following lines. -->
 
 		<!-- Include this section only if there are examples and use cases. -->	
