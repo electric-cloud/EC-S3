@@ -20,30 +20,34 @@ def website_hosting = '$[website_hosting]'
 def indexDoc = '$[indexDoc]'.trim()
 def errorDoc = '$[errorDoc]'.trim()
 
-// Create bucket logic here
-
-def credentials = new BasicAWSCredentials(commander.userName, commander.password)
-
-// Create TransferManager
-def tx = new TransferManager(credentials);
-
-// Get S3 Client
-AmazonS3 s3 = tx.getAmazonS3Client();
-
+//validations
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty");
     return
 }
 
-if (!s3.doesBucketExist(bucketName)) {
-	println("Error : Bucket " + bucketName + " not present");
-	return
-}
-
-println("Changing website hosting for bucket " + bucketName);
-
 try {
+    def credentials = new BasicAWSCredentials(commander.userName, commander.password)
+
+    // Create TransferManager
+    def tx = new TransferManager(credentials);
+
+    // Get S3 Client
+    AmazonS3 s3 = tx.getAmazonS3Client();
+
+    //Check the owner of the account just to verify if the access keys are valid
+    def owner = s3.getS3AccountOwner()
+
+    //check if the bucket is present and the user has rights
+    if (!doesBucketExist(s3,bucketName)) {
+        println("Error : Bucket " + bucketName + " not present")
+        return
+    }
+
+    println("Changing website hosting for bucket " + bucketName);
+
     if(website_hosting == '1') {
+        //Enable website hosting
         if(errorDoc.length() ==0) {
             s3.setBucketWebsiteConfiguration(bucketName, new BucketWebsiteConfiguration(indexDoc))
         } else {
@@ -51,7 +55,7 @@ try {
                     new BucketWebsiteConfiguration(indexDoc, errorDoc))
         }
     } else {
-        // Delete website configuration.
+        // Delete website hosting.
         s3.deleteBucketWebsiteConfiguration(bucketName);
     }
 

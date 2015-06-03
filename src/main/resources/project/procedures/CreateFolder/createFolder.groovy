@@ -9,52 +9,55 @@ $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander;
 //get credentials from commander
 try {
-    commander = new ElectricCommander();
+    commander = new ElectricCommander()
 }catch(Exception e){
-    println(e.getMessage());
+    println(e.getMessage())
     return
 }
 
 def bucketName = '$[bucketName]'.trim()
 def folderName = '$[folderName]'.trim()
-
-// Create bucket logic here
-
-def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 def SUFFIX = "/"
 
-// Create TransferManager
-def tx = new TransferManager(credentials);
+//validations
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty")
+    return
+}
 
-// Get S3 Client
-AmazonS3 s3 = tx.getAmazonS3Client();
-
-println("Creating folder " + folderName);
+if (folderName.length() == 0) {
+    println("Error : Folder name is empty")
+    return
+}
 
 try {
+    def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
-    if (bucketName.length() == 0) {
-        println("Error : Bucket name is empty");
-        return
-    }
+    // Create TransferManager
+    def tx = new TransferManager(credentials)
 
-    if (folderName.length() == 0) {
-        println("Error : Folder name is empty");
-        return
-    }
+    // Get S3 Client
+    AmazonS3 s3 = tx.getAmazonS3Client()
 
+    //Check the owner of the account just to verify if the access keys are valid
+    def owner = s3.getS3AccountOwner()
+
+    //check if the bucket is present and the user has rights
     if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
         return
     }
     // create meta-data for your folder and set content-length to 0
-    ObjectMetadata metadata = new ObjectMetadata();
+    ObjectMetadata metadata = new ObjectMetadata()
     metadata.setContentLength(0)
     // create empty content
     InputStream emptyContent = new ByteArrayInputStream(new byte[0])
     // create a PutObjectRequest passing the folder name suffixed by /
     PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName,
             folderName + SUFFIX, emptyContent, metadata)
+
+    println("Creating folder " + folderName)
+
     // send request to S3 to create folder
     s3.putObject(putObjectRequest)
 
@@ -62,7 +65,7 @@ try {
 
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {
-		println("Error : Folder " + folderName + " already present");
+		println("Error : Folder " + folderName + " already present")
     }
     handleServiceException(ase)
 

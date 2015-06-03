@@ -13,32 +13,35 @@ def include_sub_folder = '$[include_sub_folder]'
 ElectricCommander commander;
 //get credentials from commander
 try {
-    commander = new ElectricCommander();
+    commander = new ElectricCommander()
 }catch(Exception e){
-    println(e.getMessage());
+    println(e.getMessage())
     return
 }
 
-def credentials = new BasicAWSCredentials(commander.userName, commander.password)
-
-// Create TransferManager
-def tx = new TransferManager(credentials);
-
-// Get S3 Client
-AmazonS3 s3 = tx.getAmazonS3Client();
 def i=0
 
-println("Listing objects under folder")
+//validations
+if (bucketName.length() == 0) {
+    println("Error : Bucket name is empty")
+    return
+}
 
 try {
-    //do the validations
-    if (bucketName.length() == 0) {
-        println("Error : Bucket name is empty");
-        return
-    }
+    def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
+    // Create TransferManager
+    def tx = new TransferManager(credentials)
+
+    // Get S3 Client
+    AmazonS3 s3 = tx.getAmazonS3Client()
+
+    //Check the owner of the account just to verify if the access keys are valid
+    def owner = s3.getS3AccountOwner()
+
+    //check if the bucket is present and the user has rights
     if (!doesBucketExist(s3,bucketName)) {
-        println("Error : Bucket " + bucketName + " not present");
+        println("Error : Bucket " + bucketName + " not present")
         return
     }
 
@@ -50,6 +53,7 @@ try {
 
 	ListObjectsRequest listObjectsRequest
 
+    //Format the request based on what we want. With or without subfolders
 	if(include_sub_folder == '1') {
 	    listObjectsRequest = new ListObjectsRequest()
 	            .withBucketName(bucketName).withPrefix(prefix)
@@ -59,6 +63,9 @@ try {
 	            .withDelimiter(delimiter)
 	}
 
+    println("Listing objects under folder")
+
+    //Create the list now
     ObjectListing listing = s3.listObjects(listObjectsRequest)
 
     List<S3ObjectSummary> summaries = listing.getObjectSummaries()
