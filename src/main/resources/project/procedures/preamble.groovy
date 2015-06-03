@@ -50,8 +50,10 @@ public class ElectricCommander {
         if( resp == null ) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        assert resp.status == 200 : "Commander did not respond with 200 for credentials"
-
+        if(resp.status == 200) {
+            println("Commander did not respond with 200 for credentials")
+            return
+        }
         userName = resp.getData().credential.userName
         password = resp.getData().credential.password
 
@@ -63,7 +65,9 @@ public class ElectricCommander {
         def jsonData = [propertyName : propName, value : propValue, jobId : sysJobId]
 
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
-        assert resp != null : "Could not set property on the Commander. Request failed"
+        if(resp != null ) {
+          println("Could not set property on the Commander. Request failed")
+        }
 
     }
 
@@ -74,8 +78,14 @@ public class ElectricCommander {
         def query =  ['jobStepId': "" + sysJobStepId]
         def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
 
-        assert resp != null : "Could not get property " + propName + " on the Commander. Request failed"
-        assert resp.status == 200 : "Commander did not respond with 200 for retrieving property "
+        if(resp != null ) {
+            println("Could not get property " + propName + " on the Commander. Request failed")
+        }
+
+        if(resp.status == 200) {
+            println("Commander did not respond with 200 for retrieving property")
+            return
+        }
 
         return resp.getData().property.value
     }
