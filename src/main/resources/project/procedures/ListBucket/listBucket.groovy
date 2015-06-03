@@ -9,25 +9,28 @@ $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander;
 //get credentials from commander
 try {
-    commander = new ElectricCommander();
+    commander = new ElectricCommander()
 }catch(Exception e){
-    println(e.getMessage());
+    println(e.getMessage())
     return
 }
 
-def credentials = new BasicAWSCredentials(commander.userName, commander.password)
-
-// Create TransferManager
-def tx = new TransferManager(credentials);
-
-// Get S3 Client
-AmazonS3 s3 = tx.getAmazonS3Client();
-def i=0
-
-println("Listing buckets")
-
 try {
-	
+    def credentials = new BasicAWSCredentials(commander.userName, commander.password)
+
+    // Create TransferManager
+    def tx = new TransferManager(credentials)
+
+    // Get S3 Client
+    AmazonS3 s3 = tx.getAmazonS3Client()
+
+    //Check the owner of the account just to verify if the access keys are valid
+    def owner = s3.getS3AccountOwner()
+
+    def i=0
+
+    println("Listing buckets")
+
     for (Bucket bucket : s3.listBuckets()) {
         println(bucket.getName())
         i++

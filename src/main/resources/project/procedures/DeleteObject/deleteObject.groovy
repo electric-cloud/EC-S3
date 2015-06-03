@@ -2,42 +2,47 @@ $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander;
 //get credentials from commander
 try {
-    commander = new ElectricCommander();
+    commander = new ElectricCommander()
 }catch(Exception e){
-    println(e.getMessage());
+    println(e.getMessage())
     return
 }
 
 def bucketName = '$[bucketName]'.trim()
 def key ='$[key]'.trim()
-// Create bucket logic here
 
-def credentials = new BasicAWSCredentials(commander.userName, commander.password)
-
-// Create TransferManager
-def tx = new TransferManager(credentials);
-
-// Get S3 Client
-AmazonS3 s3 = tx.getAmazonS3Client();
-
-println "Deleting object : " + key
-
+//validations
 if (bucketName.length() == 0) {
-    println("Error : Bucket name is empty");
+    println("Error : Bucket name is empty")
     return
 }
 
 if (key.length() == 0) {
-    println("Error : Key is empty");
+    println("Error : Key is empty")
     return
 }
 
 try {
+    def credentials = new BasicAWSCredentials(commander.userName, commander.password)
+
+    // Create TransferManager
+    def tx = new TransferManager(credentials);
+
+    // Get S3 Client
+    AmazonS3 s3 = tx.getAmazonS3Client();
+
+    //Check the owner of the account just to verify if the access keys are valid
+    def owner = s3.getS3AccountOwner()
+
+    //check if the bucket is present and the user has rights
     if (!s3.doesBucketExist(bucketName)) {
-        println("Error : Bucket " + bucketName + " not present");
+        println("Error : Bucket " + bucketName + " not present")
         return
     }
 
+    println "Deleting object : " + key
+
+    //Delete the object now
     s3.deleteObject(bucketName, key);
 
     println "Object " + key + " deleted successfully"
