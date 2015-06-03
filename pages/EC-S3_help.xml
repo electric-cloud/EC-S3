@@ -948,7 +948,8 @@
 				<ol>
 					<li>Create a plugin configuration.</li>
 					<li>Create a bucket on S3.</li>
-					<li>Upload the content to the folder.</li>
+					<li>Upload the contents of the folder to the bucket.</li>
+					<li>Configure bucket for website hosting.</li>
 
 				</ol>
 
@@ -963,13 +964,19 @@
 
 			<p>Go to the CreateBucket procedure, enter the values in the parameter fields:</p>
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/createBucket_parameters.PNG" />
-			<p>This procedure calls the CreateBucket procedures to create a new bucket 'WebsiteHosting'.</p>
+			<p>This procedure calls the CreateBucket procedures to create a new bucket 'ecwebsitehosting'.</p>
 
 			<h4>Upload the Contents to the S3 Bucket</h4>
 
 			<p>Go to the UploadFolder procedure, enter the values in the parameter fields:</p>
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/uploadFolder_parameters.PNG" />
-			<p>This procedure calls the UploadFolder procedures to upload the contents of the 'C:\Electric Cloud\electricCloud\Website' directory to 'WebsiteHosting' bucket.</p>
+			<p>This procedure calls the UploadFolder procedures to upload the contents of the 'C:\Electric Cloud\electricCloud\Website' directory to 'ecwebsitehosting' bucket.</p>
+
+			<h4>Configure Bucket for Website Hosting</h4>
+
+			<p>Go to the WebsiteHosting procedure, enter the values in the parameter fields:</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/websiteHosting_parameters.PNG" />
+			<p>This procedure calls the WebsiteHosting procedures to configure the bucket 'ecwebsitehosting' for website hosting.</p>
 
 			<h4>View the Results and Output</h4>
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/results.PNG" />
@@ -980,6 +987,10 @@
 			<h5>UploadFolder</h5>
 
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/upload_folder_log.PNG" />
+
+			<h5>WebsiteHosting</h5>
+
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/website_hosting_log.PNG" />
 
 
 			<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
