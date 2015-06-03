@@ -50,7 +50,9 @@ public class ElectricCommander {
         if( resp == null ) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        assert resp.status == 200 : "Commander did not respond with 200 for credentials"
+        if(resp.status != 200) {
+            throw new Exception("Commander did not respond with 200 for credentials")
+        }
 
         userName = resp.getData().credential.userName
         password = resp.getData().credential.password
@@ -63,7 +65,9 @@ public class ElectricCommander {
         def jsonData = [propertyName : propName, value : propValue, jobId : sysJobId]
 
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
-        assert resp != null : "Could not set property on the Commander. Request failed"
+        if(resp != null ) {
+          println("Could not set property on the Commander. Request failed")
+        }
 
     }
 
@@ -74,8 +78,15 @@ public class ElectricCommander {
         def query =  ['jobStepId': "" + sysJobStepId]
         def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
 
-        assert resp != null : "Could not get property " + propName + " on the Commander. Request failed"
-        assert resp.status == 200 : "Commander did not respond with 200 for retrieving property "
+        if(resp == null ) {
+            println("Could not get property " + propName + " on the Commander. Request failed")
+            return
+        }
+
+        if(resp.status != 200) {
+            println("Commander did not respond with 200 for retrieving property")
+            return
+        }
 
         return resp.getData().property.value
     }
@@ -116,7 +127,10 @@ public class ElectricCommander {
  * Exception handling routines
  *
  */
-static void printDeleteResults(MultiObjectDeleteException mode) {
+
+def printDeleteResults
+printDeleteResults = { MultiObjectDeleteException mode ->
+
     System.out.format("%s \n", mode.getMessage());
     System.out.format("No. of objects successfully deleted = %s\n", mode.getDeletedObjects().size());
     System.out.format("No. of objects failed to delete = %s\n", mode.getErrors().size());
@@ -125,17 +139,36 @@ static void printDeleteResults(MultiObjectDeleteException mode) {
         System.out.format("Object Key: %s\t%s\t%s\n",
                 deleteError.getKey(), deleteError.getCode(), deleteError.getMessage());
     }
+
 }
 
-static handleServiceException(AmazonServiceException ase) {
-    println("Caught an AmazonServiceException, which means your request made it "
+
+def handleServiceException
+handleServiceException = {AmazonServiceException ase ->
+    println("Error : Caught an AmazonServiceException, which means your request made it "
             + "to Amazon S3, but was rejected with an error response for some reason.");
     println("Error Message:    " + ase.getMessage());
     println("HTTP Status Code: " + ase.getStatusCode());
     println("AWS Error Code:   " + ase.getErrorCode());
     println("Error Type:       " + ase.getErrorType());
     println("Request ID:       " + ase.getRequestId());
+
+
 }
+
+def handleClientException
+handleClientException ={ AmazonClientException ace ->
+    println("Caught an AmazonClientException, which means the client encountered "
+            + "a serious internal problem while trying to communicate with S3, "
+            + "such as not being able to access the network.");
+    println("Error Message: " + ace.getMessage());
+
+}
+
+/*
+ * Utility routines
+ *
+ */
 
 def isFilenameValid
 isFilenameValid = { String file ->
@@ -166,13 +199,6 @@ isFilenameValid = { String file ->
     }
 }
 
-static handleClientException(AmazonClientException ace) {
-    println("Caught an AmazonClientException, which means the client encountered "
-            + "a serious internal problem while trying to communicate with S3, "
-            + "such as not being able to access the network.");
-    println("Error Message: " + ace.getMessage());
-}
-
 def doesBucketExist
 doesBucketExist = { AmazonS3 s3, String bucket ->
 
@@ -195,6 +221,8 @@ doesBucketExist = { AmazonS3 s3, String bucket ->
         if(ase.getStatusCode() == 403 || ase.getStatusCode() == 404){
 
             return false
+        } else {
+            handleServiceException(ase)
         }
     }
 }
