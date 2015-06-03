@@ -863,9 +863,9 @@
 
 			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
 
-			<p>One can use Amazon Simple Storage Service (S3) to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This type of site is called a static website, and is used to display content that does not change frequently.</p>
+			<p>You can use Amazon Simple Storage Service (S3) to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This is called a static website and is used to display content that does not change frequently.</p>
 
-			<p>To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting.The website is then available at the region-specific website endpoint of the bucket:<i>&lt;bucket-name&gt;.s3-website-&lt;AWS-region&gt;.amazonaws.com</i></p>
+			<p>To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting. It is then available at the region-specific website endpoint of the bucket:<i>&lt;bucket-name&gt;.s3-website-&lt;AWS-region&gt;.amazonaws.com</i></p>
 
 			<h3>Input</h3>
 
@@ -883,7 +883,7 @@
 							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
 							<tr>
 								<td class='required'>Configuration</td>
-								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration.</td>
+								<td>The name of the configuration that has all the connection information. This must refer to a valid existing configuration.</td>
 							</tr>
 							<tr>
 								<td class='required'>Bucket Name</td>
@@ -891,7 +891,7 @@
 							</tr>
 							<tr>
 								<td>Enable website hosting</td>
-								<td>Once you enable your bucket for static website hosting, all your content is accessible to web browsers via the Amazon S3 website endpoint for your bucket</td>
+								<td>After you enable your bucket for static website hosting, all your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.</td>
 							</tr>
 							<tr>
 								<td class='required'>Index Document</td>
@@ -918,7 +918,7 @@
 
 			<h3>Output</h3>
 
-			<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>WebsiteHosting</b> step, click the Log button to see the diagnostic information.</p>
 
