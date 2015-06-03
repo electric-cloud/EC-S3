@@ -51,9 +51,9 @@ public class ElectricCommander {
             throw new Exception("Error : Invalid configuration $[config].");
         }
         if(resp.status == 200) {
-            println("Commander did not respond with 200 for credentials")
-            return
+            throw new Exception("Commander did not respond with 200 for credentials")
         }
+        
         userName = resp.getData().credential.userName
         password = resp.getData().credential.password
 
