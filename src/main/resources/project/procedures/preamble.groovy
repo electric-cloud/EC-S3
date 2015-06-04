@@ -45,8 +45,32 @@ public class ElectricCommander {
 
         client.ignoreSSLIssues()
 
-        def resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
+        def resp
 
+        resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
+
+        if( resp == null ) {
+            throw new Exception("Error : Invalid configuration $[config].");
+        }
+        if(resp.status != 200) {
+            throw new Exception("Commander did not respond with 200 for credentials")
+        }
+
+        userName = resp.getData().credential.userName
+        password = resp.getData().credential.password
+    }
+
+    ElectricCommander(boolean config) {
+
+        client.ignoreSSLIssues()
+
+        def resp
+
+        if(config == true) {
+            resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
+        } else {
+            resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/credential', [])
+        }
         if( resp == null ) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
@@ -69,6 +93,22 @@ public class ElectricCommander {
           println("Could not set property on the Commander. Request failed")
         }
 
+    }
+
+    public getParamCredential() {
+
+        client.ignoreSSLIssues()
+
+        def resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/paramCredential', [])
+
+        if( resp == null ) {
+            throw new Exception("Error : Invalid configuration $[config].");
+        }
+        if(resp.status != 200) {
+            throw new Exception("Commander did not respond with 200 for credentials")
+        }
+
+        return [resp.getData().credential.userName, resp.getData().credential.password]
     }
 
     public getCommanderProperty(String propName) {
