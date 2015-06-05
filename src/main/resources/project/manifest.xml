@@ -21,7 +21,7 @@
         <path>procedures/CreateConfiguration/createAndAttachCredential.pl</path>
     </file>
     <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>
-        <path>procedures/CreateConfiguration/attemptConnection.pl</path>
+        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>
     </file>
 	
 	<file>

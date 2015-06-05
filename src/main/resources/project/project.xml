@@ -405,6 +405,44 @@
                 <type>checkbox</type>
             </formalParameter>
             <step>
+                <stepName>AttemptConnection</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition>$[attempt]</condition>
+                <description/>
+                <errorHandling>abortProcedure</errorHandling>
+                <exclusive>0</exclusive>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <releaseExclusive>0</releaseExclusive>
+                <resourceName>local</resourceName>
+                <retries>0</retries>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+                <procedureName>CreateConfiguration</procedureName>
+                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+                <propertySheet>
+                    <property>
+                        <propertyName>ec_customEditorData</propertyName>
+                        <propertySheet>
+                            <property>
+                                <propertyName>formType</propertyName>
+                                <expandable>1</expandable>
+                                <value>command</value>
+                            </property>
+                        </propertySheet>
+                    </property>
+                </propertySheet>
+                <attachedParameters>
+                    <formalParameterName>credential</formalParameterName>
+                </attachedParameters>
+            </step>
+            <step>
                 <stepName>CreateConfiguration</stepName>
                 <alwaysRun>0</alwaysRun>
                 <broadcast>0</broadcast>
@@ -477,44 +515,7 @@
                     <formalParameterName>credential</formalParameterName>
                 </attachedParameters>
             </step>
-            <step>
-                <stepName>AttemptConnection</stepName>
-                <alwaysRun>0</alwaysRun>
-                <broadcast>0</broadcast>
-                <command/>
-                <condition>$[attempt]</condition>
-                <description/>
-                <errorHandling>failProcedure</errorHandling>
-                <exclusive>0</exclusive>
-                <logFileName/>
-                <parallel>0</parallel>
-                <postProcessor/>
-                <releaseExclusive>0</releaseExclusive>
-                <resourceName>local</resourceName>
-                <retries>0</retries>
-                <shell>ec-perl</shell>
-                <timeLimit/>
-                <timeLimitUnits>minutes</timeLimitUnits>
-                <workingDirectory/>
-                <workspaceName/>
-                <procedureName>CreateConfiguration</procedureName>
-                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
-                <propertySheet>
-                    <property>
-                        <propertyName>ec_customEditorData</propertyName>
-                        <propertySheet>
-                            <property>
-                                <propertyName>formType</propertyName>
-                                <expandable>1</expandable>
-                                <value>command</value>
-                            </property>
-                        </propertySheet>
-                    </property>
-                </propertySheet>
-                <attachedParameters>
-                    <formalParameterName>credential</formalParameterName>
-                </attachedParameters>
-            </step>
+
 
         </procedure>
 		
