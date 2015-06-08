@@ -21,7 +21,13 @@ public class S3Util {
 
     private static String testFileLocation;
 
-    public static void DeleteBucket(String bucketName) throws Exception {
+    /**
+     * This procedure deletes the bucket along with its contents
+     * @param bucketName
+     * @return
+     * @throws Exception
+     */
+    public static boolean DeleteBucket(String bucketName) throws Exception {
 
         Properties props = TestUtils.getProperties();
 
@@ -34,7 +40,40 @@ public class S3Util {
         AmazonS3 s3 = tx.getAmazonS3Client();
 
         if (s3.doesBucketExist(bucketName)) {
+            // Multi-object delete by specifying only keys (no version ID).
+            DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
+                    bucketName).withQuiet(false);
+
+            //get keys
+            List<String> keys = new ArrayList<String>();
+            ObjectListing objectListing = s3.listObjects(new ListObjectsRequest()
+                    .withBucketName(bucketName));
+            for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+                keys.add(objectSummary.getKey());
+            }
+
+            // Create request that include only object key names.
+            List<DeleteObjectsRequest.KeyVersion> justKeys = new ArrayList<DeleteObjectsRequest.KeyVersion>();
+            for (String key : keys) {
+                justKeys.add(new DeleteObjectsRequest.KeyVersion(key));
+            }
+
+            if (justKeys.size() == 0) {
+                return false;
+            }
+
+            multiObjectDeleteRequest.setKeys(justKeys);
+            // Execute DeleteObjects - Amazon S3 add delete marker for each object
+            // deletion. The objects no disappear from your bucket (verify).
+            DeleteObjectsResult delObjRes = null;
+
+            delObjRes = s3.deleteObjects(multiObjectDeleteRequest);
+
             s3.deleteBucket(bucketName);
+            return true;
+        } else {
+            System.out.println("Error: Bucket with name " + bucketName + " does not exists.");
+            return  false;
         }
     }
 
