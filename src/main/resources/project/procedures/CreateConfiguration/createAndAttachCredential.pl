@@ -101,6 +101,12 @@ $xpath = $ec->attachCredential($projName, $credName,
      stepName => "deleteBucketContents"});
 $errors .= $ec->checkAllErrors($xpath);
 
+
+$xpath = $ec->attachCredential($projName, $credName,
+    {procedureName => "WebsiteHosting",
+     stepName => "websiteHosting"});
+$errors .= $ec->checkAllErrors($xpath);
+
 if ("$errors" ne "") {
     # Cleanup the partially created configuration we just created
     $ec->deleteProperty($configPath);
