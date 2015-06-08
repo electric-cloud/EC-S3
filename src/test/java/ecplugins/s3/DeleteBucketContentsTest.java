@@ -16,12 +16,12 @@ import static org.junit.Assert.assertTrue;
 public class DeleteBucketContentsTest {
 
     private static Properties props;
-
+    private static String bucketName;
     @BeforeClass
     public static void setup() throws Exception {
 
         props = TestUtils.getProperties();
-
+        bucketName = "ec-s3-plugin-" + TestUtils.randInt();
         TestUtils.deleteConfiguration();
         TestUtils.createConfiguration();
     }
@@ -31,7 +31,7 @@ public class DeleteBucketContentsTest {
         long jobTimeoutMillis = 5 * 60 * 1000;
         S3Util util = new S3Util();
 
-        String bucketName = "ec-s3-plugin-" + TestUtils.randInt();
+
         if(!util.CheckIsBucketAvailable(bucketName)) {
             System.out.println("Creating bucket : " + bucketName);
             util.CreateBucket(bucketName);
@@ -73,9 +73,10 @@ public class DeleteBucketContentsTest {
     }
 
     @AfterClass
-    public static void cleanup(){
+    public static void cleanup() throws Exception {
 
         S3Util.deleteTestData();
+        S3Util.DeleteBucket(bucketName);
     }
 
 

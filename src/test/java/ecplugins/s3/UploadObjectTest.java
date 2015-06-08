@@ -15,12 +15,13 @@ import static org.junit.Assert.assertTrue;
 public class UploadObjectTest {
 
     private static Properties props;
+    private static String bucketName;
 
     @BeforeClass
     public static void setup() throws Exception {
 
         props = TestUtils.getProperties();
-
+        bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
         TestUtils.deleteConfiguration();
         TestUtils.createConfiguration();
     }
@@ -30,7 +31,7 @@ public class UploadObjectTest {
         long jobTimeoutMillis = 5 * 60 * 1000;
         S3Util util = new S3Util();
         String fileToUpload = S3Util.createFile();
-        String bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
+
         if(!util.CheckIsBucketAvailable(bucketName))
             util.CreateBucket(bucketName);
 
@@ -70,8 +71,9 @@ public class UploadObjectTest {
     }
 
     @AfterClass
-    public static void  cleanup(){
+    public static void  cleanup() throws Exception {
 
         S3Util.deleteTestData();
+        S3Util.DeleteBucket(bucketName);
     }
 }

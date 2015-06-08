@@ -2,6 +2,7 @@ package ecplugins.s3;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,12 +15,13 @@ import static org.junit.Assert.assertTrue;
 public class CreateFolderTest {
 
     private static Properties props;
+    private static String bucketName;
 
     @BeforeClass
     public static void setup() throws Exception {
 
         props = TestUtils.getProperties();
-
+        bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
         TestUtils.deleteConfiguration();
         TestUtils.createConfiguration();
     }
@@ -29,7 +31,7 @@ public class CreateFolderTest {
         long jobTimeoutMillis = 5 * 60 * 1000;
         S3Util util = new S3Util();
 
-        String bucketName = "ec-s3-plugin-test-bucket" + TestUtils.randInt();
+
         if(!util.CheckIsBucketAvailable(bucketName))
             util.CreateBucket(bucketName);
 
@@ -66,6 +68,9 @@ public class CreateFolderTest {
         //Check if the folder is actually available in S3
         assertTrue("The key is not found",  util.isValidFile(bucketName, folderName + "/"));
     }
-
+    @AfterClass
+    public static void cleanup() throws Exception {
+        S3Util.DeleteBucket(bucketName);
+    }
 
 }
