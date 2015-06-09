@@ -20,8 +20,15 @@ import java.util.*;
 public class S3Util {
 
     private static String testFileLocation;
+    private static String testFolderLocation;
 
-    public static void DeleteBucket(String bucketName) throws Exception {
+    /**
+     * This procedure deletes the bucket along with its contents
+     * @param bucketName
+     * @return
+     * @throws Exception
+     */
+    public static boolean DeleteBucket(String bucketName) throws Exception {
 
         Properties props = TestUtils.getProperties();
 
@@ -34,7 +41,40 @@ public class S3Util {
         AmazonS3 s3 = tx.getAmazonS3Client();
 
         if (s3.doesBucketExist(bucketName)) {
+            // Multi-object delete by specifying only keys (no version ID).
+            DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(
+                    bucketName).withQuiet(false);
+
+            //get keys
+            List<String> keys = new ArrayList<String>();
+            ObjectListing objectListing = s3.listObjects(new ListObjectsRequest()
+                    .withBucketName(bucketName));
+            for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+                keys.add(objectSummary.getKey());
+            }
+
+            // Create request that include only object key names.
+            List<DeleteObjectsRequest.KeyVersion> justKeys = new ArrayList<DeleteObjectsRequest.KeyVersion>();
+            for (String key : keys) {
+                justKeys.add(new DeleteObjectsRequest.KeyVersion(key));
+            }
+
+            if (justKeys.size() == 0) {
+                return false;
+            }
+
+            multiObjectDeleteRequest.setKeys(justKeys);
+            // Execute DeleteObjects - Amazon S3 add delete marker for each object
+            // deletion. The objects no disappear from your bucket (verify).
+            DeleteObjectsResult delObjRes = null;
+
+            delObjRes = s3.deleteObjects(multiObjectDeleteRequest);
+
             s3.deleteBucket(bucketName);
+            return true;
+        } else {
+            System.out.println("Error: Bucket with name " + bucketName + " does not exists.");
+            return  false;
         }
     }
 
@@ -116,6 +156,25 @@ public class S3Util {
 
     }
 
+    public static boolean UploadFolder(String bucketName, String key) throws AmazonClientException, AmazonServiceException, Exception {
+        Properties props = TestUtils.getProperties();
+        File file  =  new File(createFolder());
+        BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
+
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
+
+        // Get S3 Client
+        AmazonS3 s3 = tx.getAmazonS3Client();
+        MultipleFileUpload objectUpload = tx.uploadDirectory(bucketName, key, file, true);
+
+        while (!objectUpload.isDone()) {
+            Thread.sleep(1000);
+        }
+
+        return true;
+    }
+
 
     public static String createFile() throws IOException {
         File file = null;
@@ -165,6 +224,50 @@ public class S3Util {
 
         File fileToDelete =  new File(testFileLocation);
         fileToDelete.delete();
+    }
+
+    public static String createFolder() throws IOException {
+
+        File folder,file = null;
+        // Create a folder at project root directory.
+        folder = new File("automatedTestData");
+
+        if(folder.exists()) {
+            folder.delete();
+        }
+        // Create an empty folder
+        boolean result = folder.mkdir();
+
+        // Create 10 files inside it.
+        for(int i =0 ;i < 10; i++){
+            file = new File("automatedTestData/testFile" + i);
+            file.createNewFile();
+        }
+
+        testFolderLocation = folder.getAbsolutePath().replace('\\','/');
+        return testFolderLocation;
+
+    }
+    public static boolean deleteTestFolder(){
+        File directory = new File(testFolderLocation);
+        return deleteFolder(directory);
+    }
+    public static boolean deleteFolder(File directory) {
+
+        if(directory.exists()){
+            File[] files = directory.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                        deleteFolder(files[i]);
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        return(directory.delete());
     }
 }
 
