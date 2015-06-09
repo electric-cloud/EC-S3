@@ -25,7 +25,7 @@ if (downloadLocation.length() == 0) {
 }
 
 if(!isFilenameValid(downloadLocation)){
-    println("Error : Download location is invalid.")
+    println("Error : Can not write to " + downloadLocation + ".")
     return
 }
 
