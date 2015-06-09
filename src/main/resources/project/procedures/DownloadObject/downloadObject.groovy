@@ -16,7 +16,7 @@ def key ='$[key]'.trim()
 
 //validations
 if(!isFilenameValid(downloadLocation)){
-    println("Error : Download location is invalid.")
+    println("Error : Can not write to " + downloadLocation + ".")
     return
 }
 
