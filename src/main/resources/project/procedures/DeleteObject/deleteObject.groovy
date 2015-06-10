@@ -48,7 +48,12 @@ try {
     //Delete the object now
     s3.deleteObject(bucketName, key);
 
-    println "Object " + key + " deleted successfully"
+    if( !isObjectPresent(s3,bucketName,key)) {
+        println "Object " + key + " deleted successfully"
+    } else {
+        println "Error : Error while deleting object " + key + "."
+    }
+
 
 } catch (InterruptedException e) {
     e.printStackTrace();
