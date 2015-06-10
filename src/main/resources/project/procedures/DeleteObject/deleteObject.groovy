@@ -35,11 +35,14 @@ try {
     def owner = s3.getS3AccountOwner()
 
     //check if the bucket is present and the user has rights
-    if (!s3.doesBucketExist(bucketName)) {
+    if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present")
         return
     }
-
+    if( !isObjectPresent(s3,bucketName,key)) {
+        println("Error : Object " + key + " not present or its not an object or you do not have permissions to delete it.")
+        return
+    }
     println "Deleting object : " + key
 
     //Delete the object now
