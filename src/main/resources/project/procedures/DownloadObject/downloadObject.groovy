@@ -56,6 +56,11 @@ try {
         return
     }
 
+    if( !isObjectPresent(s3,bucketName,key)) {
+        println("Error : Object " + key + " not present or its not an object or you do not have permissions to download it.")
+        return
+    }
+
     //Download the object
     Download download = tf.download(new GetObjectRequest(bucketName, key), new File(downloadLocation + "/" + key))
 

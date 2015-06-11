@@ -258,7 +258,7 @@ doesBucketExist = { AmazonS3 s3, String bucket ->
     } catch (AmazonServiceException ase) {
         //Access denied, bucket exists but in some others account, not in our's.
 
-        if(ase.getStatusCode() == 403 || ase.getStatusCode() == 404){
+        if (ase.getStatusCode() == 403 || ase.getStatusCode() == 404) {
 
             return false
         } else {
@@ -266,3 +266,29 @@ doesBucketExist = { AmazonS3 s3, String bucket ->
         }
     }
 }
+
+def isObjectPresent
+isObjectPresent = { AmazonS3 s3, String bucket, String key ->
+
+        try {
+            /*
+            * If a object exists, but you don't have permissions, trying to get its
+            * metadata returns a 403 AccessDenied error response from Amazon S3.
+            * If a object DOESN'T exist at all, trying to get its object metadata
+            * returns a 404  error response from Amazon S3.
+            */
+
+            s3.getObjectMetadata(new GetObjectMetadataRequest(bucket, key))
+            return true
+        } catch (AmazonServiceException ase) {
+            //Access denied or object is not present
+
+            if (ase.getStatusCode() == 403 || ase.getStatusCode() == 404) {
+
+                return false
+            } else {
+                handleServiceException(ase)
+            }
+        }
+    }
+
