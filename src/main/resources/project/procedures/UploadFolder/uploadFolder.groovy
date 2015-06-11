@@ -1,8 +1,6 @@
-import javax.activation.FileTypeMap
+
 import java.nio.file.Files
 import java.nio.file.FileSystems
-import java.nio.file.spi.FileTypeDetector
-import groovy.io.FileType
 
 $[/myProject/procedure_helpers/preamble]
 
@@ -79,10 +77,10 @@ try {
 	def list = []
 
 	file.eachFileRecurse {fileName ->
-		list << fileName.getPath().substring(folderToUpload.toString().length() + 1)
+		list << fileName.getPath().substring(folderToUpload.toString().length() + 1).replace('\\','/')
 
  	}
-
+	
 	println "Uploading " + folderToUpload + " to " + bucketName
 
     //Upload the folder
