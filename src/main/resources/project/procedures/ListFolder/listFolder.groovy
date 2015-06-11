@@ -76,7 +76,8 @@ try {
     }
 
     for (S3ObjectSummary summary: summaries) {
-        System.out.println(summary.getKey())
+        def url = "http://" + bucketName + ".s3.amazonaws.com/" + summary.getKey()
+        System.out.println(summary.getKey() + "  ==>  [" + url + "]")
         i++
     }
 
