@@ -156,6 +156,25 @@ public class S3Util {
 
     }
 
+    public static boolean UploadFolder(String bucketName, String key) throws AmazonClientException, AmazonServiceException, Exception {
+        Properties props = TestUtils.getProperties();
+        File file  =  new File(createFolder());
+        BasicAWSCredentials credentials = new BasicAWSCredentials(props.getProperty(StringConstants.ACCESS_ID), props.getProperty(StringConstants.SECRET_ACCESS_ID));
+
+        // Create TransferManager
+        TransferManager tx = new TransferManager(credentials);
+
+        // Get S3 Client
+        AmazonS3 s3 = tx.getAmazonS3Client();
+        MultipleFileUpload objectUpload = tx.uploadDirectory(bucketName, key, file, true);
+
+        while (!objectUpload.isDone()) {
+            Thread.sleep(1000);
+        }
+
+        return true;
+    }
+
 
     public static String createFile() throws IOException {
         File file = null;
