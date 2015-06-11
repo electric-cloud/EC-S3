@@ -19,10 +19,7 @@ try {
 def bucketName = '$[bucketName]'.trim()
 
 //validations
-if (!doesBucketExist(s3, bucketName)) {
-    println("Error : Bucket " + bucketName + " not present")
-    return
-}
+
 
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty")
@@ -38,6 +35,11 @@ try {
 
     // Get S3 Client
     AmazonS3 s3 = tx.getAmazonS3Client()
+
+    if (!doesBucketExist(s3, bucketName)) {
+        println("Error : Bucket " + bucketName + " not present")
+        return
+    }
 
     //Check the owner of the account just to verify if the access keys are valid
     def owner = s3.getS3AccountOwner()
