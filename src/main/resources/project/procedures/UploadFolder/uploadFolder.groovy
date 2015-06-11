@@ -1,5 +1,8 @@
+import javax.activation.FileTypeMap
 import java.nio.file.Files
 import java.nio.file.FileSystems
+import java.nio.file.spi.FileTypeDetector
+import groovy.io.FileType
 
 $[/myProject/procedure_helpers/preamble]
 
@@ -27,6 +30,14 @@ if (bucketName.length() == 0) {
 if (folderToUpload.length() == 0) {
 	println("Error : File to upload is empty")
 	return
+}
+
+while(1) {
+	if (folderToUpload.endsWith("/")) {
+		folderToUpload = folderToUpload.substring(0, folderToUpload.length() - 1);
+	} else {
+		break
+	}
 }
 
 def file = new File(folderToUpload)
@@ -64,6 +75,13 @@ try {
         println("Error : Bucket " + bucketName + " not present")
         return
     }
+
+	def list = []
+
+	file.eachFileRecurse {fileName ->
+		list << fileName.getPath().substring(folderToUpload.toString().length() + 1)
+
+ 	}
 
 	println "Uploading " + folderToUpload + " to " + bucketName
 
@@ -104,8 +122,10 @@ try {
 		}
 
 		for (S3ObjectSummary summary: summaries) {
-			println "Changing the ACL to PublicRead for : " + summary.getKey()
-			s3.setObjectAcl(bucketName, summary.getKey(), CannedAccessControlList.PublicRead)
+			if(list.contains(summary.getKey())) {
+				println "Changing the ACL to PublicRead for : " + summary.getKey()
+				s3.setObjectAcl(bucketName, summary.getKey(), CannedAccessControlList.PublicRead)
+			}
 		}
 	}
 
