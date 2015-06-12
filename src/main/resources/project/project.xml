@@ -172,7 +172,7 @@
             <procedureName>CreateConfiguration</procedureName>
             <description>Create a S3 configuration</description>
             <jobNameTemplate/>
-            <resourceName>local</resourceName>
+            <resourceName/>
             <workspaceName>default</workspaceName>
             <acl>
                 <inheriting>1</inheriting>
@@ -417,7 +417,7 @@
                 <parallel>0</parallel>
                 <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName>local</resourceName>
+                <resourceName/>
                 <retries>0</retries>
                 <shell>ec-groovy</shell>
                 <timeLimit/>
@@ -455,7 +455,7 @@
                 <parallel>0</parallel>
                 <postProcessor>postp</postProcessor>
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName>local</resourceName>
+                <resourceName/>
                 <retries>0</retries>
                 <shell>ec-perl</shell>
                 <timeLimit>5</timeLimit>
@@ -490,7 +490,7 @@
                 <parallel>0</parallel>
                 <postProcessor/>
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName>local</resourceName>
+                <resourceName/>
                 <retries>0</retries>
                 <shell>ec-perl</shell>
                 <timeLimit/>
@@ -568,7 +568,7 @@
                 <broadcast>0</broadcast>
                 <command></command>
                 <condition />
-                <description>Delete an S3 configuration</description>
+                <description>Delete a S3 configuration</description>
 
                 <errorHandling>failProcedure</errorHandling>
                 <exclusive>0</exclusive>
@@ -578,7 +578,7 @@
                 <postProcessor>postp</postProcessor>
 
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName>local</resourceName>
+                <resourceName/>
                 <retries>0</retries>
                 <shell>ec-perl</shell>
 
@@ -609,7 +609,7 @@
 							
     <procedure>
       <procedureName>CreateBucket</procedureName>
-      <description/>
+      <description>Create a S3 bucket</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -648,7 +648,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Create a S3 bucket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -668,7 +668,7 @@
 	
 	<procedure>
       <procedureName>UploadObject</procedureName>
-      <description/>
+      <description>Upload an Object to S3 bucket/folder</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -732,7 +732,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Upload an Object to S3 bucket/folder</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -752,7 +752,7 @@
 	
 		<procedure>
       <procedureName>UploadFolder</procedureName>
-      <description/>
+      <description>Upload the contents of a folder to a S3 bucket/folder</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -816,7 +816,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Upload the contents of a folder to a S3 bucket/folder</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -836,7 +836,7 @@
 	
 	<procedure>
       <procedureName>DownloadObject</procedureName>
-      <description/>
+      <description>Download an S3 object to local folder</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -893,7 +893,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Download an S3 object to local folder</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -913,7 +913,7 @@
 	
 	    <procedure>
       <procedureName>ListBucket</procedureName>
-      <description/>
+      <description>List all the available buckets for the current account</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -944,7 +944,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>List all the available buckets for the current account</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -964,7 +964,7 @@
 	
 	    <procedure>
       <procedureName>CreateFolder</procedureName>
-      <description/>
+      <description>Create a S3 folder</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -1012,7 +1012,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Create a S3 folder</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -1032,7 +1032,7 @@
 
 	    <procedure>
       <procedureName>ListFolder</procedureName>
-      <description/>
+      <description>List all the available objects under a S3 folder</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -1088,7 +1088,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>List all the available objects under a S3 folder</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -1108,7 +1108,7 @@
 
 	<procedure>
       <procedureName>DownloadFolder</procedureName>
-      <description/>
+      <description>Download the contents of a S3 folder</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -1165,13 +1165,12 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Download the contents of a S3 folder</description>
         <errorHandling>failProcedure</errorHandling>
-          <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
         <parallel>0</parallel>
-        <postProcessor>postp</postProcessor>
         <precondition/>
         <releaseMode>none</releaseMode>
         <resourceName/>
@@ -1186,7 +1185,7 @@
 	
 		<procedure>
       <procedureName>DeleteObject</procedureName>
-      <description/>
+      <description>Delete a S3 object</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -1234,7 +1233,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Delete a S3 object</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -1254,7 +1253,7 @@
 	
 	<procedure>
       <procedureName>DeleteBucketContents</procedureName>
-      <description/>
+      <description>Delete all the objects in a bucket</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -1294,7 +1293,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Delete all the objects in a bucket</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>
@@ -1314,7 +1313,7 @@
 	
 		<procedure>
       <procedureName>WebsiteHosting</procedureName>
-      <description/>
+      <description>Make a S3 bucket to host static website</description>
       <jobNameTemplate/>
       <resourceName/>
       <timeLimit/>
@@ -1381,7 +1380,7 @@
         <broadcast>0</broadcast>
         <command/>
         <condition/>
-        <description/>
+        <description>Make a S3 bucket to host static website</description>
         <errorHandling>failProcedure</errorHandling>
         <exclusiveMode>none</exclusiveMode>
         <logFileName/>

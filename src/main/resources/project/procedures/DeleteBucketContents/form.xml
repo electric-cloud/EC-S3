@@ -11,6 +11,6 @@
         <label>Bucket Name:</label>
         <property>bucketName</property>
         <required>1</required>
-        <documentation>Name of the Bucket to create</documentation>
+        <documentation>Name of the Bucket to delete</documentation>
     </formElement>
 </editor>
