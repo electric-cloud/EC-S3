@@ -976,7 +976,15 @@
 		  <description>List Objects in this folder or Include all sub folders</description>
 		  <required>0</required>
 		  <type>checkbox</type>
-		</formalParameter>	  
+		</formalParameter>
+        <formalParameter>
+            <formalParameterName>propResult</formalParameterName>
+            <description>Where to put the result. If not specified, the result is only printed</description>
+            <expansionDeferred>0</expansionDeferred>
+            <required>0</required>
+            <defaultValue>/myJob</defaultValue>
+            <type>entry</type>
+        </formalParameter>
       <step>
         <stepName>listFolder</stepName>
         <alwaysRun>0</alwaysRun>

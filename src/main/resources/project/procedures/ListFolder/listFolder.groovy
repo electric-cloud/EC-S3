@@ -9,7 +9,7 @@ $[/myProject/procedure_helpers/preamble]
 def bucketName = '$[bucketName]'.trim()
 def prefix = '$[folderName]'.trim()
 def include_sub_folder = '$[include_sub_folder]'
-
+def propResult = '$[propResult]'.trim()
 ElectricCommander commander;
 //get credentials from commander
 try {
@@ -25,6 +25,14 @@ def i=0
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty")
     return
+}
+
+if(propResult.length() == 0) {
+    propResult = "/myJob"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
 }
 
 try {
@@ -78,6 +86,7 @@ try {
     for (S3ObjectSummary summary: summaries) {
         def url = "http://" + bucketName + ".s3.amazonaws.com/" + summary.getKey()
         System.out.println(summary.getKey() + "  ==>  [" + url + "]")
+        commander.setProperty(propResult + "/" + summary.getKey(), url)
         i++
     }
 
