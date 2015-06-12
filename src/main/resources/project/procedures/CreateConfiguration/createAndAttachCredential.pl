@@ -45,13 +45,6 @@ $errors .= $ec->checkAllErrors($xpath);
 
 # Attach credential to steps that will need it
 $xpath = $ec->attachCredential($projName, $credName,
-    {procedureName => "API_Run",
-     stepName => "run"});
-$errors .= $ec->checkAllErrors($xpath);
-
-
-# Attach credential to steps that will need it
-$xpath = $ec->attachCredential($projName, $credName,
     {procedureName => "CreateBucket",
      stepName => "createBucket"});
 $errors .= $ec->checkAllErrors($xpath);
