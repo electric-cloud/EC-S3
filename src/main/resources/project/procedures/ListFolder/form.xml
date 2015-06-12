@@ -30,4 +30,12 @@
 		<initiallyChecked>1</initiallyChecked>
 		<documentation>If checked, All objects in this folder and all sub folders will be listed.</documentation>
 	</formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Results Location:</label>
+        <property>propResult</property>
+        <required>0</required>
+        <value>/myJob</value>
+        <documentation>Where to put the result. If not specified, the result is pushed to /myJob.</documentation>
+    </formElement>
 </editor>
