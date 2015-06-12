@@ -18,7 +18,7 @@ use ElectricCommander;
 use XML::XPath;
 use CGI;
 
-my $gTimeout = 20;
+my $gTimeout = 300;
 
 # -----------------------------------------------------------------------------
 # main
