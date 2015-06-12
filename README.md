@@ -18,7 +18,6 @@ Create an ecplugin.properties at the root of this repository with the following 
     COMMANDER_USER=<COMMANDER_USER>
     COMMANDER_PASSWORD=<COMMANDER_PASSWORD>
 
-    ##Service URL and credentials to access S3##
     SERVICE_URL=https://s3.amazonaws.com
     ACCESS_ID=<ACCESS_ID>
     SECRET_ACCESS_ID=<SECRET_ACCESS_ID>
