@@ -30,12 +30,8 @@ if (folderToUpload.length() == 0) {
 	return
 }
 
-while(1) {
-	if (folderToUpload.endsWith("/")) {
+while(folderToUpload.endsWith("/")) {
 		folderToUpload = folderToUpload.substring(0, folderToUpload.length() - 1);
-	} else {
-		break
-	}
 }
 
 def file = new File(folderToUpload)
@@ -80,7 +76,7 @@ try {
 		list << fileName.getPath().substring(folderToUpload.toString().length() + 1).replace('\\','/')
 
  	}
-	
+
 	println "Uploading " + folderToUpload + " to " + bucketName
 
     //Upload the folder
