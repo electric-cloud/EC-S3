@@ -36,6 +36,6 @@
         <property>propResult</property>
         <required>0</required>
         <value>/myJob</value>
-        <documentation>Where to put the result. If not specified, the result is only printed.</documentation>
+        <documentation>Where to put the result. If not specified, the result is pushed to /myJob.</documentation>
     </formElement>
 </editor>
