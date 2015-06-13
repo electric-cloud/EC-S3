@@ -57,7 +57,7 @@ public class DownloadObjectTest {
 
         actualParameterArray.put(new JSONObject()
                 .put("actualParameterName", "downloadLocation")
-                .put("value", "/tmp"));
+                .put("value", props.getProperty(StringConstants.DOWNLOAD_LOCATION)));
 
         actualParameterArray.put(new JSONObject()
                 .put("actualParameterName", "key")

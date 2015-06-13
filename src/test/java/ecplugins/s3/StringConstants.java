@@ -10,5 +10,5 @@ public class StringConstants {
     final static String SERVICE_URL = "SERVICE_URL";
     final static String ACCESS_ID = "ACCESS_ID";
     final static String SECRET_ACCESS_ID = "SECRET_ACCESS_ID";
-    final static String SAMPLE_TEST_LOCATION = "SAMPLE_TEST_LOCATION";
+    final static String DOWNLOAD_LOCATION = "DOWNLOAD_LOCATION";
 }
