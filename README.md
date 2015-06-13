@@ -15,7 +15,7 @@ Run gradlew to compile the plugin
 #### Creating ecplugin.properties ####
 Create an ecplugin.properties at the root of this repository with the following content
 	
-	COMMANDER_SERVER=<COMMANDER_SERVER>
+    COMMANDER_SERVER=<COMMANDER_SERVER>
     COMMANDER_USER=<COMMANDER_USER>
     COMMANDER_PASSWORD=<COMMANDER_PASSWORD>
 
