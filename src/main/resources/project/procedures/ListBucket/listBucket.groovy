@@ -14,7 +14,16 @@ try {
     println(e.getMessage())
     return
 }
+def propResult = '$[propResult]'.trim()
 
+//validations
+if(propResult.length() == 0) {
+    propResult = "/myJob"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
+}
 try {
     def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
@@ -33,6 +42,7 @@ try {
 
     for (Bucket bucket : s3.listBuckets()) {
         println(bucket.getName())
+        commander.setProperty(propResult + "/" + bucket.getName(), bucket.getName())
         i++
     }
 
