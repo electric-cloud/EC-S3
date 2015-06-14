@@ -13,6 +13,7 @@ def bucketName = '$[bucketName]'.trim()
 def downloadLocation = commander.getCommanderProperty('downloadLocation')
 downloadLocation = downloadLocation.replace('\\','/').trim()
 def key ='$[key]'.trim()
+def propResult = '$[propResult]'.trim()
 
 //validations
 if(!isFilenameValid(downloadLocation)){
@@ -33,6 +34,14 @@ if (downloadLocation.length() == 0) {
 if (key.length() == 0) {
     println("Error : Key is empty")
     return
+}
+
+if(propResult.length() == 0) {
+    propResult = "/myJob"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
 }
 
 try {
@@ -70,6 +79,15 @@ try {
             println(download.getProgress().getPercentTransferred() + "%")
         }
     }
+
+    def downloadedFile
+    if(downloadLocation.toString().endsWith("/"))
+        downloadedFile = downloadLocation + key
+    else
+        downloadedFile = downloadLocation + "/" + key
+
+    System.out.println(key + "  ==>  [" + downloadedFile + "]")
+    commander.setProperty(propResult + "/" + key, downloadedFile)
 
     tf.shutdownNow()
 
