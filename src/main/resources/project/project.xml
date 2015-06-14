@@ -620,7 +620,15 @@
 		  <description>If checked, the uploaded object will be publicly accessible</description>
 		  <required>0</required>
 		  <type>checkbox</type>
-		</formalParameter>	  
+		</formalParameter>
+        <formalParameter>
+            <formalParameterName>propResult</formalParameterName>
+            <description>Where to put the result. If not specified, the result is pushed to /myJob</description>
+            <expansionDeferred>0</expansionDeferred>
+            <required>0</required>
+            <defaultValue>/myJob</defaultValue>
+            <type>entry</type>
+        </formalParameter>
       <step>
         <stepName>uploadObject</stepName>
         <alwaysRun>0</alwaysRun>
@@ -704,7 +712,15 @@
 		  <description>If checked, the uploaded object will be publicly accessible</description>
 		  <required>0</required>
 		  <type>checkbox</type>
-		</formalParameter>	  
+		</formalParameter>
+        <formalParameter>
+            <formalParameterName>propResult</formalParameterName>
+            <description>Where to put the result. If not specified, the result is pushed to /myJob</description>
+            <expansionDeferred>0</expansionDeferred>
+            <required>0</required>
+            <defaultValue>/myJob</defaultValue>
+            <type>entry</type>
+        </formalParameter>
       <step>
         <stepName>uploadFolder</stepName>
         <alwaysRun>0</alwaysRun>
