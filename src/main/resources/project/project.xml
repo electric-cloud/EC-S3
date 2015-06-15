@@ -8,6 +8,24 @@
 
     <workspaceName/>
         <propertySheet>
+            <property>
+                <propertyName>ec_component_plugin</propertyName>
+                <description></description>
+                <propertySheet>
+                    <property>
+                        <propertyName>operations</propertyName>
+                        <description></description>
+                        <propertySheet>
+                            <property>
+                                <propertyName>DownloadFolder</propertyName>
+                                <description>This operation retrieves the content from S3.</description>
+                                <expandable>1</expandable>
+                                <value>DownloadFolder</value>
+                            </property>
+                        </propertySheet>
+                    </property>
+                </propertySheet>
+            </property>
           <property>
                 <propertyName>ec_setup</propertyName>
                 <value/>
