@@ -18,6 +18,7 @@ def folderToUpload = commander.getCommanderProperty('folderToUpload')
 folderToUpload = folderToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
 def access_public = '$[access_public]'
+def propResult = '$[propResult]'.trim()
 
 //validations
 if (bucketName.length() == 0) {
@@ -48,6 +49,14 @@ if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) 
 if( !file.isDirectory() ) {
     println "Error : " +  folderToUpload + " is not a directory."
     return
+}
+
+if(propResult.length() == 0) {
+    propResult = "/myJob"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
 }
 
 try {
@@ -122,6 +131,14 @@ try {
 			}
 		}
 	}
+
+    //set the properties
+    list.each {
+        item ->
+            def url = "http://" + bucketName + ".s3.amazonaws.com/" + item
+            System.out.println(item + "  ==>  [" + url + "]")
+            commander.setProperty(propResult + "/" + item, url)
+    }
 
 	tf.shutdownNow()
 

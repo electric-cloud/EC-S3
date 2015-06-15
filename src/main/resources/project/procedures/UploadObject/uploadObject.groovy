@@ -16,7 +16,7 @@ def bucketName = '$[bucketName]'.trim()
 def fileToUpload = commander.getCommanderProperty('fileToUpload').trim()
 fileToUpload = fileToUpload.replace('\\','/').trim()
 def key ='$[key]'.trim()
-
+def propResult = '$[propResult]'.trim()
 def access_public = '$[access_public]'
 
 //validations
@@ -49,6 +49,14 @@ if( !Files.isReadable(FileSystems.getDefault().getPath(file.getAbsolutePath())) 
 if( !file.isFile() ) {
     println "Error : " +  fileToUpload + " is not a normal file."
     return
+}
+
+if(propResult.length() == 0) {
+    propResult = "/myJob"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
 }
 
 try {
@@ -91,9 +99,14 @@ try {
         }
     }
 
-    tf.shutdownNow()
+
+
+    def url = "http://" + bucketName + ".s3.amazonaws.com/" + key
+    System.out.println(key + "  ==>  [" + url + "]")
+    commander.setProperty(propResult + "/" + key, url)
 
     println "Uploaded " + key + " successfully"
+    tf.shutdownNow()
 
 } catch (InterruptedException e) {
     e.printStackTrace();

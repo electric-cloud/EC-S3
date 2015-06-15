@@ -89,7 +89,7 @@ public class ElectricCommander {
         def jsonData = [propertyName : propName, value : propValue, jobId : sysJobId]
 
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
-        if(resp != null ) {
+        if(resp == null ) {
           println("Could not set property on the Commander. Request failed")
         }
 

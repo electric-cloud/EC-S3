@@ -36,5 +36,13 @@
         <uncheckedValue>0</uncheckedValue>
         <initiallyChecked>0</initiallyChecked>
         <documentation>If checked, the uploaded object will be publicly accessible</documentation>
-    </formElement>    
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Results Location:</label>
+        <property>propResult</property>
+        <required>0</required>
+        <value>/myJob</value>
+        <documentation>Where to put the result. If not specified, the result is pushed to /myJob.</documentation>
+    </formElement>
 </editor>
