@@ -27,4 +27,12 @@
         <required>1</required>
         <documentation>Download location path.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'</documentation>
     </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Results Location:</label>
+        <property>propResult</property>
+        <required>0</required>
+        <value>/myJob</value>
+        <documentation>Where to put the result. If not specified, the result is pushed to /myJob.</documentation>
+    </formElement>
 </editor>

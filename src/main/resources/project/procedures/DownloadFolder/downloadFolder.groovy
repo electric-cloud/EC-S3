@@ -10,8 +10,10 @@ try {
 
 def bucketName = '$[bucketName]'.trim()
 def downloadLocation = commander.getCommanderProperty('downloadLocation')
-downloadLocation = downloadLocation.replace('\\','/').trim()
+downloadLocation = downloadLocation.toString().replace('\\','/').trim()
 def key ='$[key]'.trim()
+def propResult = '$[propResult]'.trim()
+def downloadFolderName
 
 //validations
 if (bucketName.length() == 0) {
@@ -24,9 +26,22 @@ if (downloadLocation.length() == 0) {
     return
 }
 
+if(key.length() ==0)
+    downloadFolderName = new String(bucketName)
+else
+    downloadFolderName = bucketName + "/" + key
+
 if(!isFilenameValid(downloadLocation)){
     println("Error : Can not write to " + downloadLocation + ".")
     return
+}
+
+if(propResult.length() == 0) {
+    propResult = "/myJob"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
 }
 
 try {
@@ -48,7 +63,7 @@ try {
         return
     }
 
-    println "Downloading " + key + " to " + downloadLocation
+    println "Downloading " + downloadFolderName + " to " + downloadLocation
 
     //Now download the contents
     file = new File(downloadLocation)
@@ -61,9 +76,39 @@ try {
         }
     }
 
+    //Now find all the files which were downloaded do that we can set the output properties
+    String delimiter = "/"
+    def prefix = new String(key)
+
+    if ((prefix.trim().length() != 0) && (!prefix.endsWith(delimiter))) {
+        prefix += delimiter
+    }
+
+    ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
+            .withBucketName(bucketName).withPrefix(prefix)
+
+    //Create the list now
+    ObjectListing listing = s3.listObjects(listObjectsRequest)
+
+    List<S3ObjectSummary> summaries = listing.getObjectSummaries()
+
+    while (listing.isTruncated()) {
+        listing = s3.listNextBatchOfObjects (listing)
+        summaries.addAll (listing.getObjectSummaries())
+    }
+
+    if(!downloadLocation.toString().endsWith("/"))
+        downloadLocation = downloadLocation +"/"
+
+    for (S3ObjectSummary summary: summaries) {
+        def downloadedFile = downloadLocation + summary.getKey()
+        System.out.println(summary.getKey() + "  ==>  [" + downloadedFile + "]")
+        commander.setProperty(propResult + "/" + summary.getKey(), downloadedFile)
+    }
+
     tf.shutdownNow()
 
-    println "Downloaded " + key + " successfully"
+    println "Downloaded " + downloadFolderName + " successfully"
 
 } catch (InterruptedException e) {
     e.printStackTrace();
