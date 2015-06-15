@@ -856,7 +856,14 @@
 
         <type>entry</type>
       </formalParameter>
-
+        <formalParameter>
+            <formalParameterName>propResult</formalParameterName>
+            <description>Where to put the result. If not specified, the result is pushed to /myJob</description>
+            <expansionDeferred>0</expansionDeferred>
+            <required>0</required>
+            <defaultValue>/myJob</defaultValue>
+            <type>entry</type>
+        </formalParameter>
       <step>
         <stepName>listBucket</stepName>
         <alwaysRun>0</alwaysRun>
