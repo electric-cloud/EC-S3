@@ -537,6 +537,8 @@
 
 			<p>In the <b>DownloadFolder</b> step, click the Log button to see the diagnostic information.</p>
 
+			<p>After successful download of the folder, procedure stores key name and download path of each of the object in property sheet.</p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadFolder2.PNG" />
 		</div>
 
 		<div class="DownloadObject" id="DownloadObject">
@@ -601,6 +603,10 @@
 
 			<p>In the <b>DownloadObject</b> step, click the Log button to see the diagnostic information.</p>
 
+			<p>Procedure stores the key name of the object and the download location in property sheet.</p>
+
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadObject2.PNG" />
+
 		</div>
 
 		<div class="ListBucket" id="ListBucket">
@@ -652,6 +658,9 @@
 			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>ListBucket</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>Procedure stores the list of the buckets in property sheet as follows: </p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListBucket2.PNG" />
 
 		</div>
 
@@ -716,6 +725,10 @@
 			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>ListFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>Procedure stores the list of all the objects within the folder in property sheet.</p>
+
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListFolder2.PNG" />
 
 		</div>
 
@@ -785,6 +798,9 @@
 
 			<p>In the <b>UploadFolder</b> step, click the Log button to see the diagnostic information.</p>
 
+			<p>After successful upload of a folder, procedure stores key names and AWS access URLs for each of the objects of that folder in property sheet.</p>
+
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadFolder2.PNG" />
 		</div>
 
 		<div class="UploadObject" id="UploadObject">
@@ -853,6 +869,8 @@
 
 			<p>In the <b>UploadObject</b> step, click the Log button to see the diagnostic information.</p>
 
+			<p>After successful upload of an object, procedure stores the key name and AWS link to that object in property sheet.</p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadObject2.PNG" />
 		</div>
 
 		<div class="WebsiteHosting" id="WebsiteHosting">
