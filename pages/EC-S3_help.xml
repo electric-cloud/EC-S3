@@ -537,7 +537,7 @@
 
 			<p>In the <b>DownloadFolder</b> step, click the Log button to see the diagnostic information.</p>
 
-			<p>After successful download of the folder, procedure stores key name and download path of each of the object in property sheet.</p>
+			<p>After the folder is successfully downloaded, ElectricFlow stores the key names and download paths of the objects in the property sheet.</p>
 			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadFolder2.PNG" />
 		</div>
 
@@ -603,7 +603,7 @@
 
 			<p>In the <b>DownloadObject</b> step, click the Log button to see the diagnostic information.</p>
 
-			<p>Procedure stores the key name of the object and the download location in property sheet.</p>
+			<p>ElectricFlow stores the key names and the download locations of the objects in property sheet.</p>
 
 			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadObject2.PNG" />
 
@@ -659,7 +659,7 @@
 
 			<p>In the <b>ListBucket</b> step, click the Log button to see the diagnostic information.</p>
 
-			<p>Procedure stores the list of the buckets in property sheet as follows: </p>
+			<p>ElectricFlow stores the list of buckets in the property sheet as follows: </p>
 			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListBucket2.PNG" />
 
 		</div>
@@ -726,7 +726,7 @@
 
 			<p>In the <b>ListFolder</b> step, click the Log button to see the diagnostic information.</p>
 
-			<p>Procedure stores the list of all the objects within the folder in property sheet.</p>
+			<p>ElectricFlow stores the list of all the objects in the folder in the property sheet.</p>
 
 			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListFolder2.PNG" />
 
@@ -798,7 +798,7 @@
 
 			<p>In the <b>UploadFolder</b> step, click the Log button to see the diagnostic information.</p>
 
-			<p>After successful upload of a folder, procedure stores key names and AWS access URLs for each of the objects of that folder in property sheet.</p>
+			<p>After a folder is successfully uploaded, ElectricFlow stores the key names and AWS access URLs for the objects in this folder in the property sheet.</p>
 
 			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadFolder2.PNG" />
 		</div>
@@ -869,7 +869,7 @@
 
 			<p>In the <b>UploadObject</b> step, click the Log button to see the diagnostic information.</p>
 
-			<p>After successful upload of an object, procedure stores the key name and AWS link to that object in property sheet.</p>
+			<p>After an object is successfully uploaded, ElectricFlow stores the key name and AWS link to the object in the property sheet.</p>
 			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadObject2.PNG" />
 		</div>
 
@@ -973,7 +973,7 @@
 
 			<h4>Create a Plugin Configuration</h4>
 
-			<p>In ElectricCommander, go to <b>Administration</b> > <b>Plugins</b> to open the Plugin Manager. Then click <b>Configure</b> and enter the values
+			<p>In ElectricFlow, go to <b>Administration</b> > <b>Plugins</b> to open the Plugin Manager. Then click <b>Configure</b> and enter the values
 				for the parameters in the S3 Configuration page.</p>
 			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/create_config.PNG" />
 			<p>After the configuration is created, you can see it in "S3 Configurations".</p>
