@@ -1,16 +1,17 @@
 
 import java.nio.file.Files
 import java.nio.file.FileSystems
+import groovy.io.FileType
 
 $[/myProject/procedure_helpers/preamble]
 
 ElectricCommander commander;
 //get credentials from commander
 try {
-	commander = new ElectricCommander()
+    commander = new ElectricCommander()
 }catch(Exception e){
-	println(e.getMessage());
-	return
+    println(e.getMessage());
+    return
 }
 
 def bucketName = '$[bucketName]'.trim()
@@ -22,17 +23,17 @@ def propResult = '$[propResult]'.trim()
 
 //validations
 if (bucketName.length() == 0) {
-	println("Error : Bucket name is empty")
-	return
+    println("Error : Bucket name is empty")
+    return
 }
 
 if (folderToUpload.length() == 0) {
-	println("Error : File to upload is empty")
-	return
+    println("Error : File to upload is empty")
+    return
 }
 
 while(folderToUpload.endsWith("/")) {
-		folderToUpload = folderToUpload.substring(0, folderToUpload.length() - 1);
+    folderToUpload = folderToUpload.substring(0, folderToUpload.length() - 1);
 }
 
 def file = new File(folderToUpload)
@@ -52,7 +53,7 @@ if( !file.isDirectory() ) {
 }
 
 if(propResult.length() == 0) {
-    propResult = "/myJob"
+    propResult = "/myJob/S3Output"
 }
 
 while(propResult.endsWith("/")) {
@@ -79,58 +80,61 @@ try {
         return
     }
 
-	def list = []
+    def list = []
 
-	file.eachFileRecurse {fileName ->
-		list << fileName.getPath().substring(folderToUpload.toString().length() + 1).replace('\\','/')
+    file.eachFileRecurse(FileType.FILES, {fileName ->
+        if(key) {
+            list << key + "/" + fileName.getPath().substring(folderToUpload.toString().length() + 1).replace('\\', '/')
+        } else {
+            list << fileName.getPath().substring(folderToUpload.toString().length() + 1).replace('\\', '/')
+        }
+    })
 
- 	}
-
-	println "Uploading " + folderToUpload + " to " + bucketName
+    println "Uploading " + folderToUpload + " to " + bucketName
 
     //Upload the folder
-	MultipleFileUpload objectUpload = tf.uploadDirectory(bucketName,
-			key, file, true)
+    MultipleFileUpload objectUpload = tf.uploadDirectory(bucketName,
+            key, file, true)
 
-	while (!objectUpload.isDone()) {
-		Thread.sleep(1000);
-		if(!Double.isNaN(objectUpload.getProgress().getPercentTransferred())) {
-			println(objectUpload.getProgress().getPercentTransferred() + "%")
-		}
-	}
+    while (!objectUpload.isDone()) {
+        Thread.sleep(1000);
+        if(!Double.isNaN(objectUpload.getProgress().getPercentTransferred())) {
+            println(objectUpload.getProgress().getPercentTransferred() + "%")
+        }
+    }
 
     if(access_public == '1') {
         //Change the ACL of all the uploaded objects to Public Read
 
         String prefix = ""
-		String delimiter = "/"
+        String delimiter = "/"
 
-		if ((prefix.trim().length() != 0) && (!prefix.endsWith(delimiter))) {
-			prefix += delimiter
-		}
+        if ((prefix.trim().length() != 0) && (!prefix.endsWith(delimiter))) {
+            prefix += delimiter
+        }
 
-		ListObjectsRequest listObjectsRequest
+        ListObjectsRequest listObjectsRequest
 
 
-		listObjectsRequest = new ListObjectsRequest()
-				.withBucketName(bucketName).withPrefix(prefix)
+        listObjectsRequest = new ListObjectsRequest()
+                .withBucketName(bucketName).withPrefix(prefix)
 
-		ObjectListing listing = s3.listObjects(listObjectsRequest)
+        ObjectListing listing = s3.listObjects(listObjectsRequest)
 
-		List<S3ObjectSummary> summaries = listing.getObjectSummaries()
+        List<S3ObjectSummary> summaries = listing.getObjectSummaries()
 
-		while (listing.isTruncated()) {
-			listing = s3.listNextBatchOfObjects (listing)
-			summaries.addAll (listing.getObjectSummaries())
-		}
+        while (listing.isTruncated()) {
+            listing = s3.listNextBatchOfObjects (listing)
+            summaries.addAll (listing.getObjectSummaries())
+        }
 
-		for (S3ObjectSummary summary: summaries) {
-			if(list.contains(summary.getKey())) {
-				println "Changing the ACL to PublicRead for : " + summary.getKey()
-				s3.setObjectAcl(bucketName, summary.getKey(), CannedAccessControlList.PublicRead)
-			}
-		}
-	}
+        for (S3ObjectSummary summary: summaries) {
+            if(list.contains(summary.getKey())) {
+                println "Changing the ACL to PublicRead for : " + summary.getKey()
+                s3.setObjectAcl(bucketName, summary.getKey(), CannedAccessControlList.PublicRead)
+            }
+        }
+    }
 
     //set the properties
     list.each {
@@ -140,20 +144,20 @@ try {
             commander.setProperty(propResult + "/" + item, url)
     }
 
-	tf.shutdownNow()
+    tf.shutdownNow()
 
-	println "Uploaded " + folderToUpload + " successfully"
+    println "Uploaded " + folderToUpload + " successfully"
 
 } catch (InterruptedException e) {
-	e.printStackTrace();
+    e.printStackTrace();
 } catch (AmazonServiceException ase) {
 
-	handleServiceException(ase)
+    handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
 
-	handleClientException(ace)
+    handleClientException(ace)
 
 } catch(IOException ioex) {
-	println("Error : " + ioex.getMessage())
+    println("Error : " + ioex.getMessage())
 }
