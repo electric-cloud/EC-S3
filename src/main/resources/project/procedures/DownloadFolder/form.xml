@@ -32,7 +32,7 @@
         <label>Results Location:</label>
         <property>propResult</property>
         <required>0</required>
-        <value>/myJob</value>
+        <value>/myJob/S3Output</value>
         <documentation>Where to put the result. If not specified, the result is pushed to /myJob.</documentation>
     </formElement>
 </editor>
