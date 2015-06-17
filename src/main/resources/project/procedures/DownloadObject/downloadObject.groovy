@@ -37,7 +37,7 @@ if (key.length() == 0) {
 }
 
 if(propResult.length() == 0) {
-    propResult = "/myJob"
+    propResult = "/myJob/S3Output"
 }
 
 while(propResult.endsWith("/")) {
