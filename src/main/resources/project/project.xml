@@ -718,7 +718,7 @@
             <description>Where to put the result. If not specified, the result is pushed to /myJob</description>
             <expansionDeferred>0</expansionDeferred>
             <required>0</required>
-            <defaultValue>/myJob</defaultValue>
+            <defaultValue>/myJob/S3Output</defaultValue>
             <type>entry</type>
         </formalParameter>
       <step>
