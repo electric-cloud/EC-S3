@@ -939,7 +939,8 @@
 			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 			<p>In the <b>WebsiteHosting</b> step, click the Log button to see the diagnostic information.</p>
-
+			<p>After the bucket is successfully configured for static website hosting, ElectricFlow stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_WebsiteHosting2.PNG" />
 		</div>
 		<!-- The next section is required for additional procedures. Replace [Procedure2} with the plugin procedure name in the following lines. -->
 
