@@ -19,11 +19,20 @@ def bucketName = '$[bucketName]'.trim()
 def website_hosting = '$[website_hosting]'
 def indexDoc = '$[indexDoc]'.trim()
 def errorDoc = '$[errorDoc]'.trim()
+def propResult = '$[propResult]'.trim()
 
 //validations
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty");
     return
+}
+
+if(propResult.length() == 0) {
+    propResult = "/myJob/S3Output"
+}
+
+while(propResult.endsWith("/")) {
+    propResult = propResult.substring(0, propResult.length() - 1)
 }
 
 try {
@@ -44,7 +53,7 @@ try {
         return
     }
 
-    println("Changing website hosting for bucket " + bucketName);
+    println("Changing website hosting for bucket " + bucketName)
 
     if(website_hosting == '1') {
         //Enable website hosting
@@ -54,12 +63,43 @@ try {
             s3.setBucketWebsiteConfiguration(bucketName,
                     new BucketWebsiteConfiguration(indexDoc, errorDoc))
         }
+
+        def url
+        switch(Region.fromValue(s3.getBucketLocation(new GetBucketLocationRequest(bucketName)))) {
+            case Region.US_Standard:
+                url = "http://" + bucketName + ".s3-website-us-east-1.amazonaws.com"
+                break
+            case Region.US_West:
+                url = "http://" + bucketName + ".s3-website-us-west-2.amazonaws.com"
+                break
+            case Region.US_Frankfurt:
+                url = "http://" + bucketName + ".s3-website-eu-central-1.amazonaws.com"
+                break
+            case Region.AP_Singapore:
+                url = "http://" + bucketName + ".s3-website-ap-southeast-1.amazonaws.com"
+                break
+            case Region.AP_Sydney:
+                url = "http://" + bucketName + ".s3-website-ap-southeast-2.amazonaws.com"
+                break
+            case Region.AP_Tokyo:
+                url = "http://" + bucketName + ".s3-website-ap-northeast-1.amazonaws.com"
+                break
+            case Region.SA_SaoPaulo:
+                url = "http://" + bucketName + ".s3-website-sa-east-1.amazonaws.com"
+                break
+            case Region.CN_Beijing:
+                url = "http://" + bucketName + ".s3-website-cn-north-1.amazonaws.com"
+                break
+        }
+
+        println(bucketName + "  ==>  [" + url + "]")
+        commander.setProperty(propResult + "/website_" + bucketName, url)
     } else {
         // Delete website hosting.
-        s3.deleteBucketWebsiteConfiguration(bucketName);
+        s3.deleteBucketWebsiteConfiguration(bucketName)
     }
 
-    println("Website on " + bucketName + " changed successfully");
+    println("Website on " + bucketName + " changed successfully")
 
 } catch (AmazonServiceException ase) {
     handleServiceException(ase)
