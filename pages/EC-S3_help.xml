@@ -101,10 +101,10 @@
 				<!-- Example of [Plugin name] is OpenStack or Chef. -->	
 				<!-- Example of [Name of plugin or website page] is OpenStack or OpenStack Home Page. -->		
 							
-				<p>For more information about Amazon S3, go to the <a href="http://aws.amazon.com/ec2/">Amazon Web Services website.</a>.</p>
+				<p>For more information about Amazon S3, go to the <a href="http://aws.amazon.com/s3/">Amazon Web Services website.</a>.</p>
 
 		<p>You can view the documentation at <a href="http://aws.amazon.com/documentation/s3/">AWS S3 Documentation Page.</a></p>
-        <h2>ElectricCommander Integration to AWS S3</h2>
+        <h2>ElectricFlow Integration to AWS S3</h2>
 				
 				<!-- The integration description should answer the questions:
         How deep does our integration go? Why should I care?
@@ -292,7 +292,7 @@
 						
 		<h3>Output</h3>
 						
-		<p>After the job runs, you can view the results on the Job Details page in ElectricCommander. Every job step was completed successfully.</p>
+		<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 		<p>In the <b>CreateBucket</b> step, click the Log button to see the diagnostic information.</p>
 
@@ -961,7 +961,7 @@
 
             <a name='UseCase1' id="UseCase1"></a> 
 
-            <p>One of the use case of this plugin is to host an publicly accessible javadoc (or any other auto generated documentation).To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:</p>
+            <p>One of the common use case of this plugin is to host an publicly accessible website.To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:</p>
 
 				<ol>
 					<li>Create a plugin configuration.</li>
