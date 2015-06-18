@@ -101,7 +101,7 @@ try {
 
 
 
-    def url = "http://" + bucketName + ".s3.amazonaws.com/" + key
+    def url = "https://" + bucketName + ".s3.amazonaws.com/" + key
     System.out.println(key + "  ==>  [" + url + "]")
     commander.setProperty(propResult + "/" + key, url)
 

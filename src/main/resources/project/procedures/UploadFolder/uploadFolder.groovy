@@ -139,7 +139,7 @@ try {
     //set the properties
     list.each {
         item ->
-            def url = "http://" + bucketName + ".s3.amazonaws.com/" + item
+            def url = "https://" + bucketName + ".s3.amazonaws.com/" + item
             System.out.println(item + "  ==>  [" + url + "]")
             commander.setProperty(propResult + "/" + item, url)
     }
