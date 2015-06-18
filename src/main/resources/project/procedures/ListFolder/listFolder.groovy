@@ -84,7 +84,7 @@ try {
     }
 
     for (S3ObjectSummary summary: summaries) {
-        def url = "http://" + bucketName + ".s3.amazonaws.com/" + summary.getKey()
+        def url = "https://" + bucketName + ".s3.amazonaws.com/" + summary.getKey()
         System.out.println(summary.getKey() + "  ==>  [" + url + "]")
         commander.setProperty(propResult + "/" + summary.getKey(), url)
         i++
