@@ -70,7 +70,16 @@ try {
                 url = "http://" + bucketName + ".s3-website-us-east-1.amazonaws.com"
                 break
             case Region.US_West:
+                url = "http://" + bucketName + ".s3-website-us-west-1.amazonaws.com"
+                break
+            case Region.US_West_2:
                 url = "http://" + bucketName + ".s3-website-us-west-2.amazonaws.com"
+                break
+            case Region.US_GovCloud:
+                url = "http://" + bucketName + ".s3-website-us-gov-west-1.amazonaws.com"
+                break
+            case Region.EU_Ireland:
+                url = "http://" + bucketName + ".s3-website-eu-west-1.amazonaws.com"
                 break
             case Region.US_Frankfurt:
                 url = "http://" + bucketName + ".s3-website-eu-central-1.amazonaws.com"
