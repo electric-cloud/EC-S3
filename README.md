@@ -1,4 +1,4 @@
-EC-S3
+Do not merge EC-S3
 ============
 
 The ElectricFlow Amazon S3 plugin
