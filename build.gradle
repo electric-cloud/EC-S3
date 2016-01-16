@@ -6,6 +6,12 @@
 // Copyright (c) 2015 Electric Cloud, Inc.
 // All rights reserved
 
+configurations {
+ testRuntime {
+   exclude module: 'gwt-dev'
+ }
+}
+
 
 buildscript {
 	repositories {
@@ -34,11 +40,14 @@ license {
 }
 dependencies {
     testCompile 'junit:junit:[4,)'
-    testCompile 'org.mockito:mockito-core:1.9.5'
-    testCompile 'com.amazonaws:aws-java-sdk-s3:1.9.30'
+    compile 'com.amazonaws:aws-java-sdk-s3:+'
+
+
 }
 
 test {
+    classpath = sourceSets.test.runtimeClasspath
+
     Properties props = new Properties()
 
     def propFileName = "ecplugin.properties"
@@ -49,7 +58,7 @@ test {
         props.load(new FileInputStream(propFileName))
     }
 
-    systemProperties['COMMANDER_SERVER'] = "$commanderServer"
+    systemProperties['COMMANDER_SERVER'] = props.getProperty("COMMANDER_SERVER")
     systemProperties['COMMANDER_USER'] = props.getProperty("COMMANDER_USER")
     systemProperties['COMMANDER_PASSWORD'] = props.getProperty("COMMANDER_PASSWORD")
     systemProperties['PLUGIN_VERSION'] = version
@@ -62,8 +71,6 @@ test {
      exceptionFormat = 'full'
  }
 }
-
 gwt {
-
-	modules 'ecplugins.s3.ConfigurationManagement'
+    modules 'ecplugins.s3.ConfigurationManagement'
 }
