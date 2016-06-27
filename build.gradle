@@ -32,10 +32,11 @@ license {
     header = file ('shortHeader.txt')
     exclude "**/project.xml"
 }
+
 dependencies {
     testCompile 'junit:junit:[4,)'
     testCompile 'org.mockito:mockito-core:1.9.5'
-    testCompile 'com.amazonaws:aws-java-sdk-s3:1.10.1'
+    testCompile 'com.amazonaws:aws-java-sdk-s3:1.11.10'
 }
 
 test {
@@ -63,7 +64,4 @@ test {
  }
 }
 
-gwt {
-
-	modules 'ecplugins.s3.ConfigurationManagement'
-}
+task wrapper(type: Wrapper) { gradleVersion = '2.13' }
