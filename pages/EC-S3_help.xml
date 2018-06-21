@@ -22,8 +22,8 @@ Copyright 2015 Electric Cloud, Inc.
           content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org" />
     <meta content="text/html; charset=us-ascii"
           http-equiv="content-type" />
-					
-<!-- Enter the new plugin name in the following line. -->				
+
+<!-- Enter the new plugin name in the following line. -->
 
     <title>ElectricFlow Plugin for Amazon Simple Storage Service (S3) implementation</title>
     <link rel="stylesheet"
@@ -34,41 +34,41 @@ Copyright 2015 Electric Cloud, Inc.
 
 <body>
     <div class="help">
-		
+
 
         <h1>Amazon Simple Storage Service (S3) </h1>
-				
-				<!-- Do not change the following line. -->		
+
+				<!-- Do not change the following line. -->
 
         <p>Plugin Version @PLUGIN_VERSION@</p>
 
         <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
 
-        <!-- The tool description should answer these kinds of questions: 
-				What is the tool itself is used for in the development process? 
-				Who would use this tool? What is the general use-case or problem that this tool solves? 
-				Look at the tool's documentation or website(s) to get their own descriptions. 
-				Look at Wikipedia or other outside websites. 
-				If there is a Hudson plugin, read their documentation for ideas, examples, etc. 
+        <!-- The tool description should answer these kinds of questions:
+				What is the tool itself is used for in the development process?
+				Who would use this tool? What is the general use-case or problem that this tool solves?
+				Look at the tool's documentation or website(s) to get their own descriptions.
+				Look at Wikipedia or other outside websites.
+				If there is a Hudson plugin, read their documentation for ideas, examples, etc.
 				It's OK to copy word-for-word only if appropriate, such as FOSS - but not commercial software.
             -->
 
 				<!--If you are revising a plugin, enter the date when the current sprint will end.
-				If you are writing the first version of a new plugin, change "Revised on" to "Created on" and 
-				enter the date when the current sprint will end, and the document will be published.-->		
-				
-        <p>Revised on May 28, 2015</p>
-				
+				If you are writing the first version of a new plugin, change "Revised on" to "Created on" and
+				enter the date when the current sprint will end, and the document will be published.-->
+
+        <p>Revised on June 21, 2018</p>
+
 				<h1>Contents</h1>
-				
+
 				<ul>
 				<li><p><a href="#overview">Overview</a></p></li>
 				<li><p><a href="#setupconfig">Setting Up the Plugin Configuration</a></p></li>
 				<li><p><a href="#procedures">Plugin Procedures</a></p></li>
 				<ul>
-				
-				<!-- Add a line for each plugin procedure. The following are examples. -->		
-				
+
+				<!-- Add a line for each plugin procedure. The following are examples. -->
+
 				<li><a href="#CreateBucket">CreateBucket</a></li>
 				<li><a href="#CreateFolder">CreateFolder</a></li>
 				<li><a href="#DeleteBucketContents">DeleteBucketContents</a></li>
@@ -82,55 +82,55 @@ Copyright 2015 Electric Cloud, Inc.
 				<li><a href="#WebsiteHosting">WebsiteHosting</a></li>
 
 				</ul>
-				
+
 				<!-- Include this section only if there are examples and use cases. -->
 
 				<li><p><a href="#example">Examples and Use Cases</a></p></li>
 				<ul>
 
 				<!-- Add a line for each example or use case. The following is an example. -->
-				
+
 				<li><a href="#UseCase1">Host a Static Website on Amazon S3</a></li>
 				</ul>
 				<li><p><a href="#rns">Release Notes</a></p></li>
 				</ul>
-					
+
 		    <!-- The next section is required. -->
-				
+
 				<h1 id="overview">Overview</h1>
-				
-				<!-- The integration description should answer the questions: 
-				How deep does our integration go? Why should I care? 
-				What general functionality does the plugin include? 
+
+				<!-- The integration description should answer the questions:
+				How deep does our integration go? Why should I care?
+				What general functionality does the plugin include?
 				What functionality does the plugin omit? -->
-				
+
 				<!-- The following is an example description. Replace it with the new plugin description. -->
-				
+
 				<p>Amazon Simple Storage Service (S3) is storage for the Internet. It is designed to make web-scale computing easier for developers.</p>
-						
+
         <p>Amazon S3 has a simple web-services interface where you can store and retrieve any amount of data, at any time, from anywhere on the web.
 			It gives developers access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run
 			its own global network of websites. The goal is to maximize benefits of scale and pass those benefits on to developers.</p>
 
-        <!-- This section is required. Replace the plugin name, the URL to the website with the new plugin information, and the name of the link. -->	
-				<!-- Example of [Plugin name] is OpenStack or Chef. -->	
-				<!-- Example of [Name of plugin or website page] is OpenStack or OpenStack Home Page. -->		
-							
+        <!-- This section is required. Replace the plugin name, the URL to the website with the new plugin information, and the name of the link. -->
+				<!-- Example of [Plugin name] is OpenStack or Chef. -->
+				<!-- Example of [Name of plugin or website page] is OpenStack or OpenStack Home Page. -->
+
 				<p>For more information about Amazon S3, go to the <a href="http://aws.amazon.com/s3/">Amazon Web Services website.</a>.</p>
 
 		<p>You can view the documentation at <a href="http://aws.amazon.com/documentation/s3/">AWS S3 Documentation Page.</a></p>
         <h2>ElectricFlow Integration to AWS S3</h2>
-				
+
 				<!-- The integration description should answer the questions:
         How deep does our integration go? Why should I care?
-        What general functionality does the plugin include? 
+        What general functionality does the plugin include?
 				What functionality does the plugin omit? -->
-				
+
 				<!-- The following is an example description. Replace it with the new plugin content. -->
 
         <p>This plugin uses the Amazon S3 application programming interface (API) that lets developers choose where
 			their objects are stored on the Amazon cloud. Using this secure API, your application is automatically scaled up and down as needed. This integration allows ElectricFlow to manage S3 buckets and objects.</p>
-				
+
 				<p>The plugin interacts with S3 data by using AWS Java SDK to perform the following tasks:</p>
 				<ul>
 					<li>Create configurations with connection information.</li>
@@ -142,33 +142,33 @@ Copyright 2015 Electric Cloud, Inc.
 				</ul>
 
 		<p>This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).</p>
-				
-			<!-- The following is boilerplate text. Do not modify or remove it from the document. -->	
-				
+
+			<!-- The following is boilerplate text. Do not modify or remove it from the document. -->
+
 		<p>IMPORTANT: For all parameter descriptions in this document, required parameters are shown in <span class='required'>bold italics</span>.</p>
-		
-		<!-- The next section is required. -->		
-		
+
+		<!-- The next section is required. -->
+
     <h1 id="setupconfig">Setting Up the Plugin Configuration</h1>
 
-    <!-- This is boilerplate text. Do not modify or remove it from the document. -->	
-		
-		<p>Plugin configurations are sets of parameters that apply across some or all of the plugin procedures. 
-		They reduce repetition of common values, create predefined sets of parameters for end users, and store 
-		credentials securely. Each configuration has a unique name that is automatically entered in designated 
+    <!-- This is boilerplate text. Do not modify or remove it from the document. -->
+
+		<p>Plugin configurations are sets of parameters that apply across some or all of the plugin procedures.
+		They reduce repetition of common values, create predefined sets of parameters for end users, and store
+		credentials securely. Each configuration has a unique name that is automatically entered in designated
 		parameters in the procedures.</p>
-						
+
 		<h2>Input</h2>
-  
+
     <ol>
 		  <li>Go to <b>Administration</b> > <b>Plugins</b> to open the Plugin Manager.</li>
-			
-			<!-- Replace the [Plugin name is ElectricFlow] in the following line with the name that appears in the UI. -->		
-				
+
+			<!-- Replace the [Plugin name is ElectricFlow] in the following line with the name that appears in the UI. -->
+
 		  <li>Find the EC-S3 row.</li>
-			
+
 		  <!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
-			
+
 			<li>Click <b>Configure</b> to open the EC-S3 Configurations page.</li>
 		  <li>Click <b>Create Configuration</b>.</li>
 		  <li>To create a S3 configuration, enter the following information and click <b>OK</b>.
@@ -219,29 +219,29 @@ Copyright 2015 Electric Cloud, Inc.
 					</tr>
                  </tbody>
             </table>
-		
-		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI. 
+
+		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
 		Change the filename (.png) to the new image filename. -->
-		
+
 		<img src="../../plugins/@PLUGIN_KEY@/images/parameters/configuration_panel.png" />
-		
+
 		</ol>
-						
-	  <h2>Output</h2>	 
-		
+
+	  <h2>Output</h2>
+
 		<!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
-		
+
 		<p>The EC-S3 Configurations page now shows the new configuration.</p>
-		
+
 		<!-- The following line is optional. Replace the [Plugin name] in the following lines with the new plugin name. -->
-		
+
 		<p>You can also manage your S3 configurations in this page. Click <b>Edit</b> to modify an existing configuration or
 		<b>Delete</b> to remove an existing configuration.</p>
-						
 
 
-		<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->		
-		
+
+		<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
+
 		 <h1 id="procedures">Plugin Procedures</h1>
 
      <div class="CreateBucket" id="CreateBucket">
@@ -251,9 +251,9 @@ Copyright 2015 Electric Cloud, Inc.
      <h2>CreateBucket</h2>
 
       <!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
-			
+
 			<p>A bucket is a container for objects stored in Amazon S3. </p>
-			
+
 			<p>To ensure a single, consistent naming approach for Amazon S3 buckets across regions and to ensure bucket names conform to DNS naming conventions,
 				bucket names must comply with the following requirements:</p>
 
@@ -269,7 +269,7 @@ Copyright 2015 Electric Cloud, Inc.
 				</ul>
 
 			<h3>Input</h3>
-			
+
       <ol>
 			<li>Go to the <b>CreateBucket</b> procedure.</li>
 			<li>Enter the following parameters:<br />
@@ -294,19 +294,19 @@ Copyright 2015 Electric Cloud, Inc.
             </table>
 
 				</li>
-						
+
 		<br />
-		
-		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI. 
+
+		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
 		Change the filename (.png) to the new image filename. -->
-		
+
 		<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_CreateBucket1.PNG" />
 		<br />
 
-		</ol>   
-						
+		</ol>
+
 		<h3>Output</h3>
-						
+
 		<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
 
 		<p>In the <b>CreateBucket</b> step, click the Log button to see the diagnostic information.</p>
@@ -959,23 +959,23 @@ Copyright 2015 Electric Cloud, Inc.
 		</div>
 		<!-- The next section is required for additional procedures. Replace [Procedure2} with the plugin procedure name in the following lines. -->
 
-		<!-- Include this section only if there are examples and use cases. -->	
-			
-    <h1 id="example">Examples and Use Cases</h1><br />
-		
-		<!-- The following can be an example of how to run a specific procedure or a use case showing how to perform a specific task 
-		using one or more procedures.  -->
-		
+		<!-- Include this section only if there are examples and use cases. -->
 
-        <!-- The following is a use case with several procedures showing how to perform a specific task.  
-				Replace it with an example or use case for the new plugin. 
+    <h1 id="example">Examples and Use Cases</h1><br />
+
+		<!-- The following can be an example of how to run a specific procedure or a use case showing how to perform a specific task
+		using one or more procedures.  -->
+
+
+        <!-- The following is a use case with several procedures showing how to perform a specific task.
+				Replace it with an example or use case for the new plugin.
 				Replace [UseCase1} with the name of the example or use case in the following lines.-->
-				
+
 				<h2>Use Case 1: Static Website Hosting</h2>
 
         <div class="procedure" id="UseCase1">
 
-            <a name='UseCase1' id="UseCase1"></a> 
+            <a name='UseCase1' id="UseCase1"></a>
 
             <p>One of the common use case of this plugin is to host an publicly accessible website.To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:</p>
 
@@ -1028,16 +1028,20 @@ Copyright 2015 Electric Cloud, Inc.
 
 
 			<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
-			 
+
 			  <h1>Release Notes</h1>
-				
-				<!-- For each release, create an h2 section describing new and revised procedures, enhancements, and JIRA fixes. 
-				See the following examples for how to write the release note items, which include: 
-				- Phrases starting with "Added the N procedure to ...", "Removed the X parameter from the ...", "Fixed the issue where  ...", 
-				and so on. 
+
+				<!-- For each release, create an h2 section describing new and revised procedures, enhancements, and JIRA fixes.
+				See the following examples for how to write the release note items, which include:
+				- Phrases starting with "Added the N procedure to ...", "Removed the X parameter from the ...", "Fixed the issue where  ...",
+				and so on.
 				- Descriptions of new features or functionality supported by the plugin.
 				-->
 
+        <h2>EC-S3-plugin-1.1.0</h2>
+        <ul>
+            <li>AWS SDK Version has been changed to 1.11.10.</li>
+        </ul>
         <h2>EC-S3-plugin-1.0.0.0</h2>
 
         <ul>
@@ -1051,7 +1055,7 @@ Copyright 2015 Electric Cloud, Inc.
 		</div>
 	</div>
 </body>
-		
+
 </html>
 
 
