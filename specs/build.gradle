@@ -1,0 +1,51 @@
+apply plugin: "groovy"
+apply plugin: 'idea'
+
+version = "1.0"
+description = "EC-EC2 Specs"
+
+sourceCompatibility = 1.8
+
+defaultTasks 'test'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+    maven {
+        url  "https://dl.bintray.com/ecpluginsdev/maven"
+    }
+
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.5:indy'
+    compile 'org.spockframework:spock-core:1.1-groovy-2.4-SNAPSHOT'
+    compile 'com.electriccloud:ec-specs-plugins-core:1.1'
+    compile 'com.jayway.restassured:rest-assured:2.4.0'
+    compile 'de.gesellix:docker-client:2018-01-26T21-28-05'
+//    Let's play with it
+    compile 'software.amazon.awssdk:s3:2.0.0-preview-10'
+}
+
+test {
+    systemProperties["COMMANDER_SECURE"] = '1'
+    def server = findProperty('commanderServer') ?: findProperty('COMMANDER_SERVER') ?: 'localhost'
+    systemProperties['COMMANDER_SERVER'] = server
+
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
+    outputs.upToDateWhen { false }
+    systemProperties['EC_SPECS_CLI'] = true
+
+    def destination = findProperty('reportDestination') ?: "spec-report"
+    if (destination) {
+        reports {
+            html.destination = destination
+        }
+    }
+}

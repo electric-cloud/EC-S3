@@ -1,0 +1,1061 @@
+<!--
+Copyright 2015 Electric Cloud, Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="generator"
+          content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org" />
+    <meta content="text/html; charset=us-ascii"
+          http-equiv="content-type" />
+
+<!-- Enter the new plugin name in the following line. -->
+
+    <title>ElectricFlow Plugin for Amazon Simple Storage Service (S3) implementation</title>
+    <link rel="stylesheet"
+          href="../../plugins/@PLUGIN_KEY@/pluginhelp.css"
+          type="text/css"
+          media="screen" />
+</head>
+
+<body>
+    <div class="help">
+
+
+        <h1>Amazon Simple Storage Service (S3) </h1>
+
+				<!-- Do not change the following line. -->
+
+        <p>Plugin Version @PLUGIN_VERSION@</p>
+
+        <hr style="margin-left: -10px; margin-top: 10px; height: 1px; width: 100%; color: #5981BD;" noshade="noshade" />
+
+        <!-- The tool description should answer these kinds of questions:
+				What is the tool itself is used for in the development process?
+				Who would use this tool? What is the general use-case or problem that this tool solves?
+				Look at the tool's documentation or website(s) to get their own descriptions.
+				Look at Wikipedia or other outside websites.
+				If there is a Hudson plugin, read their documentation for ideas, examples, etc.
+				It's OK to copy word-for-word only if appropriate, such as FOSS - but not commercial software.
+            -->
+
+				<!--If you are revising a plugin, enter the date when the current sprint will end.
+				If you are writing the first version of a new plugin, change "Revised on" to "Created on" and
+				enter the date when the current sprint will end, and the document will be published.-->
+
+        <p>Revised on June 21, 2018</p>
+
+				<h1>Contents</h1>
+
+				<ul>
+				<li><p><a href="#overview">Overview</a></p></li>
+				<li><p><a href="#setupconfig">Setting Up the Plugin Configuration</a></p></li>
+				<li><p><a href="#procedures">Plugin Procedures</a></p></li>
+				<ul>
+
+				<!-- Add a line for each plugin procedure. The following are examples. -->
+
+				<li><a href="#CreateBucket">CreateBucket</a></li>
+				<li><a href="#CreateFolder">CreateFolder</a></li>
+				<li><a href="#DeleteBucketContents">DeleteBucketContents</a></li>
+				<li><a href="#DeleteObject">DeleteObject</a></li>
+				<li><a href="#DownloadFolder">DownloadFolder</a></li>
+				<li><a href="#DownloadObject">DownloadObject</a></li>
+				<li><a href="#ListBucket">ListBucket</a></li>
+				<li><a href="#ListFolder">ListFolder</a></li>
+				<li><a href="#UploadFolder">UploadFolder</a></li>
+				<li><a href="#UploadObject">UploadObject</a></li>
+				<li><a href="#WebsiteHosting">WebsiteHosting</a></li>
+
+				</ul>
+
+				<!-- Include this section only if there are examples and use cases. -->
+
+				<li><p><a href="#example">Examples and Use Cases</a></p></li>
+				<ul>
+
+				<!-- Add a line for each example or use case. The following is an example. -->
+
+				<li><a href="#UseCase1">Host a Static Website on Amazon S3</a></li>
+				</ul>
+				<li><p><a href="#rns">Release Notes</a></p></li>
+				</ul>
+
+		    <!-- The next section is required. -->
+
+				<h1 id="overview">Overview</h1>
+
+				<!-- The integration description should answer the questions:
+				How deep does our integration go? Why should I care?
+				What general functionality does the plugin include?
+				What functionality does the plugin omit? -->
+
+				<!-- The following is an example description. Replace it with the new plugin description. -->
+
+				<p>Amazon Simple Storage Service (S3) is storage for the Internet. It is designed to make web-scale computing easier for developers.</p>
+
+        <p>Amazon S3 has a simple web-services interface where you can store and retrieve any amount of data, at any time, from anywhere on the web.
+			It gives developers access to the same highly scalable, reliable, fast, inexpensive data storage infrastructure that Amazon uses to run
+			its own global network of websites. The goal is to maximize benefits of scale and pass those benefits on to developers.</p>
+
+        <!-- This section is required. Replace the plugin name, the URL to the website with the new plugin information, and the name of the link. -->
+				<!-- Example of [Plugin name] is OpenStack or Chef. -->
+				<!-- Example of [Name of plugin or website page] is OpenStack or OpenStack Home Page. -->
+
+				<p>For more information about Amazon S3, go to the <a href="http://aws.amazon.com/s3/">Amazon Web Services website.</a>.</p>
+
+		<p>You can view the documentation at <a href="http://aws.amazon.com/documentation/s3/">AWS S3 Documentation Page.</a></p>
+        <h2>ElectricFlow Integration to AWS S3</h2>
+
+				<!-- The integration description should answer the questions:
+        How deep does our integration go? Why should I care?
+        What general functionality does the plugin include?
+				What functionality does the plugin omit? -->
+
+				<!-- The following is an example description. Replace it with the new plugin content. -->
+
+        <p>This plugin uses the Amazon S3 application programming interface (API) that lets developers choose where
+			their objects are stored on the Amazon cloud. Using this secure API, your application is automatically scaled up and down as needed. This integration allows ElectricFlow to manage S3 buckets and objects.</p>
+
+				<p>The plugin interacts with S3 data by using AWS Java SDK to perform the following tasks:</p>
+				<ul>
+					<li>Create configurations with connection information.</li>
+					<li>Create buckets and folders.</li>
+					<li>Store objects in existing buckets and folders.</li>
+					<li>Download objects or entire folders.</li>
+					<li>List all the buckets and folders.</li>
+
+				</ul>
+
+		<p>This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).</p>
+
+			<!-- The following is boilerplate text. Do not modify or remove it from the document. -->
+
+		<p>IMPORTANT: For all parameter descriptions in this document, required parameters are shown in <span class='required'>bold italics</span>.</p>
+
+		<!-- The next section is required. -->
+
+    <h1 id="setupconfig">Setting Up the Plugin Configuration</h1>
+
+    <!-- This is boilerplate text. Do not modify or remove it from the document. -->
+
+		<p>Plugin configurations are sets of parameters that apply across some or all of the plugin procedures.
+		They reduce repetition of common values, create predefined sets of parameters for end users, and store
+		credentials securely. Each configuration has a unique name that is automatically entered in designated
+		parameters in the procedures.</p>
+
+		<h2>Input</h2>
+
+    <ol>
+		  <li>Go to <b>Administration</b> > <b>Plugins</b> to open the Plugin Manager.</li>
+
+			<!-- Replace the [Plugin name is ElectricFlow] in the following line with the name that appears in the UI. -->
+
+		  <li>Find the EC-S3 row.</li>
+
+		  <!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
+
+			<li>Click <b>Configure</b> to open the EC-S3 Configurations page.</li>
+		  <li>Click <b>Create Configuration</b>.</li>
+		  <li>To create a S3 configuration, enter the following information and click <b>OK</b>.
+			<br /> Remember that you may need to create additional configurations later.</li>
+
+                <!-- Replace the information in this table with the parameters for the new plugin. -->
+								<table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+								<!-- The following is example text. Replace it with the configuration parameters for the new plugin. -->
+								    <tr>
+                        <td class='required'>Configuration Name</td>
+                        <td>Name of the S3 configuration.The default is S3 integration.</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>A description for this configuration.</td>
+                    </tr>
+                    <tr>
+                        <td class='required'>Service URL</td>
+                        <td>The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com. (Required)</td>
+                    </tr>
+                    <tr>
+                        <td class='required'>Resource Pool</td>
+                        <td>The name of the pool of resources on which the integration steps can run. (Required)</td>
+                    </tr>
+                    <tr>
+                        <td class='required'>Workspace</td>
+                        <td>The workspace to use for resources dynamically created by this configuration. (Required)</td>
+                    </tr>
+					<tr>
+						<td class='required'>Access IDs (Credential Parameters)</td>
+						<td>The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential,
+							putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential. (Required)</td>
+					</tr>
+					<tr>
+						<td class='required'>Attempt Connection?</td>
+						<td>If the check box is selected, the system tries a connection to check credentials. (Required)</td>
+					</tr>
+					<tr>
+						<td class='required'>Debug Level</td>
+						<td>Provide the debug level for the output: 0=errors only, 1=normal headers and responses, 2+=debugging information included. (Required)</td>
+					</tr>
+                 </tbody>
+            </table>
+
+		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+		Change the filename (.png) to the new image filename. -->
+
+		<img src="../../plugins/@PLUGIN_KEY@/images/parameters/configuration_panel.png" />
+
+		</ol>
+
+	  <h2>Output</h2>
+
+		<!-- Replace the [Plugin name] in the following lines with the new plugin name. -->
+
+		<p>The EC-S3 Configurations page now shows the new configuration.</p>
+
+		<!-- The following line is optional. Replace the [Plugin name] in the following lines with the new plugin name. -->
+
+		<p>You can also manage your S3 configurations in this page. Click <b>Edit</b> to modify an existing configuration or
+		<b>Delete</b> to remove an existing configuration.</p>
+
+
+
+		<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
+
+		 <h1 id="procedures">Plugin Procedures</h1>
+
+     <div class="CreateBucket" id="CreateBucket">
+
+     <a name='CreateBucket' id="CreateBucket"></a>
+
+     <h2>CreateBucket</h2>
+
+      <!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>A bucket is a container for objects stored in Amazon S3. </p>
+
+			<p>To ensure a single, consistent naming approach for Amazon S3 buckets across regions and to ensure bucket names conform to DNS naming conventions,
+				bucket names must comply with the following requirements:</p>
+
+				<ul>
+					<li>Can contain lowercase letters, numbers, periods (.), and hyphens (-).</li>
+					<li>Must start with a number or letter.</li>
+					<li>Must be between 3 and 63 characters long.</li>
+					<li>Must not be formatted as an IP address (e.g., 192.168.5.4).</li>
+					<li>Must not contain underscores (_).</li>
+					<li>Must not end with a hyphen.</li>
+					<li>Cannot contain two, adjacent periods.</li>
+					<li>Cannot contain dashes next to periods (e.g., my-.bucket.com and my.-bucket are invalid).</li>
+				</ul>
+
+			<h3>Input</h3>
+
+      <ol>
+			<li>Go to the <b>CreateBucket</b> procedure.</li>
+			<li>Enter the following parameters:<br />
+     <table class="grid">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+								<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+                   <tr>
+                         <td class='required'>Configuration</td>
+                        <td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration.</td>
+                    </tr>
+					<tr>
+						<td class='required'>Bucket Name</td>
+						<td>Name of the bucket to create.</td>
+					</tr>
+                </tbody>
+            </table>
+
+				</li>
+
+		<br />
+
+		<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+		Change the filename (.png) to the new image filename. -->
+
+		<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_CreateBucket1.PNG" />
+		<br />
+
+		</ol>
+
+		<h3>Output</h3>
+
+		<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+		<p>In the <b>CreateBucket</b> step, click the Log button to see the diagnostic information.</p>
+
+</div>
+
+
+		<div class="CreateFolder" id="CreateFolder">
+
+			<a name='CreateFolder' id="CreateFolder"></a>
+
+			<h2>CreateFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure create nested folders within the specified bucket. Folders help to organize the S3 Objects. </p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>CreateFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucket in which to create folder. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Folder Name</td>
+								<td>Name of the Folder to create. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_CreateFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>CreateFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="DeleteBucketContents" id="DeleteBucketContents">
+
+			<a name='DeleteBucketContents' id="DeleteBucketContents"></a>
+
+			<h2>DeleteBucketContents</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure deletes the contents of the specified bucket.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DeleteBucketContents</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketof which to clear the contents. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DeleteBucketContents1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>DeleteBucketContents</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="DeleteObject" id="DeleteObject">
+
+			<a name='DeleteObject' id="DeleteObject"></a>
+
+			<h2>DeleteObject</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure deletes the S3 object in specified bucket or folder.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DeleteObject</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketwhere the object is. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Key</td>
+								<td>Key of the object to delete. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DeleteObject1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>DeleteObject</b> step, click the Log button to see the diagnostic information.</p>
+
+		</div>
+
+		<div class="DownloadFolder" id="DownloadFolder">
+
+			<a name='DownloadFolder' id="DownloadFolder"></a>
+
+			<h2>DownloadFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure downloads the contents of the specified folder to local filesystem.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DownloadFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketwhere the folder is. (Required)</td>
+							</tr>
+							<tr>
+								<td>Key Prefix - Folder</td>
+								<td>Key prefix of the folder to download.</td>
+							</tr>
+							<tr>
+								<td class='required'>Download Location</td>
+								<td>Path of the download location.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>DownloadFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>After the folder is successfully downloaded, ElectricFlow stores the key names and download paths of the objects in the property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadFolder2.PNG" />
+		</div>
+
+		<div class="DownloadObject" id="DownloadObject">
+
+			<a name='DownloadObject' id="DownloadObject"></a>
+
+			<h2>DownloadObject</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure downloads the S3 object specified by the key to the local file system.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>DownloadObject</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketwhere the folder is. (Required)</td>
+							</tr>
+							<tr>
+								<td>Key</td>
+								<td>Key of the object to download</td>
+							</tr>
+							<tr>
+								<td class='required'>Download Location</td>
+								<td>Path of the download location.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadObject1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>DownloadObject</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>ElectricFlow stores the key names and the download locations of the objects in property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_DownloadObject2.PNG" />
+
+		</div>
+
+		<div class="ListBucket" id="ListBucket">
+
+			<a name='ListBucket' id="ListBucket"></a>
+
+			<h2>ListBucket</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure lists all the buckets.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>ListBucket</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListBucket1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>ListBucket</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>ElectricFlow stores the list of buckets in the property sheet (Default location is <b>/myJob/S3Output</b>) as follows: </p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListBucket2.PNG" />
+
+		</div>
+
+		<div class="ListFolder" id="ListFolder">
+
+			<a name='ListFolder' id="ListFolder"></a>
+
+			<h2>ListFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure lists the contents of the folders, either recursively or nonrecursively.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>ListFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketof which to list the folders. (Required)</td>
+							</tr>
+							<tr>
+								<td>Folder Name</td>
+								<td>Name of the folder or prefix to include in the list.</td>
+							</tr>
+							<tr>
+								<td>List Objects in this folder or Include all sub folders?</td>
+								<td>If selected, all objects in this folder and all subfolders will be in the list.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>ListFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>ElectricFlow stores the list of all the objects in the folder in the property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_ListFolder2.PNG" />
+
+		</div>
+
+		<div class="UploadFolder" id="UploadFolder">
+
+			<a name='UploadFolder' id="UploadFolder"></a>
+
+			<h2>UploadFolder</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure uploads the specified local filesystem folder to the Amazon S3 service.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>UploadFolder</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketof which to list the folders. (Required)</td>
+							</tr>
+							<tr>
+								<td>Key</td>
+								<td>The key prefix of the virtual directory to which the folder is uploaded. Keep this field empty to upload files to the root of the bucket.</td>
+							</tr>
+							<tr>
+								<td class='required'>Folder to Upload</td>
+								<td>Name of the folder to upload.For example, '/opt/folderToUpload' or 'C:\path\to\folderToUpload'. (Required)</td>
+							</tr>
+							<tr>
+								<td>Make the object public</td>
+								<td>If selected, the uploaded object will be publicly accessible.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadFolder1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>UploadFolder</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>After a folder is successfully uploaded, ElectricFlow stores the key names and AWS access URLs for the objects in this folder in the property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadFolder2.PNG" />
+		</div>
+
+		<div class="UploadObject" id="UploadObject">
+
+			<a name='UploadObject' id="UploadObject"></a>
+
+			<h2>UploadObject</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>This procedure uploads the specified local filesystem folder to Amazon S3 service.</p>
+
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>UploadObject</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucketto which upload the object. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>Key</td>
+								<td>Key of the object to upload. This value will be used as the key for the object that is uploaded. (Required)</td>
+							</tr>
+							<tr>
+								<td class='required'>File to Upload</td>
+								<td>Path for file to upload. For example, '/path/to/fileToUpload.txt' or 'C:\mydir\fileToUpload.txt'. (Required)</td>
+							</tr>
+							<tr>
+								<td>Make the object public</td>
+								<td>If checked, the uploaded object will be publicly accessible.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadObject1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>UploadObject</b> step, click the Log button to see the diagnostic information.</p>
+
+			<p>After an object is successfully uploaded, ElectricFlow stores the key name and AWS link to the object in the property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_UploadObject2.PNG" />
+		</div>
+
+		<div class="WebsiteHosting" id="WebsiteHosting">
+
+			<a name='WebsiteHosting' id="WebsiteHosting"></a>
+
+			<h2>WebsiteHosting</h2>
+
+			<!-- The following is an example description of the procedure. Replace it with the new plugin procedure description. -->
+
+			<p>You can use Amazon Simple Storage Service (S3) to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This is called a static website and is used to display content that does not change frequently.</p>
+
+			<p>To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting. It is then available at the region-specific website endpoint of the bucket:<i>&lt;bucket-name&gt;.s3-website-&lt;AWS-region&gt;.amazonaws.com</i></p>
+
+			<h3>Input</h3>
+
+			<ol>
+				<li>Go to the <b>WebsiteHosting</b> procedure.</li>
+				<li>Enter the following parameters:<br />
+					<table class="grid">
+						<thead>
+							<tr>
+								<th>Parameter</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- The following is example text. Replace it with the  parameters for the plugin procedure. -->
+							<tr>
+								<td class='required'>Configuration</td>
+								<td>The name of the configuration that has all the connection information. This must refer to a valid existing configuration.</td>
+							</tr>
+							<tr>
+								<td class='required'>Bucket Name</td>
+								<td>Name of the bucket to create.</td>
+							</tr>
+							<tr>
+								<td>Enable website hosting</td>
+								<td>After you enable your bucket for static website hosting, all your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.</td>
+							</tr>
+							<tr>
+								<td class='required'>Index Document</td>
+								<td>Name of the index document.</td>
+							</tr>
+							<tr>
+								<td class='required'>Error Document</td>
+								<td>Name of the error document.</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</li>
+
+				<br />
+
+				<!-- The following image shows the parameter form consisting of the parameter name and the field in the UI.
+                Change the filename (.png) to the new image filename. -->
+
+				<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_WebsiteHosting1.PNG" />
+				<br />
+
+			</ol>
+
+			<h3>Output</h3>
+
+			<p>After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.</p>
+
+			<p>In the <b>WebsiteHosting</b> step, click the Log button to see the diagnostic information.</p>
+			<p>After the bucket is successfully configured for static website hosting, ElectricFlow stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet.(Default location is <b>/myJob/S3Output</b>.)</p>
+			<img src="../../plugins/@PLUGIN_KEY@/images/parameters/EC-S3_WebsiteHosting2.PNG" />
+		</div>
+		<!-- The next section is required for additional procedures. Replace [Procedure2} with the plugin procedure name in the following lines. -->
+
+		<!-- Include this section only if there are examples and use cases. -->
+
+    <h1 id="example">Examples and Use Cases</h1><br />
+
+		<!-- The following can be an example of how to run a specific procedure or a use case showing how to perform a specific task
+		using one or more procedures.  -->
+
+
+        <!-- The following is a use case with several procedures showing how to perform a specific task.
+				Replace it with an example or use case for the new plugin.
+				Replace [UseCase1} with the name of the example or use case in the following lines.-->
+
+				<h2>Use Case 1: Static Website Hosting</h2>
+
+        <div class="procedure" id="UseCase1">
+
+            <a name='UseCase1' id="UseCase1"></a>
+
+            <p>One of the common use case of this plugin is to host an publicly accessible website.To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:</p>
+
+				<ol>
+					<li>Create a plugin configuration.</li>
+					<li>Create a bucket on S3.</li>
+					<li>Upload the contents of the folder to the bucket.</li>
+					<li>Configure bucket for website hosting.</li>
+
+				</ol>
+
+			<h4>Create a Plugin Configuration</h4>
+
+			<p>In ElectricFlow, go to <b>Administration</b> > <b>Plugins</b> to open the Plugin Manager. Then click <b>Configure</b> and enter the values
+				for the parameters in the S3 Configuration page.</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/create_config.PNG" />
+			<p>After the configuration is created, you can see it in "S3 Configurations".</p>
+
+			<h4>Create a Bucket on S3</h4>
+
+			<p>Go to the CreateBucket procedure, enter the values in the parameter fields:</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/createBucket_parameters.PNG" />
+			<p>This procedure calls the CreateBucket procedures to create a new bucket 'ecwebsitehosting'.</p>
+
+			<h4>Upload the Contents to the S3 Bucket</h4>
+
+			<p>Go to the UploadFolder procedure, enter the values in the parameter fields:</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/uploadFolder_parameters.PNG" />
+			<p>This procedure calls the UploadFolder procedures to upload the contents of the 'C:\Electric Cloud\electricCloud\Website' directory to 'ecwebsitehosting' bucket.</p>
+
+			<h4>Configure Bucket for Website Hosting</h4>
+
+			<p>Go to the WebsiteHosting procedure, enter the values in the parameter fields:</p>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/websiteHosting_parameters.PNG" />
+			<p>This procedure calls the WebsiteHosting procedures to configure the bucket 'ecwebsitehosting' for website hosting.</p>
+
+			<h4>View the Results and Output</h4>
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/results.PNG" />
+			<p>The following output appears during the procedures:</p>
+			<h5>CreateBucket</h5>
+
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/create_bucket_log.PNG" />
+			<h5>UploadFolder</h5>
+
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/upload_folder_log.PNG" />
+
+			<h5>WebsiteHosting</h5>
+
+			<img alt="" src="../../plugins/@PLUGIN_KEY@/images/use_cases/Case_1/website_hosting_log.PNG" />
+
+
+			<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
+
+			  <h1>Release Notes</h1>
+
+				<!-- For each release, create an h2 section describing new and revised procedures, enhancements, and JIRA fixes.
+				See the following examples for how to write the release note items, which include:
+				- Phrases starting with "Added the N procedure to ...", "Removed the X parameter from the ...", "Fixed the issue where  ...",
+				and so on.
+				- Descriptions of new features or functionality supported by the plugin.
+				-->
+
+        <h2>EC-S3-plugin-1.1.0</h2>
+        <ul>
+            <li>AWS SDK Version has been changed to 1.11.10.</li>
+        </ul>
+        <h2>EC-S3-plugin-1.0.0.0</h2>
+
+        <ul>
+            <li>Added support to create new buckets and folders in buckets.</li>
+			<li>Added support to clean the bucket contents.</li>
+			<li>Added support to delete specific objects in a bucket or folder.</li>
+			<li>Added support to upload or download objects or the entire content of the bucket or folder.</li>
+			<li>Added support to list buckets and folders.</li>
+        </ul>
+
+		</div>
+	</div>
+</body>
+
+</html>
+
+

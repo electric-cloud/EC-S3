@@ -1,0 +1,14 @@
+<plugin>
+  <key>EC-S3</key>
+  <label>EC-S3</label>
+  <version>2.0.0</version>
+  <author>Electric Cloud</author>
+  <authorUrl>http://www.electric-cloud.com/support</authorUrl>
+  <category>Resource Management</category>
+  <commander-version min="6.0" />
+  <description>Integration for Amazon S3</description>
+  <configure>ec_config</configure>
+  <pluginWizardBased>false</pluginWizardBased>
+  <depends min="1.4.1">EC-PluginManager</depends>
+  <help>help.xml</help>
+</plugin>
