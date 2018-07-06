@@ -15,6 +15,7 @@ class TestHelper extends PluginSpockTestSupport {
         return helper
     }
 
+
     static def getClientId() {
         def id = System.getenv('AWS_ACCESS_KEY_ID')
         assert id
@@ -58,7 +59,8 @@ class TestHelper extends PluginSpockTestSupport {
             resource_pool: 'spec resource pool',
             workspace: 'default',
         ]
-        def props = [:]
+
+        def props = [confPath: 's3_cfgs']
 
         if (System.getenv('RECREATE_CONFIG')) {
             props.recreate = true
@@ -73,5 +75,23 @@ class TestHelper extends PluginSpockTestSupport {
             props
         )
     }
+
+    def deleteArtifact(artifactName, version) {
+        dsl "deleteArtifactVersion artifactVersionName: '$artifactName:$version'"
+    }
+
+    def getJobStepSummary(def jobId, def procedureName, def stepName) {
+        assert jobId
+        def summary = null
+        def property = "/myJob/jobSteps/$procedureName/steps/$stepName/summary"
+        println "Trying to get the summary, property: $property, jobId: $jobId"
+        try {
+            summary = getJobProperty(property, jobId)
+        } catch (Throwable e) {
+            logger.error("Can't retrieve Upper Step Summary from the property: '$property'; check job: " + jobId)
+        }
+        return summary
+    }
+
 
 }

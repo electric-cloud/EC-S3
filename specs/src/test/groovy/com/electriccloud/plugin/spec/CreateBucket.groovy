@@ -23,6 +23,7 @@ class CreateBucket extends TestHelper {
         ]
     }
 
+
     def 'create bucket'() {
         given:
         def bucketName = randomize('test-bucket')
@@ -35,6 +36,8 @@ class CreateBucket extends TestHelper {
         logger.debug(result.logs)
         assert result.outcome == 'success'
         assert result.logs =~ /Bucket $bucketName created successfully/
+        cleanup:
+        helperInstance.deleteBucket(bucketName)
     }
 
 }
