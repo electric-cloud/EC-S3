@@ -60,7 +60,8 @@ class TestHelper extends PluginSpockTestSupport {
             workspace: 'default',
         ]
 
-        def props = [confPath: 's3_cfgs']
+//        def props = [confPath: 's3_cfgs']
+        def props = [:]
 
         if (System.getenv('RECREATE_CONFIG')) {
             props.recreate = true

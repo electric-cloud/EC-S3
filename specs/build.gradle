@@ -23,14 +23,23 @@ repositories {
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.5:indy'
     compile 'org.spockframework:spock-core:1.1-groovy-2.4-SNAPSHOT'
-    compile 'com.electriccloud:ec-specs-plugins-core:1.1'
+    compile 'com.electriccloud:ec-specs-plugins-core:1.2'
     compile 'com.jayway.restassured:rest-assured:2.4.0'
     compile 'de.gesellix:docker-client:2018-01-26T21-28-05'
-//    Let's play with it
     compile 'software.amazon.awssdk:s3:2.0.0-preview-10'
+
+    testCompile( 'com.athaydes:spock-reports:1.6.0' ) {
+        transitive = false // this avoids affecting your version of Groovy/Spock
+    }
+    testCompile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'org.slf4j:slf4j-simple:1.7.13'
+
 }
 
+
 test {
+    systemProperty 'com.athaydes.spockframework.report.showCodeBlocks', true
+
     systemProperties["COMMANDER_SECURE"] = '1'
     def server = findProperty('commanderServer') ?: findProperty('COMMANDER_SERVER') ?: 'localhost'
     systemProperties['COMMANDER_SERVER'] = server
@@ -44,8 +53,6 @@ test {
 
     def destination = findProperty('reportDestination') ?: "spec-report"
     if (destination) {
-        reports {
-            html.destination = destination
-        }
+        systemProperty 'com.athaydes.spockframework.report.outputDir', destination
     }
 }

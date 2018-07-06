@@ -163,6 +163,7 @@ try {
     tf.shutdownNow()
 
     println "Uploaded " + folderToUpload + " successfully"
+    commander.setSummary("Uploaded " + folderToUpload + " successfully")
 
 } catch (InterruptedException e) {
     e.printStackTrace();

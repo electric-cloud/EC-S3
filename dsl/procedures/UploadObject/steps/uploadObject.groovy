@@ -19,6 +19,12 @@
 
 import java.nio.file.Files
 import java.nio.file.FileSystems
+import com.amazonaws.AmazonClientException
+import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.transfer.TransferManager
+
 
 $[/myProject/procedure_helpers/preamble]
 
@@ -118,13 +124,13 @@ try {
         }
     }
 
-
-
     def url = "https://" + bucketName + ".s3.amazonaws.com/" + key
     System.out.println(key + "  ==>  [" + url + "]")
     commander.setProperty(propResult + "/" + key, url)
 
     println "Uploaded " + key + " successfully"
+    commander.setSummary("Uploaded " + key + " successfully")
+
     tf.shutdownNow()
 
 } catch (InterruptedException e) {

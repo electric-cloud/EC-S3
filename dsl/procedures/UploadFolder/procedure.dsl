@@ -8,7 +8,7 @@ procedure procName, description: 'Upload the contents of a folder to a S3 bucket
         subprocedure: 'Setup'
 
     step 'uploadFolder',
-        command: new File(pluginDir, "dsl/procedures/$procName/uploadFolder.groovy").text,
+        command: new File(pluginDir, "dsl/procedures/$procName/steps/uploadFolder.groovy").text,
         errorHandling: 'failProcedure',
         exclusiveMode: 'none',
         releaseMode: 'none',

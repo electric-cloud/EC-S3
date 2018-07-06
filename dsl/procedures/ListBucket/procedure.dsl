@@ -8,7 +8,7 @@ procedure procName, description: 'List all the available buckets for the current
         subprocedure: 'Setup'
 
     step 'listBucket',
-        command: new File(pluginDir, "dsl/procedures/$procName/listBucket.groovy").text,
+        command: new File(pluginDir, "dsl/procedures/$procName/steps/listBucket.groovy").text,
         errorHandling: 'failProcedure',
         exclusiveMode: 'none',
         releaseMode: 'none',

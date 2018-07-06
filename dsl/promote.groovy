@@ -48,6 +48,10 @@ def stepsWithAttachedCredentials = [
 		stepName: 'listFolder'
 	],
 	[
+	    procedureName: 'UploadFolder',
+		stepName: 'uploadFolder'
+	],
+	[
 	    procedureName: 'UploadObject',
 		stepName: 'uploadObject'
 	],

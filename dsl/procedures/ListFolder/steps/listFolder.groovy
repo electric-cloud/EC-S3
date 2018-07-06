@@ -1,4 +1,3 @@
-
 /*
 *
 * Copyright 2015 Electric Cloud, Inc.
@@ -16,7 +15,18 @@
 * limitations under the License.
 */
 
+import com.amazonaws.AmazonClientException
+import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.transfer.TransferManager
+
 $[/myProject/procedure_helpers/preamble]
+
+def bucketName = '$[bucketName]'.trim()
+def prefix = '$[folderName]'.trim()
+def include_sub_folder = '$[include_sub_folder]'
+def propResult = '$[propResult]'.trim()
 ElectricCommander commander;
 //get credentials from commander
 try {
@@ -26,31 +36,11 @@ try {
     return
 }
 
-def bucketName = '$[bucketName]'.trim()
-def downloadLocation = commander.getCommanderProperty('downloadLocation')
-downloadLocation = downloadLocation.toString().replace('\\','/').trim()
-def key ='$[key]'.trim()
-def propResult = '$[propResult]'.trim()
-def downloadFolderName
+def i=0
 
 //validations
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty")
-    return
-}
-
-if (downloadLocation.length() == 0) {
-    println("Error : Download location is empty")
-    return
-}
-
-if(key.length() ==0)
-    downloadFolderName = new String(bucketName)
-else
-    downloadFolderName = bucketName + "/" + key
-
-if(!isFilenameValid(downloadLocation)){
-    println("Error : Can not write to " + downloadLocation + ".")
     return
 }
 
@@ -66,11 +56,10 @@ try {
     def credentials = new BasicAWSCredentials(commander.userName, commander.password)
 
     // Create TransferManager
-    def tx = new TransferManager(credentials);
+    def tx = new TransferManager(credentials)
 
     // Get S3 Client
-    AmazonS3 s3 = tx.getAmazonS3Client();
-    TransferManager tf = new TransferManager(s3);
+    AmazonS3 s3 = tx.getAmazonS3Client()
 
     //Check the owner of the account just to verify if the access keys are valid
     def owner = s3.getS3AccountOwner()
@@ -81,29 +70,25 @@ try {
         return
     }
 
-    println "Downloading " + downloadFolderName + " to " + downloadLocation
-
-    //Now download the contents
-    file = new File(downloadLocation)
-    MultipleFileDownload download = tf.downloadDirectory(bucketName, key, file)
-
-    while (!download.isDone()) {
-    	Thread.sleep(1000);
-        if(!Double.isNaN(download.getProgress().getPercentTransferred())) {
-            println(download.getProgress().getPercentTransferred() + "%")
-        }
-    }
-
-    //Now find all the files which were downloaded do that we can set the output properties
     String delimiter = "/"
-    def prefix = new String(key)
 
     if ((prefix.trim().length() != 0) && (!prefix.endsWith(delimiter))) {
         prefix += delimiter
     }
 
-    ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
-            .withBucketName(bucketName).withPrefix(prefix)
+	ListObjectsRequest listObjectsRequest
+
+    //Format the request based on what we want. With or without subfolders
+	if(include_sub_folder == '1') {
+	    listObjectsRequest = new ListObjectsRequest()
+	            .withBucketName(bucketName).withPrefix(prefix)
+	} else {
+	    listObjectsRequest = new ListObjectsRequest()
+	            .withBucketName(bucketName).withPrefix(prefix)
+	            .withDelimiter(delimiter)
+	}
+
+    println("Listing objects under folder")
 
     //Create the list now
     ObjectListing listing = s3.listObjects(listObjectsRequest)
@@ -115,27 +100,18 @@ try {
         summaries.addAll (listing.getObjectSummaries())
     }
 
-    if(!downloadLocation.toString().endsWith("/"))
-        downloadLocation = downloadLocation +"/"
-
     for (S3ObjectSummary summary: summaries) {
-        def downloadedFile = downloadLocation + summary.getKey()
-        System.out.println(summary.getKey() + "  ==>  [" + downloadedFile + "]")
-        commander.setProperty(propResult + "/" + summary.getKey(), downloadedFile)
+        def url = "https://" + bucketName + ".s3.amazonaws.com/" + summary.getKey()
+        System.out.println(summary.getKey() + "  ==>  [" + url + "]")
+        commander.setProperty(propResult + "/" + summary.getKey(), url)
+        i++
     }
 
-    tf.shutdownNow()
-
-    println "Downloaded " + downloadFolderName + " successfully"
-
-} catch (InterruptedException e) {
-    e.printStackTrace();
+    println("Listed " + i + " objects")
+    commander.setSummary("Listed " + i + " objects")
 } catch (AmazonServiceException ase) {
-
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
-
     handleClientException(ace)
-
 }

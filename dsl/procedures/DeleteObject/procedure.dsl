@@ -8,7 +8,7 @@ procedure procName, description: 'Delete an S3 object', {
         subprocedure: 'Setup'
 
     step 'deleteObject',
-        command: new File(pluginDir, "dsl/procedures/$procName/deleteObject.groovy").text,
+        command: new File(pluginDir, "dsl/procedures/$procName/steps/deleteObject.groovy").text,
         errorHandling: 'failProcedure',
         exclusiveMode: 'none',
         releaseMode: 'none',

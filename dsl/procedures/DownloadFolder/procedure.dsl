@@ -8,7 +8,7 @@ procedure procName, description: 'Download the contents of an S3 folder', {
         subprocedure: 'Setup'
 
     step 'downloadFolder',
-        command: new File(pluginDir, "dsl/procedures/$procName/downloadFolder.groovy").text,
+        command: new File(pluginDir, "dsl/procedures/$procName/steps/downloadFolder.groovy").text,
         errorHandling: 'failProcedure',
         exclusiveMode: 'none',
         releaseMode: 'none',

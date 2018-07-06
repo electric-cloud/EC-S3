@@ -93,6 +93,7 @@ try {
 
     delObjRes = s3.deleteObjects(multiObjectDeleteRequest);
     println("Successfully deleted " + delObjRes.getDeletedObjects().size() + " items")
+    commander.setSummary("Successfully deleted " + delObjRes.getDeletedObjects().size() + " items")
 
 } catch (MultiObjectDeleteException mode) {
     printDeleteResults(mode)

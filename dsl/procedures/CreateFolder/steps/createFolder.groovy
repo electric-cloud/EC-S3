@@ -78,6 +78,7 @@ try {
     s3.putObject(putObjectRequest)
 
     println("Folder " + folderName + " created successfully")
+    commander.setSummary("Folder " + folderName + " created successfully")
 
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {

@@ -8,7 +8,7 @@ procedure procName, description: 'List all the available objects under a S3 fold
         subprocedure: 'Setup'
 
     step 'listFolder',
-        command: new File(pluginDir, "dsl/procedures/$procName/listFolder.groovy").text,
+        command: new File(pluginDir, "dsl/procedures/$procName/steps/listFolder.groovy").text,
         errorHandling: 'failProcedure',
         exclusiveMode: 'none',
         releaseMode: 'none',

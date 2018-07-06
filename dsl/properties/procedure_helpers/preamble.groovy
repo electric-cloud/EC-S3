@@ -17,13 +17,27 @@
 
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.transfer.*
 import groovyx.net.http.RESTClient;
 import static groovyx.net.http.ContentType.JSON
 
+import java.io.ByteArrayInputStream
+import java.io.File
+import java.io.InputStream
+
+import groovyx.net.http.RESTClient;
+import static groovyx.net.http.ContentType.JSON
+import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.ContentType
+import groovyx.net.http.Method
 import groovyx.net.http.RESTClient
+
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 
 @Grab('com.amazonaws:aws-java-sdk-s3:1.11.10')
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7.1')

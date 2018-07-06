@@ -15,6 +15,11 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import com.amazonaws.AmazonClientException
+import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.transfer.TransferManager
 
 $[/myProject/procedure_helpers/preamble]
 ElectricCommander commander;
@@ -71,7 +76,7 @@ try {
     } else {
         println "Error : Error while deleting object " + key + "."
     }
-
+    commander.setSummary("Object " + key + " deleted successfully")
 
 } catch (InterruptedException e) {
     e.printStackTrace();
