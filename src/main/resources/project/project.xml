@@ -8,6 +8,12 @@
 
     <workspaceName/>
         <propertySheet>
+          <!-- Improvement for ECSTHREE-10 -->
+          <property>
+              <propertyName>ec_icon</propertyName>
+              <value>images/icon-plugin.svg</value>
+          </property>
+          <!-- End of improvement for ECSTHREE-10 -->
           <property>
                 <propertyName>ec_setup</propertyName>
                 <value/>

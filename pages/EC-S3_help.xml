@@ -57,7 +57,7 @@ Copyright 2015 Electric Cloud, Inc.
 				If you are writing the first version of a new plugin, change "Revised on" to "Created on" and
 				enter the date when the current sprint will end, and the document will be published.-->
 
-        <p>Revised on June 21, 2018</p>
+        <p>Revised on December 19, 2018</p>
 
 				<h1>Contents</h1>
 
@@ -1029,7 +1029,7 @@ Copyright 2015 Electric Cloud, Inc.
 
 			<!-- The next section is required. Replace [Procedure1} with the plugin procedure name in the following lines. -->
 
-			  <h1>Release Notes</h1>
+        <h1 id="rns">Release Notes</h1>
 
 				<!-- For each release, create an h2 section describing new and revised procedures, enhancements, and JIRA fixes.
 				See the following examples for how to write the release note items, which include:
@@ -1038,6 +1038,10 @@ Copyright 2015 Electric Cloud, Inc.
 				- Descriptions of new features or functionality supported by the plugin.
 				-->
 
+        <h2>EC-S3-plugin-1.1.1</h2>
+        <ul>
+            <li>The plugin icon has been updated.</li>
+        </ul>
         <h2>EC-S3-plugin-1.1.0</h2>
         <ul>
             <li>AWS SDK Version has been changed to 1.11.10.</li>
