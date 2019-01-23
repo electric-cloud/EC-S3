@@ -24,6 +24,7 @@ Copyright 2015 Electric Cloud, Inc.
   <author>Electric Cloud</author>
   <authorUrl>http://www.electric-cloud.com/support</authorUrl>
   <category>Resource Management</category>
+  <ecSupportLevel>10</ecSupportLevel>
   <commander-version min="5.4"/>
   <components>
     <component name="ConfigurationManagement">
