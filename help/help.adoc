@@ -1,0 +1,490 @@
+
+Plugin Version @PLUGIN_VERSION@
+
+
+Revised on December 19, 2018
+
+This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).
+
+IMPORTANT: For all parameter descriptions in this document, required parameters are shown in [.required]#bold italics#.
+
+[[setupconfig]]
+== Setting up the plugin configuration
+
+Plugin configurations are sets of parameters that apply across some or all of the plugin procedures. They reduce repetition of common values, create predefined sets of parameters for end users, and store credentials securely. Each configuration has a unique name that is automatically entered in designated parameters in the procedures.
+
+==== Input
+
+. Go to *Administration* > *Plugins* to open the Plugin Manager.
+. Find the EC-S3 row.
+. Click *Configure* to open the EC-S3 Configurations page.
+. Click *Create Configuration*.
+. To create a S3 configuration, enter the following information and click *OK*.
+
+Remember that you may need to create additional configurations later.
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration Name |Name of the S3 configuration.The default is S3 integration.
+|Description |A description for this configuration.
+|Service URL |The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com. (Required)
+|Resource Pool |The name of the pool of resources on which the integration steps can run. (Required)
+|Workspace |The workspace to use for resources dynamically created by this configuration. (Required)
+|Access IDs (Credential Parameters) |The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential. (Required)
+|Attempt Connection? |If the check box is selected, the system tries a connection to check credentials. (Required)
+|Debug Level |Provide the debug level for the output: 0=errors only, 1=normal headers and responses, 2+=debugging information included. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/configuration-panel.png[image]
+
+==== Output
+
+The EC-S3 Configurations page now shows the new configuration.
+
+You can also manage your S3 configurations in this page. Click *Edit* to modify an existing configuration or *Delete* to remove an existing configuration.
+
+[[procedures]]
+== Plugin procedures
+
+[[CreateBucket]]
+
+
+=== CreateBucket
+
+A bucket is a container for objects stored in Amazon S3.
+
+To ensure a single, consistent naming approach for Amazon S3 buckets across regions and to ensure bucket names conform to DNS naming conventions, bucket names must comply with the following requirements:
+
+* Can contain lowercase letters, numbers, periods (.), and hyphens (-).
+* Must start with a number or letter.
+* Must be between 3 and 63 characters long.
+* Must not be formatted as an IP address (e.g., 192.168.5.4).
+* Must not contain underscores (_).
+* Must not end with a hyphen.
+* Cannot contain two, adjacent periods.
+* Cannot contain dashes next to periods (e.g., my-.bucket.com and my.-bucket are invalid).
+
+==== Input
+
+. Go to the *CreateBucket* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Name of the bucket to create.
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-createbucket1.png[image]
+
+==== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *CreateBucket* step, click the Log button to see the diagnostic information.
+
+[[CreateFolder]]
+
+
+=== CreateFolder
+
+This procedure create nested folders within the specified bucket. Folders help to organize the S3 Objects.
+
+==== Input
+
+. Go to the *CreateFolder* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucket in which to create folder. (Required)
+|Folder Name |Name of the Folder to create. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-createfolder1.png[image]
+
+==== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *CreateFolder* step, click the Log button to see the diagnostic information.
+
+[[DeleteBucketContents]]
+
+
+=== DeleteBucketContents
+
+This procedure deletes the contents of the specified bucket.
+
+====== Input
+
+. Go to the *DeleteBucketContents* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketof which to clear the contents. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-deletebucketcontents1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *DeleteBucketContents* step, click the Log button to see the diagnostic information.
+
+[[DeleteObject]]
+
+
+=== DeleteObject
+
+This procedure deletes the S3 object in specified bucket or folder.
+
+====== Input
+
+. Go to the *DeleteObject* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketwhere the object is. (Required)
+|Key |Key of the object to delete. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-deleteobject1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *DeleteObject* step, click the Log button to see the diagnostic information.
+
+[[DownloadFolder]]
+
+
+=== DownloadFolder
+
+This procedure downloads the contents of the specified folder to local filesystem.
+
+====== Input
+
+. Go to the *DownloadFolder* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketwhere the folder is. (Required)
+|Key Prefix - Folder |Key prefix of the folder to download.
+|Download Location |Path of the download location.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadfolder1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *DownloadFolder* step, click the Log button to see the diagnostic information.
+
+After the folder is successfully downloaded, ElectricFlow stores the key names and download paths of the objects in the property sheet.(Default location is */myJob/S3Output*.)
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadfolder2.png[image]
+
+[[DownloadObject]]
+
+
+=== DownloadObject
+
+This procedure downloads the S3 object specified by the key to the local file system.
+
+====== Input
+
+. Go to the *DownloadObject* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketwhere the folder is. (Required)
+|Key |Key of the object to download
+|Download Location |Path of the download location.For example, '/path/to/downloadLocation' or 'C:\path\to\downloadLocation'. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadobject1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *DownloadObject* step, click the Log button to see the diagnostic information.
+
+ElectricFlow stores the key names and the download locations of the objects in property sheet.(Default location is */myJob/S3Output*.)
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadobject2.png[image]
+
+[[ListBucket]]
+
+
+=== ListBucket
+
+This procedure lists all the buckets.
+
+====== Input
+
+. Go to the *ListBucket* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listbucket1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *ListBucket* step, click the Log button to see the diagnostic information.
+
+ElectricFlow stores the list of buckets in the property sheet (Default location is */myJob/S3Output*) as follows:
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listbucket2.png[image]
+
+[[ListFolder]]
+
+
+=== ListFolder
+
+This procedure lists the contents of the folders, either recursively or nonrecursively.
+
+====== Input
+
+. Go to the *ListFolder* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketof which to list the folders. (Required)
+|Folder Name |Name of the folder or prefix to include in the list.
+|List Objects in this folder or Include all sub folders? |If selected, all objects in this folder and all subfolders will be in the list.
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listfolder1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *ListFolder* step, click the Log button to see the diagnostic information.
+
+ElectricFlow stores the list of all the objects in the folder in the property sheet.(Default location is */myJob/S3Output*.)
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listfolder2.png[image]
+
+[[UploadFolder]]
+
+
+=== UploadFolder
+
+This procedure uploads the specified local filesystem folder to the Amazon S3 service.
+
+====== Input
+
+. Go to the *UploadFolder* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketof which to list the folders. (Required)
+|Key |The key prefix of the virtual directory to which the folder is uploaded. Keep this field empty to upload files to the root of the bucket.
+|Folder to Upload |Name of the folder to upload.For example, '/opt/folderToUpload' or 'C:\path\to\folderToUpload'. (Required)
+|Make the object public |If selected, the uploaded object will be publicly accessible.
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadfolder1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *UploadFolder* step, click the Log button to see the diagnostic information.
+
+After a folder is successfully uploaded, ElectricFlow stores the key names and AWS access URLs for the objects in this folder in the property sheet.(Default location is */myJob/S3Output*.)
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadfolder2.png[image]
+
+[[UploadObject]]
+
+
+=== UploadObject
+
+This procedure uploads the specified local filesystem folder to Amazon S3 service.
+
+====== Input
+
+. Go to the *UploadObject* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Bucket Name |Name of the bucketto which upload the object. (Required)
+|Key |Key of the object to upload. This value will be used as the key for the object that is uploaded. (Required)
+|File to Upload |Path for file to upload. For example, '/path/to/fileToUpload.txt' or 'C:\mydir\fileToUpload.txt'. (Required)
+|Make the object public |If checked, the uploaded object will be publicly accessible.
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadobject1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *UploadObject* step, click the Log button to see the diagnostic information.
+
+After an object is successfully uploaded, ElectricFlow stores the key name and AWS link to the object in the property sheet.(Default location is */myJob/S3Output*.)
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadobject2.png[image]
+
+[[WebsiteHosting]]
+
+
+=== WebsiteHosting
+
+You can use Amazon Simple Storage Service (S3) to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This is called a static website and is used to display content that does not change frequently.
+
+To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting. It is then available at the region-specific website endpoint of the bucket:_<bucket-name>.s3-website-<AWS-region>.amazonaws.com_
+
+====== Input
+
+. Go to the *WebsiteHosting* procedure.
+. Enter the following parameters:
+
+[cols=",",options="header",]
+|===
+|Parameter |Description
+|Configuration |The name of the configuration that has all the connection information. This must refer to a valid existing configuration.
+|Bucket Name |Name of the bucket to create.
+|Enable website hosting |After you enable your bucket for static website hosting, all your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.
+|Index Document |Name of the index document.
+|Error Document |Name of the error document.
+|===
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-websitehosting1.png[image]
+
+====== Output
+
+After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+
+In the *WebsiteHosting* step, click the Log button to see the diagnostic information.
+
+After the bucket is successfully configured for static website hosting, ElectricFlow stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet.(Default location is */myJob/S3Output*.)
+
+image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-websitehosting2.png[image]
+
+[[example]]
+== Examples and use cases
+
+=== Use case 1: static website hosting
+
+[[UseCase1]]
+
+
+One of the common use case of this plugin is to host an publicly accessible website.To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:
+
+. Create a plugin configuration.
+. Create a bucket on S3.
+. Upload the contents of the folder to the bucket.
+. Configure bucket for website hosting.
+
+=== Create a plugin configuration
+
+In ElectricFlow, go to *Administration* > *Plugins* to open the Plugin Manager. Then click *Configure* and enter the values for the parameters in the S3 Configuration page.
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/create-config.png[image]
+
+After the configuration is created, you can see it in "S3 Configurations".
+
+=== Create a bucket on s3
+
+Go to the CreateBucket procedure, enter the values in the parameter fields:
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/createbucket-parameters.png[image]
+
+This procedure calls the CreateBucket procedures to create a new bucket 'ecwebsitehosting'.
+
+=== Upload the contents to the s3 bucket
+
+Go to the UploadFolder procedure, enter the values in the parameter fields:
+
+image::cloudbees-common::cd-plugins/ec-s3/use_cases/case-1/uploadfolder-parameters.png[image]
+
+This procedure calls the UploadFolder procedures to upload the contents of the 'C:\Electric Cloud\electricCloud\Website' directory to 'ecwebsitehosting' bucket.
+
+=== Configure bucket for website hosting
+
+Go to the WebsiteHosting procedure, enter the values in the parameter fields:
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/websitehosting-parameters.png[image]
+
+This procedure calls the WebsiteHosting procedures to configure the bucket 'ecwebsitehosting' for website hosting.
+
+=== View the results and output
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/results.png[image]
+
+The following output appears during the procedures:
+
+=== CreateBucket
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/create-bucket-log.png[image]
+
+=== UploadFolder
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/upload-folder-log.png[image]
+
+=== WebsiteHosting
+
+image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/website-hosting-log.png[image]
+
+[[rns]]
+== Release notes
+
+=== EC-S3 1.1.2
+
+* The documentation has been migrated to the main documentation site.
+
+=== EC-S3 1.1.1
+
+* The plugin icon has been updated.
+
+=== EC-S3 1.1.0
+
+* AWS SDK Version has been changed to 1.11.10.
+
+=== EC-S3 1.0.0
+
+* Added support to create new buckets and folders in buckets.
+* Added support to clean the bucket contents.
+* Added support to delete specific objects in a bucket or folder.
+* Added support to upload or download objects or the entire content of the bucket or folder.
+* Added support to list buckets and folders.
