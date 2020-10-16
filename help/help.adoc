@@ -81,7 +81,7 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-createbucket1.png[ima
 
 ==== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *CreateBucket* step, click the Log button to see the diagnostic information.
 
@@ -109,7 +109,7 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-createfolder1.png[ima
 
 ==== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *CreateFolder* step, click the Log button to see the diagnostic information.
 
@@ -136,7 +136,7 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-deletebucketcontents1
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *DeleteBucketContents* step, click the Log button to see the diagnostic information.
 
@@ -164,7 +164,7 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-deleteobject1.png[ima
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *DeleteObject* step, click the Log button to see the diagnostic information.
 
@@ -193,11 +193,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadfolder1.png[i
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *DownloadFolder* step, click the Log button to see the diagnostic information.
 
-After the folder is successfully downloaded, ElectricFlow stores the key names and download paths of the objects in the property sheet.(Default location is */myJob/S3Output*.)
+After the folder is successfully downloaded, {CD} stores the key names and download paths of the objects in the property sheet.(Default location is */myJob/S3Output*.)
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadfolder2.png[image]
 
@@ -226,11 +226,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadobject1.png[i
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *DownloadObject* step, click the Log button to see the diagnostic information.
 
-ElectricFlow stores the key names and the download locations of the objects in property sheet.(Default location is */myJob/S3Output*.)
+{CD} stores the key names and the download locations of the objects in property sheet.(Default location is */myJob/S3Output*.)
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-downloadobject2.png[image]
 
@@ -256,11 +256,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listbucket1.png[image
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *ListBucket* step, click the Log button to see the diagnostic information.
 
-ElectricFlow stores the list of buckets in the property sheet (Default location is */myJob/S3Output*) as follows:
+{CD} stores the list of buckets in the property sheet (Default location is */myJob/S3Output*) as follows:
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listbucket2.png[image]
 
@@ -289,11 +289,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listfolder1.png[image
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *ListFolder* step, click the Log button to see the diagnostic information.
 
-ElectricFlow stores the list of all the objects in the folder in the property sheet.(Default location is */myJob/S3Output*.)
+{CD} stores the list of all the objects in the folder in the property sheet.(Default location is */myJob/S3Output*.)
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-listfolder2.png[image]
 
@@ -323,11 +323,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadfolder1.png[ima
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *UploadFolder* step, click the Log button to see the diagnostic information.
 
-After a folder is successfully uploaded, ElectricFlow stores the key names and AWS access URLs for the objects in this folder in the property sheet.(Default location is */myJob/S3Output*.)
+After a folder is successfully uploaded, {CD} stores the key names and AWS access URLs for the objects in this folder in the property sheet.(Default location is */myJob/S3Output*.)
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadfolder2.png[image]
 
@@ -357,11 +357,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadobject1.png[ima
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *UploadObject* step, click the Log button to see the diagnostic information.
 
-After an object is successfully uploaded, ElectricFlow stores the key name and AWS link to the object in the property sheet.(Default location is */myJob/S3Output*.)
+After an object is successfully uploaded, {CD} stores the key name and AWS link to the object in the property sheet.(Default location is */myJob/S3Output*.)
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-uploadobject2.png[image]
 
@@ -393,11 +393,11 @@ image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-websitehosting1.png[i
 
 ====== Output
 
-After the job runs, you can view the results on the Job Details page in ElectricFlow. Every job step was completed successfully.
+After the job runs, you can view the results on the Job Details page in {CD}. Every job step was completed successfully.
 
 In the *WebsiteHosting* step, click the Log button to see the diagnostic information.
 
-After the bucket is successfully configured for static website hosting, ElectricFlow stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet.(Default location is */myJob/S3Output*.)
+After the bucket is successfully configured for static website hosting, {CD} stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet.(Default location is */myJob/S3Output*.)
 
 image::cloudbees-common::cd-plugins/ec-s3/parameters/ec-s3-websitehosting2.png[image]
 
@@ -418,7 +418,7 @@ One of the common use case of this plugin is to host an publicly accessible webs
 
 === Create a plugin configuration
 
-In ElectricFlow, go to *Administration* > *Plugins* to open the Plugin Manager. Then click *Configure* and enter the values for the parameters in the S3 Configuration page.
+In {CD}, go to *Administration* > *Plugins* to open the Plugin Manager. Then click *Configure* and enter the values for the parameters in the S3 Configuration page.
 
 image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/create-config.png[image]
 

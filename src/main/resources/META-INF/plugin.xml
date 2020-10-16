@@ -21,7 +21,7 @@ Copyright 2015 Electric Cloud, Inc.
   <description>Integration for Amazon S3</description>
   <configure>configurations.xml</configure>
   <help>@PLUGIN_KEY@_help.xml</help>
-  <author>Electric Cloud</author>
+  <author>CloudBees</author>
   <authorUrl>http://www.electric-cloud.com/support</authorUrl>
   <category>Resource Management</category>
   <ecSupportLevel>10</ecSupportLevel>
