@@ -34,5 +34,4 @@ Copyright 2015 Electric Cloud, Inc.
   <hasAdoc>true</hasAdoc>
   <catalogLabel>Amazon Simple Storage Service</catalogLabel>
   <detailedDescription>Amazon Simple Storage Service (S3) is storage for the Internet. It is designed to make web-scale computing easier for developers. This plugin uses the Amazon S3 application programming interface (API) that lets developers choose where their objects are stored on the Amazon cloud.</detailedDescription>
-  <hasAdoc>true</hasAdoc>
 </plugin>
