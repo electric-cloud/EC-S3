@@ -19,11 +19,11 @@ push (@::gMatchers,
         id =>          "createBucket",
         pattern =>     q{^Bucket\s(.+)\screated\ssuccessfully},
         action =>           q{
-         
+
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Bucket $1 created successfully.";
-                              
+
                               setProperty("summary", $desc . "\n");
                              },
   },
@@ -31,11 +31,11 @@ push (@::gMatchers,
         id =>          "listBucket",
         pattern =>     q{^Listed\s(.+)\sbuckets},
         action =>           q{
-         
+
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Listed $1 buckets.";
-                              
+
                               setProperty("summary", $desc . "\n");
                              },
   },
@@ -43,11 +43,11 @@ push (@::gMatchers,
         id =>          "listFolder",
         pattern =>     q{^Listed\s(.+)\sobjects},
         action =>           q{
-         
+
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Listed $1 objects.";
-                              
+
                               setProperty("summary", $desc . "\n");
                              },
   },
@@ -55,11 +55,11 @@ push (@::gMatchers,
         id =>          "createFolder",
         pattern =>     q{^Folder\s(.+)\screated\ssuccessfully},
         action =>           q{
-         
+
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Folder $1 created successfully.";
-                                
+
                               setProperty("summary", $desc . "\n");
                              },
   },
@@ -67,11 +67,11 @@ push (@::gMatchers,
         id =>          "deleteObject",
         pattern =>     q{^Object\s(.+)\sdeleted\ssuccessfully},
         action =>           q{
-         
+
                               my $desc = ((defined $::gProperties{"summary"}) ? $::gProperties{"summary"} : '');
 
                               $desc .= "Object $1 deleted successfully.";
-                              
+
                               setProperty("summary", $desc . "\n");
                              },
   },
@@ -147,18 +147,5 @@ push (@::gMatchers,
                                 setProperty("summary", $desc . "\n");
                                },
     },
-    {
-              id      => "error2",
-              pattern => q{ERROR\s:|[Ee]rror\s:|[Ee]xception},
-              action  => q{
-                     my $description = ((defined $::gProperties{"summary"}) ?
-                              $::gProperties{"summary"} : '');
 
-                        $description .= "$1";
-
-                        setProperty("summary", $description . "\n");
-                        incValue("errors"); diagnostic("", "error", -1);
-
-                          }
-      }
 );
