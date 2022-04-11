@@ -43,6 +43,18 @@ repositories {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force group: 'com.electriccloud', name: 'commander-client', version: '10.1.0'
+        force group: 'com.electriccloud', name: 'commander-sdk', version: '6.1.2.1'
+        force group: 'com.electriccloud', name: 'ec_internal', version: '6.1.2.1'
+        force group: 'com.google.gwt', name: 'gwt-user', version: '2.5.0-ec3'
+        force group: 'com.google.gwt', name: 'gwt-dev', version: '2.5.0-ec1'
+
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
 group = "com.electriccloud"
 description = "Plugins : EC-S3"
 version = "1.1.3"
