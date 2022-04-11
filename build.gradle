@@ -8,17 +8,39 @@
 
 
 buildscript {
-	repositories {
-		maven {
-			url 'http://dl.bintray.com/ecpluginsdev/maven'
-		}
-
-		jcenter()
-	}
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://nexus-internal.cloudbees.com/content/repositories/snapshots'
+            credentials {
+                username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+                password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+            }
+        }
+        maven {
+            url 'https://nexus-internal.cloudbees.com/content/groups/mirror'
+            credentials {
+                username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+                password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+            }
+        }
+    }
 	dependencies {
-        classpath group: 'com.electriccloud.plugins', name: 'flow-gradle-plugin', version: '+'
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+        classpath group: 'com.electriccloud.plugins', name: 'flow-gradle-plugin', version: '2.4'
 	}
+}
+
+repositories {
+    mavenCentral()
+    // maven { url 'https://repo.cloudbees.com/content/repositories/dev-connect' }
+    maven {
+        url 'https://nexus-internal.cloudbees.com/content/groups/mirror'
+        credentials {
+            username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+            password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+        }
+    }
 }
 
 group = "com.electriccloud"
