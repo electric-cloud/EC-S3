@@ -209,7 +209,7 @@ sub validateUserSession() {
     my $ec = ElectricCommander->new({abortOnError => 0});
     $ec->login();
     if($ec->getError()) {
-        print "Location: ../\n\n";
+        print "Location: ../../../\n\n";
         exit 0;
     }
 }
