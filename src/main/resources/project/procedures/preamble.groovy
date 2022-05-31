@@ -37,6 +37,7 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 @Grab('com.amazonaws:aws-java-sdk-s3:1.11.10')
+@Grab('org.glassfish.jaxb:jaxb-runtime:2.3.2')
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7.1')
 
 enum RequestMethod {
