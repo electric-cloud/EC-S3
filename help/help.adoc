@@ -410,6 +410,10 @@ image::cloudbees-common::cd-plugins/ec-s3/use-cases/case-1/website-hosting-log.p
 [[rns]]
 == Release notes
 
+=== EC-S3 1.1.4
+
+* Fixed Caught: java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter
+
 === EC-S3 1.1.3
 
 * Added session validation.
