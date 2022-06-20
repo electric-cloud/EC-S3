@@ -413,7 +413,7 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 
 === EC-S3 1.1.4
 
-* * Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`
+* Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`
 
 === EC-S3 1.1.3
 
