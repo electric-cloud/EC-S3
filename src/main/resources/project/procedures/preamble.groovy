@@ -22,9 +22,15 @@ import com.amazonaws.services.s3.model.*
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.transfer.*
 
+import com.electriccloud.client.groovy.ElectricFlow
+import com.electriccloud.client.groovy.models.*
+
+
+
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.InputStream
+import java.net.URLEncoder
 
 import groovyx.net.http.RESTClient;
 import static groovyx.net.http.ContentType.JSON
@@ -59,23 +65,34 @@ public class ElectricCommander {
 
     def jobStepId = '$[/myJobStep/jobStepId]'
 
+    ElectricFlow ef = new ElectricFlow()
+
     ElectricCommander() {
 
         client.ignoreSSLIssues()
 
         def resp
+        def credential
 
-        resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
+        if('$[config]'.startsWith("/")){
+            def plugConf = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0$[config]', [])
+            def credName = plugConf.getData().pluginConfiguration.credentialMappings.parameterDetail[0].parameterValue
+            resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
+            credential = resp.credential
+        }else{
+            resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
+            credential = resp.getData().credential
+        }
 
         if( resp == null ) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        if(resp.status != 200) {
+        if(!credential && resp.status != 200) {
             throw new Exception("Commander did not respond with 200 for credentials")
         }
 
-        userName = resp.getData().credential.userName
-        password = resp.getData().credential.password
+        userName = credential.userName
+        password = credential.password
     }
 
     ElectricCommander(boolean config) {
@@ -83,7 +100,9 @@ public class ElectricCommander {
         client.ignoreSSLIssues()
 
         def resp
-
+        if('$[config]'.startsWith("/")){
+            println("starts with slash 222")
+        }
         if(config == true) {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
         } else {
@@ -116,17 +135,26 @@ public class ElectricCommander {
     public getParamCredential() {
 
         client.ignoreSSLIssues()
-
-        def resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/paramCredential', [])
+        def resp
+        def credential
+        if('$[config]'.startsWith("/")){
+            def plugConf = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0$[config]', [])
+            def credName = plugConf.getData().pluginConfiguration.credentialMappings.parameterDetail[0].parameterValue
+            resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
+            credential = result.credential
+        }else {
+            resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/paramCredential', [])
+            credential = resp.getData().credential
+        }
 
         if( resp == null ) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        if(resp.status != 200) {
+        if(!credential && resp.status != 200) {
             throw new Exception("Commander did not respond with 200 for credentials")
         }
 
-        return [resp.getData().credential.userName, resp.getData().credential.password]
+        return [credential.userName, credential.password]
     }
 
     public getCommanderProperty(String propName) {
@@ -147,6 +175,13 @@ public class ElectricCommander {
         }
 
         return resp.getData().property.value
+    }
+
+    public propertyKey(String propName){
+        if(propName.endsWith("/")){
+            propName = propName.substring(0, propName.length()-2)
+        }
+        return propName.replaceAll("\\/","_")
     }
 
 

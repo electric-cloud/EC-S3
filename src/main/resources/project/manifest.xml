@@ -17,11 +17,15 @@ Copyright 2015 Electric Cloud, Inc.
 
 <fileset>
     <file>
-        <xpath>//property[propertyName=&quot;ui_forms&quot;]/propertySheet/property[propertyName=&quot;S3CreateConfigForm&quot;]/value</xpath>
+        <xpath>//property[propertyName=&quot;forms&quot;]/propertySheet/property[propertyName=&quot;S3CreateConfigForm&quot;]/value</xpath>
         <path>procedures/CreateConfiguration/S3CreateConfigForm.xml</path>
     </file>
     <file>
-        <xpath>//property[propertyName=&quot;ui_forms&quot;]/propertySheet/property[propertyName=&quot;S3EditConfigForm&quot;]/value</xpath>
+        <path>procedures/CreateConfiguration/newConfigForm.xml</path>
+        <xpath>//procedure[procedureName=&quot;ConfigurationParametersHolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
+    </file>
+    <file>
+        <xpath>//property[propertyName=&quot;forms&quot;]/propertySheet/property[propertyName=&quot;S3EditConfigForm&quot;]/value</xpath>
         <path>procedures/CreateConfiguration/S3EditConfigForm.xml</path>
     </file>
     <file>
@@ -30,21 +34,36 @@ Copyright 2015 Electric Cloud, Inc.
     </file>
 
 
-    <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateConfiguration&quot;]/command</xpath>
+    <file>
+        <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateConfiguration&quot;]/command</xpath>
         <path>procedures/CreateConfiguration/createcfg.pl</path>
     </file>
-    <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateAndAttachCredential&quot;]/command</xpath>
+    <file>
+        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>
+        <xpath>//procedure[procedureName=&quot;TestConfiguration&quot;]/step[stepName=&quot;checkConnection&quot;]/command</xpath>
+    </file>
+<!--    <file>-->
+<!--        <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>-->
+<!--        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>-->
+<!--    </file>-->
+<!--    <file>-->
+<!--        <xpath>//procedure[procedureName=&quot;EditConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>-->
+<!--        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>-->
+<!--    </file>-->
+    <file>
+        <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateAndAttachCredential&quot;]/command</xpath>
         <path>procedures/CreateConfiguration/createAndAttachCredential.pl</path>
     </file>
-    <file><xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>
-        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>
+
+    <file>
+        <path>procedures/CreateConfiguration/editConfiguration.pl</path>
+        <xpath>//procedure[procedureName=&quot;EditConfiguration&quot;]/step[stepName=&quot;EditConfiguration&quot;]/command</xpath>
     </file>
-	
-	<file>
+    <file>
         <xpath>//procedure[procedureName=&quot;DeleteConfiguration&quot;]/step[stepName=&quot;DeleteConfiguration&quot;]/command</xpath>
         <path>procedures/DeleteConfiguration/deletecfg.pl</path>
     </file>
-	
+
     <file>
         <path>postp_matchers.pl</path>
         <xpath>//property[propertyName=&quot;postp_matchers&quot;]/value</xpath>
@@ -53,107 +72,387 @@ Copyright 2015 Electric Cloud, Inc.
         <xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/CreateBucket/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;createBucket&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;CreateBucket&quot;]/step[stepName=&quot;createBucket&quot;]/command
+        </xpath>
         <path>procedures/CreateBucket/createBucket.groovy</path>
     </file>
 
-	    <file>
+    <file>
         <xpath>//procedure[procedureName=&quot;ListBucket&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/ListBucket/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;ListBucket&quot;]/step[stepName=&quot;listBucket&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;ListBucket&quot;]/step[stepName=&quot;listBucket&quot;]/command</xpath>
         <path>procedures/ListBucket/listBucket.groovy</path>
     </file>
-	
-	    <file>
+
+    <file>
         <xpath>//procedure[procedureName=&quot;CreateFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/CreateFolder/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;CreateFolder&quot;]/step[stepName=&quot;createFolder&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;CreateFolder&quot;]/step[stepName=&quot;createFolder&quot;]/command
+        </xpath>
         <path>procedures/CreateFolder/createFolder.groovy</path>
     </file>
-	
-	<file>
+
+    <file>
         <xpath>//procedure[procedureName=&quot;ListFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/ListFolder/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;ListFolder&quot;]/step[stepName=&quot;listFolder&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;ListFolder&quot;]/step[stepName=&quot;listFolder&quot;]/command</xpath>
         <path>procedures/ListFolder/listFolder.groovy</path>
     </file>
-	
-	<file>
+
+    <file>
         <xpath>//procedure[procedureName=&quot;UploadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/UploadObject/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;UploadObject&quot;]/step[stepName=&quot;uploadObject&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;UploadObject&quot;]/step[stepName=&quot;uploadObject&quot;]/command
+        </xpath>
         <path>procedures/UploadObject/uploadObject.groovy</path>
     </file>
 
-	<file>
+    <file>
         <xpath>//procedure[procedureName=&quot;UploadFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/UploadFolder/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;UploadFolder&quot;]/step[stepName=&quot;uploadFolder&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;UploadFolder&quot;]/step[stepName=&quot;uploadFolder&quot;]/command
+        </xpath>
         <path>procedures/UploadFolder/uploadFolder.groovy</path>
     </file>
-	
-	<file>
+
+    <file>
         <xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/DownloadObject/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/step[stepName=&quot;downloadObject&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;DownloadObject&quot;]/step[stepName=&quot;downloadObject&quot;]/command
+        </xpath>
         <path>procedures/DownloadObject/downloadObject.groovy</path>
     </file>
 
-	<file>
+    <file>
         <xpath>//procedure[procedureName=&quot;DownloadFolder&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/DownloadFolder/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;DownloadFolder&quot;]/step[stepName=&quot;downloadFolder&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;DownloadFolder&quot;]/step[stepName=&quot;downloadFolder&quot;]/command
+        </xpath>
         <path>procedures/DownloadFolder/downloadFolder.groovy</path>
     </file>
 
-	<file>
+    <file>
         <xpath>//procedure[procedureName=&quot;DeleteObject&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/DeleteObject/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;DeleteObject&quot;]/step[stepName=&quot;deleteObject&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;DeleteObject&quot;]/step[stepName=&quot;deleteObject&quot;]/command
+        </xpath>
         <path>procedures/DeleteObject/deleteObject.groovy</path>
     </file>
 
-	<file>
+    <file>
         <xpath>//procedure[procedureName=&quot;DeleteBucketContents&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/DeleteBucketContents/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;DeleteBucketContents&quot;]/step[stepName=&quot;deleteBucketContents&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;DeleteBucketContents&quot;]/step[stepName=&quot;deleteBucketContents&quot;]/command</xpath>
         <path>procedures/DeleteBucketContents/deleteBucketContents.groovy</path>
     </file>
 
-	<file>
+    <file>
         <xpath>//procedure[procedureName=&quot;WebsiteHosting&quot;]/propertySheet/property[propertyName=&quot;ec_parameterForm&quot;]/value</xpath>
         <path>procedures/WebsiteHosting/form.xml</path>
     </file>
-    
-    <file><xpath>//procedure[procedureName=&quot;WebsiteHosting&quot;]/step[stepName=&quot;websiteHosting&quot;]/command</xpath>
+
+    <file>
+        <xpath>//procedure[procedureName=&quot;WebsiteHosting&quot;]/step[stepName=&quot;websiteHosting&quot;]/command
+        </xpath>
         <path>procedures/WebsiteHosting/websiteHosting.groovy</path>
     </file>
-	
+
     <file>
         <xpath>//property[propertyName=&quot;ec_setup&quot;]/value</xpath>
         <path>ec_setup.pl</path>
     </file>
     <file>
         <xpath>//property[propertyName=&quot;preamble&quot;]/value</xpath>
-		<path>procedures/preamble.groovy</path>
-    </file>	
+        <path>procedures/preamble.groovy</path>
+    </file>
+    <file>
+        <path>stepsWithAttachedCredentials.json</path>
+        <xpath>//property[propertyName=&quot;ec_config&quot;]/propertySheet/property[propertyName=&quot;stepsWithAttachedCredentials&quot;]/value</xpath>
+    </file>
+
+    <!-- create configuration -->
+    <file>
+        <path>stepsWithAttachedCredentials.json</path>
+        <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/propertySheet/property[propertyName=&quot;ec_stepsWithAttachedCredentials&quot;]/value</xpath>
+    </file>
+    <!-- End of create configuration -->
+
+<!--    <file>-->
+<!--        <path>lib/EC/Plugin/Core.pm</path>-->
+<!--        <xpath>//property[propertyName=&quot;EC::Plugin::Core&quot;]/value</xpath>-->
+<!--    </file>-->
+
+    <!-- PDK Perl Libs-->
+    <file>
+        <path>pdk/Bytes/Random/Secure/Tiny.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;Bytes&quot;]/propertySheet/property[propertyName=&quot;Random&quot;]/propertySheet/property[propertyName=&quot;Secure&quot;]/propertySheet/property[propertyName=&quot;Tiny.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Devel/Stacktrace.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Devel&quot;]/propertySheet/property[propertyName=&quot;Stacktrace.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/StepParameters.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;StepParameters.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/BaseClass.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;BaseClass.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types/Scalar.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types&quot;]/propertySheet/property[propertyName=&quot;Scalar.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types/Regexp.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types&quot;]/propertySheet/property[propertyName=&quot;Regexp.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types/ArrayrefOf.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types&quot;]/propertySheet/property[propertyName=&quot;ArrayrefOf.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types/Reference.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types&quot;]/propertySheet/property[propertyName=&quot;Reference.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types/Any.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types&quot;]/propertySheet/property[propertyName=&quot;Any.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types/Enum.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types&quot;]/propertySheet/property[propertyName=&quot;Enum.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Log.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Log.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Config.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Config.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Throwable.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Throwable.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Constants.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Constants.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/Proxy.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;Proxy.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/CLI/Command.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;CLI&quot;]/propertySheet/property[propertyName=&quot;Command.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/CLI/ExecutionResult.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;CLI&quot;]/propertySheet/property[propertyName=&quot;ExecutionResult.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/CLI.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;CLI.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Metadata.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Metadata.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/MetadataFactory.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;MetadataFactory.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Payloadset.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Payloadset.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Engine.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Engine.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Dataset.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Dataset.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Payload.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Payload.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Transformer.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Transformer.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting/Data.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting&quot;]/propertySheet/property[propertyName=&quot;Data.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/EF/Reporting.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;Reporting.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component/OAuth.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component&quot;]/propertySheet/property[propertyName=&quot;OAuth.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Types.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Types.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Context.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Context.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/BaseClass2.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;BaseClass2.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/ContextFactory.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;ContextFactory.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/ComponentManager.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;ComponentManager.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Log/FW.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Log&quot;]/propertySheet/property[propertyName=&quot;FW.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/StepResult/Action.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;StepResult&quot;]/propertySheet/property[propertyName=&quot;Action.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/EF/PostP.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;PostP.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/EF/OutputParameters.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;EF&quot;]/propertySheet/property[propertyName=&quot;OutputParameters.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Component.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Component.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/StepResult.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;StepResult.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Parameter.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Parameter.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Service/Bootstrap.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Service&quot;]/propertySheet/property[propertyName=&quot;Bootstrap.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Service/RSA.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Service&quot;]/propertySheet/property[propertyName=&quot;RSA.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/WrongFunctionArgumentType.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;WrongFunctionArgumentType.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/UnexpectedEmptyValue.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;UnexpectedEmptyValue.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/MissingFunctionArgument.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;MissingFunctionArgument.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/RuntimeException.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;RuntimeException.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/EntityDoesNotExist.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;EntityDoesNotExist.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/EntityAlreadyExists.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;EntityAlreadyExists.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/MissingFunctionDefinition.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;MissingFunctionDefinition.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/WrongFunctionArgumentValue.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;WrongFunctionArgumentValue.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Exception/UnexpectedMissingValue.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;UnexpectedMissingValue.pm&quot;]/value</xpath>
+    </file>
+
+    <file>
+        <path>pdk/FlowPDF/Exception/ConfigDoesNotExist.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Exception&quot;]/propertySheet/property[propertyName=&quot;ConfigDoesNotExist.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Client/REST.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Client&quot;]/propertySheet/property[propertyName=&quot;REST.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Client/REST/Auth.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Client&quot;]/propertySheet/property[propertyName=&quot;REST&quot;]/propertySheet/property[propertyName=&quot;Auth.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Helpers.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Helpers.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/FlowPDF/Credential.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;FlowPDF&quot;]/propertySheet/property[propertyName=&quot;Credential.pm&quot;]/value</xpath>
+    </file>
+    <file>
+        <path>pdk/Try/Tiny.pm</path>
+        <xpath>//property[propertyName=&quot;pdk&quot;]/propertySheet/property[propertyName=&quot;Try&quot;]/propertySheet/property[propertyName=&quot;Tiny.pm&quot;]/value</xpath>
+    </file>
+
+    <!-- End of PDK Perl Libs-->
 </fileset>

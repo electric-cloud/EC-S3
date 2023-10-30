@@ -1,0 +1,66 @@
+<editor>
+    <formElement>
+        <type>entry</type>
+        <label>Service URL:</label>
+        <property>service_url</property>
+        <value>https://s3.amazonaws.com</value>
+        <documentation>The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com.</documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Resource Pool:</label>
+        <property>resource_pool</property>
+        <value>default</value>
+        <documentation>The name of the pool of resources on which the integration steps can run.</documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
+        <label>Workspace:</label>
+        <property>workspace</property>
+        <value>default</value>
+        <documentation>The workspace to use for resourced dynamically created by this configuration.</documentation>
+        <required>1</required>
+    </formElement>
+    <formElement>
+        <type>credential</type>
+        <label>Access ID's:</label>
+        <property>credential</property>
+        <userNameLabel>Access ID:</userNameLabel>
+        <passwordLabel>Secret Access ID:</passwordLabel>
+        <retypePasswordLabel>Retype Secret Access ID:</retypePasswordLabel>
+        <required>1</required>
+        <documentation>The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential.</documentation>
+        <supportsCredentialReference>true</supportsCredentialReference>
+    </formElement>
+<!--    <formElement>-->
+<!--        <type>checkbox</type>-->
+<!--        <label>Test connection?:</label>-->
+<!--        <property>test_connection</property>-->
+<!--        <checkedValue>1</checkedValue>-->
+<!--        <uncheckedValue>0</uncheckedValue>-->
+<!--        <intiallyChecked>0</intiallyChecked>-->
+<!--        <required>0</required>-->
+<!--    </formElement>-->
+    <formElement>
+        <type>select</type>
+        <property>debug_level</property>
+        <required>0</required>
+        <documentation>Level of the plugin procedure's verbosity.</documentation>
+        <label>Log Level:</label>
+        <option>
+            <name>Info</name>
+            <value>0</value>
+        </option>
+        <option>
+            <name>Debug</name>
+            <value>1</value>
+        </option>
+        <option>
+            <name>Trace</name>
+            <value>2</value>
+        </option>
+        <value>0</value>
+    </formElement>
+</editor>

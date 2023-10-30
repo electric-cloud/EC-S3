@@ -1,20 +1,376 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exportedData version="68" buildLabel="build_main_87670_2015.03.27_12:11:30" buildVersion="5.4.0.87670">
-  <exportPath>/projects/@PLUGIN_KEY@</exportPath>
-  <project>
-    <projectName>@PLUGIN_KEY@</projectName>
-    <description/>
-    <resourceName/>
-
-    <workspaceName/>
+    <exportPath>/projects/@PLUGIN_KEY@-@PLUGIN_VERSION@</exportPath>
+    <project>
+        <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+        <description/>
+        <resourceName/>
+        <workspaceName/>
         <propertySheet>
-          <!-- Improvement for ECSTHREE-10 -->
-          <property>
-              <propertyName>ec_icon</propertyName>
-              <value>images/icon-plugin.svg</value>
-          </property>
-          <!-- End of improvement for ECSTHREE-10 -->
-          <property>
+            <property>
+                <propertyName>ec_configPropertySheet</propertyName>
+                <value>s3_cfgs</value>
+            </property>
+
+            <!-- PDK related part-->
+            <property>
+                <propertyName>postpLoader</propertyName>
+                <value></value>
+            </property>
+            <property>
+                <propertyName>pdk</propertyName>
+                <propertySheet>
+                    <property>
+                        <propertyName>FlowPDF</propertyName>
+                        <propertySheet>
+                            <property>
+                                <propertyName>Component.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Parameter.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>ComponentManager.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Types</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>Any.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>Reference.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>ArrayrefOf.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>Scalar.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>Regexp.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>Enum.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>Helpers.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Exception</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>RuntimeException.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>ConfigDoesNotExist.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>WrongFunctionArgumentValue.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>MissingFunctionDefinition.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>EntityDoesNotExist.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>WrongFunctionArgumentType.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>MissingFunctionArgument.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>UnexpectedMissingValue.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>EntityAlreadyExists.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>UnexpectedEmptyValue.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>Types.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Exception.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Constants.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Context.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Component</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>CLI</propertyName>
+                                        <propertySheet>
+                                            <property>
+                                                <propertyName>ExecutionResult.pm</propertyName>
+                                                <value></value>
+                                            </property>
+                                            <property>
+                                                <propertyName>Command.pm</propertyName>
+                                                <value></value>
+                                            </property>
+                                        </propertySheet>
+                                    </property>
+                                    <property>
+                                        <propertyName>OAuth.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>CLI.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>EF.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>Proxy.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>EF</propertyName>
+                                        <propertySheet>
+                                            <property>
+                                                <propertyName>Reporting</propertyName>
+                                                <propertySheet>
+                                                    <property>
+                                                        <propertyName>Dataset.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>Transformer.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>MetadataFactory.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>Engine.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>Metadata.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>Data.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>Payload.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                    <property>
+                                                        <propertyName>Payloadset.pm</propertyName>
+                                                        <value></value>
+                                                    </property>
+                                                </propertySheet>
+                                            </property>
+                                            <property>
+                                                <propertyName>Reporting.pm</propertyName>
+                                                <value></value>
+                                            </property>
+                                        </propertySheet>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>BaseClass.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Config.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Credential.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Log</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>FW.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>Log.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Client</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>REST.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>REST</propertyName>
+                                        <propertySheet>
+                                            <property>
+                                                <propertyName>Auth.pm</propertyName>
+                                                <value></value>
+                                            </property>
+                                        </propertySheet>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>StepResult</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>Action.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>EF</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>PostP.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>OutputParameters.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>StepParameters.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>StepResult.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Throwable.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>ContextFactory.pm</propertyName>
+                                <value></value>
+                            </property>
+                            <property>
+                                <propertyName>Devel</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>Stacktrace.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>Service</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>Bootstrap.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                    <property>
+                                        <propertyName>RSA.pm</propertyName>
+                                        <value></value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>BaseClass2.pm</propertyName>
+                                <value></value>
+                            </property>
+                        </propertySheet>
+                    </property>
+                    <property>
+                        <propertyName>FlowPDF.pm</propertyName>
+                        <value></value>
+                    </property>
+                    <property>
+                        <propertyName>Bytes</propertyName>
+                        <propertySheet>
+                            <property>
+                                <propertyName>Random</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>Secure</propertyName>
+                                        <propertySheet>
+                                            <property>
+                                                <propertyName>Tiny.pm</propertyName>
+                                                <value></value>
+                                            </property>
+                                        </propertySheet>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                        </propertySheet>
+                    </property>
+                    <property>
+                        <propertyName>Try</propertyName>
+                        <propertySheet>
+                            <property>
+                                <propertyName>Tiny.pm</propertyName>
+                                <value></value>
+                            </property>
+                        </propertySheet>
+                    </property>
+                </propertySheet>
+            </property>
+            <!-- End of PDK related part -->
+
+            <property>
+                <propertyName>ec_formXmlCompliant</propertyName>
+                <value>true</value>
+            </property>
+
+            <property>
+                <propertyName>ec_configCompliant</propertyName>
+                <value>true</value>
+            </property>
+
+            <!-- Improvement for ECSTHREE-10 -->
+            <property>
+                <propertyName>ec_icon</propertyName>
+                <value>images/icon-plugin.svg</value>
+            </property>
+            <!-- End of improvement for ECSTHREE-10 -->
+            <property>
                 <propertyName>ec_setup</propertyName>
                 <value/>
                 <expandable>0</expandable>
@@ -58,27 +414,132 @@
                         <value/>
                     </property>
                 </propertySheet>
-            </property>		
+            </property>
             <property>
                 <propertyName>postp_matchers</propertyName>
                 <description/>
                 <expandable>1</expandable>
                 <value/>
-            </property>			
+            </property>
+            <property>
+                <propertyName>ec_config</propertyName>
+                <description/>
+                <propertySheet>
+                    <property>
+                        <propertyName>stepsWithAttachedCredentials</propertyName>
+                        <expandable>0</expandable>
+                        <value/>
+                    </property>
+                    <property>
+                        <propertyName>configLocation</propertyName>
+                        <expandable>0</expandable>
+                        <value>s3_cfgs</value>
+                    </property>
+                    <property>
+                        <propertyName>form</propertyName>
+                        <expandable>1</expandable>
+                        <value>$[/projects/@PLUGIN_KEY@-@PLUGIN_VERSION@/ui_forms/EC-S3 - S3CreateConfigForm]</value>
+                    </property>
+                    <property>
+                        <propertyName>fields</propertyName>
+                        <description/>
+                        <propertySheet>
+                            <property>
+                                <propertyName>config</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>label</propertyName>
+                                        <value>Configuration Name</value>
+                                    </property>
+                                    <property>
+                                        <propertyName>order</propertyName>
+                                        <value>1</value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>service_url</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>label</propertyName>
+                                        <value>Service URL:</value>
+                                    </property>
+                                    <property>
+                                        <propertyName>order</propertyName>
+                                        <value>2</value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>resource_pool</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>label</propertyName>
+                                        <value>Resource Pool:</value>
+                                    </property>
+                                    <property>
+                                        <propertyName>order</propertyName>
+                                        <value>4</value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>workspace</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>label</propertyName>
+                                        <value>Workspace:</value>
+                                    </property>
+                                    <property>
+                                        <propertyName>order</propertyName>
+                                        <value>5</value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                            <property>
+                                <propertyName>credential</propertyName>
+                                <propertySheet>
+                                    <property>
+                                        <propertyName>label</propertyName>
+                                        <value>Access ID:</value>
+                                    </property>
+                                    <property>
+                                        <propertyName>order</propertyName>
+                                        <value>3</value>
+                                    </property>
+                                </propertySheet>
+                            </property>
+                        </propertySheet>
+                    </property>
+                </propertySheet>
+            </property>
+            <!-- New configurations -->
+            <property>
+                <propertyName>ec_formXmlCompliant</propertyName>
+                <value>true</value>
+            </property>
+            <property>
+                <propertyName>ec_configCompliant</propertyName>
+                <value>true</value>
+            </property>
+            <!-- End of new configurations -->
         </propertySheet>
 
-       
-		
-		        <procedure>
+
+        <procedure>
             <procedureName>CreateConfiguration</procedureName>
             <description>Create a S3 configuration</description>
             <jobNameTemplate/>
-            <resourceName/>
+            <resourceName>local</resourceName>
             <workspaceName>default</workspaceName>
             <acl>
                 <inheriting>1</inheriting>
             </acl>
             <propertySheet>
+                <property>
+                    <propertyName>ec_stepsWithAttachedCredentials</propertyName>
+                    <value></value>
+                </property>
                 <property>
                     <propertyName>ec_customEditorData</propertyName>
                     <propertySheet>
@@ -146,7 +607,7 @@
                                     </propertySheet>
                                 </property>
                                 <property>
-                                    <propertyName>debug</propertyName>
+                                    <propertyName>debug_level</propertyName>
                                     <propertySheet>
                                         <acl>
                                             <inheriting>1</inheriting>
@@ -211,7 +672,7 @@
                                     </propertySheet>
                                 </property>
                                 <property>
-                                    <propertyName>attempt</propertyName>
+                                    <propertyName>checkConnection</propertyName>
                                     <propertySheet>
                                         <acl>
                                             <inheriting>1</inheriting>
@@ -264,7 +725,7 @@
                 <type>credential</type>
             </formalParameter>
             <formalParameter>
-                <formalParameterName>debug</formalParameterName>
+                <formalParameterName>debug_level</formalParameterName>
                 <defaultValue>1</defaultValue>
                 <description/>
                 <required>1</required>
@@ -299,50 +760,50 @@
                 <type>entry</type>
             </formalParameter>
             <formalParameter>
-                <formalParameterName>attempt</formalParameterName>
+                <formalParameterName>checkConnection</formalParameterName>
                 <defaultValue/>
                 <description/>
                 <required>1</required>
                 <type>checkbox</type>
             </formalParameter>
-            <step>
-                <stepName>AttemptConnection</stepName>
-                <alwaysRun>0</alwaysRun>
-                <broadcast>0</broadcast>
-                <command/>
-                <condition>$[attempt]</condition>
-                <description/>
-                <errorHandling>abortProcedure</errorHandling>
-                <exclusive>0</exclusive>
-                <logFileName/>
-                <parallel>0</parallel>
-                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-                <releaseExclusive>0</releaseExclusive>
-                <resourceName/>
-                <retries>0</retries>
-                <shell>ec-groovy</shell>
-                <timeLimit/>
-                <timeLimitUnits>minutes</timeLimitUnits>
-                <workingDirectory/>
-                <workspaceName/>
-                <procedureName>CreateConfiguration</procedureName>
-                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
-                <propertySheet>
-                    <property>
-                        <propertyName>ec_customEditorData</propertyName>
-                        <propertySheet>
-                            <property>
-                                <propertyName>formType</propertyName>
-                                <expandable>1</expandable>
-                                <value>command</value>
-                            </property>
-                        </propertySheet>
-                    </property>
-                </propertySheet>
-                <attachedParameters>
-                    <formalParameterName>credential</formalParameterName>
-                </attachedParameters>
-            </step>
+<!--            <step>-->
+<!--                <stepName>AttemptConnection</stepName>-->
+<!--                <alwaysRun>0</alwaysRun>-->
+<!--                <broadcast>0</broadcast>-->
+<!--                <command/>-->
+<!--                <condition>$[checkConnection]</condition>-->
+<!--                <description/>-->
+<!--                <errorHandling>abortProcedure</errorHandling>-->
+<!--                <exclusive>0</exclusive>-->
+<!--                <logFileName/>-->
+<!--                <parallel>0</parallel>-->
+<!--                <postProcessor>postp &#45;&#45;loadProperty /myProject/postp_matchers</postProcessor>-->
+<!--                <releaseExclusive>0</releaseExclusive>-->
+<!--                <resourceName/>-->
+<!--                <retries>0</retries>-->
+<!--                <shell>ec-groovy</shell>-->
+<!--                <timeLimit/>-->
+<!--                <timeLimitUnits>minutes</timeLimitUnits>-->
+<!--                <workingDirectory/>-->
+<!--                <workspaceName/>-->
+<!--                <procedureName>CreateConfiguration</procedureName>-->
+<!--                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>-->
+<!--                <propertySheet>-->
+<!--                    <property>-->
+<!--                        <propertyName>ec_customEditorData</propertyName>-->
+<!--                        <propertySheet>-->
+<!--                            <property>-->
+<!--                                <propertyName>formType</propertyName>-->
+<!--                                <expandable>1</expandable>-->
+<!--                                <value>command</value>-->
+<!--                            </property>-->
+<!--                        </propertySheet>-->
+<!--                    </property>-->
+<!--                </propertySheet>-->
+<!--                <attachedParameters>-->
+<!--                    <formalParameterName>credential</formalParameterName>-->
+<!--                </attachedParameters>-->
+<!--            </step>-->
             <step>
                 <stepName>CreateConfiguration</stepName>
                 <alwaysRun>0</alwaysRun>
@@ -358,7 +819,7 @@
                 <releaseExclusive>0</releaseExclusive>
                 <resourceName/>
                 <retries>0</retries>
-                <shell>ec-perl</shell>
+                <shell>cb-perl</shell>
                 <timeLimit>5</timeLimit>
                 <timeLimitUnits>minutes</timeLimitUnits>
                 <workingDirectory/>
@@ -393,7 +854,7 @@
                 <releaseExclusive>0</releaseExclusive>
                 <resourceName/>
                 <retries>0</retries>
-                <shell>ec-perl</shell>
+                <shell>cb-perl</shell>
                 <timeLimit/>
                 <timeLimitUnits>minutes</timeLimitUnits>
                 <workingDirectory/>
@@ -416,32 +877,328 @@
                     <formalParameterName>credential</formalParameterName>
                 </attachedParameters>
             </step>
-
-
         </procedure>
-		
-<procedure>
+
+        <procedure>
+            <procedureName>EditConfiguration</procedureName>
+            <description>Edit a S3 configuration</description>
+            <jobNameTemplate>S3-edit_cfg-$[jobId]</jobNameTemplate>
+            <resourceName>local</resourceName>
+            <workspaceName></workspaceName>
+            <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+            <acl>
+                <inheriting>1</inheriting>
+            </acl>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_formXmlCompliant</propertyName>
+                    <value>true</value>
+                </property>
+                <property>
+                    <propertyName>ec_customEditorData</propertyName>
+                    <propertySheet>
+                        <acl>
+                            <inheriting>1</inheriting>
+                        </acl>
+                        <property>
+                            <propertyName>parameters</propertyName>
+                            <propertySheet>
+                                <acl>
+                                    <inheriting>1</inheriting>
+                                </acl>
+                                <property>
+                                    <propertyName>createCredential</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>checkedValue</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>1</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>initiallyChecked</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>0</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>uncheckedValue</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>0</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>credential</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>debug_level</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>desc</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>resource_pool</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>service_url</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>workspace</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>checkConnection</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>checkedValue</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>1</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>initiallyChecked</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>0</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>uncheckedValue</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>0</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                            </propertySheet>
+                        </property>
+                    </propertySheet>
+                </property>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>1</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description>The configuration to use</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>credential</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>0</required>
+                <type>credential</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>debug_level</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description/>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>desc</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>resource_pool</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>service_url</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>workspace</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>checkConnection</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>1</required>
+                <type>checkbox</type>
+            </formalParameter>
+<!--            <step>-->
+<!--                <stepName>AttemptConnection</stepName>-->
+<!--                <alwaysRun>0</alwaysRun>-->
+<!--                <broadcast>0</broadcast>-->
+<!--                <command/>-->
+<!--                <condition>$[checkConnection]</condition>-->
+<!--                <description/>-->
+<!--                <errorHandling>abortProcedure</errorHandling>-->
+<!--                <exclusive>0</exclusive>-->
+<!--                <logFileName/>-->
+<!--                <parallel>0</parallel>-->
+<!--                <postProcessor>$[/myProject/postpLoader]</postProcessor>-->
+<!--                <releaseExclusive>0</releaseExclusive>-->
+<!--                <resourceName/>-->
+<!--                <retries>0</retries>-->
+<!--                <shell>ec-groovy</shell>-->
+<!--                <timeLimit/>-->
+<!--                <timeLimitUnits>minutes</timeLimitUnits>-->
+<!--                <workingDirectory/>-->
+<!--                <workspaceName/>-->
+<!--                <procedureName>EditConfiguration</procedureName>-->
+<!--                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>-->
+<!--                <propertySheet>-->
+<!--                    <property>-->
+<!--                        <propertyName>ec_customEditorData</propertyName>-->
+<!--                        <propertySheet>-->
+<!--                            <property>-->
+<!--                                <propertyName>formType</propertyName>-->
+<!--                                <expandable>1</expandable>-->
+<!--                                <value>command</value>-->
+<!--                            </property>-->
+<!--                        </propertySheet>-->
+<!--                    </property>-->
+<!--                </propertySheet>-->
+<!--                <attachedParameters>-->
+<!--                    <formalParameterName>credential</formalParameterName>-->
+<!--                </attachedParameters>-->
+<!--            </step>-->
+            <step>
+                <stepName>EditConfiguration</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Edit a S3 configuration</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusive>0</exclusive>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>$[/myProject/postpLoader]</postProcessor>
+                <releaseExclusive>0</releaseExclusive>
+                <resourceName/>
+                <retries>0</retries>
+                <shell>cb-perl</shell>
+                <timeLimit>5</timeLimit>
+                <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+                <procedureName>EditConfiguration</procedureName>
+                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+                <propertySheet>
+                    <property>
+                        <propertyName>ec_customEditorData</propertyName>
+                        <propertySheet>
+                            <property>
+                                <propertyName>formType</propertyName>
+                                <expandable>1</expandable>
+                                <value>command</value>
+                            </property>
+                        </propertySheet>
+                    </property>
+                </propertySheet>
+            </step>
+        </procedure>
+
+        <procedure>
             <procedureName>DeleteConfiguration</procedureName>
             <description>Delete an S3 configuration</description>
-
             <jobNameTemplate>s3-deletecfg-$[jobId]</jobNameTemplate>
-            <resourceName />
-            <workspaceName />
-
+            <resourceName/>
+            <workspaceName/>
             <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
             <propertySheet>
                 <property>
                     <propertyName>ec_customEditorData</propertyName>
                     <propertySheet>
-
                         <property>
                             <propertyName>parameters</propertyName>
                             <propertySheet>
-
                                 <property>
                                     <propertyName>config</propertyName>
                                     <propertySheet>
-
                                         <property>
                                             <propertyName>formType</propertyName>
                                             <expandable>1</expandable>
@@ -451,15 +1208,14 @@
                                 </property>
                             </propertySheet>
                         </property>
-
                     </propertySheet>
                 </property>
             </propertySheet>
 
             <formalParameter>
                 <formalParameterName>config</formalParameterName>
-                <defaultValue />
-                <description>The configuration name. </description>
+                <defaultValue/>
+                <description>The configuration name.</description>
                 <required>1</required>
                 <type>entry</type>
             </formalParameter>
@@ -468,891 +1224,1253 @@
                 <alwaysRun>0</alwaysRun>
                 <broadcast>0</broadcast>
                 <command></command>
-                <condition />
+                <condition/>
                 <description>Delete a S3 configuration</description>
-
                 <errorHandling>failProcedure</errorHandling>
                 <exclusive>0</exclusive>
-                <logFileName />
-
+                <logFileName/>
                 <parallel>0</parallel>
                 <postProcessor>postp</postProcessor>
-
                 <releaseExclusive>0</releaseExclusive>
                 <resourceName/>
                 <retries>0</retries>
-                <shell>ec-perl</shell>
-
+                <shell>cb-perl</shell>
                 <timeLimit>5</timeLimit>
                 <timeLimitUnits>minutes</timeLimitUnits>
-                <workingDirectory />
-
-                <workspaceName />
+                <workingDirectory/>
+                <workspaceName/>
                 <procedureName>DeleteConfiguration</procedureName>
                 <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
                 <propertySheet>
                     <property>
                         <propertyName>ec_customEditorData</propertyName>
                         <propertySheet>
-
                             <property>
                                 <propertyName>formType</propertyName>
                                 <expandable>1</expandable>
                                 <value>command</value>
                             </property>
-
                         </propertySheet>
                     </property>
                 </propertySheet>
             </step>
-
         </procedure>
-							
-    <procedure>
-      <procedureName>CreateBucket</procedureName>
-      <description>Create a S3 bucket</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+        <procedure>
+            <procedureName>CreateBucket</procedureName>
+            <description>Create a S3 bucket</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>createBucket</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Create a S3 bucket</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+        <procedure>
+            <procedureName>UploadObject</procedureName>
+            <description>Upload an Object to S3 bucket/folder</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>key</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>fileToUpload</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>access_public</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description>If checked, the uploaded object will be publicly accessible</description>
+                <required>0</required>
+                <type>checkbox</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>uploadObject</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Upload an Object to S3 bucket/folder</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>
-      <step>
-        <stepName>createBucket</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Create a S3 bucket</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
-	
-	<procedure>
-      <procedureName>UploadObject</procedureName>
-      <description>Upload an Object to S3 bucket/folder</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+        <procedure>
+            <procedureName>UploadFolder</procedureName>
+            <description>Upload the contents of a folder to a S3 bucket/folder</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>key</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>key</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>	  
-	  <formalParameter>
-        <formalParameterName>fileToUpload</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>folderToUpload</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-	  <formalParameter>
-		  <formalParameterName>access_public</formalParameterName>
-		  <defaultValue>1</defaultValue>
-		  <description>If checked, the uploaded object will be publicly accessible</description>
-		  <required>0</required>
-		  <type>checkbox</type>
-		</formalParameter>
-        <formalParameter>
-            <formalParameterName>propResult</formalParameterName>
-            <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-            <expansionDeferred>0</expansionDeferred>
-            <required>0</required>
-            <defaultValue>/myJob/S3Output</defaultValue>
-            <type>entry</type>
-        </formalParameter>
-      <step>
-        <stepName>uploadObject</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Upload an Object to S3 bucket/folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>access_public</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description>If checked, the uploaded object will be publicly accessible</description>
+                <required>0</required>
+                <type>checkbox</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>uploadFolder</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Upload the contents of a folder to a S3 bucket/folder</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
-	
-		<procedure>
-      <procedureName>UploadFolder</procedureName>
-      <description>Upload the contents of a folder to a S3 bucket/folder</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+        <procedure>
+            <procedureName>DownloadObject</procedureName>
+            <description>Download an S3 object to local folder</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>key</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>	  
-	  <formalParameter>
-        <formalParameterName>folderToUpload</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>key</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-	  <formalParameter>
-		  <formalParameterName>access_public</formalParameterName>
-		  <defaultValue>1</defaultValue>
-		  <description>If checked, the uploaded object will be publicly accessible</description>
-		  <required>0</required>
-		  <type>checkbox</type>
-		</formalParameter>
-        <formalParameter>
-            <formalParameterName>propResult</formalParameterName>
-            <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-            <expansionDeferred>0</expansionDeferred>
-            <required>0</required>
-            <defaultValue>/myJob/S3Output</defaultValue>
-            <type>entry</type>
-        </formalParameter>
-      <step>
-        <stepName>uploadFolder</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Upload the contents of a folder to a S3 bucket/folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>downloadLocation</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
-	
-	<procedure>
-      <procedureName>DownloadObject</procedureName>
-      <description>Download an S3 object to local folder</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>downloadObject</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Download an S3 object to local folder</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+        <procedure>
+            <procedureName>ListBucket</procedureName>
+            <description>List all the available buckets for the current account</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>key</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>listBucket</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>List all the available buckets for the current account</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>	  
-	  <formalParameter>
-        <formalParameterName>downloadLocation</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>propResult</formalParameterName>
-        <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-        <expansionDeferred>0</expansionDeferred>
-        <required>0</required>
-        <defaultValue>/myJob/S3Output</defaultValue>
-        <type>entry</type>
-      </formalParameter>
-      <step>
-        <stepName>downloadObject</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Download an S3 object to local folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+        <procedure>
+            <procedureName>CreateFolder</procedureName>
+            <description>Create a S3 folder</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>	
-	
-	    <procedure>
-      <procedureName>ListBucket</procedureName>
-      <description>List all the available buckets for the current account</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-        <formalParameter>
-            <formalParameterName>propResult</formalParameterName>
-            <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-            <expansionDeferred>0</expansionDeferred>
-            <required>0</required>
-            <defaultValue>/myJob/S3Output</defaultValue>
-            <type>entry</type>
-        </formalParameter>
-      <step>
-        <stepName>listBucket</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>List all the available buckets for the current account</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>folderName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
-	
-	    <procedure>
-      <procedureName>CreateFolder</procedureName>
-      <description>Create a S3 folder</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>createFolder</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Create a S3 folder</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+        <procedure>
+            <procedureName>ListFolder</procedureName>
+            <description>List all the available objects under a S3 folder</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>folderName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <step>
-        <stepName>createFolder</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Create a S3 folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
+                <type>entry</type>
+            </formalParameter>
 
-	    <procedure>
-      <procedureName>ListFolder</procedureName>
-      <description>List all the available objects under a S3 folder</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+            <formalParameter>
+                <formalParameterName>folderName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>include_sub_folder</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description>List Objects in this folder or Include all sub folders</description>
+                <required>0</required>
+                <type>checkbox</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>listFolder</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>List all the available objects under a S3 folder</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
+        <procedure>
+            <procedureName>DownloadFolder</procedureName>
+            <description>Download the contents of a S3 folder</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-      <formalParameter>
-        <formalParameterName>folderName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>key</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>downloadLocation</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>downloadFolder</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Download the contents of a S3 folder</description>
+                <errorHandling>failProcedure</errorHandling>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>
-		<formalParameter>
-		  <formalParameterName>include_sub_folder</formalParameterName>
-		  <defaultValue>1</defaultValue>
-		  <description>List Objects in this folder or Include all sub folders</description>
-		  <required>0</required>
-		  <type>checkbox</type>
-		</formalParameter>
-        <formalParameter>
-            <formalParameterName>propResult</formalParameterName>
-            <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-            <expansionDeferred>0</expansionDeferred>
-            <required>0</required>
-            <defaultValue>/myJob/S3Output</defaultValue>
-            <type>entry</type>
-        </formalParameter>
-      <step>
-        <stepName>listFolder</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>List all the available objects under a S3 folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
+        <procedure>
+            <procedureName>DeleteObject</procedureName>
+            <description>Delete a S3 object</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-	<procedure>
-      <procedureName>DownloadFolder</procedureName>
-      <description>Download the contents of a S3 folder</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>key</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>key</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>deleteObject</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Delete a S3 object</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>	  
-	  <formalParameter>
-        <formalParameterName>downloadLocation</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
-        <formalParameter>
-            <formalParameterName>propResult</formalParameterName>
-            <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-            <expansionDeferred>0</expansionDeferred>
-            <required>0</required>
-            <defaultValue>/myJob/S3Output</defaultValue>
-            <type>entry</type>
-        </formalParameter>
-      <step>
-        <stepName>downloadFolder</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Download the contents of a S3 folder</description>
-        <errorHandling>failProcedure</errorHandling>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+        <procedure>
+            <procedureName>DeleteBucketContents</procedureName>
+            <description>Delete all the objects in a bucket</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>	
-	
-		<procedure>
-      <procedureName>DeleteObject</procedureName>
-      <description>Delete a S3 object</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>key</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <step>
+                <stepName>deleteBucketContents</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Delete all the objects in a bucket</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>	  
-      <step>
-        <stepName>deleteObject</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Delete a S3 object</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>	
-	
-	<procedure>
-      <procedureName>DeleteBucketContents</procedureName>
-      <description>Delete all the objects in a bucket</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+        <procedure>
+            <procedureName>WebsiteHosting</procedureName>
+            <description>Make a S3 bucket to host static website</description>
+            <jobNameTemplate/>
+            <resourceName/>
+            <timeLimit/>
+            <timeLimitUnits>minutes</timeLimitUnits>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <workspaceName/>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>bucketName</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-  
-      <step>
-        <stepName>deleteBucketContents</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Delete all the objects in a bucket</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+                <type>entry</type>
+            </formalParameter>
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>	
-	
-		<procedure>
-      <procedureName>WebsiteHosting</procedureName>
-      <description>Make a S3 bucket to host static website</description>
-      <jobNameTemplate/>
-      <resourceName/>
-      <timeLimit/>
-      <timeLimitUnits>minutes</timeLimitUnits>
+            <formalParameter>
+                <formalParameterName>website_hosting</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description>Once you enable your bucket for static website hosting, all your content is accessible to
+                    web browsers via the Amazon S3 website endpoint for your bucket
+                </description>
+                <required>0</required>
+                <type>checkbox</type>
+            </formalParameter>
 
-      <workspaceName/>
-	  <propertySheet>
-		<property>
-			<propertyName>ec_parameterForm</propertyName>
-			<description/>
-			<expandable>0</expandable>
-			<value/>
-		</property>
-	   </propertySheet>
-      <formalParameter>
-        <formalParameterName>config</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+            <formalParameter>
+                <formalParameterName>indexDoc</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>1</required>
 
-        <type>entry</type>
-      </formalParameter>
-      <formalParameter>
-        <formalParameterName>bucketName</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>errorDoc</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
 
-        <type>entry</type>
-      </formalParameter>
-	  
-	   <formalParameter>
-		  <formalParameterName>website_hosting</formalParameterName>
-		  <defaultValue>1</defaultValue>
-		  <description>Once you enable your bucket for static website hosting, all your content is accessible to web browsers via the Amazon S3 website endpoint for your bucket</description>
-		  <required>0</required>
-		  <type>checkbox</type>
-		</formalParameter>	
-		
-      <formalParameter>
-        <formalParameterName>indexDoc</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>propResult</formalParameterName>
+                <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output
+                </description>
+                <expansionDeferred>0</expansionDeferred>
+                <required>0</required>
+                <defaultValue>/myJob/S3Output</defaultValue>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>websiteHosting</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition/>
+                <description>Make a S3 bucket to host static website</description>
+                <errorHandling>failProcedure</errorHandling>
+                <exclusiveMode>none</exclusiveMode>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <precondition/>
+                <releaseMode>none</releaseMode>
+                <resourceName/>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
 
-        <type>entry</type>
-      </formalParameter>	  
-	  <formalParameter>
-        <formalParameterName>errorDoc</formalParameterName>
-        <defaultValue/>
-        <description/>
-        <expansionDeferred>0</expansionDeferred>
-        <required>0</required>
+                <workingDirectory/>
+                <workspaceName/>
+            </step>
+        </procedure>
 
-        <type>entry</type>
-      </formalParameter>
-        <formalParameter>
-            <formalParameterName>propResult</formalParameterName>
-            <description>Where to put the result. If not specified, the result is pushed to /myJob/S3Output</description>
-            <expansionDeferred>0</expansionDeferred>
-            <required>0</required>
-            <defaultValue>/myJob/S3Output</defaultValue>
-            <type>entry</type>
-        </formalParameter>
-      <step>
-        <stepName>websiteHosting</stepName>
-        <alwaysRun>0</alwaysRun>
-        <broadcast>0</broadcast>
-        <command/>
-        <condition/>
-        <description>Make a S3 bucket to host static website</description>
-        <errorHandling>failProcedure</errorHandling>
-        <exclusiveMode>none</exclusiveMode>
-        <logFileName/>
-        <parallel>0</parallel>
-        <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
-        <precondition/>
-        <releaseMode>none</releaseMode>
-        <resourceName/>
-        <shell>ec-groovy</shell>
-        <timeLimit/>
-        <timeLimitUnits>minutes</timeLimitUnits>
+        <!-- BEGIN OF NEW ConfigurationParametersHolder procedure -->
+        <procedure>
+            <procedureName>ConfigurationParametersHolder</procedureName>
+            <description>ConfigurationParametersHolder</description>
+            <jobNameTemplate>EC-S3-Holder-$[jobId]</jobNameTemplate>
+            <resourceName></resourceName>
+            <workspaceName></workspaceName>
+            <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+                <!-- End of step property -->
+                <property>
+                    <propertyName>ec_customEditorData</propertyName>
+                    <propertySheet>
+                        <property>
+                            <propertyName>service_url</propertyName>
+                            <propertySheet>
+                                <property>
+                                    <propertyName>formType</propertyName>
+                                    <expandable>1</expandable>
+                                    <value>standard</value>
+                                </property>
+                            </propertySheet>
+                        </property>
+                        <property>
+                            <propertyName>resource_pool</propertyName>
+                            <propertySheet>
+                                <property>
+                                    <propertyName>formType</propertyName>
+                                    <expandable>1</expandable>
+                                    <value>standard</value>
+                                </property>
+                            </propertySheet>
+                        </property>
+                        <property>
+                            <propertyName>workspace</propertyName>
+                            <propertySheet>
+                                <property>
+                                    <propertyName>formType</propertyName>
+                                    <expandable>1</expandable>
+                                    <value>standard</value>
+                                </property>
+                            </propertySheet>
+                        </property>
+                        <property>
+                            <propertyName>credential</propertyName>
+                            <propertySheet>
+                                <property>
+                                    <propertyName>formType</propertyName>
+                                    <expandable>1</expandable>
+                                    <value>standard</value>
+                                </property>
+                            </propertySheet>
+                        </property>
+<!--                        <property>-->
+<!--                            <propertyName>checkConnection</propertyName>-->
+<!--                            <propertySheet>-->
+<!--                                <property>-->
+<!--                                    <propertyName>formType</propertyName>-->
+<!--                                    <expandable>1</expandable>-->
+<!--                                    <value>standard</value>-->
+<!--                                </property>-->
+<!--                            </propertySheet>-->
+<!--                        </property>-->
+                        <!-- Start of debug level selector-->
+                        <property>
+                            <propertySheet>
+                                <property>
+                                    <propertySheet>
+                                        <property>
+                                            <propertySheet>
+                                                <property>
+                                                    <propertyName>text</propertyName>
+                                                    <value>Info</value>
+                                                </property>
+                                                <property>
+                                                    <propertyName>value</propertyName>
+                                                    <value>0</value>
+                                                </property>
+                                            </propertySheet>
+                                            <propertyName>option1</propertyName>
+                                        </property>
+                                        <property>
+                                            <propertySheet>
+                                                <property>
+                                                    <propertyName>text</propertyName>
+                                                    <value>Debug</value>
+                                                </property>
+                                                <property>
+                                                    <propertyName>value</propertyName>
+                                                    <value>1</value>
+                                                </property>
+                                            </propertySheet>
+                                            <propertyName>option2</propertyName>
+                                        </property>
+                                        <property>
+                                            <propertySheet>
+                                                <property>
+                                                    <propertyName>text</propertyName>
+                                                    <value>Trace</value>
+                                                </property>
+                                                <property>
+                                                    <propertyName>value</propertyName>
+                                                    <value>2</value>
+                                                </property>
+                                            </propertySheet>
+                                            <propertyName>option3</propertyName>
+                                        </property>
+                                        <property>
+                                            <propertyName>type</propertyName>
+                                            <value>list</value>
+                                        </property>
+                                        <property>
+                                            <propertyName>optionCount</propertyName>
+                                            <value>3</value>
+                                        </property>
+                                    </propertySheet>
+                                    <propertyName>options</propertyName>
+                                </property>
+                                <property>
+                                    <propertyName>formType</propertyName>
+                                    <value>standard</value>
+                                </property>
+                            </propertySheet>
+                            <propertyName>debug_level</propertyName>
+                        </property>
+                        <!-- End of debug level selector-->
+<!--                        <property>-->
+<!--                            <propertyName>formType</propertyName>-->
+<!--                            <expandable>1</expandable>-->
+<!--                            <value>standard</value>-->
+<!--                        </property>-->
+                    </propertySheet>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>service_url</formalParameterName>
+                <defaultValue/>
+                <description>The service URL for the S3 service. For the Amazon public S3, this should be
+                    https://s3.amazonaws.com.
+                </description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>resource_pool</formalParameterName>
+                <defaultValue/>
+                <description>The name of the pool of resources on which the integration steps can run.</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>workspace</formalParameterName>
+                <defaultValue/>
+                <description>The workspace to use for resourced dynamically created by this configuration.</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>credential</formalParameterName>
+                <defaultValue/>
+                <description>The workspace to use for resourced dynamically created by this configuration.</description>
+                <required>1</required>
+                <type>credential</type>
+            </formalParameter>
+<!--            <formalParameter>-->
+<!--                <formalParameterName>checkConnection</formalParameterName>-->
+<!--                <defaultValue>1</defaultValue>-->
+<!--                <description>Test Connection</description>-->
+<!--                <required>0</required>-->
+<!--                <type>entry</type>-->
+<!--            </formalParameter>-->
+            <formalParameter>
+                <formalParameterName>debug_level</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description>The workspace to use for resourced dynamically created by this configuration.</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+        </procedure>
+        <!-- END OF NEW ParameterHolder procedure -->
 
-        <workingDirectory/>
-        <workspaceName/>
-      </step>
-    </procedure>
-	
-	
-  </project>
+        <!-- New TestConfiguration procedure -->
+        <procedure>
+            <procedureName>TestConfiguration</procedureName>
+            <description>TestConfiguration</description>
+            <jobNameTemplate>S3-test-config-$[jobId]</jobNameTemplate>
+            <resourceName>local</resourceName>
+            <workspaceName></workspaceName>
+            <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+            <propertySheet>
+                <property>
+                    <propertyName>ec_parameterForm</propertyName>
+                    <description/>
+                    <expandable>0</expandable>
+                    <value/>
+                </property>
+                <!-- End of step property -->
+                <property>
+                    <propertyName>ec_customEditorData</propertyName>
+                    <propertySheet>
+                        <property>
+                            <propertyName>parameters</propertyName>
+                            <propertySheet>
+                                <property>
+                                    <propertyName>config</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>service_url</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>resource_pool</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>workspace</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                                <property>
+                                    <propertyName>credential</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+<!--                                <property>-->
+<!--                                    <propertyName>checkConnection</propertyName>-->
+<!--                                    <propertySheet>-->
+<!--                                        <property>-->
+<!--                                            <propertyName>formType</propertyName>-->
+<!--                                            <expandable>1</expandable>-->
+<!--                                            <value>standard</value>-->
+<!--                                        </property>-->
+<!--                                    </propertySheet>-->
+<!--                                </property>-->
+                                <property>
+                                    <propertyName>debug_level</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
+                            </propertySheet>
+                        </property>
+                    </propertySheet>
+                </property>
+            </propertySheet>
+            <formalParameter>
+                <formalParameterName>config</formalParameterName>
+                <defaultValue/>
+                <description>The configuration to use.</description>
+                <required>0</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>service_url</formalParameterName>
+                <defaultValue/>
+                <description>The service URL for the S3 service. For the Amazon public S3, this should be
+                    https://s3.amazonaws.com.
+                </description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>resource_pool</formalParameterName>
+                <defaultValue/>
+                <description>The name of the pool of resources on which the integration steps can run.</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>workspace</formalParameterName>
+                <defaultValue/>
+                <description>The workspace to use for resourced dynamically created by this configuration.</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
+                <formalParameterName>credential</formalParameterName>
+                <defaultValue/>
+                <description>Provide the username and password to use on the host. (Required)</description>
+                <required>1</required>
+                <type>credential</type>
+            </formalParameter>
+<!--            <formalParameter>-->
+<!--                <formalParameterName>checkConnection</formalParameterName>-->
+<!--                <defaultValue>1</defaultValue>-->
+<!--                <description>Test Connection.</description>-->
+<!--                <required>0</required>-->
+<!--                <type>entry</type>-->
+<!--            </formalParameter>-->
+            <formalParameter>
+                <formalParameterName>debug_level</formalParameterName>
+                <defaultValue>1</defaultValue>
+                <description>Level of the plugin procedure's verbosity.</description>
+                <required>1</required>
+                <type>entry</type>
+            </formalParameter>
+            <step>
+                <stepName>checkConnection</stepName>
+                <alwaysRun>0</alwaysRun>
+                <broadcast>0</broadcast>
+                <command/>
+                <condition></condition>
+                <description/>
+                <errorHandling>abortJob</errorHandling>
+                <exclusive>0</exclusive>
+                <logFileName/>
+                <parallel>0</parallel>
+                <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
+                <releaseExclusive>0</releaseExclusive>
+                <resourceName/>
+                <retries>0</retries>
+                <shell>ec-groovy</shell>
+                <timeLimit/>
+                <timeLimitUnits>minutes</timeLimitUnits>
+                <workingDirectory/>
+                <workspaceName/>
+                <procedureName>TestConfiguration</procedureName>
+                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
+                <propertySheet>
+                    <property>
+                        <propertyName>ec_customEditorData</propertyName>
+                        <propertySheet>
+                            <property>
+                                <propertyName>formType</propertyName>
+                                <expandable>1</expandable>
+                                <value>command</value>
+                            </property>
+                        </propertySheet>
+                    </property>
+                </propertySheet>
+                <attachedParameters>
+                    <formalParameterName>credential</formalParameterName>
+                </attachedParameters>
+            </step>
+        </procedure>
+        <!-- End of New TestConfiguration procedure -->
+
+    </project>
 </exportedData>
