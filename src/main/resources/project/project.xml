@@ -607,7 +607,7 @@
                                     </propertySheet>
                                 </property>
                                 <property>
-                                    <propertyName>debug_level</propertyName>
+                                    <propertyName>debug</propertyName>
                                     <propertySheet>
                                         <acl>
                                             <inheriting>1</inheriting>
@@ -725,7 +725,7 @@
                 <type>credential</type>
             </formalParameter>
             <formalParameter>
-                <formalParameterName>debug_level</formalParameterName>
+                <formalParameterName>debug</formalParameterName>
                 <defaultValue>1</defaultValue>
                 <description/>
                 <required>1</required>
@@ -766,44 +766,6 @@
                 <required>1</required>
                 <type>checkbox</type>
             </formalParameter>
-<!--            <step>-->
-<!--                <stepName>AttemptConnection</stepName>-->
-<!--                <alwaysRun>0</alwaysRun>-->
-<!--                <broadcast>0</broadcast>-->
-<!--                <command/>-->
-<!--                <condition>$[checkConnection]</condition>-->
-<!--                <description/>-->
-<!--                <errorHandling>abortProcedure</errorHandling>-->
-<!--                <exclusive>0</exclusive>-->
-<!--                <logFileName/>-->
-<!--                <parallel>0</parallel>-->
-<!--                <postProcessor>postp &#45;&#45;loadProperty /myProject/postp_matchers</postProcessor>-->
-<!--                <releaseExclusive>0</releaseExclusive>-->
-<!--                <resourceName/>-->
-<!--                <retries>0</retries>-->
-<!--                <shell>ec-groovy</shell>-->
-<!--                <timeLimit/>-->
-<!--                <timeLimitUnits>minutes</timeLimitUnits>-->
-<!--                <workingDirectory/>-->
-<!--                <workspaceName/>-->
-<!--                <procedureName>CreateConfiguration</procedureName>-->
-<!--                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>-->
-<!--                <propertySheet>-->
-<!--                    <property>-->
-<!--                        <propertyName>ec_customEditorData</propertyName>-->
-<!--                        <propertySheet>-->
-<!--                            <property>-->
-<!--                                <propertyName>formType</propertyName>-->
-<!--                                <expandable>1</expandable>-->
-<!--                                <value>command</value>-->
-<!--                            </property>-->
-<!--                        </propertySheet>-->
-<!--                    </property>-->
-<!--                </propertySheet>-->
-<!--                <attachedParameters>-->
-<!--                    <formalParameterName>credential</formalParameterName>-->
-<!--                </attachedParameters>-->
-<!--            </step>-->
             <step>
                 <stepName>CreateConfiguration</stepName>
                 <alwaysRun>0</alwaysRun>
@@ -948,7 +910,7 @@
                                     </propertySheet>
                                 </property>
                                 <property>
-                                    <propertyName>debug_level</propertyName>
+                                    <propertyName>debug</propertyName>
                                     <propertySheet>
                                         <acl>
                                             <inheriting>1</inheriting>
@@ -1066,7 +1028,7 @@
                 <type>credential</type>
             </formalParameter>
             <formalParameter>
-                <formalParameterName>debug_level</formalParameterName>
+                <formalParameterName>debug</formalParameterName>
                 <defaultValue>1</defaultValue>
                 <description/>
                 <required>1</required>
@@ -1107,44 +1069,6 @@
                 <required>1</required>
                 <type>checkbox</type>
             </formalParameter>
-<!--            <step>-->
-<!--                <stepName>AttemptConnection</stepName>-->
-<!--                <alwaysRun>0</alwaysRun>-->
-<!--                <broadcast>0</broadcast>-->
-<!--                <command/>-->
-<!--                <condition>$[checkConnection]</condition>-->
-<!--                <description/>-->
-<!--                <errorHandling>abortProcedure</errorHandling>-->
-<!--                <exclusive>0</exclusive>-->
-<!--                <logFileName/>-->
-<!--                <parallel>0</parallel>-->
-<!--                <postProcessor>$[/myProject/postpLoader]</postProcessor>-->
-<!--                <releaseExclusive>0</releaseExclusive>-->
-<!--                <resourceName/>-->
-<!--                <retries>0</retries>-->
-<!--                <shell>ec-groovy</shell>-->
-<!--                <timeLimit/>-->
-<!--                <timeLimitUnits>minutes</timeLimitUnits>-->
-<!--                <workingDirectory/>-->
-<!--                <workspaceName/>-->
-<!--                <procedureName>EditConfiguration</procedureName>-->
-<!--                <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>-->
-<!--                <propertySheet>-->
-<!--                    <property>-->
-<!--                        <propertyName>ec_customEditorData</propertyName>-->
-<!--                        <propertySheet>-->
-<!--                            <property>-->
-<!--                                <propertyName>formType</propertyName>-->
-<!--                                <expandable>1</expandable>-->
-<!--                                <value>command</value>-->
-<!--                            </property>-->
-<!--                        </propertySheet>-->
-<!--                    </property>-->
-<!--                </propertySheet>-->
-<!--                <attachedParameters>-->
-<!--                    <formalParameterName>credential</formalParameterName>-->
-<!--                </attachedParameters>-->
-<!--            </step>-->
             <step>
                 <stepName>EditConfiguration</stepName>
                 <alwaysRun>0</alwaysRun>
@@ -1439,7 +1363,7 @@
                 <defaultValue/>
                 <description/>
                 <expansionDeferred>0</expansionDeferred>
-                <required>1</required>
+                <required>0</required>
 
                 <type>entry</type>
             </formalParameter>
@@ -2155,16 +2079,7 @@
                                 </property>
                             </propertySheet>
                         </property>
-<!--                        <property>-->
-<!--                            <propertyName>checkConnection</propertyName>-->
-<!--                            <propertySheet>-->
-<!--                                <property>-->
-<!--                                    <propertyName>formType</propertyName>-->
-<!--                                    <expandable>1</expandable>-->
-<!--                                    <value>standard</value>-->
-<!--                                </property>-->
-<!--                            </propertySheet>-->
-<!--                        </property>-->
+
                         <!-- Start of debug level selector-->
                         <property>
                             <propertySheet>
@@ -2225,7 +2140,7 @@
                                     <value>standard</value>
                                 </property>
                             </propertySheet>
-                            <propertyName>debug_level</propertyName>
+                            <propertyName>debug</propertyName>
                         </property>
                         <!-- End of debug level selector-->
 <!--                        <property>-->
@@ -2266,15 +2181,8 @@
                 <required>1</required>
                 <type>credential</type>
             </formalParameter>
-<!--            <formalParameter>-->
-<!--                <formalParameterName>checkConnection</formalParameterName>-->
-<!--                <defaultValue>1</defaultValue>-->
-<!--                <description>Test Connection</description>-->
-<!--                <required>0</required>-->
-<!--                <type>entry</type>-->
-<!--            </formalParameter>-->
             <formalParameter>
-                <formalParameterName>debug_level</formalParameterName>
+                <formalParameterName>debug</formalParameterName>
                 <defaultValue>1</defaultValue>
                 <description>The workspace to use for resourced dynamically created by this configuration.</description>
                 <required>1</required>
@@ -2355,18 +2263,8 @@
                                         </property>
                                     </propertySheet>
                                 </property>
-<!--                                <property>-->
-<!--                                    <propertyName>checkConnection</propertyName>-->
-<!--                                    <propertySheet>-->
-<!--                                        <property>-->
-<!--                                            <propertyName>formType</propertyName>-->
-<!--                                            <expandable>1</expandable>-->
-<!--                                            <value>standard</value>-->
-<!--                                        </property>-->
-<!--                                    </propertySheet>-->
-<!--                                </property>-->
                                 <property>
-                                    <propertyName>debug_level</propertyName>
+                                    <propertyName>debug</propertyName>
                                     <propertySheet>
                                         <property>
                                             <propertyName>formType</propertyName>
@@ -2417,15 +2315,8 @@
                 <required>1</required>
                 <type>credential</type>
             </formalParameter>
-<!--            <formalParameter>-->
-<!--                <formalParameterName>checkConnection</formalParameterName>-->
-<!--                <defaultValue>1</defaultValue>-->
-<!--                <description>Test Connection.</description>-->
-<!--                <required>0</required>-->
-<!--                <type>entry</type>-->
-<!--            </formalParameter>-->
             <formalParameter>
-                <formalParameterName>debug_level</formalParameterName>
+                <formalParameterName>debug</formalParameterName>
                 <defaultValue>1</defaultValue>
                 <description>Level of the plugin procedure's verbosity.</description>
                 <required>1</required>

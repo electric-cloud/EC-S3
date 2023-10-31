@@ -177,6 +177,7 @@ public class ElectricCommander {
         return resp.getData().property.value
     }
 
+    // To avoid nested properties error.
     public propertyKey(String propName){
         if(propName.endsWith("/")){
             propName = propName.substring(0, propName.length()-2)

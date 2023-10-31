@@ -34,18 +34,9 @@
         <documentation>The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential.</documentation>
         <supportsCredentialReference>true</supportsCredentialReference>
     </formElement>
-<!--    <formElement>-->
-<!--        <type>checkbox</type>-->
-<!--        <label>Test connection?:</label>-->
-<!--        <property>test_connection</property>-->
-<!--        <checkedValue>1</checkedValue>-->
-<!--        <uncheckedValue>0</uncheckedValue>-->
-<!--        <intiallyChecked>0</intiallyChecked>-->
-<!--        <required>0</required>-->
-<!--    </formElement>-->
     <formElement>
         <type>select</type>
-        <property>debug_level</property>
+        <property>debug</property>
         <required>0</required>
         <documentation>Level of the plugin procedure's verbosity.</documentation>
         <label>Log Level:</label>

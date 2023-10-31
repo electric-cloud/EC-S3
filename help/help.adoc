@@ -411,6 +411,12 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 [[rns]]
 == Release notes
 
+=== EC-S3 1.2.0
+
+* Added support for new plugin configuration.
+* Upgraded from Perl 5.8 to Perl 5.32.
+* Starting from this release, a CloudBees CD/RO agent v10.3+ is required to run EC-S3 plugin procedures.
+
 === EC-S3 1.1.4
 
 * Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`
