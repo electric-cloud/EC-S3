@@ -42,14 +42,6 @@ Copyright 2015 Electric Cloud, Inc.
         <path>procedures/CreateConfiguration/attemptConnection.groovy</path>
         <xpath>//procedure[procedureName=&quot;TestConfiguration&quot;]/step[stepName=&quot;checkConnection&quot;]/command</xpath>
     </file>
-<!--    <file>-->
-<!--        <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>-->
-<!--        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>-->
-<!--    </file>-->
-<!--    <file>-->
-<!--        <xpath>//procedure[procedureName=&quot;EditConfiguration&quot;]/step[stepName=&quot;AttemptConnection&quot;]/command</xpath>-->
-<!--        <path>procedures/CreateConfiguration/attemptConnection.groovy</path>-->
-<!--    </file>-->
     <file>
         <xpath>//procedure[procedureName=&quot;CreateConfiguration&quot;]/step[stepName=&quot;CreateAndAttachCredential&quot;]/command</xpath>
         <path>procedures/CreateConfiguration/createAndAttachCredential.pl</path>
