@@ -120,7 +120,7 @@ try {
     for (S3ObjectSummary summary: summaries) {
         def downloadedFile = downloadLocation + summary.getKey()
         System.out.println(summary.getKey() + "  ==>  [" + downloadedFile + "]")
-        commander.setProperty(propResult + "/" + commander.propertyKey(summary.getKey()), downloadedFile)
+        commander.setProperty(propResult + "/" + commander.getPropertyName(summary.getKey()), downloadedFile)
     }
 
     tf.shutdownNow()
