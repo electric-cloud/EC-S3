@@ -14,6 +14,34 @@
 
 
 # Data that drives the create step picker registration for this plugin.
+use ElectricCommander::Util;
+use strict;
+use warnings;
+no warnings 'redefine';
+use Data::Dumper;
+
+use ElectricCommander;
+use JSON qw(decode_json);
+use subs qw(debug);
+use Time::HiRes qw(time gettimeofday tv_interval);
+
+my @logs = ();
+sub debug($) {
+    my ($message) = @_;
+    push @logs, scalar time . ": " . $message;
+
+    if ($ENV{EC_SETUP_DEBUG}) {
+        print scalar time . ": $message\n";
+    }
+}
+
+our $plugin_config_locations = 's3_cfgs';
+
+# External Credential Manageent Update:
+# We're retrieving the steps with attached creds from property sheet
+my $stepsWithCredentials = getStepsWithCredentials();
+
+
 my %CreateBucket = ( 
   label       => "EC-S3 - CreateBucket", 
   procedure   => "CreateBucket", 
@@ -92,6 +120,14 @@ my %WebsiteHosting = (
 );
 
 @::createStepPickerSteps = (\%CreateBucket, \%UploadObject, \%UploadFolder, \%DownloadObject, \%ListBucket, \%CreateFolder, \%ListFolder, \%DownloadFolder, \%DeleteObject, \%DeleteBucketContents, \%WebsiteHosting);
+
+if ($upgradeAction eq 'upgrade') {
+    migrateConfigurations($otherPluginName);
+    migrateProperties($otherPluginName);
+    debug "Migrated properties";
+    reattachExternalCredentials($otherPluginName);
+}
+
 
 if ($upgradeAction eq "upgrade") {
     my $cfgPropertySheet = 's3_cfgs';
@@ -198,5 +234,149 @@ if ($upgradeAction eq "upgrade") {
                 stepName => 'websiteHosting'
             });
 		}
+    }
+    reattachExternalCredentials($otherPluginName);
+}
+
+
+sub reattachExternalCredentials {
+    my ($otherPluginName) = @_;
+
+    my $configName = getConfigLocation($otherPluginName);
+    my $configsPath = "/plugins/$otherPluginName/project/$configName";
+
+    my $xp = $commander->getProperty($configsPath);
+
+    my $id = $xp->findvalue('//propertySheetId')->string_value();
+    my $props = $commander->getProperties({propertySheetId => $id});
+    for my $node ($props->findnodes('//property/propertySheetId')) {
+        my $configPropertySheetId = $node->string_value();
+        my $config = $commander->getProperties({propertySheetId => $configPropertySheetId});
+
+        # iterate through props to get credentials.
+        for my $configRow ($config->findnodes('//property')) {
+            my $propName = $configRow->findvalue('propertyName')->string_value();
+            my $propValue = $configRow->findvalue('value')->string_value();
+            # print "Name $propName, value: $propValue\n";
+            if ($propName =~ m/credential$/s && $propValue =~ m|^\/|s) {
+                for my $step (@$stepsWithCredentials) {
+                    $batch->attachCredential({
+                        projectName    => $pluginName,
+                        procedureName  => $step->{procedureName},
+                        stepName       => $step->{stepName},
+                        credentialName => $propValue,
+                    });
+                    #    debug "Attached credential to $step->{stepName}";
+                }
+                print "Reattaching $propName with val: $propValue\n";
+            }
+        }
+        # exit 0;
+    }
+}
+
+sub getConfigLocation {
+    my ($otherPluginName) = @_;
+
+    my $configName = eval {
+        $commander->getProperty("/plugins/$otherPluginName/project/ec_configPropertySheet")->findvalue('//value')->string_value
+    } || $plugin_config_locations;
+    return $configName;
+}
+
+sub getStepsWithCredentials {
+    my $retval = [];
+    eval {
+        my $pluginName = '@PLUGIN_NAME@';
+        my $stepsJson = $commander->getProperty("/projects/$pluginName/procedures/CreateConfiguration/ec_stepsWithAttachedCredentials")->findvalue('//value')->string_value;
+        $retval = decode_json($stepsJson);
+    };
+    return $retval;
+}
+
+sub reattachExternalConfigurations {
+    my ($otherPluginName) = @_;
+
+    my %migrated = ();
+    # For the configurations that exists while the plugin was deleted
+    # The api is new so it requires the upgraded version of the agent
+    eval {
+        my $cfgs = $commander->getPluginConfigurations({
+            pluginKey => '@PLUGIN_KEY@',
+        });
+        my @creds = ();
+        for my $cfg ($cfgs->findnodes('//pluginConfiguration/credentialMappings/parameterDetail')) {
+            my $value = $cfg->findvalue('parameterValue')->string_value();
+            push @creds, $value;
+        }
+
+        for my $cred (@creds) {
+            next if $migrated{$cred};
+            for my $stepWithCreds (@$stepsWithCredentials) {
+                $commander->attachCredential({
+                    projectName => "/plugins/$pluginName/project",
+                    credentialName => $cred,
+                    procedureName => $stepWithCreds->{procedureName},
+                    stepName => $stepWithCreds->{stepName}
+                });
+            }
+            $migrated{$cred} = 1;
+            debug "Migrated $cred";
+        }
+        1;
+    } or do {
+        debug "getPluginConfiguration API is not supported on the promoting agent, falling back";
+        for my $stepWithCreds (@$stepsWithCredentials) {
+            my $step = $commander->getStep({
+                projectName => "/plugins/$otherPluginName/project",
+                procedureName => $stepWithCreds->{procedureName},
+                stepName => $stepWithCreds->{stepName},
+            });
+            for my $attachedCred ($step->findnodes('//attachedCredentials/credentialName')) {
+                my $credName = $attachedCred->string_value();
+                $commander->attachCredential({
+                    projectName => "/plugins/$pluginName/project",
+                    credentialName => $credName,
+                    procedureName => $stepWithCreds->{procedureName},
+                    stepName => $stepWithCreds->{stepName}
+                });
+                $migrated{$credName} = 1;
+                debug "Migrated credential $credName to $stepWithCreds->{procedureName}";
+            }
+        }
+    };
+}
+
+sub migrateConfigurations {
+    my ($otherPluginName) = @_;
+
+    my $configName = getConfigLocation($otherPluginName);
+    # my $configName = eval {
+    #     $commander->getProperty("/plugins/$otherPluginName/project/ec_configPropertySheet")->findvalue('//value')->string_value
+    # } || 'ec_plugin_cfgs';
+
+    $commander->clone({
+        path      => "/plugins/$otherPluginName/project/$configName",
+        cloneName => "/plugins/$pluginName/project/$configName"
+    });
+
+}
+
+sub migrateProperties {
+    my ($otherPluginName) = @_;
+    my $clonedPropertySheets = eval {
+        decode_json($commander->getProperty("/plugins/$otherPluginName/project/ec_clonedProperties")->findvalue('//value')->string_value);
+    };
+    unless ($clonedPropertySheets) {
+        debug "No properties to migrate";
+        return;
+    }
+
+    for my $prop (@$clonedPropertySheets) {
+        $commander->clone({
+            path      => "/plugins/$otherPluginName/project/$prop",
+            cloneName => "/plugins/$pluginName/project/$prop"
+        });
+        debug "Cloned $prop"
     }
 }

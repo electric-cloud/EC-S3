@@ -25,7 +25,8 @@ Copyright 2015 Electric Cloud, Inc.
   <authorUrl>http://www.electric-cloud.com/support</authorUrl>
   <category>Resource Management</category>
   <ecSupportLevel>10</ecSupportLevel>
-  <commander-version min="5.4"/>
+  <supportsConfigurationObjects>true</supportsConfigurationObjects>
+  <commander-version min="10.3"/>
   <components>
     <component name="ConfigurationManagement">
       <javascript>war/ecplugins.s3.ConfigurationManagement/ecplugins.s3.ConfigurationManagement.nocache.js</javascript>

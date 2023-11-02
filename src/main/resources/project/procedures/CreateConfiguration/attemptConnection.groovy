@@ -45,6 +45,12 @@ try {
 
     //Check the owner of the account just to verify if the access keys are valid
     def owner = s3.getS3AccountOwner()
+    println("Id: "+owner.id)
+    List<Bucket> buckets = s3.listBuckets()
+    println("{S3} buckets are:")
+    for (Bucket b : buckets) {
+        println("* " + b.getName())
+    }
 
 } catch (AmazonServiceException ase) {
     handleServiceException(ase)

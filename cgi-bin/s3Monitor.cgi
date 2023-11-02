@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-exec "$COMMANDER_HOME/bin/ec-perl" -x "$0" "${@}"
+exec "$COMMANDER_HOME/bin/cb-perl" -x "$0" "${@}"
 
 #!perl
 

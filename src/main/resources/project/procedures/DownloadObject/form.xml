@@ -20,6 +20,7 @@ Copyright 2015 Electric Cloud, Inc.
         <label>Configuration:</label>
         <property>config</property>
         <required>1</required>
+        <configuration>1</configuration>
         <documentation>The name of the config which holds all the connection information. This must reference a valid existing configuration.</documentation>
     </formElement>
     <formElement>
