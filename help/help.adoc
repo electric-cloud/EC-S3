@@ -416,6 +416,7 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 * Added support for a new plugin configuration.
 * Upgraded from Perl 5.8 to Perl 5.32.
 * Starting with EC-S3 1.2.0, {PRODUCT} agents running v10.3 and later are required to run plugin procedures.
+* Removed CGI scripts.
 
 === EC-S3 1.1.4
 
