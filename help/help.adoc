@@ -1,6 +1,6 @@
 Plugin Version @PLUGIN_VERSION@ 
 
-Revised on May 31, 2022
+Revised on November 16, 2023
 
 This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).
 
