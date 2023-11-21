@@ -1,0 +1,92 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://nexus-internal.cloudbees.com/content/repositories/snapshots'
+            credentials {
+                username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+                password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+            }
+        }
+        maven {
+            url 'https://nexus-internal.cloudbees.com/content/groups/mirror'
+            credentials {
+                username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+                password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+            }
+        }
+    }
+    dependencies {
+        classpath "com.cloudbees.cd.plugins:hen:1.8.13"
+    }
+}
+
+
+plugins {
+    id "com.cloudbees.cd.plugins.specs" version "1.10.0.0"
+}
+
+apply plugin: 'idea'
+apply plugin: 'com.cloudbees.cd.plugins.specs-hen'
+apply plugin: "groovy"
+apply plugin: 'java'
+
+version = "1.1.3"
+description = "EC-S3 Specs"
+
+group 'org.cloudbees'
+generateHenClasses {
+    pluginName = 'EC-S3'
+    translateCheckbox = false
+}
+
+configurations {
+    testCompile
+}
+defaultTasks 'test'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url 'https://nexus-internal.cloudbees.com/content/repositories/snapshots'
+        credentials {
+            username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+            password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+        }
+    }
+    maven {
+        url 'https://nexus-internal.cloudbees.com/content/groups/mirror'
+        credentials {
+            username = System.getenv('NEXUS_USERNAME') ?: nexusUsername
+            password = System.getenv('NEXUS_PASSWORD') ?: nexusPassword
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
+
+    implementation 'com.jayway.restassured:rest-assured:2.4.0'
+    implementation 'org.spockframework:spock-core:1.2-groovy-2.5'
+    implementation ('com.electriccloud:ec-specs-plugins-core:1.9.2') {
+        exclude(group: "org.codehaus.groovy", module: "groovy-all")
+    }
+    implementation("com.cloudbees.cd.plugins:hen:1.8.13") {
+        exclude(group: "org.codehaus.groovy", module: "groovy-all")
+    }
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.10'
+}
+
+configureTests {
+    environmentName = findProperty('envName') ?: 'default'
+    readEnvironmentVariables = true
+    readSecrets = true
+    dependsOn(['compileGroovy', 'compileTestGroovy', 'compileJava', 'compileTestJava', 'processResources', 'processTestResources'])
+}
+
+sendAllureReports {
+    projectName = 'ec-s3'
+}
