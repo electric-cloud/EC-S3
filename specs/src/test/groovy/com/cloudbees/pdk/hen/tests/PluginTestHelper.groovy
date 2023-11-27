@@ -3,6 +3,7 @@ package com.cloudbees.pdk.hen.tests
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.model.ListObjectsV2Result
 import com.amazonaws.services.s3.model.ListVersionsRequest
 import com.amazonaws.services.s3.model.ObjectListing
 import com.amazonaws.services.s3.model.S3ObjectSummary
@@ -107,4 +108,32 @@ class PluginTestHelper extends PluginSpockTestSupport {
         assert createFileJob.successful
     }
 
+    def checkBucketContentIsEmpty(String bucketName) {
+        final AmazonS3 s3 = this.client()
+
+        try {
+            ObjectListing objectListing = s3.listObjects(bucketName)
+            return objectListing.objectSummaries.size() == 0
+        }catch (AmazonServiceException e) {
+            println(e.getErrorMessage())
+            return false
+        }
+    }
+    def isFolderCreated(String bucketName, String key) {
+        final AmazonS3 s3 = this.client()
+
+        try {
+            ListObjectsV2Result result = s3.listObjectsV2(bucketName, key)
+            return result.getKeyCount() > 0
+        }catch (AmazonServiceException e) {
+            println(e.getErrorMessage())
+            return false
+        }
+    }
+
+    def client() {
+        BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey)
+        TransferManager tm = new TransferManager(basicAWSCredentials)
+        return tm.getAmazonS3Client()
+    }
 }

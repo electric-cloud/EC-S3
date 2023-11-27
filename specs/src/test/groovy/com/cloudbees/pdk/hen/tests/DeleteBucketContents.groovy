@@ -31,6 +31,7 @@ class DeleteBucketContents extends PluginTestHelper {
                 .run()
         then:
         assert r.successful
+        assert checkBucketContentIsEmpty(bucketName)
     }
     @Unroll
     def "Negative: deleteBucketContents with #caseDes"() {
@@ -56,5 +57,6 @@ class DeleteBucketContents extends PluginTestHelper {
                 .folderName(folderName)
                 .run()
         assert folder.isSuccessful()
+        assert isFolderCreated(bucketName, folderName)
     }
 }
