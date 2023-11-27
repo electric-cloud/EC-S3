@@ -34,9 +34,11 @@ class PluginTestHelper extends PluginSpockTestSupport {
     @Shared
     static final def EMPTY = ""
     @Shared
-    static final FILE_LOCATION = "/tmp";
+    static final TEMP_LOCATION = "/tmp";
     @Shared
-    static final FILE_NAME = "testSpec.txt"
+    static final FILE_NAME = "specTest.txt"
+    @Shared
+    static final FOLDER_NAME = "specFolder"
     @Shared
     static ServerHandler serverHandler = ServerHandler.getInstance()
 
@@ -97,7 +99,11 @@ class PluginTestHelper extends PluginSpockTestSupport {
     }
 
     def createFile() {
-        JobResponse createFileJob = serverHandler.runCommand("echo \"This is test file\" > ${FILE_LOCATION}/${FILE_NAME}", "bash", 'local')
+        JobResponse createFileJob = serverHandler.runCommand("mkdir -p ${TEMP_LOCATION}/${FOLDER_NAME} && chmod -R 777 ${TEMP_LOCATION}/${FOLDER_NAME} && echo \"This is test file\" > ${TEMP_LOCATION}/${FOLDER_NAME}/${FILE_NAME} && echo \"This is test file\" > ${TEMP_LOCATION}/${FILE_NAME}", "bash", 'local')
+        assert createFileJob.successful
+    }
+    def removeFolder() {
+        JobResponse createFileJob = serverHandler.runCommand("rm -rf specFolder", "bash", 'local')
         assert createFileJob.successful
     }
 
