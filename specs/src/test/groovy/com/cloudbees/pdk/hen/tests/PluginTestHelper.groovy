@@ -1,8 +1,11 @@
 package com.cloudbees.pdk.hen.tests
 
 import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.AnonymousAWSCredentials
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.internal.Constants
+import com.amazonaws.services.s3.model.HeadBucketRequest
 import com.amazonaws.services.s3.model.ListObjectsV2Result
 import com.amazonaws.services.s3.model.ListVersionsRequest
 import com.amazonaws.services.s3.model.ObjectListing
@@ -97,6 +100,7 @@ class PluginTestHelper extends PluginSpockTestSupport {
                 .bucketName(bucketName)
                 .run()
         assert bucket.isSuccessful()
+        assert isBucketExist(bucketName)
     }
 
     def createFile() {
@@ -119,7 +123,7 @@ class PluginTestHelper extends PluginSpockTestSupport {
             return false
         }
     }
-    def isFolderCreated(String bucketName, String key) {
+    def isFolderExist(String bucketName, String key) {
         final AmazonS3 s3 = this.client()
 
         try {
@@ -129,6 +133,19 @@ class PluginTestHelper extends PluginSpockTestSupport {
             println(e.getErrorMessage())
             return false
         }
+    }
+    def isBucketExist(String bucketName) {
+        final AmazonS3 s3 = this.client()
+        HeadBucketRequest headBucketRequest = new HeadBucketRequest(bucketName)
+        headBucketRequest.setRequestCredentials(new AnonymousAWSCredentials())
+        try {
+            s3.headBucket(headBucketRequest)
+        } catch (AmazonServiceException e) {
+            if (e.getStatusCode() == Constants.NO_SUCH_BUCKET_STATUS_CODE) {
+                return false
+            }
+        }
+        return true
     }
 
     def client() {

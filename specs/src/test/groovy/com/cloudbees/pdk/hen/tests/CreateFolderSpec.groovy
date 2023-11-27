@@ -34,7 +34,7 @@ class CreateFolderSpec  extends PluginTestHelper {
                 .run()
         then:
         assert r.successful
-        assert isFolderCreated(bucketName, folderName)
+        assert isFolderExist(bucketName, folderName)
     }
 
     @Unroll

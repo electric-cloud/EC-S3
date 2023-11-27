@@ -57,6 +57,6 @@ class DeleteBucketContents extends PluginTestHelper {
                 .folderName(folderName)
                 .run()
         assert folder.isSuccessful()
-        assert isFolderCreated(bucketName, folderName)
+        assert isFolderExist(bucketName, folderName)
     }
 }

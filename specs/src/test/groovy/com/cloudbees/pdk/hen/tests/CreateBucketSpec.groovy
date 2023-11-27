@@ -28,6 +28,7 @@ class CreateBucketSpec extends PluginTestHelper{
                 .run()
         then:
         assert r.successful
+        assert isBucketExist(bucketName)
     }
 
     @Unroll
