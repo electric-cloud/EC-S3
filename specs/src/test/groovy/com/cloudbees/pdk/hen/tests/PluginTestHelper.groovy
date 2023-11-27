@@ -9,7 +9,9 @@ import com.amazonaws.services.s3.model.S3ObjectSummary
 import com.amazonaws.services.s3.model.S3VersionSummary
 import com.amazonaws.services.s3.model.VersionListing
 import com.amazonaws.services.s3.transfer.TransferManager
+import com.cloudbees.pdk.hen.JobResponse
 import com.cloudbees.pdk.hen.S3
+import com.cloudbees.pdk.hen.ServerHandler
 import com.electriccloud.spec.PluginSpockTestSupport
 import spock.lang.Shared
 import static com.cloudbees.pdk.hen.Utils.env
@@ -31,6 +33,13 @@ class PluginTestHelper extends PluginSpockTestSupport {
     static final String DEFAULT = "default"
     @Shared
     static final def EMPTY = ""
+    @Shared
+    static final FILE_LOCATION = "/tmp";
+    @Shared
+    static final FILE_NAME = "testSpec.txt"
+    @Shared
+    static ServerHandler serverHandler = ServerHandler.getInstance()
+
     static def generator = { String alphabet, int n ->
         new Random().with {
             (1..n).collect { alphabet[ nextInt( alphabet.length() ) ] }.join()
@@ -77,6 +86,19 @@ class PluginTestHelper extends PluginSpockTestSupport {
             return false
         }
         return true
+    }
+
+    def createBucket(String bucketName) {
+        def bucket = pluginWithoutConfig.createBucket.flush()
+                .config(configName)
+                .bucketName(bucketName)
+                .run()
+        assert bucket.isSuccessful()
+    }
+
+    def createFile() {
+        JobResponse createFileJob = serverHandler.runCommand("echo \"This is test file\" > ${FILE_LOCATION}/${FILE_NAME}", "bash", 'local')
+        assert createFileJob.successful
     }
 
 }
