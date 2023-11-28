@@ -1,15 +1,21 @@
 package com.cloudbees.pdk.hen.tests
 
 import com.amazonaws.AmazonServiceException
+import com.amazonaws.auth.AnonymousAWSCredentials
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.internal.Constants
+import com.amazonaws.services.s3.model.HeadBucketRequest
+import com.amazonaws.services.s3.model.ListObjectsV2Result
 import com.amazonaws.services.s3.model.ListVersionsRequest
 import com.amazonaws.services.s3.model.ObjectListing
 import com.amazonaws.services.s3.model.S3ObjectSummary
 import com.amazonaws.services.s3.model.S3VersionSummary
 import com.amazonaws.services.s3.model.VersionListing
 import com.amazonaws.services.s3.transfer.TransferManager
+import com.cloudbees.pdk.hen.JobResponse
 import com.cloudbees.pdk.hen.S3
+import com.cloudbees.pdk.hen.ServerHandler
 import com.electriccloud.spec.PluginSpockTestSupport
 import spock.lang.Shared
 import static com.cloudbees.pdk.hen.Utils.env
@@ -31,6 +37,15 @@ class PluginTestHelper extends PluginSpockTestSupport {
     static final String DEFAULT = "default"
     @Shared
     static final def EMPTY = ""
+    @Shared
+    static final TEMP_LOCATION = "/tmp";
+    @Shared
+    static final FILE_NAME = "specTest.txt"
+    @Shared
+    static final FOLDER_NAME = "specFolder"
+    @Shared
+    static ServerHandler serverHandler = ServerHandler.getInstance()
+
     static def generator = { String alphabet, int n ->
         new Random().with {
             (1..n).collect { alphabet[ nextInt( alphabet.length() ) ] }.join()
@@ -79,4 +94,63 @@ class PluginTestHelper extends PluginSpockTestSupport {
         return true
     }
 
+    def createBucket(String bucketName) {
+        def bucket = pluginWithoutConfig.createBucket.flush()
+                .config(configName)
+                .bucketName(bucketName)
+                .run()
+        assert bucket.isSuccessful()
+        assert isBucketExist(bucketName)
+    }
+
+    def createFile() {
+        JobResponse createFileJob = serverHandler.runCommand("mkdir -p ${TEMP_LOCATION}/${FOLDER_NAME} && chmod -R 777 ${TEMP_LOCATION}/${FOLDER_NAME} && echo \"This is test file\" > ${TEMP_LOCATION}/${FOLDER_NAME}/${FILE_NAME} && echo \"This is test file\" > ${TEMP_LOCATION}/${FILE_NAME}", "bash", 'local')
+        assert createFileJob.successful
+    }
+    def removeFolder() {
+        JobResponse createFileJob = serverHandler.runCommand("rm -rf specFolder", "bash", 'local')
+        assert createFileJob.successful
+    }
+
+    def checkBucketContentIsEmpty(String bucketName) {
+        final AmazonS3 s3 = this.client()
+
+        try {
+            ObjectListing objectListing = s3.listObjects(bucketName)
+            return objectListing.objectSummaries.size() == 0
+        }catch (AmazonServiceException e) {
+            println(e.getErrorMessage())
+            return false
+        }
+    }
+    def isFolderExist(String bucketName, String key) {
+        final AmazonS3 s3 = this.client()
+
+        try {
+            ListObjectsV2Result result = s3.listObjectsV2(bucketName, key)
+            return result.getKeyCount() > 0
+        }catch (AmazonServiceException e) {
+            println(e.getErrorMessage())
+            return false
+        }
+    }
+    def isBucketExist(String bucketName) {
+        final AmazonS3 s3 = this.client()
+        HeadBucketRequest headBucketRequest = new HeadBucketRequest(bucketName)
+        headBucketRequest.setRequestCredentials(new AnonymousAWSCredentials())
+        try {
+            s3.headBucket(headBucketRequest)
+        } catch (AmazonServiceException e) {
+            if (e.getStatusCode() == Constants.NO_SUCH_BUCKET_STATUS_CODE) {
+                return false
+            }
+        }
+        return true
+    }
+
+    def client() {
+        BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey)
+        TransferManager tm = new TransferManager(basicAWSCredentials)
+        return tm.getAmazonS3Client()
+    }
 }
