@@ -159,11 +159,11 @@ class PluginTestHelper extends PluginSpockTestSupport {
     def isObjectExist(String bucketName, String objectName) {
         final AmazonS3 s3 = this.client()
         try {
-            s3.doesObjectExist(bucketName, objectName)
+            return s3.doesObjectExist(bucketName, objectName)
         } catch (AmazonServiceException e) {
+            e.printStackTrace()
             return false
         }
-        return true
     }
     def getAllBuckets() {
         final AmazonS3 s3 = this.client()
