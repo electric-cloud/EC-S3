@@ -1,5 +1,6 @@
 package com.cloudbees.pdk.hen.tests
 
+import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.auth.AnonymousAWSCredentials
 import com.amazonaws.auth.BasicAWSCredentials
@@ -41,6 +42,10 @@ class PluginTestHelper extends PluginSpockTestSupport {
     static final TEMP_LOCATION = "/tmp";
     @Shared
     static final FILE_NAME = "specTest.txt"
+    @Shared
+    static final INDEX_FILE = "index.html"
+    @Shared
+    static final ERROR_FILE = "error.html"
     @Shared
     static final FOLDER_NAME = "specFolder"
     @Shared
@@ -107,6 +112,10 @@ class PluginTestHelper extends PluginSpockTestSupport {
         JobResponse createFileJob = serverHandler.runCommand("mkdir -p ${TEMP_LOCATION}/${FOLDER_NAME} && chmod -R 777 ${TEMP_LOCATION}/${FOLDER_NAME} && echo \"This is test file\" > ${TEMP_LOCATION}/${FOLDER_NAME}/${FILE_NAME} && echo \"This is test file\" > ${TEMP_LOCATION}/${FILE_NAME}", "bash", 'local')
         assert createFileJob.successful
     }
+    def createFileForWebsiteHosting() {
+        JobResponse createFileJob = serverHandler.runCommand("echo -e '<html>\n<html>\n\t<body>\n\t\t<h1>Welcome to CloudBees!!!</h1>\n\t</body>\n</html>' > ${TEMP_LOCATION}/${INDEX_FILE} && echo -e '<html>\n<html>\n\t<body>\n\t\t<h1>Oops somthing wrong!!!</h1>\n\t</body>\n</html>' > ${TEMP_LOCATION}/${ERROR_FILE}", "bash", 'local')
+        assert createFileJob.successful
+    }
     def removeFolder() {
         JobResponse createFileJob = serverHandler.runCommand("rm -rf specFolder", "bash", 'local')
         assert createFileJob.successful
@@ -147,10 +156,44 @@ class PluginTestHelper extends PluginSpockTestSupport {
         }
         return true
     }
-
+    def isObjectExist(String bucketName, String objectName) {
+        final AmazonS3 s3 = this.client()
+        try {
+            s3.doesObjectExist(bucketName, objectName)
+        } catch (AmazonServiceException e) {
+            return false
+        }
+        return true
+    }
+    def getAllBuckets() {
+        final AmazonS3 s3 = this.client()
+        try {
+            return s3.listBuckets().size()
+        } catch (AmazonServiceException e) {
+            return 0
+        }
+    }
+    def getAllFolders(String bucketName, String prefix) {
+        final AmazonS3 s3 = this.client()
+        try {
+            return s3.listObjects(bucketName, prefix).getObjectSummaries().size()
+        } catch (AmazonServiceException e) {
+            return 0
+        }
+    }
     def client() {
         BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(awsAccessKeyId, awsSecretAccessKey)
         TransferManager tm = new TransferManager(basicAWSCredentials)
         return tm.getAmazonS3Client()
     }
+
+    def checkFolderExistenceInResource(String directory){
+        JobResponse directoryJob = serverHandler.runCommand("[ -d \"${directory}\" ] && echo \"Folder exists\" || exit 1", "bash", 'local')
+        return directoryJob.successful
+    }
+    def checkFileExistenceInResource(String file){
+        JobResponse fileJob = serverHandler.runCommand("[ -f \"${file}\" ] && echo \"File exists\" || exit 1", "bash", 'local')
+        return fileJob.successful
+    }
+
 }
