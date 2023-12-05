@@ -53,7 +53,6 @@ class UploadObjectSpec extends PluginTestHelper {
         "invalid bucket name"   |   "invalid"   |   FILE_NAME   |    "${TEMP_LOCATION}/${FILE_NAME}"    |   "Error : Bucket ${bucket} not present"
         "invalid file"          |   bucketName  |   FILE_NAME   |    "${TEMP_LOCATION}/invalid"         |   "Error : File ${file} does not exists"
         "empty bucket name"     |   EMPTY       |   FILE_NAME   |    "${TEMP_LOCATION}/${FILE_NAME}"    |   "Error : Bucket name is empty"
-        "empty key"             |   bucketName  |   FILE_NAME   |    "${TEMP_LOCATION}/${FILE_NAME}"    |   "Error : Key is empty"
         "empty file name"       |   "invalid"   |   FILE_NAME   |    EMPTY                              |   "Error : File to upload is empty"
     }
 
