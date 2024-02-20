@@ -411,7 +411,7 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 [[rns]]
 == Release notes
 
-=== EC-Artifact 1.2.1
+=== EC-S3 1.2.1
 
 * Improved SSL/TLS certificate validation to ensure that when the *Ignore SSL issues* parameter is selected that SSL/TLS validation is properly disabled.
 
