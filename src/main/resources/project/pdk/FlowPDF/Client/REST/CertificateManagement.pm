@@ -86,7 +86,7 @@ sub applyToLWP {
         return $ua;
     }
     elsif ($policy eq CM_POLICY_IGNORE) {
-        $ua->ssl_opts(verify_hostname => 0);
+        $ua->ssl_opts(verify_hostname => 0, SSL_verify_mode => 0);
         return $ua;
     }
 
