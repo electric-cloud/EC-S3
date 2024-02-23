@@ -1,6 +1,6 @@
 Plugin Version @PLUGIN_VERSION@ 
 
-Revised on November 16, 2023
+Revised on February 23, 2024
 
 This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).
 
@@ -17,7 +17,7 @@ Plugin configurations are sets of parameters that apply across some or all of th
 . Find the EC-S3 row.
 . Select *Configure* to open the EC-S3 Configurations page.
 . Select *Create Configuration*.
-. To create a S3 configuration, enter the following information and click *OK*.
+. To create a S3 configuration, enter the following information and select *OK*.
 
 Remember that you may need to create additional configurations later.
 
@@ -360,7 +360,7 @@ One of the common use case of this plugin is to host a publicly accessible websi
 
 === Create a plugin configuration
 
-In {PRODUCT}, menu:Administration[Plugins] to open the Plugin Manager. Then select *Configure* and enter the values for the parameters in the S3 Configuration page.
+In {PRODUCT}, navigate to menu:Administration[Plugins] to open the Plugin Manager. Then select *Configure* and enter the values for the parameters in the S3 Configuration page.
 
 image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/create-config.png[role="screenshot"]
 
@@ -424,7 +424,7 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 
 === EC-S3 1.1.4
 
-* Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`
+* Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`. 
 
 === EC-S3 1.1.3
 
