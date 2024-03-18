@@ -1,448 +1,301 @@
-Plugin Version @PLUGIN_VERSION@ 
+Plugin Version @PLUGIN_VERSION@
 
 Revised on February 23, 2024
 
 This plugin was developed and tested against Amazon Simple Storage Service (Amazon S3).
 
-IMPORTANT: For all parameter descriptions in this document, required parameters are shown in [.required]#bold italics#.
-
 [[setupconfig]]
-== Setting up the plugin configuration
+== Create Amazon Simple Storage Service plugin configurations
 
-Plugin configurations are sets of parameters that apply across some or all of the plugin procedures. They reduce repetition of common values, create predefined sets of parameters for end users, and store credentials securely. Each configuration has a unique name that is automatically entered in designated parameters in the procedures.
+include::cloudbees-cd-plugin-docs::partial$create-configuration-intro.adoc[]
 
-=== Input
+include::cloudbees-cd-plugin-docs::partial$create-configuration.adoc[]
 
-. Go to menu:Administration[Plugins] to open the Plugin Manager.
-. Find the EC-S3 row.
-. Select *Configure* to open the EC-S3 Configurations page.
-. Select *Create Configuration*.
-. To create a S3 configuration, enter the following information and select *OK*.
+=== Amazon Simple Storage Service plugin configuration parameters
 
-Remember that you may need to create additional configurations later.
-
+.Amazon Simple Storage Service plugin configuration parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration Name |Name of the S3 configuration.The default is S3 integration.
+|Configuration Name |Name of the Amazon S3 configuration. The default is `S3 integration`.
 |Description |A description for this configuration.
-|Service URL |The service URL for the S3 service. For the Amazon public S3, this should be https://s3.amazonaws.com. (Required)
-|Resource Pool |The name of the pool of resources on which the integration steps can run. (Required)
-|Workspace |The workspace to use for resources dynamically created by this configuration. (Required)
-|Access IDs (Credential Parameters) |The two access IDs that are required for communicating with S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential. (Required)
-|Attempt Connection? |If the checkbox is selected, the system tries a connection to check credentials. (Required)
-|Debug Level |Provide the debug level for the output: 0=errors only, 1=normal headers and responses, 2+=debugging information included. (Required)
+|Service URL |Required. The service URL for the Amazon S3 service. For the Amazon public S3, this should be `\https://s3.amazonaws.com`.
+|Resource Pool |Required. The name of the pool of resources on which the integration steps can run.
+|Workspace |Required. The workspace to use for resources dynamically created by this configuration.
+|Access IDs (Credential Parameters) |Required. The two access IDs that are required for communicating with Amazon S3 (Access ID and Secret Access ID). The configuration stores these as a credential, putting the Access ID in the user field of the credential and the Secret Access ID in the password field of the credential.
+|Attempt Connection? |Required. If selected, the system attempts a connection to check credentials.
+|Debug Level |Required. Provide the debug level for the output:
+
+* `0` = Errors only
+* `1` = Normal headers and responses
+* `2` or higher = Debugging information is included
 |===
-
-=== Output
-
-The EC-S3 Configurations page now shows the new configuration.
-
-You can also manage your S3 configurations in this page. Select *Edit* to modify an existing configuration or *Delete* to remove an existing configuration.
 
 [[procedures]]
-== Plugin procedures
+== Create Amazon Simple Storage Service plugin procedures
+
+include::cloudbees-cd-plugin-docs::partial$create-procedure-intro.adoc[]
 
 [[CreateBucket]]
-
-
 === CreateBucket
 
-A bucket is a container for objects stored in Amazon S3.
+Creates an Amazon S3 bucket.
 
-To ensure a single, consistent naming approach for Amazon S3 buckets across regions and to ensure bucket names conform to DNS naming conventions, bucket names must comply with the following requirements:
+[NOTE]
+====
+A bucket is a container for objects stored in Amazon S3. To ensure a single, consistent, naming approach for Amazon S3 buckets across regions, and to ensure bucket names conform to DNS naming conventions, bucket names must comply with the following requirements. Bucket names:
 
-* Can contain lowercase letters, numbers, periods (.), and hyphens (-).
+* Can contain lowercase letters, numbers, periods (`.`), and hyphens (`-`).
 * Must start with a number or letter.
 * Must be between 3 and 63 characters long.
-* Must not be formatted as an IP address (e.g., 192.168.5.4).
-* Must not contain underscores (_).
-* Must not end with a hyphen.
-* Cannot contain two, adjacent periods.
-* Cannot contain dashes next to periods (e.g., my-.bucket.com and my.-bucket are invalid).
+* Must not be formatted as an IP address (for example, `192.168.5.4`).
+* Must not contain underscores (`_`).
+* Must not end with a hyphen (`-`).
+* Cannot contain two, adjacent periods (`..`).
+* Cannot contain dashes next to periods (for example, `my-.bucket.com` and `my.-bucket` are invalid).
+====
 
-==== Input
+==== CreateBucket input parameters
 
-. Go to the *CreateBucket* procedure.
-. Enter the following parameters:
-
+.CreateBucket input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration.
+|Configuration |The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
 |Bucket Name |Name of the bucket to create.
 |===
 
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *CreateBucket* step, select the *Log* button to see the diagnostic information.
-
-
 === CreateFolder
 
-This procedure create nested folders within the specified bucket. Folders help to organize the S3 Objects.
+Creates nested folders within the specified bucket. Folders help to organize the Amazon S3 objects.
 
-==== Input
+==== CreateFolder input parameters
 
-. Go to the *CreateFolder* procedure.
-. Enter the following parameters:
-
+.CreateFolder input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucket in which to create folder. (Required)
-|Folder Name |Name of the Folder to create. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket in which to create the folder.
+|Folder Name |Required. Name of the folder to create.
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *CreateFolder* step, select the *Log* button to see the diagnostic information.
 
 === DeleteBucketContents
 
-This procedure deletes the contents of the specified bucket.
+Deletes the contents of the specified bucket.
 
-==== Input
+==== DeleteBucketContents input parameters
 
-. Go to the *DeleteBucketContents* procedure.
-. Enter the following parameters:
-
+.DeleteBucketContents input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketof which to clear the contents. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket from which to clear the contents.
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *DeleteBucketContents* step, select the *Log* button to see the diagnostic information.
 
 === DeleteObject
 
-This procedure deletes the S3 object in specified bucket or folder.
+This procedure deletes the Amazon S3 object in specified bucket or folder.
 
-==== Input
+==== DeleteObject input parameters
 
-. Go to the *DeleteObject* procedure.
-. Enter the following parameters:
-
+.DeleteObject input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketwhere the object is. (Required)
-|Key |Key of the object to delete. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket where the object is stored.
+|Key |Required. Key of the object to delete.
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *DeleteObject* step, select the *Log* button to see the diagnostic information.
 
 === DownloadFolder
 
-This procedure downloads the contents of the specified folder to local filesystem.
+Downloads the contents of the specified folder to the local filesystem. After the folder is successfully downloaded, {PRODUCT} stores the key names and download paths of the objects in the property sheet. The default location is `/myJob/S3Output`.
 
-==== Input
+==== DownloadFolder input parameters
 
-. Go to the *DownloadFolder* procedure.
-. Enter the following parameters:
-
+.DownloadFolder input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketwhere the folder is. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket where the folder is stored.
 |Key Prefix - Folder |Key prefix of the folder to download.
-|Download Location |Path of the download location.For example, `/path/to/downloadLocation` or `C:\path\to\downloadLocation`. (Required)
+|Download Location |Required. Path of the download location (for example, `/path/to/downloadLocation` or `C:\path\to\downloadLocation`).
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *DownloadFolder* step, select the *Log* button to see the diagnostic information.
-
-After the folder is successfully downloaded, {PRODUCT} stores the key names and download paths of the objects in the property sheet.(Default location is */myJob/S3Output*.)
-
 
 === DownloadObject
 
-This procedure downloads the S3 object specified by the key to the local file system.
+Downloads the Amazon S3 object specified by the key to the local file system. {PRODUCT} stores the key names and the download locations of the objects in the property sheet. The default location is `/myJob/S3Output`.
 
-==== Input
+==== DownloadObject input parameters
 
-. Go to the *DownloadObject* procedure.
-. Enter the following parameters:
-
+.DownloadObject input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketwhere the folder is. (Required)
-|Key |Key of the object to download
-|Download Location |Path of the download location.For example, `/path/to/downloadLocation` or `C:\path\to\downloadLocation`. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket where the folder is stored.
+|Key |Key of the object to download.
+|Download Location |Required. Path of the download location (for example, `/path/to/downloadLocation` or `C:\path\to\downloadLocation`).
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *DownloadObject* step, select the *Log* button to see the diagnostic information.
-
-{PRODUCT} stores the key names and the download locations of the objects in property sheet.(Default location is */myJob/S3Output*.)
 
 
 [[ListBucket]]
-
-
 === ListBucket
 
-This procedure lists all the buckets.
+Lists all buckets. {PRODUCT} stores the list of buckets in the property sheet. The default location is `/myJob/S3Output`.
 
-==== Input
+==== ListBucket input parameters
 
-. Go to the *ListBucket* procedure.
-. Enter the following parameters:
-
+.ListBucket input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
 |===
-
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *ListBucket* step, select the *Log* button to see the diagnostic information.
-
-{PRODUCT} stores the list of buckets in the property sheet (Default location is */myJob/S3Output*) as follows:
 
 [[ListFolder]]
-
-
 === ListFolder
 
-This procedure lists the contents of the folders, either recursively or nonrecursively.
+Lists the contents of the folders, either recursively or non-recursively. {PRODUCT} stores the list of all the objects in the folder in the property sheet. The default location is `/myJob/S3Output`.
 
-==== Input
+==== ListFolder input parameters
 
-. Go to the *ListFolder* procedure.
-. Enter the following parameters:
-
+.ListFolder input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketof which to list the folders. (Required)
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket in which to list the folders.
 |Folder Name |Name of the folder or prefix to include in the list.
-|List Objects in this folder or Include all sub folders? |If selected, all objects in this folder and all subfolders will be in the list.
+|List Objects in this folder or Include all sub folders? |If selected, all objects in this folder and all sub-folders are included in the list.
 |===
-
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *ListFolder* step, select the *Log* button to see the diagnostic information.
-
-{PRODUCT} stores the list of all the objects in the folder in the property sheet.(Default location is */myJob/S3Output*.)
 
 === UploadFolder
 
-This procedure uploads the specified local filesystem folder to the Amazon S3 service.
+Uploads the specified local file system folder to the Amazon S3 service. After a folder is successfully uploaded, {PRODUCT} stores the key names and AWS access URLs for the objects in this folder in the property sheet. The default location is `/myJob/S3Output`.
 
-==== Input
+==== UploadFolder input parameters
 
-. Go to the *UploadFolder* procedure.
-. Enter the following parameters:
-
+.UploadFolder input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketof which to list the folders. (Required)
-|Key |The key prefix of the virtual directory to which the folder is uploaded. Keep this field empty to upload files to the root of the bucket.
-|Folder to Upload |Name of the folder to upload.For example, `/opt/folderToUpload` or `C:\path\to\folderToUpload`. (Required)
-|Make the object public |If selected, the uploaded object will be publicly accessible.
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket in which to list the folders.
+|Key |The key prefix of the virtual directory to which the folder is uploaded. Leave this field empty to upload files to the root of the bucket.
+|Folder to Upload |Required. Name of the folder to upload (for example, `/opt/folderToUpload` or `C:\path\to\folderToUpload`).
+|Make the object public |If selected, the uploaded object is publicly accessible.
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *UploadFolder* step, select the *Log* button to see the diagnostic information.
-
-After a folder is successfully uploaded, {PRODUCT} stores the key names and AWS access URLs for the objects in this folder in the property sheet.(Default location is */myJob/S3Output*.)
-
 
 === UploadObject
 
-This procedure uploads the specified local filesystem folder to Amazon S3 service.
+Uploads the specified local file system folder to the Amazon S3 service. After an object is successfully uploaded, {PRODUCT} stores the key name and AWS link to the object in the property sheet. The default location is `/myJob/S3Output`.
 
-==== Input
+==== UploadObject input parameters
 
-. Go to the *UploadObject* procedure.
-. Enter the following parameters:
-
+.UploadObject input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
-|Configuration |The name of the configuration which holds all the connection information. This must reference a valid existing configuration. (Required)
-|Bucket Name |Name of the bucketto which upload the object. (Required)
-|Key |Key of the object to upload. This value will be used as the key for the object that is uploaded. (Required)
-|File to Upload |Path for file to upload. For example, `/path/to/fileToUpload.txt` or `C:\mydir\fileToUpload.txt`. (Required)
-|Make the object public |If selected, the uploaded object will be publicly accessible.
+|Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
+|Bucket Name |Required. Name of the bucket to which the object will be uploaded.
+|Key |Required. Key of the object to upload. This value is used as the key for the object that is uploaded.
+|File to Upload |Required. Path for file to upload (for example, `/path/to/fileToUpload.txt` or `C:\mydir\fileToUpload.txt`).
+|Make the object public |If selected, the uploaded object is publicly accessible.
 |===
-
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *UploadObject* step, select the *Log* button to see the diagnostic information.
-
-After an object is successfully uploaded, {PRODUCT} stores the key name and AWS link to the object in the property sheet.(Default location is */myJob/S3Output*.)
-
 
 === WebsiteHosting
 
-You can use Amazon Simple Storage Service (S3) to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This is called a static website and is used to display content that does not change frequently.
+You can use Amazon S3 to host a website that uses client-side technologies (such as HTML, CSS, and JavaScript) and does not require server-side technologies (such as PHP and ASP.NET). This is called a static website and is used to display content that does not change frequently.
 
-To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting. It is then available at the region-specific website endpoint of the bucket:_<bucket-name>.s3-website-<AWS-region>.amazonaws.com_
+To host your static website, use this procedure to configure an Amazon S3 bucket for website hosting. It is then available at the region-specific website endpoint of the bucket: `<bucket-name>.s3-website-<AWS-region>.amazonaws.com`.
 
-==== Input
+After the bucket is successfully configured for static website hosting, {PRODUCT} stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet. The default location is `*/myJob/S3Output`.
 
-. Go to the *WebsiteHosting* procedure.
-. Enter the following parameters:
+==== WebsiteHosting input parameters
 
+.WebsiteHosting input parameters
 [cols="1a,1a",options="header"]
 |===
 |Parameter |Description
 |Configuration |The name of the configuration that has all the connection information. This must refer to a valid existing configuration.
 |Bucket Name |Name of the bucket to create.
-|Enable website hosting |After you enable your bucket for static website hosting, all your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.
+|Enable website hosting |If selected, after you enable your bucket for static website hosting, all of your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.
 |Index Document |Name of the index document.
 |Error Document |Name of the error document.
 |===
 
-==== Output
-
-After the job runs, you can view the results on the Job Details page in {PRODUCT}. Every job step was completed successfully.
-
-In the *WebsiteHosting* step, select the *Log* button to see the diagnostic information.
-
-After the bucket is successfully configured for static website hosting, {PRODUCT} stores the bucket name as a key and Amazon S3 website endpoint for your bucket as a value in the property sheet.(Default location is */myJob/S3Output*.)
-
-== Examples and use cases
-
-=== Use case 1: static website hosting
+== Amazon Simple Storage Service plugin use cases
 
 [[UseCase1]]
+One of the common use case of this plugin is to host a publicly accessible website.To achieve this, create a bucket on Amazon S3 and then upload the contents to that folder.To do this, you must:
 
+. <<setupconfig,Create a plugin configuration>>.
+. Configure the <<CreateBucket>> procedure to create a bucket on Amazon S3.
++
+.CreateBucket parameters
+image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/createbucket-parameters.png[CreateBucket parameters,role="screenshot"]
+. Configure the <<UploadFolder>> procedure to upload the contents of the folder to the bucket.
++
+.UploadFolder parameters
+image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/uploadfolder-parameters.png[UploadFolder parameters,role="screenshot"]
++
+When this procedure runs, the contents of the `C:\Electric Cloud\electricCloud\Website` directory are uploaded to the `ecwebsitehosting` bucket.
 
-One of the common use case of this plugin is to host a publicly accessible website.To achieve this, create a bucket on S3 and then upload the contents to that folder.To do this, you must:
+. Use the <<WebsiteHosting>> procedure to configure the bucket for website hosting.
++
+.WebsiteHosting parameters
+image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-log.png[WebsiteHosting parameters,role="screenshot"]
 
-. Create a plugin configuration.
-. Create a bucket on S3.
-. Upload the contents of the folder to the bucket.
-. Configure bucket for website hosting.
-
-=== Create a plugin configuration
-
-In {PRODUCT}, navigate to menu:Administration[Plugins] to open the Plugin Manager. Then select *Configure* and enter the values for the parameters in the S3 Configuration page.
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/create-config.png[role="screenshot"]
-
-After the configuration is created, you can see it in "S3 Configurations".
-
-=== Create a bucket on s3
-
-Go to the CreateBucket procedure, enter the values in the parameter fields:
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/createbucket-parameters.png[role="screenshot"]
-
-This procedure calls the CreateBucket procedures to create a new bucket `ecwebsitehosting`.
-
-=== Upload the contents to the s3 bucket
-
-Go to the UploadFolder procedure, enter the values in the parameter fields:
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/uploadfolder-parameters.png[role="screenshot"]
-
-This procedure calls the UploadFolder procedures to upload the contents of the `C:\Electric Cloud\electricCloud\Website` directory to `ecwebsitehosting` bucket.
-
-=== Configure bucket for website hosting
-
-Go to the WebsiteHosting procedure, enter the values in the parameter fields:
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/websitehosting-parameters.png[role="screenshot"]
-
-This procedure calls the WebsiteHosting procedures to configure the bucket `ecwebsitehosting` for website hosting.
-
-=== View the results and output
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/results.png[role="screenshot"]
-
-The following output appears during the procedures:
-
-=== CreateBucket
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/create-bucket-log.png[role="screenshot"]
-
-=== UploadFolder
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/upload-folder-log.png[role="screenshot"]
-
-=== WebsiteHosting
-
-image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-log.png[role="screenshot"]
+. Run the procedures. The following output appears during the procedures:
++
+.CreateBucket output
+image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/create-bucket-log.png[CreateBucket output,role="screenshot"]
++
+.UploadFolder output
+image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/upload-folder-log.png[UploadFolder output,role="screenshot"]
++
+.WebsiteHosting output
+image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-log.png[WebsiteHosting output,role="screenshot"]
 
 [[rns]]
-== Release notes
+== Amazon Simple Storage Service plugin release notes
 
-=== EC-S3 1.2.1
+=== 1.2.1
 
 * Improved SSL/TLS certificate validation to ensure that when the *Ignore SSL issues* parameter is selected that SSL/TLS validation is properly disabled.
 
-=== EC-S3 1.2.0
+=== 1.2.0
 
 * Added support for a new plugin configuration.
 * Upgraded from Perl 5.8 to Perl 5.32.
 * Starting with EC-S3 1.2.0, {PRODUCT} agents running v10.3 and later are required to run plugin procedures.
 * Removed CGI scripts.
 
-=== EC-S3 1.1.4
+=== 1.1.4
 
-* Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`. 
+* Fixed the following Java error: `java.lang.NoClassDefFoundError: javax/xml/bind/DatatypeConverter`.
 
-=== EC-S3 1.1.3
+=== 1.1.3
 
 * Added session validation.
 
-=== EC-S3 1.1.2
+=== 1.1.2
 
 * The documentation has been migrated to the main documentation site.
 
-=== EC-S3 1.1.1
+=== 1.1.1
 
-* The plugin icon has been updated.
+* Updated the plugin icon.
 
-=== EC-S3 1.1.0
+=== 1.1.0
 
-* AWS SDK Version has been changed to 1.11.10.
+* Changed the AWS SDK version to 1.11.10.
 
-=== EC-S3 1.0.0
+=== 1.0.0
 
 * Added support to create new buckets and folders in buckets.
 * Added support to clean the bucket contents.
