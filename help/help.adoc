@@ -170,7 +170,7 @@ Lists the contents of the folders, either recursively or non-recursively. {PRODU
 |Configuration |Required. The name of the configuration that holds all the connection information. This must reference a valid existing configuration.
 |Bucket Name |Required. Name of the bucket in which to list the folders.
 |Folder Name |Name of the folder or prefix to include in the list.
-|List Objects in this folder or Include all sub folders? |If selected, all objects in this folder and all sub-folders are included in the list.
+|List Objects in this folder or Include all subfolders? |If selected, all objects in this folder and all subfolders are included in the list.
 |===
 
 === UploadFolder
@@ -223,7 +223,7 @@ After the bucket is successfully configured for static website hosting, {PRODUCT
 |Parameter |Description
 |Configuration |The name of the configuration that has all the connection information. This must refer to a valid existing configuration.
 |Bucket Name |Name of the bucket to create.
-|Enable website hosting |If selected, after you enable your bucket for static website hosting, all of your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.
+|Enable website hosting |If selected, after you enable your bucket for static website hosting, your content is accessible to web browsers through the Amazon S3 endpoint for your bucket.
 |Index Document |Name of the index document.
 |Error Document |Name of the error document.
 |===
