@@ -52,7 +52,7 @@ try {
 
     // Get S3 Client
     AmazonS3 s3 = tx.getAmazonS3Client()
-
+    s3.setEndpoint(commander.serviceUrl)
     if (!doesBucketExist(s3, bucketName)) {
         println("Error : Bucket " + bucketName + " not present")
         return

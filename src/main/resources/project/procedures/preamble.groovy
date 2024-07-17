@@ -25,8 +25,6 @@ import com.amazonaws.services.s3.transfer.*
 import com.electriccloud.client.groovy.ElectricFlow
 import com.electriccloud.client.groovy.models.*
 
-
-
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.InputStream
@@ -62,6 +60,7 @@ public class ElectricCommander {
 
     def userName
     def password
+    def serviceUrl
 
     def jobStepId = '$[/myJobStep/jobStepId]'
 
@@ -74,25 +73,34 @@ public class ElectricCommander {
         def resp
         def credential
 
-        if('$[config]'.startsWith("/")){
+        if ('$[config]'.startsWith("/")) {
             def plugConf = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0$[config]', [])
             def credName = plugConf.getData().pluginConfiguration.credentialMappings.parameterDetail[0].parameterValue
             resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
             credential = resp.credential
-        }else{
+            println("config resp data in if" + plugConf.getData())
+        } else {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
             credential = resp.getData().credential
+            println("config resp data in else" + resp.getData())
         }
 
-        if( resp == null ) {
+        if (resp == null) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        if(!credential && resp.status != 200) {
+        if (!credential && resp.status != 200) {
             throw new Exception("Commander did not respond with 200 for credentials")
         }
 
         userName = credential.userName
         password = credential.password
+        try {
+            serviceUrl = getCommanderProperty('service_url')
+            println "service_url: $serviceUrl"
+        } catch (Throwable e) {
+            println "service_url is not found (service_url field does not exist?),setting to default"
+            serviceUrl = "https://s3.amazonaws.com"
+        }
     }
 
     ElectricCommander(boolean config) {
@@ -100,34 +108,40 @@ public class ElectricCommander {
         client.ignoreSSLIssues()
 
         def resp
-        if('$[config]'.startsWith("/")){
+        if ('$[config]'.startsWith("/")) {
             println("starts with slash 222")
         }
-        if(config == true) {
+        if (config == true) {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
         } else {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/credential', [])
         }
-        if( resp == null ) {
+        if (resp == null) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        if(resp.status != 200) {
+        if (resp.status != 200) {
             throw new Exception("Commander did not respond with 200 for credentials")
         }
 
         userName = resp.getData().credential.userName
         password = resp.getData().credential.password
-
+        try {
+            serviceUrl = getCommanderProperty('service_url')
+            println "service_url: $serviceUrl"
+        } catch (Throwable e) {
+            println "service_url is not found (service_url field does not exist?),setting to default"
+            serviceUrl = "https://s3.amazonaws.com"
+        }
     }
 
     public setProperty(String propName, String propValue) {
 
         sysJobId = System.getenv('COMMANDER_JOBID')
-        def jsonData = [propertyName : propName, value : propValue, jobId : sysJobId]
+        def jsonData = [propertyName: propName, value: propValue, jobId: sysJobId]
 
         def resp = PerformHTTPRequest(RequestMethod.POST, '/rest/v1.0/properties', jsonData)
-        if(resp == null ) {
-          println("Could not set property on the Commander. Request failed")
+        if (resp == null) {
+            println("Could not set property on the Commander. Request failed")
         }
 
     }
@@ -137,20 +151,20 @@ public class ElectricCommander {
         client.ignoreSSLIssues()
         def resp
         def credential
-        if('$[config]'.startsWith("/")){
+        if ('$[config]'.startsWith("/")) {
             def plugConf = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0$[config]', [])
             def credName = plugConf.getData().pluginConfiguration.credentialMappings.parameterDetail[0].parameterValue
             resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
             credential = result.credential
-        }else {
+        } else {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/paramCredential', [])
             credential = resp.getData().credential
         }
 
-        if( resp == null ) {
+        if (resp == null) {
             throw new Exception("Error : Invalid configuration $[config].");
         }
-        if(!credential && resp.status != 200) {
+        if (!credential && resp.status != 200) {
             throw new Exception("Commander did not respond with 200 for credentials")
         }
 
@@ -161,15 +175,15 @@ public class ElectricCommander {
 
         sysJobStepId = System.getenv('COMMANDER_JOBSTEPID')
         def url = '/rest/v1.0/properties/' + propName
-        def query =  ['jobStepId': "" + sysJobStepId]
+        def query = ['jobStepId': "" + sysJobStepId]
         def resp = PerformHTTPRequest(RequestMethod.GET, url, query, [])
 
-        if(resp == null ) {
+        if (resp == null) {
             println("Could not get property " + propName + " on the Commander. Request failed")
             return
         }
 
-        if(resp.status != 200) {
+        if (resp.status != 200) {
             println("Commander did not respond with 200 for retrieving property")
             return
         }
@@ -178,18 +192,19 @@ public class ElectricCommander {
     }
 
     // To avoid nested properties error.
-    public getPropertyName(String propName){
-        if(propName.endsWith("/")){
-            propName = propName.substring(0, propName.length()-2)
+    public getPropertyName(String propName) {
+        if (propName.endsWith("/")) {
+            propName = propName.substring(0, propName.length() - 2)
         }
-        return propName.replaceAll("\\/","_")
+        return propName.replaceAll("\\/", "_")
     }
 
 
     private PerformHTTPRequest(RequestMethod request, String url, Object jsonData) {
 
-        PerformHTTPRequest(request,url,["":""],jsonData)
+        PerformHTTPRequest(request, url, ["": ""], jsonData)
     }
+
     private PerformHTTPRequest(RequestMethod request, String url, def query, Object jsonData) {
         def response
         def requestHeaders = ['Cookie': "sessionId=" + sessionId, 'Accept': 'application/json']
@@ -229,7 +244,7 @@ printDeleteResults = { MultiObjectDeleteException mode ->
     System.out.format("No. of objects successfully deleted = %s\n", mode.getDeletedObjects().size());
     System.out.format("No. of objects failed to delete = %s\n", mode.getErrors().size());
     System.out.format("Printing error data...\n");
-    for (MultiObjectDeleteException.DeleteError deleteError : mode.getErrors()){
+    for (MultiObjectDeleteException.DeleteError deleteError : mode.getErrors()) {
         System.out.format("Object Key: %s\t%s\t%s\n",
                 deleteError.getKey(), deleteError.getCode(), deleteError.getMessage());
     }
@@ -238,7 +253,7 @@ printDeleteResults = { MultiObjectDeleteException mode ->
 
 
 def handleServiceException
-handleServiceException = {AmazonServiceException ase ->
+handleServiceException = { AmazonServiceException ase ->
     println("Error : Caught an AmazonServiceException, which means your request made it "
             + "to Amazon S3, but was rejected with an error response for some reason.");
     println("Error Message:    " + ase.getMessage());
@@ -251,7 +266,7 @@ handleServiceException = {AmazonServiceException ase ->
 }
 
 def handleClientException
-handleClientException ={ AmazonClientException ace ->
+handleClientException = { AmazonClientException ace ->
     println("Caught an AmazonClientException, which means the client encountered "
             + "a serious internal problem while trying to communicate with S3, "
             + "such as not being able to access the network.");
@@ -271,14 +286,14 @@ isFilenameValid = { String file ->
     try {
         // Try to create an empty file at the provided location to check write permissions/valid path
 
-        if(f.createNewFile()){
+        if (f.createNewFile()) {
             // Can successfully create an empty file.
             f.delete()
             return true
         } else {
             // if testFile.txt already exists
             f.delete()
-            if(f.createNewFile()){
+            if (f.createNewFile()) {
                 // provided location is writable
                 f.delete()
                 return true
@@ -324,25 +339,25 @@ doesBucketExist = { AmazonS3 s3, String bucket ->
 def isObjectPresent
 isObjectPresent = { AmazonS3 s3, String bucket, String key ->
 
-        try {
-            /*
-            * If a object exists, but you don't have permissions, trying to get its
-            * metadata returns a 403 AccessDenied error response from Amazon S3.
-            * If a object DOESN'T exist at all, trying to get its object metadata
-            * returns a 404  error response from Amazon S3.
-            */
+    try {
+        /*
+        * If a object exists, but you don't have permissions, trying to get its
+        * metadata returns a 403 AccessDenied error response from Amazon S3.
+        * If a object DOESN'T exist at all, trying to get its object metadata
+        * returns a 404  error response from Amazon S3.
+        */
 
-            s3.getObjectMetadata(new GetObjectMetadataRequest(bucket, key))
-            return true
-        } catch (AmazonServiceException ase) {
-            //Access denied or object is not present
+        s3.getObjectMetadata(new GetObjectMetadataRequest(bucket, key))
+        return true
+    } catch (AmazonServiceException ase) {
+        //Access denied or object is not present
 
-            if (ase.getStatusCode() == 403 || ase.getStatusCode() == 404) {
+        if (ase.getStatusCode() == 403 || ase.getStatusCode() == 404) {
 
-                return false
-            } else {
-                handleServiceException(ase)
-            }
+            return false
+        } else {
+            handleServiceException(ase)
         }
     }
+}
 

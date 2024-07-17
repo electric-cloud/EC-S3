@@ -63,6 +63,7 @@ try {
 
     //Check the owner of the account just to verify if the access keys are valid
     def owner = s3.getS3AccountOwner()
+    s3.setEndpoint(commander.serviceUrl)
 
     //check if the bucket is present and the user has rights
     if (!doesBucketExist(s3,bucketName)) {

@@ -27,7 +27,7 @@ ElectricCommander commander;
 //get credentials from commander
 try {
     commander = new ElectricCommander()
-}catch(Exception e){
+} catch (Exception e) {
     println(e.getMessage());
     return
 }
@@ -49,12 +49,13 @@ try {
 
     // Get S3 Client
     AmazonS3 s3 = tx.getAmazonS3Client();
-
+    println "service_url ${commander.serviceUrl}"
+    s3.endpoint = commander?.serviceUrl?:"https://s3.amazonaws.com"
     //Check the owner of the account just to verify if the access keys are valid
     def owner = s3.getS3AccountOwner()
 
     //check if the bucket is present
-    if (doesBucketExist(s3,bucketName)) {
+    if (doesBucketExist(s3, bucketName)) {
         println("Error : Bucket " + bucketName + " already present")
         return
     }
@@ -72,7 +73,7 @@ try {
 
 } catch (AmazonServiceException ase) {
     if (ase.statusCode.equals(409)) {
-		println("Error : Bucket " + bucketName + " already present")
+        println("Error : Bucket " + bucketName + " already present")
     }
     handleServiceException(ase)
 
