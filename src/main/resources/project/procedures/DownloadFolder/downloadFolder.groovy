@@ -69,8 +69,8 @@ try {
 
     // Get S3 Client
     AmazonS3 s3 = tx.getAmazonS3Client();
-    s3.setEndpoint(commander.serviceUrl)
-
+    println "service_url in downloadFolder ${commander?.serviceUrl}"
+    s3.endpoint = commander?.serviceUrl?:"https://s3.amazonaws.com"
     TransferManager tf = new TransferManager(s3);
 
     //Check the owner of the account just to verify if the access keys are valid
