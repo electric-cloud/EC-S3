@@ -78,11 +78,9 @@ public class ElectricCommander {
             def credName = plugConf.getData().pluginConfiguration.credentialMappings.parameterDetail[0].parameterValue
             resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
             credential = resp.credential
-            println("config resp data in if" + plugConf.getData())
         } else {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
             credential = resp.getData().credential
-            println("config resp data in else" + resp.getData())
         }
 
         if (resp == null) {
@@ -94,13 +92,7 @@ public class ElectricCommander {
 
         userName = credential.userName
         password = credential.password
-        try {
-            serviceUrl = getCommanderProperty('service_url')
-            println "service_url: $serviceUrl"
-        } catch (Throwable e) {
-            println "service_url is not found (service_url field does not exist?),setting to default"
-            serviceUrl = "https://s3.amazonaws.com"
-        }
+        serviceUrl = serviceUrlValue
     }
 
     ElectricCommander(boolean config) {
@@ -125,13 +117,17 @@ public class ElectricCommander {
 
         userName = resp.getData().credential.userName
         password = resp.getData().credential.password
+        serviceUrl = serviceUrlValue
+    }
+
+    String getServiceUrlValue() {
+        String servUrl
         try {
-            serviceUrl = getCommanderProperty('service_url')
-            println "service_url: $serviceUrl"
+            servUrl = getCommanderProperty('service_url')
         } catch (Throwable e) {
-            println "service_url is not found (service_url field does not exist?),setting to default"
-            serviceUrl = "https://s3.amazonaws.com"
+            servUrl = "https://s3.amazonaws.com"
         }
+        servUrl
     }
 
     public setProperty(String propName, String propValue) {

@@ -69,7 +69,6 @@ try {
 
     // Get S3 Client
     AmazonS3 s3 = tx.getAmazonS3Client();
-    println "service_url in downloadObject ${commander?.serviceUrl}"
     s3.endpoint = commander?.serviceUrl?:"https://s3.amazonaws.com"
     TransferManager tf = new TransferManager(s3)
 
