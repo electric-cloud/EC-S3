@@ -261,6 +261,9 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/upload-folder-log
 .WebsiteHosting output
 image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-log.png[WebsiteHosting output,role="screenshot"]
 
+[[rns]]
+== Amazon Simple Storage Service plugin release notes
+
 === 1.2.2
 
 * Fixed issue where the plugin configuration *Service URL*  parameter was not applied to procedures.
