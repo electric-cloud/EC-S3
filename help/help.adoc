@@ -264,6 +264,10 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 [[rns]]
 == Amazon Simple Storage Service plugin release notes
 
+=== 1.2.2
+
+* Fixed issue where the plugin configuration *Service URL* parameter was not applied to procedures.
+
 === 1.2.1
 
 * Improved SSL/TLS certificate validation to ensure that when the *Ignore SSL issues* parameter is selected that SSL/TLS validation is properly disabled.
