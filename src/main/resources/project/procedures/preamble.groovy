@@ -72,10 +72,19 @@ public class ElectricCommander {
 
         def resp
         def credential
+        def servUrl
 
         if ('$[config]'.startsWith("/")) {
             def plugConf = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0$[config]', [])
             def credName = plugConf.getData().pluginConfiguration.credentialMappings.parameterDetail[0].parameterValue
+            List paramDetails = plugConf.getData().pluginConfiguration.fields.parameterDetail
+            paramDetails.each { it ->
+                if(it.parameterName == 'service_url'){
+                    servUrl = it.parameterValue
+                }
+            }
+            servUrl = servUrl ?: "https://s3.amazonaws.com"
+            println("service_url : ${servUrl}")
             resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
             credential = resp.credential
         } else {
@@ -92,7 +101,7 @@ public class ElectricCommander {
 
         userName = credential.userName
         password = credential.password
-        serviceUrl = serviceUrlValue
+        serviceUrl = servUrl
     }
 
     ElectricCommander(boolean config) {
@@ -114,7 +123,6 @@ public class ElectricCommander {
         if (resp.status != 200) {
             throw new Exception("Commander did not respond with 200 for credentials")
         }
-
         userName = resp.getData().credential.userName
         password = resp.getData().credential.password
         serviceUrl = serviceUrlValue
@@ -124,6 +132,7 @@ public class ElectricCommander {
         String servUrl
         try {
             servUrl = getCommanderProperty('service_url')
+            println("service_url : ${service_url}")
         } catch (Throwable e) {
             servUrl = "https://s3.amazonaws.com"
         }
