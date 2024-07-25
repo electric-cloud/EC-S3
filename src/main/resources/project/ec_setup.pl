@@ -124,8 +124,7 @@ my %WebsiteHosting = (
 if ($upgradeAction eq 'upgrade') {
     migrateConfigurations($otherPluginName);
     migrateProperties($otherPluginName);
-    debug "Migrated properties";
-    reattachExternalCredentials($otherPluginName);
+    reattachExternalConfigurations($otherPluginName);
 }
 
 
