@@ -84,13 +84,14 @@ public class ElectricCommander {
                 }
             }
             servUrl = servUrl ?: "https://s3.amazonaws.com"
-            println("service_url : ${servUrl}")
             resp = ef.getFullCredential(jobStepId: jobStepId, credentialName: credName)
             credential = resp.credential
         } else {
             resp = PerformHTTPRequest(RequestMethod.GET, '/rest/v1.0/jobsSteps/' + jobStepId + '/credentials/$[config]', [])
             credential = resp.getData().credential
+            servUrl = getServiceUrlFromOldConfig('$[config]')
         }
+        println("service_url : ${servUrl}")
 
         if (resp == null) {
             throw new Exception("Error : Invalid configuration $[config].");
@@ -137,6 +138,26 @@ public class ElectricCommander {
             servUrl = "https://s3.amazonaws.com"
         }
         servUrl
+    }
+
+    String getServiceUrlFromOldConfig(String pluginConfigName){
+        def value
+        def propSheetId
+
+        def res = ef.getProperties(propertyName:"/plugins/EC-S3/project/s3_cfgs")
+        def configs = res.propertySheet.property
+        def check = configs.findAll{
+            pluginConfigName.contains(it.propertyName)
+        }
+        propSheetId = check[0].propertySheetId
+        if(propSheetId){
+            def result = ef.getProperties(propertySheetId:check[0].propertySheetId).propertySheet.property
+            def output = result.findAll{
+                "service_url".contains(it.propertyName)
+            }
+            value = output[0].value
+        }
+        return value?:"https://s3.amazonaws.com"
     }
 
     public setProperty(String propName, String propValue) {
