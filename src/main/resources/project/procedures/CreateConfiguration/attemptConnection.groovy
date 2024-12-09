@@ -53,8 +53,12 @@ try {
     }
 
 } catch (AmazonServiceException ase) {
+    commander.setProperty("/myJob/summary", ase.toString())
+    commander.setProperty("/myJob/configError", ase.toString())
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
+    commander.setProperty("/myJob/summary", ace.toString())
+    commander.setProperty("/myJob/configError", ace.toString())
     handleClientException(ace)
 }

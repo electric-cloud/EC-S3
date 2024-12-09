@@ -37,6 +37,7 @@ def bucketName = '$[bucketName]'.trim()
 //validations
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty")
+    commander.setProperty("/myJob/summary", "Error : Bucket name is empty")
     return
 }
 
@@ -52,10 +53,10 @@ try {
     s3.endpoint = commander?.serviceUrl?:"https://s3.amazonaws.com"
     //Check the owner of the account just to verify if the access keys are valid
     def owner = s3.getS3AccountOwner()
-
     //check if the bucket is present
     if (doesBucketExist(s3, bucketName)) {
         println("Error : Bucket " + bucketName + " already present")
+        commander.setProperty("/myJob/summary", "Error : Bucket " + bucketName + " already present")
         return
     }
 
@@ -74,9 +75,11 @@ try {
     if (ase.statusCode.equals(409)) {
         println("Error : Bucket " + bucketName + " already present")
     }
+    commander.setProperty("/myJob/summary", ase.toString())
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
+    commander.setProperty("/myJob/summary", ace.toString())
     handleClientException(ace)
 
 }

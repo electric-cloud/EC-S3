@@ -31,11 +31,12 @@ class TestConnection extends PluginTestHelper {
                 .run()
         then:
         assert !r.successful
+        assert r.getSummary() =~ expectedLog
         assert r.jobLog =~ expectedLog
         where:
         cases                       |   accessKeyID     |   secretAccessKey     |   expectedLog
-        "invalid access key ID"     |   "invalid"       |   awsSecretAccessKey  |   "HTTP Status Code: 403"
-        "invalid secret access key" |   awsAccessKeyId  |   "invalid"           |   "HTTP Status Code: 403"
+        "invalid access key ID"     |   "invalid"       |   awsSecretAccessKey  |   "Status Code: 403"
+        "invalid secret access key" |   awsAccessKeyId  |   "invalid"           |   "Status Code: 403"
         "empty access key ID"       |   EMPTY           |   awsSecretAccessKey  |   "a non-empty Access Key \\(AKID\\) must be provided in the credential"
         "empty secret access key"   |   awsAccessKeyId  |   EMPTY               |   "a non-empty Access Key \\(AKID\\) must be provided in the credential"
     }

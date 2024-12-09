@@ -39,7 +39,7 @@ class CreateBucketSpec extends PluginTestHelper{
                 .run()
         then:
         assert !r.successful
-        assert r.jobLog =~ expectedLog
+        assert r.summary?: r.jobLog =~ expectedLog
         where:
         caseDes                                 |   bucket          |   expectedLog
         "bucket name contains uppercase"        |   "SPECTEST"      |   "Bucket name should not contain uppercase characters"

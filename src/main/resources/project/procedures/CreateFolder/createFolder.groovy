@@ -39,11 +39,13 @@ def SUFFIX = "/"
 //validations
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty")
+    commander.setProperty("/myJob/summary", "Error : Bucket name is empty")
     return
 }
 
 if (folderName.length() == 0) {
     println("Error : Folder name is empty")
+    commander.setProperty("/myJob/summary", "Error : Folder name is empty")
     return
 }
 
@@ -62,6 +64,7 @@ try {
     //check if the bucket is present and the user has rights
     if (!doesBucketExist(s3,bucketName)) {
         println("Error : Bucket " + bucketName + " not present");
+        commander.setProperty("/myJob/summary","Error : Bucket " + bucketName + " not present")
         return
     }
     // create meta-data for your folder and set content-length to 0
@@ -84,9 +87,11 @@ try {
     if (ase.statusCode.equals(409)) {
 		println("Error : Folder " + folderName + " already present")
     }
+    commander.setProperty("/myJob/summary", ase.toString())
     handleServiceException(ase)
 
 } catch (AmazonClientException ace) {
+    commander.setProperty("/myJob/summary", ace.toString())
     handleClientException(ace)
 }
 
