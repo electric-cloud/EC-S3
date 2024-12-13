@@ -41,6 +41,7 @@ class DeleteBucketContents extends PluginTestHelper {
                 .run()
         then:
         assert !r.successful
+        assert r.summary =~ expectedLog
         assert r.jobLog =~ expectedLog
 
         where:

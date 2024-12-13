@@ -40,6 +40,7 @@ def bucketName = '$[bucketName]'.trim()
 
 if (bucketName.length() == 0) {
     println("Error : Bucket name is empty")
+    commander.setProperty("/myJob/summary", "Error : Bucket name is empty")
     return
 }
 
@@ -55,6 +56,7 @@ try {
     s3.endpoint = commander?.serviceUrl?:"https://s3.amazonaws.com"
     if (!doesBucketExist(s3, bucketName)) {
         println("Error : Bucket " + bucketName + " not present")
+        commander.setProperty("/myJob/summary", "Error : Bucket " + bucketName + " not present")
         return
     }
 
@@ -83,6 +85,7 @@ try {
 
     if(justKeys.size() == 0) {
         println("Bucket : " + bucketName + " is empty")
+        commander.setProperty("/myJob/summary", "Bucket : " + bucketName + " is empty")
         return
     }
 
@@ -95,10 +98,13 @@ try {
     println("Successfully deleted " + delObjRes.getDeletedObjects().size() + " items")
 
 } catch (MultiObjectDeleteException mode) {
+    commander.setProperty("/myJob/summary", mode.toString())
     printDeleteResults(mode)
 } catch (AmazonServiceException ase) {
+    commander.setProperty("/myJob/summary", ase.toString())
     handleServiceException(ase)
 } catch (AmazonClientException ace) {
+    commander.setProperty("/myJob/summary", ace.toString())
     handleClientException(ace)
 
 }
