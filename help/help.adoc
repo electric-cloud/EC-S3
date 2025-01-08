@@ -266,7 +266,7 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 
 === 1.2.3
 
-* Added an error summary for some procedures that didn't have one.
+* Added error summaries for procedures that did not have one.
 
 === 1.2.2
 
