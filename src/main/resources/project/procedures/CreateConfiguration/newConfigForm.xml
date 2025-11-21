@@ -35,6 +35,13 @@
         <supportsCredentialReference>true</supportsCredentialReference>
     </formElement>
     <formElement>
+        <type>entry</type>
+        <label>Check connection resource:</label>
+        <property>checkConnectionResource</property>
+        <documentation>A resource that is used to check the connection.</documentation>
+        <required>0</required>
+    </formElement>
+    <formElement>
         <type>select</type>
         <property>debug</property>
         <required>0</required>

@@ -264,6 +264,10 @@ image::cloudbees-common-sda::cd-plugins/ec-s3/use-cases/case-1/website-hosting-l
 [[rns]]
 == Amazon Simple Storage Service plugin release notes
 
+=== 1.2.4
+
+* Improved the **Test Connection** feature in plugin configuration to validate connectivity on the specified resource.
+
 === 1.2.3
 
 * Added error summaries for procedures that did not have one.

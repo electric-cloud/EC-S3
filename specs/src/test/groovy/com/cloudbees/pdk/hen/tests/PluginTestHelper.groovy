@@ -196,4 +196,14 @@ class PluginTestHelper extends PluginSpockTestSupport {
         return fileJob.successful
     }
 
+    boolean isVersionAtLeast(String current, String minimum) {
+        def currentParts = current.tokenize('.').collect { it.toInteger() }
+        def minimumParts = minimum.tokenize('.').collect { it.toInteger() }
+
+        for (int i = 0; i < Math.min(currentParts.size(), minimumParts.size()); i++) {
+            if (currentParts[i] > minimumParts[i]) return true
+            if (currentParts[i] < minimumParts[i]) return false
+        }
+        return currentParts.size() >= minimumParts.size()
+    }
 }

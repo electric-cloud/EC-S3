@@ -92,6 +92,10 @@ class EditConfiguration extends Procedure {
         this.addCredentialReference('credential', path)
         return this
     }
-    
+
+    EditConfiguration checkConnectionResource(String checkConnectionResource) {
+        this.addParam('checkConnectionResource', checkConnectionResource)
+        return this
+    }
     
 }

@@ -1,12 +1,28 @@
 package com.cloudbees.pdk.hen.tests
 
+import com.cloudbees.pdk.hen.ServerHandler
 import com.cloudbees.pdk.hen.procedures.TestConfiguration
+import spock.lang.Requires
 import spock.lang.Unroll
 import spock.lang.Shared
 
 class TestConnection extends PluginTestHelper {
     @Shared
     TestConfiguration testConfiguration = pluginWithoutConfig.testConfiguration
+
+    @Shared
+    def pluginVer
+    @Shared
+    static boolean isRequiredPluginVersion
+
+
+
+    def setupSpec() {
+        pluginVer = dsl("getPlugin(pluginName: 'EC-S3').pluginVersion").value
+        isRequiredPluginVersion = isVersionAtLeast(pluginVer, "1.2.4")
+        println("Current Plugin Version:"+pluginVer)
+        ServerHandler.getInstance().setupResource("s3-resource", "127.0.0.1", 7800)
+    }
 
     def 'Test connection'() {
         when:
@@ -19,7 +35,6 @@ class TestConnection extends PluginTestHelper {
         then:
         assert r.successful
     }
-
     @Unroll
     def 'Negative: Test connection - #cases'() {
         when:
@@ -39,6 +54,40 @@ class TestConnection extends PluginTestHelper {
         "invalid secret access key" |   awsAccessKeyId  |   "invalid"           |   "Status Code: 403"
         "empty access key ID"       |   EMPTY           |   awsSecretAccessKey  |   "a non-empty Access Key \\(AKID\\) must be provided in the credential"
         "empty secret access key"   |   awsAccessKeyId  |   EMPTY               |   "a non-empty Access Key \\(AKID\\) must be provided in the credential"
+    }
+    @Requires({isRequiredPluginVersion})
+    @Unroll
+    def 'Test connection with resource'() {
+        when:
+        def r = testConfiguration.flush()
+                .serviceurl(serviceUrl)
+                .credential(awsAccessKeyId, awsSecretAccessKey)
+                .workspace(DEFAULT)
+                .resourcepool(DEFAULT)
+                .debug("1")
+                .checkConnectionResource(resource)
+                .run()
+        then:
+        assert r.successful
+        where:
+        Des                 | resource
+        "default resource"  | "local"
+        "specific resource" | "s3-resource"
+    }
+    @Requires({isRequiredPluginVersion})
+    def 'Negative: test config with invalid resource'() {
+        when:
+        def r = testConfiguration.flush()
+                .serviceurl(serviceUrl)
+                .credential(awsAccessKeyId, awsSecretAccessKey)
+                .workspace(DEFAULT)
+                .resourcepool(DEFAULT)
+                .debug("1")
+                .checkConnectionResource("invalid-resource")
+                .run()
+        then:
+        assert !r.successful
+        assert r.jobLog =~ "AGENT ERROR: NONEXISTENT_RESOURCE"
     }
 
 }

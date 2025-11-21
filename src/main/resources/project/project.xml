@@ -699,6 +699,19 @@
                                         </property>
                                     </propertySheet>
                                 </property>
+                                <property>
+                                    <propertyName>checkConnectionResource</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
                             </propertySheet>
                         </property>
                     </propertySheet>
@@ -766,6 +779,13 @@
                 <required>1</required>
                 <type>checkbox</type>
             </formalParameter>
+            <formalParameter>
+                <formalParameterName>checkConnectionResource</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>0</required>
+                <type>entry</type>
+            </formalParameter>
             <step>
                 <stepName>CreateConfiguration</stepName>
                 <alwaysRun>0</alwaysRun>
@@ -779,7 +799,7 @@
                 <parallel>0</parallel>
                 <postProcessor>postp</postProcessor>
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName/>
+                <resourceName>$[checkConnectionResource]</resourceName>
                 <retries>0</retries>
                 <shell>cb-perl</shell>
                 <timeLimit>5</timeLimit>
@@ -1002,6 +1022,19 @@
                                         </property>
                                     </propertySheet>
                                 </property>
+                                <property>
+                                    <propertyName>checkConnectionResource</propertyName>
+                                    <propertySheet>
+                                        <acl>
+                                            <inheriting>1</inheriting>
+                                        </acl>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
                             </propertySheet>
                         </property>
                     </propertySheet>
@@ -1069,6 +1102,13 @@
                 <required>1</required>
                 <type>checkbox</type>
             </formalParameter>
+            <formalParameter>
+                <formalParameterName>checkConnectionResource</formalParameterName>
+                <defaultValue/>
+                <description/>
+                <required>0</required>
+                <type>entry</type>
+            </formalParameter>
             <step>
                 <stepName>EditConfiguration</stepName>
                 <alwaysRun>0</alwaysRun>
@@ -1082,7 +1122,7 @@
                 <parallel>0</parallel>
                 <postProcessor>$[/myProject/postpLoader]</postProcessor>
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName/>
+                <resourceName>$[checkConnectionResource]</resourceName>
                 <retries>0</retries>
                 <shell>cb-perl</shell>
                 <timeLimit>5</timeLimit>
@@ -2070,6 +2110,16 @@
                             </propertySheet>
                         </property>
                         <property>
+                            <propertyName>checkConnectionResource</propertyName>
+                            <propertySheet>
+                                <property>
+                                    <propertyName>formType</propertyName>
+                                    <expandable>1</expandable>
+                                    <value>standard</value>
+                                </property>
+                            </propertySheet>
+                        </property>
+                        <property>
                             <propertyName>credential</propertyName>
                             <propertySheet>
                                 <property>
@@ -2182,6 +2232,13 @@
                 <type>credential</type>
             </formalParameter>
             <formalParameter>
+                <formalParameterName>checkConnectionResource</formalParameterName>
+                <defaultValue/>
+                <description>A resource that is used to check the connection.</description>
+                <required>0</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
                 <formalParameterName>debug</formalParameterName>
                 <defaultValue>1</defaultValue>
                 <description>The workspace to use for resourced dynamically created by this configuration.</description>
@@ -2196,7 +2253,7 @@
             <procedureName>TestConfiguration</procedureName>
             <description>TestConfiguration</description>
             <jobNameTemplate>S3-test-config-$[jobId]</jobNameTemplate>
-            <resourceName>local</resourceName>
+            <resourceName>$[checkConnectionResource]</resourceName>
             <workspaceName></workspaceName>
             <projectName>@PLUGIN_KEY@-@PLUGIN_VERSION@</projectName>
             <propertySheet>
@@ -2273,6 +2330,16 @@
                                         </property>
                                     </propertySheet>
                                 </property>
+                                <property>
+                                    <propertyName>checkConnectionResource</propertyName>
+                                    <propertySheet>
+                                        <property>
+                                            <propertyName>formType</propertyName>
+                                            <expandable>1</expandable>
+                                            <value>standard</value>
+                                        </property>
+                                    </propertySheet>
+                                </property>
                             </propertySheet>
                         </property>
                     </propertySheet>
@@ -2309,6 +2376,13 @@
                 <type>entry</type>
             </formalParameter>
             <formalParameter>
+                <formalParameterName>checkConnectionResource</formalParameterName>
+                <defaultValue/>
+                <description>A resource that is used to check the connection.</description>
+                <required>0</required>
+                <type>entry</type>
+            </formalParameter>
+            <formalParameter>
                 <formalParameterName>credential</formalParameterName>
                 <defaultValue/>
                 <description>Provide the username and password to use on the host. (Required)</description>
@@ -2335,7 +2409,7 @@
                 <parallel>0</parallel>
                 <postProcessor>postp --loadProperty /myProject/postp_matchers</postProcessor>
                 <releaseExclusive>0</releaseExclusive>
-                <resourceName/>
+                <resourceName>$[checkConnectionResource]</resourceName>
                 <retries>0</retries>
                 <shell>ec-groovy</shell>
                 <timeLimit/>
