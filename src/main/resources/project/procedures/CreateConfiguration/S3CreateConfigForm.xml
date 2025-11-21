@@ -75,6 +75,13 @@ Copyright 2015 Electric Cloud, Inc.
     </formElement>
     <formElement>
         <type>entry</type>
+        <label>Check connection resource:</label>
+        <property>checkConnectionResource</property>
+        <documentation>A resource that is used to check the connection.</documentation>
+        <required>0</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
         <label>Debug Level:</label>
         <property>debug</property>
         <value>1</value>

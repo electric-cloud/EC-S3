@@ -80,6 +80,9 @@ class TestConfiguration extends Procedure {
         this.addCredentialReference('credential', path)
         return this
     }
-    
-    
+
+    TestConfiguration checkConnectionResource(String checkConnectionResource) {
+        this.addParam('checkConnectionResource', checkConnectionResource)
+        return this
+    }
 }

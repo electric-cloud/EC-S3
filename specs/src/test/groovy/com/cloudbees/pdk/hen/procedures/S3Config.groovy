@@ -92,6 +92,11 @@ class S3Config extends Procedure {
         this.addCredentialReference('credential', path)
         return this
     }
+
+    S3Config checkConnectionResource(String checkConnectionResource) {
+        this.addParam('checkConnectionResource', checkConnectionResource)
+        return this
+    }
     
     
 }

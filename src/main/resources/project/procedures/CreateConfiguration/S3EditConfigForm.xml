@@ -60,6 +60,13 @@ Copyright 2015 Electric Cloud, Inc.
     </formElement>
     <formElement>
         <type>entry</type>
+        <label>Check connection resource:</label>
+        <property>checkConnectionResource</property>
+        <documentation>A resource that is used to check the connection.</documentation>
+        <required>0</required>
+    </formElement>
+    <formElement>
+        <type>entry</type>
         <label>Debug Level:</label>
         <property>debug</property>
         <documentation>Provide the debug level for the output: 0=errors only, 1=normal headers and responses, 2+=debugging information included.</documentation>
