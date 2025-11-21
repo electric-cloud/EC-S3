@@ -2,7 +2,7 @@ package com.cloudbees.pdk.hen.tests
 
 import com.cloudbees.pdk.hen.ServerHandler
 import com.cloudbees.pdk.hen.procedures.TestConfiguration
-import spock.lang.Requires
+import com.electriccloud.plugins.annotations.NewFeature
 import spock.lang.Unroll
 import spock.lang.Shared
 
@@ -10,17 +10,7 @@ class TestConnection extends PluginTestHelper {
     @Shared
     TestConfiguration testConfiguration = pluginWithoutConfig.testConfiguration
 
-    @Shared
-    def pluginVer
-    @Shared
-    static boolean isRequiredPluginVersion
-
-
-
     def setupSpec() {
-        pluginVer = dsl("getPlugin(pluginName: 'EC-S3').pluginVersion").value
-        isRequiredPluginVersion = isVersionAtLeast(pluginVer, "1.2.4")
-        println("Current Plugin Version:"+pluginVer)
         ServerHandler.getInstance().setupResource("s3-resource", "127.0.0.1", 7800)
     }
 
@@ -55,7 +45,7 @@ class TestConnection extends PluginTestHelper {
         "empty access key ID"       |   EMPTY           |   awsSecretAccessKey  |   "a non-empty Access Key \\(AKID\\) must be provided in the credential"
         "empty secret access key"   |   awsAccessKeyId  |   EMPTY               |   "a non-empty Access Key \\(AKID\\) must be provided in the credential"
     }
-    @Requires({isRequiredPluginVersion})
+    @NewFeature(pluginVersion = '1.2.4')
     @Unroll
     def 'Test connection with resource'() {
         when:
@@ -74,7 +64,7 @@ class TestConnection extends PluginTestHelper {
         "default resource"  | "local"
         "specific resource" | "s3-resource"
     }
-    @Requires({isRequiredPluginVersion})
+    @NewFeature(pluginVersion = '1.2.4')
     def 'Negative: test config with invalid resource'() {
         when:
         def r = testConfiguration.flush()
